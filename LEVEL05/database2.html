@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Database Management Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .toc li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .toc a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .chapter {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #fff;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .chapter h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .chapter h3 {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter h4 {
+            color: #555;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            white-space: pre;
+            overflow-wrap: break-word;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .code-block .comment {
+            color: #75715e;
+        }
+
+        .code-block .keyword {
+            color: #f92672;
+        }
+
+        .code-block .string {
+            color: #e6db74;
+        }
+
+        .code-block .function {
+            color: #66d9ef;
+        }
+
+        .example {
+            background: #e8f4f8;
+            border-left: 4px solid #4a90e2;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .example h4 {
+            color: #4a90e2;
+            margin-top: 0;
+        }
+
+        .exercise {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .exercise h4 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .exercise ol {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .exercise li {
+            margin: 0.5rem 0;
+        }
+
+        .note {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .note h4 {
+            color: #0c5460;
+            margin-top: 0;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            display: block;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #5568d3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            min-width: 100%;
+            display: table;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+            word-wrap: break-word;
+            vertical-align: top;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+            position: sticky;
+            left: 0;
+            z-index: 10;
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        table tr:nth-child(even) td {
+            background: #f8f9fa;
+        }
+
+        table td {
+            white-space: normal;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        .highlight {
+            background: #fffacd;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100vw;
+            }
+
+            .container {
+                max-width: 100%;
+                width: 100%;
+                box-shadow: none;
+                overflow-x: hidden;
+            }
+
+            header {
+                padding: 1.5rem 1rem;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            header p {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            .toc {
+                padding: 1.5rem 1rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .toc h2 {
+                font-size: 1.5rem;
+                word-wrap: break-word;
+            }
+
+            .toc li {
+                padding-left: 1.2rem;
+                margin: 0.4rem 0;
+                word-wrap: break-word;
+            }
+
+            .toc a {
+                word-wrap: break-word;
+                display: inline-block;
+                max-width: 100%;
+            }
+
+            .content {
+                padding: 1rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .chapter {
+                padding: 1.5rem 1rem;
+                margin-bottom: 2rem;
+                border-left-width: 3px;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .chapter h2 {
+                font-size: 1.6rem;
+                line-height: 1.3;
+                word-wrap: break-word;
+            }
+
+            .chapter h3 {
+                font-size: 1.3rem;
+                margin-top: 1.2rem;
+                line-height: 1.4;
+            }
+
+            .chapter h4 {
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+
+            .chapter p {
+                text-align: left;
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .code-block {
+                padding: 1rem;
+                font-size: 0.85rem;
+                line-height: 1.4;
+                margin: 0.8rem 0;
+                -webkit-overflow-scrolling: touch;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                width: 100%;
+                overflow-x: auto;
+                box-sizing: border-box;
+            }
+
+            .example,
+            .exercise,
+            .note {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+
+            .example h4,
+            .exercise h4,
+            .note h4 {
+                font-size: 1rem;
+            }
+
+            .table-wrapper {
+                margin: 1rem 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+                overflow-y: visible;
+                -webkit-overflow-scrolling: touch;
+                display: block;
+                position: relative;
+            }
+
+            .table-wrapper::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            .table-wrapper::-webkit-scrollbar-track {
+                background: #e0e0e0;
+            }
+
+            .table-wrapper::-webkit-scrollbar-thumb {
+                background: #667eea;
+                border-radius: 3px;
+            }
+
+            table {
+                font-size: 0.9rem;
+                width: auto;
+                min-width: 100%;
+                display: table;
+                table-layout: auto;
+            }
+
+            table th,
+            table td {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+                word-wrap: break-word;
+                min-width: 80px;
+            }
+
+            table th {
+                white-space: nowrap;
+                position: relative;
+                left: auto;
+            }
+
+            table td {
+                white-space: normal;
+            }
+
+            ul, ol {
+                margin-left: 1.5rem;
+                padding-right: 0.5rem;
+            }
+
+            li {
+                margin: 0.4rem 0;
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            footer p {
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100vw;
+            }
+
+            header {
+                padding: 1rem 0.8rem;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .toc {
+                padding: 1rem 0.8rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .toc h2 {
+                font-size: 1.3rem;
+                word-wrap: break-word;
+            }
+
+            .toc li {
+                padding-left: 1rem;
+                font-size: 0.9rem;
+                word-wrap: break-word;
+            }
+
+            .toc a {
+                word-wrap: break-word;
+                display: inline-block;
+                max-width: 100%;
+            }
+
+            .content {
+                padding: 0.8rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .chapter {
+                padding: 1rem 0.8rem;
+                margin-bottom: 1.5rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .chapter h2 {
+                font-size: 1.4rem;
+            }
+
+            .chapter h3 {
+                font-size: 1.2rem;
+            }
+
+            .chapter h4 {
+                font-size: 1rem;
+            }
+
+            .chapter p {
+                font-size: 0.9rem;
+            }
+
+            .code-block {
+                padding: 0.8rem;
+                font-size: 0.75rem;
+                border-radius: 3px;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                overflow-wrap: break-word;
+                max-width: 100%;
+                width: 100%;
+                overflow-x: auto;
+                box-sizing: border-box;
+            }
+
+            .example,
+            .exercise,
+            .note {
+                padding: 0.8rem;
+                margin: 0.8rem 0;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .table-wrapper {
+                margin: 0.8rem 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                font-size: 0.8rem;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            table th,
+            table td {
+                padding: 0.4rem;
+                font-size: 0.8rem;
+                word-wrap: break-word;
+            }
+
+            ul, ol {
+                margin-left: 1.2rem;
+            }
+
+            li {
+                font-size: 0.9rem;
+            }
+
+            .exercise ol {
+                margin-left: 1.2rem;
+            }
+        }
+
+        /* Tablet Styles */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+            }
+
+            header {
+                padding: 1.8rem;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .chapter {
+                padding: 1.8rem;
+            }
+
+            .code-block {
+                font-size: 0.88rem;
+            }
+        }
+
+        /* Large Screen Optimization */
+        @media screen and (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+            }
+
+            .content {
+                padding: 2.5rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            header {
+                background: #667eea;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .toc {
+                page-break-after: always;
+            }
+
+            .chapter {
+                page-break-inside: avoid;
+                border-left: none;
+                padding: 1rem;
+            }
+
+            .code-block {
+                page-break-inside: avoid;
+                background: #f5f5f5;
+                color: #333;
+                border: 1px solid #ddd;
+            }
+
+            footer {
+                page-break-before: always;
+            }
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .code-block {
+                border: 2px solid #000;
+            }
+
+            .chapter {
+                border-left-width: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Database Management 2 Guide</h1>
+            
+        </header>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#ch1">Chapter 1: Advanced Database Concepts</a></li>
+                <li><a href="#ch2">Chapter 2: Data Manipulation with SQL</a></li>
+                <li><a href="#ch3">Chapter 3: Programming Database Applications</a></li>
+                <li><a href="#ch4">Chapter 4: Database Administration</a></li>
+                <li><a href="#ch5">Chapter 5: Database Administration Procedures</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- Chapter 1: Advanced Database Concepts -->
+            <div class="chapter" id="ch1">
+                <h2>Chapter 1: Advanced Database Concepts</h2>
+                
+                <h3>1.1 Explain Database Concepts</h3>
+                
+                <h4>What is a Database?</h4>
+                <p>A database is an organized collection of data stored and accessed electronically. It allows for efficient storage, retrieval, and manipulation of data. Databases are essential for managing large amounts of information in a structured way.</p>
+
+                <h4>Key Database Concepts</h4>
+                
+                <h4>1. Data Models</h4>
+                <p>Data models define how data is structured and organized. The main types include:</p>
+                <ul>
+                    <li><strong>Relational Model:</strong> Data organized in tables (rows and columns) with relationships between tables</li>
+                    <li><strong>Hierarchical Model:</strong> Tree-like structure with parent-child relationships</li>
+                    <li><strong>Network Model:</strong> More flexible than hierarchical, allowing many-to-many relationships</li>
+                    <li><strong>Object-Oriented Model:</strong> Data represented as objects with attributes and methods</li>
+                </ul>
+
+                <h4>2. Database Management System (DBMS)</h4>
+                <p>A DBMS is software that manages databases. It provides:</p>
+                <ul>
+                    <li>Data storage and retrieval</li>
+                    <li>Data security and access control</li>
+                    <li>Data integrity enforcement</li>
+                    <li>Concurrency control</li>
+                    <li>Backup and recovery</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Popular DBMS</h4>
+                    <ul>
+                        <li><strong>MySQL:</strong> Open-source relational database</li>
+                        <li><strong>PostgreSQL:</strong> Advanced open-source relational database</li>
+                        <li><strong>Oracle:</strong> Enterprise-level relational database</li>
+                        <li><strong>SQL Server:</strong> Microsoft's relational database</li>
+                        <li><strong>MongoDB:</strong> NoSQL document database</li>
+                    </ul>
+                </div>
+
+                <h4>3. Database Architecture</h4>
+                <p>Database architecture consists of three levels:</p>
+                <ul>
+                    <li><strong>External Level (View Level):</strong> How users see the data</li>
+                    <li><strong>Conceptual Level (Logical Level):</strong> Overall structure of the database</li>
+                    <li><strong>Internal Level (Physical Level):</strong> How data is stored on disk</li>
+                </ul>
+
+                <h4>4. ACID Properties</h4>
+                <p>ACID properties ensure reliable database transactions:</p>
+                <ul>
+                    <li><strong>Atomicity:</strong> All operations in a transaction succeed or all fail</li>
+                    <li><strong>Consistency:</strong> Database remains in a valid state after transaction</li>
+                    <li><strong>Isolation:</strong> Concurrent transactions don't interfere with each other</li>
+                    <li><strong>Durability:</strong> Committed changes persist even after system failure</li>
+                </ul>
+
+                <h4>5. Normalization</h4>
+                <p>Normalization is the process of organizing data to reduce redundancy and improve data integrity. Normal forms include:</p>
+                <ul>
+                    <li><strong>1NF (First Normal Form):</strong> Each column contains atomic values</li>
+                    <li><strong>2NF (Second Normal Form):</strong> 1NF + no partial dependencies</li>
+                    <li><strong>3NF (Third Normal Form):</strong> 2NF + no transitive dependencies</li>
+                    <li><strong>BCNF (Boyce-Codd Normal Form):</strong> Stricter version of 3NF</li>
+                </ul>
+
+                <div class="example">
+                    <h4>Example: Normalization</h4>
+                    <p><strong>Before Normalization (Unnormalized):</strong></p>
+                    <table>
+                        <tr>
+                            <th>StudentID</th>
+                            <th>StudentName</th>
+                            <th>Course1</th>
+                            <th>Course2</th>
+                            <th>Course3</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Math</td>
+                            <td>Science</td>
+                            <td>English</td>
+                        </tr>
+                    </table>
+                    <p><strong>After Normalization (1NF):</strong></p>
+                    <table>
+                        <tr>
+                            <th>StudentID</th>
+                            <th>StudentName</th>
+                            <th>Course</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Math</td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Science</td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>English</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h4>6. Database Schema</h4>
+                <p>A database schema is the structure that defines how data is organized. It includes:</p>
+                <ul>
+                    <li>Tables and their columns</li>
+                    <li>Data types</li>
+                    <li>Constraints</li>
+                    <li>Relationships</li>
+                    <li>Indexes</li>
+                </ul>
+
+                <div class="exercise">
+                    <h4>Exercise 1.1</h4>
+                    <ol>
+                        <li>Explain the difference between a database and a DBMS.</li>
+                        <li>What are the three levels of database architecture? Give an example for each.</li>
+                        <li>Why is normalization important in database design?</li>
+                        <li>Explain each ACID property with a real-world example.</li>
+                        <li>Design a simple database schema for a library management system with at least 3 tables.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Chapter 2: Data Manipulation with SQL -->
+            <div class="chapter" id="ch2">
+                <h2>Chapter 2: Data Manipulation with SQL</h2>
+                
+                <h3>2.1 Basic Queries in SQL</h3>
+                
+                <h4>SELECT Statement</h4>
+                <p>The SELECT statement is used to retrieve data from one or more tables.</p>
+
+                <div class="code-block">
+<span class="comment">-- Basic SELECT syntax</span>
+<span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name;
+
+<span class="comment">-- Select all columns</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees;
+
+<span class="comment">-- Select specific columns</span>
+<span class="keyword">SELECT</span> first_name, last_name, salary
+<span class="keyword">FROM</span> employees;
+
+<span class="comment">-- Using WHERE clause for filtering</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees
+<span class="keyword">WHERE</span> salary > 50000;
+
+<span class="comment">-- Using ORDER BY for sorting</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees
+<span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span>;
+                </div>
+
+                <div class="example">
+                    <h4>Example: Employee Database</h4>
+                    <p>Given an employees table:</p>
+                    <table>
+                        <tr>
+                            <th>emp_id</th>
+                            <th>first_name</th>
+                            <th>last_name</th>
+                            <th>department</th>
+                            <th>salary</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>IT</td>
+                            <td>75000</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>Jane</td>
+                            <td>Smith</td>
+                            <td>HR</td>
+                            <td>60000</td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>Bob</td>
+                            <td>Johnson</td>
+                            <td>IT</td>
+                            <td>80000</td>
+                        </tr>
+                    </table>
+                    <p><strong>Query:</strong> Find all IT employees earning more than 70000</p>
+                    <div class="code-block">
+<span class="keyword">SELECT</span> first_name, last_name, salary
+<span class="keyword">FROM</span> employees
+<span class="keyword">WHERE</span> department = <span class="string">'IT'</span> <span class="keyword">AND</span> salary > 70000;
+                    </div>
+                </div>
+
+                <h4>SQL Operators</h4>
+                <ul>
+                    <li><strong>Comparison:</strong> =, &lt;&gt;, &lt;, &gt;, &lt;=, &gt;=</li>
+                    <li><strong>Logical:</strong> AND, OR, NOT</li>
+                    <li><strong>Pattern Matching:</strong> LIKE, NOT LIKE</li>
+                    <li><strong>Range:</strong> BETWEEN, NOT BETWEEN</li>
+                    <li><strong>Membership:</strong> IN, NOT IN</li>
+                    <li><strong>Null Check:</strong> IS NULL, IS NOT NULL</li>
+                </ul>
+
+                <h3>2.2 More Complex SQL Queries (Nested/Sub Queries)</h3>
+                
+                <h4>Subqueries</h4>
+                <p>A subquery is a query nested inside another query. It can be used in SELECT, FROM, WHERE, and HAVING clauses.</p>
+
+                <div class="code-block">
+<span class="comment">-- Subquery in WHERE clause</span>
+<span class="keyword">SELECT</span> first_name, last_name, salary
+<span class="keyword">FROM</span> employees
+<span class="keyword">WHERE</span> salary > (
+    <span class="keyword">SELECT</span> <span class="function">AVG</span>(salary)
+    <span class="keyword">FROM</span> employees
+);
+
+<span class="comment">-- Subquery with IN</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees
+<span class="keyword">WHERE</span> department_id <span class="keyword">IN</span> (
+    <span class="keyword">SELECT</span> department_id
+    <span class="keyword">FROM</span> departments
+    <span class="keyword">WHERE</span> location = <span class="string">'New York'</span>
+);
+
+<span class="comment">-- Correlated subquery</span>
+<span class="keyword">SELECT</span> e1.first_name, e1.salary
+<span class="keyword">FROM</span> employees e1
+<span class="keyword">WHERE</span> e1.salary > (
+    <span class="keyword">SELECT</span> <span class="function">AVG</span>(e2.salary)
+    <span class="keyword">FROM</span> employees e2
+    <span class="keyword">WHERE</span> e2.department_id = e1.department_id
+);
+
+<span class="comment">-- EXISTS subquery</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees e
+<span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (
+    <span class="keyword">SELECT</span> 1
+    <span class="keyword">FROM</span> projects p
+    <span class="keyword">WHERE</span> p.manager_id = e.emp_id
+);
+                </div>
+
+                <div class="example">
+                    <h4>Example: Finding Employees with Maximum Salary in Each Department</h4>
+                    <div class="code-block">
+<span class="keyword">SELECT</span> e1.department_id, e1.first_name, e1.salary
+<span class="keyword">FROM</span> employees e1
+<span class="keyword">WHERE</span> e1.salary = (
+    <span class="keyword">SELECT</span> <span class="function">MAX</span>(e2.salary)
+    <span class="keyword">FROM</span> employees e2
+    <span class="keyword">WHERE</span> e2.department_id = e1.department_id
+)
+<span class="keyword">ORDER BY</span> e1.department_id;
+                    </div>
+                </div>
+
+                <h4>JOIN Operations</h4>
+                <p>JOINs combine rows from two or more tables based on related columns.</p>
+
+                <div class="code-block">
+<span class="comment">-- INNER JOIN</span>
+<span class="keyword">SELECT</span> e.first_name, e.last_name, d.department_name
+<span class="keyword">FROM</span> employees e
+<span class="keyword">INNER JOIN</span> departments d
+<span class="keyword">ON</span> e.department_id = d.department_id;
+
+<span class="comment">-- LEFT JOIN (returns all left table rows)</span>
+<span class="keyword">SELECT</span> e.first_name, d.department_name
+<span class="keyword">FROM</span> employees e
+<span class="keyword">LEFT JOIN</span> departments d
+<span class="keyword">ON</span> e.department_id = d.department_id;
+
+<span class="comment">-- RIGHT JOIN (returns all right table rows)</span>
+<span class="keyword">SELECT</span> e.first_name, d.department_name
+<span class="keyword">FROM</span> employees e
+<span class="keyword">RIGHT JOIN</span> departments d
+<span class="keyword">ON</span> e.department_id = d.department_id;
+
+<span class="comment">-- FULL OUTER JOIN</span>
+<span class="keyword">SELECT</span> e.first_name, d.department_name
+<span class="keyword">FROM</span> employees e
+<span class="keyword">FULL OUTER JOIN</span> departments d
+<span class="keyword">ON</span> e.department_id = d.department_id;
+
+<span class="comment">-- Self JOIN</span>
+<span class="keyword">SELECT</span> e1.first_name <span class="keyword">AS</span> employee,
+       e2.first_name <span class="keyword">AS</span> manager
+<span class="keyword">FROM</span> employees e1
+<span class="keyword">JOIN</span> employees e2
+<span class="keyword">ON</span> e1.manager_id = e2.emp_id;
+                </div>
+
+                <h3>2.3 Aggregate Queries with Groups</h3>
+                
+                <h4>Aggregate Functions</h4>
+                <p>Aggregate functions perform calculations on a set of values and return a single value.</p>
+
+                <div class="code-block">
+<span class="comment">-- Common aggregate functions</span>
+<span class="keyword">SELECT</span> 
+    <span class="function">COUNT</span>(*) <span class="keyword">AS</span> total_employees,
+    <span class="function">AVG</span>(salary) <span class="keyword">AS</span> avg_salary,
+    <span class="function">MAX</span>(salary) <span class="keyword">AS</span> max_salary,
+    <span class="function">MIN</span>(salary) <span class="keyword">AS</span> min_salary,
+    <span class="function">SUM</span>(salary) <span class="keyword">AS</span> total_salary
+<span class="keyword">FROM</span> employees;
+
+<span class="comment">-- GROUP BY clause</span>
+<span class="keyword">SELECT</span> department_id, <span class="function">COUNT</span>(*) <span class="keyword">AS</span> emp_count,
+       <span class="function">AVG</span>(salary) <span class="keyword">AS</span> avg_salary
+<span class="keyword">FROM</span> employees
+<span class="keyword">GROUP BY</span> department_id;
+
+<span class="comment">-- HAVING clause (filters groups)</span>
+<span class="keyword">SELECT</span> department_id, <span class="function">COUNT</span>(*) <span class="keyword">AS</span> emp_count
+<span class="keyword">FROM</span> employees
+<span class="keyword">GROUP BY</span> department_id
+<span class="keyword">HAVING</span> <span class="function">COUNT</span>(*) > 5;
+
+<span class="comment">-- Multiple grouping columns</span>
+<span class="keyword">SELECT</span> department_id, job_title, <span class="function">AVG</span>(salary)
+<span class="keyword">FROM</span> employees
+<span class="keyword">GROUP BY</span> department_id, job_title;
+                </div>
+
+                <div class="example">
+                    <h4>Example: Department Statistics</h4>
+                    <div class="code-block">
+<span class="comment">-- Find departments with average salary above company average</span>
+<span class="keyword">SELECT</span> d.department_name, 
+       <span class="function">COUNT</span>(e.emp_id) <span class="keyword">AS</span> employee_count,
+       <span class="function">AVG</span>(e.salary) <span class="keyword">AS</span> avg_salary
+<span class="keyword">FROM</span> departments d
+<span class="keyword">JOIN</span> employees e <span class="keyword">ON</span> d.department_id = e.department_id
+<span class="keyword">GROUP BY</span> d.department_id, d.department_name
+<span class="keyword">HAVING</span> <span class="function">AVG</span>(e.salary) > (
+    <span class="keyword">SELECT</span> <span class="function">AVG</span>(salary) <span class="keyword">FROM</span> employees
+)
+<span class="keyword">ORDER BY</span> avg_salary <span class="keyword">DESC</span>;
+                    </div>
+                </div>
+
+                <h3>2.4 Insert, Delete, Update Statements in SQL</h3>
+                
+                <h4>INSERT Statement</h4>
+                <div class="code-block">
+<span class="comment">-- Insert single row</span>
+<span class="keyword">INSERT INTO</span> employees (emp_id, first_name, last_name, department, salary)
+<span class="keyword">VALUES</span> (104, <span class="string">'Alice'</span>, <span class="string">'Williams'</span>, <span class="string">'IT'</span>, 70000);
+
+<span class="comment">-- Insert multiple rows</span>
+<span class="keyword">INSERT INTO</span> employees (emp_id, first_name, last_name, department, salary)
+<span class="keyword">VALUES</span>
+    (105, <span class="string">'Charlie'</span>, <span class="string">'Brown'</span>, <span class="string">'HR'</span>, 55000),
+    (106, <span class="string">'Diana'</span>, <span class="string">'Prince'</span>, <span class="string">'IT'</span>, 85000);
+
+<span class="comment">-- Insert from another table</span>
+<span class="keyword">INSERT INTO</span> employees_backup (emp_id, first_name, last_name, salary)
+<span class="keyword">SELECT</span> emp_id, first_name, last_name, salary
+<span class="keyword">FROM</span> employees
+<span class="keyword">WHERE</span> department = <span class="string">'IT'</span>;
+                </div>
+
+                <h4>UPDATE Statement</h4>
+                <div class="code-block">
+<span class="comment">-- Update single column</span>
+<span class="keyword">UPDATE</span> employees
+<span class="keyword">SET</span> salary = 80000
+<span class="keyword">WHERE</span> emp_id = 101;
+
+<span class="comment">-- Update multiple columns</span>
+<span class="keyword">UPDATE</span> employees
+<span class="keyword">SET</span> salary = salary * 1.1,
+    department = <span class="string">'IT'</span>
+<span class="keyword">WHERE</span> emp_id = 102;
+
+<span class="comment">-- Update with subquery</span>
+<span class="keyword">UPDATE</span> employees
+<span class="keyword">SET</span> salary = salary * 1.05
+<span class="keyword">WHERE</span> department_id <span class="keyword">IN</span> (
+    <span class="keyword">SELECT</span> department_id
+    <span class="keyword">FROM</span> departments
+    <span class="keyword">WHERE</span> location = <span class="string">'New York'</span>
+);
+                </div>
+
+                <h4>DELETE Statement</h4>
+                <div class="code-block">
+<span class="comment">-- Delete specific rows</span>
+<span class="keyword">DELETE FROM</span> employees
+<span class="keyword">WHERE</span> emp_id = 103;
+
+<span class="comment">-- Delete with condition</span>
+<span class="keyword">DELETE FROM</span> employees
+<span class="keyword">WHERE</span> salary &lt; 50000;
+
+<span class="comment">-- Delete all rows (be careful!)</span>
+<span class="keyword">DELETE FROM</span> employees;
+
+<span class="comment">-- Delete with subquery</span>
+<span class="keyword">DELETE FROM</span> employees
+<span class="keyword">WHERE</span> department_id <span class="keyword">NOT IN</span> (
+    <span class="keyword">SELECT</span> department_id <span class="keyword">FROM</span> departments
+);
+                </div>
+
+                <div class="note">
+                    <h4>Important Note</h4>
+                    <p>Always use WHERE clause with UPDATE and DELETE statements to avoid modifying all rows accidentally. Consider using transactions when performing bulk updates or deletes.</p>
+                </div>
+
+                <h3>2.5 Create Tables</h3>
+                
+                <h4>CREATE TABLE Syntax</h4>
+                <div class="code-block">
+<span class="comment">-- Basic table creation</span>
+<span class="keyword">CREATE TABLE</span> employees (
+    emp_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    first_name <span class="keyword">VARCHAR</span>(50) <span class="keyword">NOT NULL</span>,
+    last_name <span class="keyword">VARCHAR</span>(50) <span class="keyword">NOT NULL</span>,
+    email <span class="keyword">VARCHAR</span>(100) <span class="keyword">UNIQUE</span>,
+    department_id <span class="keyword">INT</span>,
+    salary <span class="keyword">DECIMAL</span>(10, 2),
+    hire_date <span class="keyword">DATE</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_DATE</span>,
+    <span class="keyword">FOREIGN KEY</span> (department_id) <span class="keyword">REFERENCES</span> departments(department_id)
+);
+
+<span class="comment">-- Table with constraints</span>
+<span class="keyword">CREATE TABLE</span> departments (
+    department_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">AUTO_INCREMENT</span>,
+    department_name <span class="keyword">VARCHAR</span>(100) <span class="keyword">NOT NULL</span> <span class="keyword">UNIQUE</span>,
+    location <span class="keyword">VARCHAR</span>(100),
+    budget <span class="keyword">DECIMAL</span>(12, 2) <span class="keyword">CHECK</span> (budget > 0),
+    created_date <span class="keyword">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_TIMESTAMP</span>
+);
+
+<span class="comment">-- Table with composite primary key</span>
+<span class="keyword">CREATE TABLE</span> employee_projects (
+    emp_id <span class="keyword">INT</span>,
+    project_id <span class="keyword">INT</span>,
+    role <span class="keyword">VARCHAR</span>(50),
+    start_date <span class="keyword">DATE</span>,
+    <span class="keyword">PRIMARY KEY</span> (emp_id, project_id),
+    <span class="keyword">FOREIGN KEY</span> (emp_id) <span class="keyword">REFERENCES</span> employees(emp_id),
+    <span class="keyword">FOREIGN KEY</span> (project_id) <span class="keyword">REFERENCES</span> projects(project_id)
+);
+                </div>
+
+                <h4>Data Types</h4>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Data Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Integer</td>
+                        <td>INT, BIGINT, SMALLINT</td>
+                        <td>Whole numbers</td>
+                    </tr>
+                    <tr>
+                        <td>Decimal</td>
+                        <td>DECIMAL(p,s), FLOAT, DOUBLE</td>
+                        <td>Floating point numbers</td>
+                    </tr>
+                    <tr>
+                        <td>String</td>
+                        <td>VARCHAR(n), CHAR(n), TEXT</td>
+                        <td>Character strings</td>
+                    </tr>
+                    <tr>
+                        <td>Date/Time</td>
+                        <td>DATE, TIME, TIMESTAMP, DATETIME</td>
+                        <td>Date and time values</td>
+                    </tr>
+                    <tr>
+                        <td>Boolean</td>
+                        <td>BOOLEAN, BOOL</td>
+                        <td>True/False values</td>
+                    </tr>
+                    <tr>
+                        <td>Binary</td>
+                        <td>BLOB, BINARY</td>
+                        <td>Binary data</td>
+                    </tr>
+                </table>
+
+                <h4>ALTER TABLE</h4>
+                <div class="code-block">
+<span class="comment">-- Add column</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">ADD COLUMN</span> phone_number <span class="keyword">VARCHAR</span>(20);
+
+<span class="comment">-- Modify column</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">MODIFY COLUMN</span> salary <span class="keyword">DECIMAL</span>(12, 2);
+
+<span class="comment">-- Drop column</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">DROP COLUMN</span> phone_number;
+
+<span class="comment">-- Add constraint</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">ADD CONSTRAINT</span> chk_salary <span class="keyword">CHECK</span> (salary > 0);
+
+<span class="comment">-- Drop constraint</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">DROP CONSTRAINT</span> chk_salary;
+                </div>
+
+                <h4>DROP TABLE</h4>
+                <div class="code-block">
+<span class="comment">-- Drop table</span>
+<span class="keyword">DROP TABLE</span> employees;
+
+<span class="comment">-- Drop table if exists</span>
+<span class="keyword">DROP TABLE</span> <span class="keyword">IF EXISTS</span> employees;
+                </div>
+
+                <h3>2.6 Views (Virtual Tables) in SQL</h3>
+                
+                <h4>What are Views?</h4>
+                <p>Views are virtual tables based on the result of a SQL query. They don't store data physically but provide a way to simplify complex queries and enhance security.</p>
+
+                <h4>Benefits of Views</h4>
+                <ul>
+                    <li>Simplify complex queries</li>
+                    <li>Provide security by hiding sensitive data</li>
+                    <li>Present data in a different format</li>
+                    <li>Maintain backward compatibility</li>
+                </ul>
+
+                <div class="code-block">
+<span class="comment">-- Create simple view</span>
+<span class="keyword">CREATE VIEW</span> employee_summary <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> 
+    e.emp_id,
+    e.first_name,
+    e.last_name,
+    d.department_name,
+    e.salary
+<span class="keyword">FROM</span> employees e
+<span class="keyword">JOIN</span> departments d <span class="keyword">ON</span> e.department_id = d.department_id;
+
+<span class="comment">-- Query the view</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employee_summary
+<span class="keyword">WHERE</span> salary > 70000;
+
+<span class="comment">-- Create view with aggregate</span>
+<span class="keyword">CREATE VIEW</span> department_stats <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> 
+    d.department_name,
+    <span class="function">COUNT</span>(e.emp_id) <span class="keyword">AS</span> employee_count,
+    <span class="function">AVG</span>(e.salary) <span class="keyword">AS</span> avg_salary,
+    <span class="function">MAX</span>(e.salary) <span class="keyword">AS</span> max_salary
+<span class="keyword">FROM</span> departments d
+<span class="keyword">LEFT JOIN</span> employees e <span class="keyword">ON</span> d.department_id = e.department_id
+<span class="keyword">GROUP BY</span> d.department_id, d.department_name;
+
+<span class="comment">-- Create updatable view</span>
+<span class="keyword">CREATE VIEW</span> employee_public <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> emp_id, first_name, last_name, department_id
+<span class="keyword">FROM</span> employees;
+
+<span class="comment">-- Update through view</span>
+<span class="keyword">UPDATE</span> employee_public
+<span class="keyword">SET</span> last_name = <span class="string">'Smith'</span>
+<span class="keyword">WHERE</span> emp_id = 101;
+
+<span class="comment">-- Drop view</span>
+<span class="keyword">DROP VIEW</span> employee_summary;
+
+<span class="comment">-- Replace view</span>
+<span class="keyword">CREATE OR REPLACE VIEW</span> employee_summary <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> emp_id, first_name, last_name, salary
+<span class="keyword">FROM</span> employees;
+                </div>
+
+                <div class="example">
+                    <h4>Example: Secure View for HR Department</h4>
+                    <div class="code-block">
+<span class="comment">-- Create view that hides salary information</span>
+<span class="keyword">CREATE VIEW</span> employee_hr_view <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> 
+    emp_id,
+    first_name,
+    last_name,
+    email,
+    department_id,
+    hire_date
+<span class="keyword">FROM</span> employees;
+
+<span class="comment">-- HR can query without seeing salaries</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employee_hr_view
+<span class="keyword">WHERE</span> department_id = 2;
+                    </div>
+                </div>
+
+                <h3>2.7 Create Indexes</h3>
+                
+                <h4>What are Indexes?</h4>
+                <p>Indexes are database objects that improve query performance by providing fast access to data. They work like an index in a book, allowing the database to find data without scanning the entire table.</p>
+
+                <h4>Types of Indexes</h4>
+                <ul>
+                    <li><strong>Primary Index:</strong> Automatically created on primary key</li>
+                    <li><strong>Unique Index:</strong> Ensures uniqueness of values</li>
+                    <li><strong>Composite Index:</strong> Index on multiple columns</li>
+                    <li><strong>Clustered Index:</strong> Determines physical order of data</li>
+                    <li><strong>Non-clustered Index:</strong> Separate structure pointing to data</li>
+                </ul>
+
+                <div class="code-block">
+<span class="comment">-- Create single column index</span>
+<span class="keyword">CREATE INDEX</span> idx_last_name <span class="keyword">ON</span> employees(last_name);
+
+<span class="comment">-- Create unique index</span>
+<span class="keyword">CREATE UNIQUE INDEX</span> idx_email <span class="keyword">ON</span> employees(email);
+
+<span class="comment">-- Create composite index</span>
+<span class="keyword">CREATE INDEX</span> idx_dept_salary <span class="keyword">ON</span> employees(department_id, salary);
+
+<span class="comment">-- Create index with specific method (PostgreSQL)</span>
+<span class="keyword">CREATE INDEX</span> idx_name_btree <span class="keyword">ON</span> employees <span class="keyword">USING</span> btree(first_name);
+
+<span class="comment">-- Drop index</span>
+<span class="keyword">DROP INDEX</span> idx_last_name;
+
+<span class="comment">-- Show indexes (MySQL)</span>
+<span class="keyword">SHOW INDEXES FROM</span> employees;
+
+<span class="comment">-- Show indexes (PostgreSQL)</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> pg_indexes <span class="keyword">WHERE</span> tablename = <span class="string">'employees'</span>;
+                </div>
+
+                <div class="note">
+                    <h4>Index Best Practices</h4>
+                    <ul>
+                        <li>Index columns frequently used in WHERE clauses</li>
+                        <li>Index foreign key columns</li>
+                        <li>Don't over-index (slows down INSERT/UPDATE/DELETE)</li>
+                        <li>Consider composite indexes for multi-column queries</li>
+                        <li>Monitor index usage and remove unused indexes</li>
+                    </ul>
+                </div>
+
+                <h3>2.8 Create Relationship and Referential Integrity</h3>
+                
+                <h4>Types of Relationships</h4>
+                <ul>
+                    <li><strong>One-to-One (1:1):</strong> Each record in one table relates to one record in another</li>
+                    <li><strong>One-to-Many (1:N):</strong> One record relates to many records in another table</li>
+                    <li><strong>Many-to-Many (N:M):</strong> Many records relate to many records (requires junction table)</li>
+                </ul>
+
+                <h4>Foreign Keys and Referential Integrity</h4>
+                <p>Foreign keys maintain referential integrity by ensuring that values in one table exist in another table.</p>
+
+                <div class="code-block">
+<span class="comment">-- Create tables with relationships</span>
+<span class="keyword">CREATE TABLE</span> departments (
+    department_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    department_name <span class="keyword">VARCHAR</span>(100) <span class="keyword">NOT NULL</span>
+);
+
+<span class="comment">-- One-to-Many: Department to Employees</span>
+<span class="keyword">CREATE TABLE</span> employees (
+    emp_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    first_name <span class="keyword">VARCHAR</span>(50),
+    department_id <span class="keyword">INT</span>,
+    <span class="keyword">FOREIGN KEY</span> (department_id) 
+        <span class="keyword">REFERENCES</span> departments(department_id)
+        <span class="keyword">ON DELETE</span> <span class="keyword">CASCADE</span>
+        <span class="keyword">ON UPDATE</span> <span class="keyword">CASCADE</span>
+);
+
+<span class="comment">-- Many-to-Many: Employees to Projects (junction table)</span>
+<span class="keyword">CREATE TABLE</span> projects (
+    project_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    project_name <span class="keyword">VARCHAR</span>(100)
+);
+
+<span class="keyword">CREATE TABLE</span> employee_projects (
+    emp_id <span class="keyword">INT</span>,
+    project_id <span class="keyword">INT</span>,
+    role <span class="keyword">VARCHAR</span>(50),
+    <span class="keyword">PRIMARY KEY</span> (emp_id, project_id),
+    <span class="keyword">FOREIGN KEY</span> (emp_id) 
+        <span class="keyword">REFERENCES</span> employees(emp_id)
+        <span class="keyword">ON DELETE</span> <span class="keyword">CASCADE</span>,
+    <span class="keyword">FOREIGN KEY</span> (project_id) 
+        <span class="keyword">REFERENCES</span> projects(project_id)
+        <span class="keyword">ON DELETE</span> <span class="keyword">CASCADE</span>
+);
+
+<span class="comment">-- Add foreign key to existing table</span>
+<span class="keyword">ALTER TABLE</span> employees
+<span class="keyword">ADD CONSTRAINT</span> fk_department
+<span class="keyword">FOREIGN KEY</span> (department_id) 
+<span class="keyword">REFERENCES</span> departments(department_id);
+
+<span class="comment">-- Foreign key options</span>
+<span class="comment">-- ON DELETE CASCADE: Delete related rows</span>
+<span class="comment">-- ON DELETE SET NULL: Set foreign key to NULL</span>
+<span class="comment">-- ON DELETE RESTRICT: Prevent deletion if related rows exist</span>
+<span class="comment">-- ON UPDATE CASCADE: Update foreign key when primary key changes</span>
+                </div>
+
+                <div class="example">
+                    <h4>Example: Complete Database Schema with Relationships</h4>
+                    <div class="code-block">
+<span class="comment">-- University Database Schema</span>
+<span class="keyword">CREATE TABLE</span> students (
+    student_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    first_name <span class="keyword">VARCHAR</span>(50) <span class="keyword">NOT NULL</span>,
+    last_name <span class="keyword">VARCHAR</span>(50) <span class="keyword">NOT NULL</span>,
+    email <span class="keyword">VARCHAR</span>(100) <span class="keyword">UNIQUE</span>
+);
+
+<span class="keyword">CREATE TABLE</span> courses (
+    course_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span>,
+    course_name <span class="keyword">VARCHAR</span>(100) <span class="keyword">NOT NULL</span>,
+    credits <span class="keyword">INT</span> <span class="keyword">CHECK</span> (credits > 0)
+);
+
+<span class="comment">-- Junction table for many-to-many</span>
+<span class="keyword">CREATE TABLE</span> enrollments (
+    student_id <span class="keyword">INT</span>,
+    course_id <span class="keyword">INT</span>,
+    enrollment_date <span class="keyword">DATE</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_DATE</span>,
+    grade <span class="keyword">CHAR</span>(2),
+    <span class="keyword">PRIMARY KEY</span> (student_id, course_id),
+    <span class="keyword">FOREIGN KEY</span> (student_id) <span class="keyword">REFERENCES</span> students(student_id),
+    <span class="keyword">FOREIGN KEY</span> (course_id) <span class="keyword">REFERENCES</span> courses(course_id)
+);
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercise 2.1 - 2.8</h4>
+                    <ol>
+                        <li>Write a query to find all employees who earn more than the average salary of their department.</li>
+                        <li>Create a view that shows employee names, departments, and salaries for employees earning above $60,000.</li>
+                        <li>Design a database schema for an online bookstore with tables for books, authors, publishers, and customers. Include appropriate relationships and constraints.</li>
+                        <li>Create indexes on frequently queried columns in your bookstore database.</li>
+                        <li>Write a query using GROUP BY to find the total sales per product category.</li>
+                        <li>Explain the difference between INNER JOIN and LEFT JOIN with examples.</li>
+                        <li>Create a stored procedure that updates employee salaries by a given percentage for a specific department.</li>
+                        <li>What are the advantages and disadvantages of using views?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Chapter 3: Programming Database Applications -->
+            <div class="chapter" id="ch3">
+                <h2>Chapter 3: Programming Database Applications</h2>
+                
+                <h3>3.1 Create Procedures and Functions</h3>
+                
+                <h4>Stored Procedures</h4>
+                <p>Stored procedures are precompiled SQL statements stored in the database that can be executed multiple times.</p>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Create stored procedure</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE PROCEDURE</span> GetEmployeeByDepartment(
+    <span class="keyword">IN</span> dept_id <span class="keyword">INT</span>
+)
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> emp_id, first_name, last_name, salary
+    <span class="keyword">FROM</span> employees
+    <span class="keyword">WHERE</span> department_id = dept_id;
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+
+<span class="comment">-- Call procedure</span>
+<span class="keyword">CALL</span> GetEmployeeByDepartment(1);
+
+<span class="comment">-- Procedure with OUT parameter</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE PROCEDURE</span> GetDepartmentStats(
+    <span class="keyword">IN</span> dept_id <span class="keyword">INT</span>,
+    <span class="keyword">OUT</span> emp_count <span class="keyword">INT</span>,
+    <span class="keyword">OUT</span> avg_salary <span class="keyword">DECIMAL</span>(10,2)
+)
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*), <span class="function">AVG</span>(salary)
+    <span class="keyword">INTO</span> emp_count, avg_salary
+    <span class="keyword">FROM</span> employees
+    <span class="keyword">WHERE</span> department_id = dept_id;
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+
+<span class="comment">-- Call with output parameters</span>
+<span class="keyword">CALL</span> GetDepartmentStats(1, @count, @avg);
+<span class="keyword">SELECT</span> @count, @avg;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- PostgreSQL: Create stored procedure</span>
+<span class="keyword">CREATE OR REPLACE PROCEDURE</span> update_employee_salary(
+    p_emp_id <span class="keyword">INT</span>,
+    p_new_salary <span class="keyword">DECIMAL</span>
+)
+<span class="keyword">LANGUAGE</span> plpgsql
+<span class="keyword">AS</span> $$
+<span class="keyword">BEGIN</span>
+    <span class="keyword">UPDATE</span> employees
+    <span class="keyword">SET</span> salary = p_new_salary
+    <span class="keyword">WHERE</span> emp_id = p_emp_id;
+    
+    <span class="keyword">COMMIT</span>;
+<span class="keyword">END</span>;
+$$;
+
+<span class="comment">-- Call procedure</span>
+<span class="keyword">CALL</span> update_employee_salary(101, 85000);
+                </div>
+
+                <h4>Stored Functions</h4>
+                <p>Functions return a single value and can be used in SQL statements.</p>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Create function</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE FUNCTION</span> CalculateBonus(salary <span class="keyword">DECIMAL</span>(10,2))
+<span class="keyword">RETURNS</span> <span class="keyword">DECIMAL</span>(10,2)
+<span class="keyword">DETERMINISTIC</span>
+<span class="keyword">READS SQL DATA</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">DECLARE</span> bonus <span class="keyword">DECIMAL</span>(10,2);
+    <span class="keyword">SET</span> bonus = salary * 0.1;
+    <span class="keyword">RETURN</span> bonus;
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+
+<span class="comment">-- Use function in query</span>
+<span class="keyword">SELECT</span> first_name, salary, CalculateBonus(salary) <span class="keyword">AS</span> bonus
+<span class="keyword">FROM</span> employees;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- PostgreSQL: Create function</span>
+<span class="keyword">CREATE OR REPLACE FUNCTION</span> get_employee_count(dept_id <span class="keyword">INT</span>)
+<span class="keyword">RETURNS</span> <span class="keyword">INT</span>
+<span class="keyword">LANGUAGE</span> plpgsql
+<span class="keyword">AS</span> $$
+<span class="keyword">DECLARE</span>
+    emp_count <span class="keyword">INT</span>;
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">INTO</span> emp_count
+    <span class="keyword">FROM</span> employees
+    <span class="keyword">WHERE</span> department_id = dept_id;
+    
+    <span class="keyword">RETURN</span> emp_count;
+<span class="keyword">END</span>;
+$$;
+
+<span class="comment">-- Use function</span>
+<span class="keyword">SELECT</span> get_employee_count(1);
+                </div>
+
+                <div class="example">
+                    <h4>Example: Procedure to Transfer Employee</h4>
+                    <div class="code-block">
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE PROCEDURE</span> TransferEmployee(
+    <span class="keyword">IN</span> p_emp_id <span class="keyword">INT</span>,
+    <span class="keyword">IN</span> p_new_dept_id <span class="keyword">INT</span>
+)
+<span class="keyword">BEGIN</span>
+    <span class="keyword">DECLARE</span> old_dept_id <span class="keyword">INT</span>;
+    
+    <span class="comment">-- Get current department</span>
+    <span class="keyword">SELECT</span> department_id <span class="keyword">INTO</span> old_dept_id
+    <span class="keyword">FROM</span> employees
+    <span class="keyword">WHERE</span> emp_id = p_emp_id;
+    
+    <span class="comment">-- Update department</span>
+    <span class="keyword">UPDATE</span> employees
+    <span class="keyword">SET</span> department_id = p_new_dept_id
+    <span class="keyword">WHERE</span> emp_id = p_emp_id;
+    
+    <span class="comment">-- Log the transfer</span>
+    <span class="keyword">INSERT INTO</span> transfer_log (emp_id, old_dept, new_dept, transfer_date)
+    <span class="keyword">VALUES</span> (p_emp_id, old_dept_id, p_new_dept_id, <span class="function">CURRENT_DATE</span>);
+    
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+                    </div>
+                </div>
+
+                <h3>3.2 Database Triggers</h3>
+                
+                <h4>What are Triggers?</h4>
+                <p>Triggers are special stored procedures that automatically execute when certain events occur in the database (INSERT, UPDATE, DELETE).</p>
+
+                <h4>Trigger Types</h4>
+                <ul>
+                    <li><strong>BEFORE:</strong> Executes before the triggering event</li>
+                    <li><strong>AFTER:</strong> Executes after the triggering event</li>
+                    <li><strong>INSTEAD OF:</strong> Replaces the triggering event (mainly for views)</li>
+                </ul>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: BEFORE INSERT trigger</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE TRIGGER</span> before_employee_insert
+<span class="keyword">BEFORE INSERT</span> <span class="keyword">ON</span> employees
+<span class="keyword">FOR EACH ROW</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">IF</span> NEW.salary &lt; 0 <span class="keyword">THEN</span>
+        <span class="keyword">SET</span> NEW.salary = 0;
+    <span class="keyword">END IF</span>;
+    
+    <span class="keyword">IF</span> NEW.email <span class="keyword">IS NULL</span> <span class="keyword">THEN</span>
+        <span class="keyword">SET</span> NEW.email = <span class="function">CONCAT</span>(NEW.first_name, <span class="string">'.'</span>, NEW.last_name, <span class="string">'@company.com'</span>);
+    <span class="keyword">END IF</span>;
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: AFTER UPDATE trigger</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE TRIGGER</span> after_employee_update
+<span class="keyword">AFTER UPDATE</span> <span class="keyword">ON</span> employees
+<span class="keyword">FOR EACH ROW</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">IF</span> OLD.salary != NEW.salary <span class="keyword">THEN</span>
+        <span class="keyword">INSERT INTO</span> salary_history (
+            emp_id, old_salary, new_salary, change_date
+        ) <span class="keyword">VALUES</span> (
+            NEW.emp_id, OLD.salary, NEW.salary, <span class="function">NOW</span>()
+        );
+    <span class="keyword">END IF</span>;
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- PostgreSQL: Trigger with function</span>
+<span class="keyword">CREATE OR REPLACE FUNCTION</span> log_employee_changes()
+<span class="keyword">RETURNS</span> <span class="keyword">TRIGGER</span> <span class="keyword">AS</span> $$
+<span class="keyword">BEGIN</span>
+    <span class="keyword">IF</span> (TG_OP = <span class="string">'UPDATE'</span>) <span class="keyword">THEN</span>
+        <span class="keyword">INSERT INTO</span> employee_audit (
+            emp_id, old_value, new_value, changed_at
+        ) <span class="keyword">VALUES</span> (
+            NEW.emp_id, 
+            <span class="function">row_to_json</span>(OLD), 
+            <span class="function">row_to_json</span>(NEW), 
+            <span class="function">CURRENT_TIMESTAMP</span>
+        );
+        <span class="keyword">RETURN</span> NEW;
+    <span class="keyword">ELSIF</span> (TG_OP = <span class="string">'DELETE'</span>) <span class="keyword">THEN</span>
+        <span class="keyword">INSERT INTO</span> employee_audit (
+            emp_id, old_value, changed_at
+        ) <span class="keyword">VALUES</span> (
+            OLD.emp_id, 
+            <span class="function">row_to_json</span>(OLD), 
+            <span class="function">CURRENT_TIMESTAMP</span>
+        );
+        <span class="keyword">RETURN</span> OLD;
+    <span class="keyword">END IF</span>;
+<span class="keyword">RETURN</span> NULL;
+<span class="keyword">END</span>;
+$$ <span class="keyword">LANGUAGE</span> plpgsql;
+
+<span class="keyword">CREATE TRIGGER</span> employee_changes_trigger
+<span class="keyword">AFTER UPDATE OR DELETE</span> <span class="keyword">ON</span> employees
+<span class="keyword">FOR EACH ROW</span>
+<span class="keyword">EXECUTE FUNCTION</span> log_employee_changes();
+                </div>
+
+                <div class="example">
+                    <h4>Example: Trigger to Maintain Audit Trail</h4>
+                    <div class="code-block">
+<span class="comment">-- Create audit table</span>
+<span class="keyword">CREATE TABLE</span> employee_audit (
+    audit_id <span class="keyword">INT</span> <span class="keyword">PRIMARY KEY</span> <span class="keyword">AUTO_INCREMENT</span>,
+    emp_id <span class="keyword">INT</span>,
+    action <span class="keyword">VARCHAR</span>(10),
+    old_data <span class="keyword">JSON</span>,
+    new_data <span class="keyword">JSON</span>,
+    changed_by <span class="keyword">VARCHAR</span>(50),
+    changed_at <span class="keyword">TIMESTAMP</span> <span class="keyword">DEFAULT</span> <span class="function">CURRENT_TIMESTAMP</span>
+);
+
+<span class="comment">-- Trigger to log all changes</span>
+<span class="keyword">DELIMITER</span> //
+
+<span class="keyword">CREATE TRIGGER</span> audit_employee_changes
+<span class="keyword">AFTER UPDATE</span> <span class="keyword">ON</span> employees
+<span class="keyword">FOR EACH ROW</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">INSERT INTO</span> employee_audit (
+        emp_id, action, old_data, new_data, changed_by
+    ) <span class="keyword">VALUES</span> (
+        NEW.emp_id,
+        <span class="string">'UPDATE'</span>,
+        <span class="function">JSON_OBJECT</span>(
+            <span class="string">'salary'</span>, OLD.salary,
+            <span class="string">'department_id'</span>, OLD.department_id
+        ),
+        <span class="function">JSON_OBJECT</span>(
+            <span class="string">'salary'</span>, NEW.salary,
+            <span class="string">'department_id'</span>, NEW.department_id
+        ),
+        <span class="function">USER</span>(),
+        <span class="function">NOW</span>()
+    );
+<span class="keyword">END</span> //
+
+<span class="keyword">DELIMITER</span> ;
+                    </div>
+                </div>
+
+                <div class="note">
+                    <h4>Trigger Best Practices</h4>
+                    <ul>
+                        <li>Keep triggers simple and fast</li>
+                        <li>Avoid complex business logic in triggers</li>
+                        <li>Document all triggers clearly</li>
+                        <li>Be careful with recursive triggers</li>
+                        <li>Test triggers thoroughly before deployment</li>
+                    </ul>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercise 3.1 - 3.2</h4>
+                    <ol>
+                        <li>Create a stored procedure that calculates the total salary for a given department.</li>
+                        <li>Write a function that returns the number of employees in a department with salary above a threshold.</li>
+                        <li>Create a trigger that automatically updates a "last_modified" timestamp whenever an employee record is updated.</li>
+                        <li>Design a trigger system to prevent deletion of employees who are managers of other employees.</li>
+                        <li>Create a procedure that transfers an employee between departments and logs the transfer.</li>
+                        <li>Explain the difference between stored procedures and functions.</li>
+                        <li>When would you use a BEFORE trigger versus an AFTER trigger?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Chapter 4: Database Administration -->
+            <div class="chapter" id="ch4">
+                <h2>Chapter 4: Database Administration</h2>
+                
+                <h3>4.1 User Management and Security</h3>
+                
+                <h4>Creating and Managing Users</h4>
+                <p>Database security starts with proper user management. Administrators need to create users, assign appropriate privileges, and manage access control.</p>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Create user</span>
+<span class="keyword">CREATE USER</span> <span class="string">'newuser'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED BY</span> <span class="string">'password123'</span>;
+
+<span class="comment">-- Create user with specific host</span>
+<span class="keyword">CREATE USER</span> <span class="string">'app_user'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED BY</span> <span class="string">'secure_password'</span>;
+
+<span class="comment">-- Grant privileges</span>
+<span class="keyword">GRANT SELECT, INSERT, UPDATE</span> <span class="keyword">ON</span> company_db.employees <span class="keyword">TO</span> <span class="string">'app_user'</span>@<span class="string">'%'</span>;
+
+<span class="comment">-- Grant all privileges on database</span>
+<span class="keyword">GRANT ALL PRIVILEGES</span> <span class="keyword">ON</span> company_db.* <span class="keyword">TO</span> <span class="string">'admin_user'</span>@<span class="string">'localhost'</span>;
+
+<span class="comment">-- Grant specific privileges</span>
+<span class="keyword">GRANT SELECT, INSERT</span> <span class="keyword">ON</span> company_db.customers <span class="keyword">TO</span> <span class="string">'sales_user'</span>@<span class="string">'%'</span>;
+
+<span class="comment">-- Revoke privileges</span>
+<span class="keyword">REVOKE INSERT</span> <span class="keyword">ON</span> company_db.employees <span class="keyword">FROM</span> <span class="string">'app_user'</span>@<span class="string">'%'</span>;
+
+<span class="comment">-- Show user privileges</span>
+<span class="keyword">SHOW GRANTS FOR</span> <span class="string">'app_user'</span>@<span class="string">'%'</span>;
+
+<span class="comment">-- Change user password</span>
+<span class="keyword">ALTER USER</span> <span class="string">'newuser'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED BY</span> <span class="string">'new_password'</span>;
+
+<span class="comment">-- Drop user</span>
+<span class="keyword">DROP USER</span> <span class="string">'old_user'</span>@<span class="string">'localhost'</span>;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- PostgreSQL: Create user</span>
+<span class="keyword">CREATE USER</span> app_user <span class="keyword">WITH</span> <span class="keyword">PASSWORD</span> <span class="string">'secure_password'</span>;
+
+<span class="comment">-- Create role (users and roles are similar in PostgreSQL)</span>
+<span class="keyword">CREATE ROLE</span> sales_team <span class="keyword">WITH</span> <span class="keyword">LOGIN</span> <span class="keyword">PASSWORD</span> <span class="string">'password123'</span>;
+
+<span class="comment">-- Grant privileges</span>
+<span class="keyword">GRANT SELECT, INSERT, UPDATE</span> <span class="keyword">ON</span> customers <span class="keyword">TO</span> sales_team;
+
+<span class="comment">-- Grant usage on schema</span>
+<span class="keyword">GRANT USAGE</span> <span class="keyword">ON</span> <span class="keyword">SCHEMA</span> public <span class="keyword">TO</span> app_user;
+
+<span class="comment">-- Grant all privileges</span>
+<span class="keyword">GRANT ALL PRIVILEGES</span> <span class="keyword">ON</span> <span class="keyword">DATABASE</span> company_db <span class="keyword">TO</span> app_user;
+
+<span class="comment">-- Revoke privileges</span>
+<span class="keyword">REVOKE INSERT</span> <span class="keyword">ON</span> employees <span class="keyword">FROM</span> app_user;
+
+<span class="comment">-- Alter user</span>
+<span class="keyword">ALTER USER</span> app_user <span class="keyword">WITH</span> <span class="keyword">PASSWORD</span> <span class="string">'new_password'</span>;
+
+<span class="comment">-- Drop user</span>
+<span class="keyword">DROP USER</span> old_user;
+                </div>
+
+                <h4>Privilege Levels</h4>
+                <table>
+                    <tr>
+                        <th>Privilege</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>SELECT</td>
+                        <td>Read data from tables</td>
+                    </tr>
+                    <tr>
+                        <td>INSERT</td>
+                        <td>Add new rows to tables</td>
+                    </tr>
+                    <tr>
+                        <td>UPDATE</td>
+                        <td>Modify existing rows</td>
+                    </tr>
+                    <tr>
+                        <td>DELETE</td>
+                        <td>Remove rows from tables</td>
+                    </tr>
+                    <tr>
+                        <td>CREATE</td>
+                        <td>Create new tables/databases</td>
+                    </tr>
+                    <tr>
+                        <td>DROP</td>
+                        <td>Delete tables/databases</td>
+                    </tr>
+                    <tr>
+                        <td>ALTER</td>
+                        <td>Modify table structure</td>
+                    </tr>
+                    <tr>
+                        <td>INDEX</td>
+                        <td>Create and drop indexes</td>
+                    </tr>
+                    <tr>
+                        <td>ALL PRIVILEGES</td>
+                        <td>All privileges on specified object</td>
+                    </tr>
+                </table>
+
+                <h3>4.2 Backup and Recovery</h3>
+                
+                <h4>Importance of Backups</h4>
+                <p>Regular backups are essential for protecting data against loss due to hardware failure, human error, or disasters. A good backup strategy includes:</p>
+                <ul>
+                    <li>Regular scheduled backups</li>
+                    <li>Multiple backup copies</li>
+                    <li>Off-site storage</li>
+                    <li>Testing recovery procedures</li>
+                </ul>
+
+                <h4>MySQL Backup and Recovery</h4>
+                <div class="code-block">
+<span class="comment">-- Backup entire database</span>
+<span class="comment">-- Command line: mysqldump -u username -p database_name > backup.sql</span>
+mysqldump -u root -p company_db > company_db_backup.sql
+
+<span class="comment">-- Backup specific tables</span>
+mysqldump -u root -p company_db employees departments > tables_backup.sql
+
+<span class="comment">-- Backup with compression</span>
+mysqldump -u root -p company_db | gzip > company_db_backup.sql.gz
+
+<span class="comment">-- Backup all databases</span>
+mysqldump -u root -p --all-databases > all_databases_backup.sql
+
+<span class="comment">-- Restore database</span>
+<span class="comment">-- Command line: mysql -u username -p database_name < backup.sql</span>
+mysql -u root -p company_db < company_db_backup.sql
+
+<span class="comment">-- Create new database and restore</span>
+mysql -u root -p -e <span class="string">"CREATE DATABASE company_db_restored"</span>
+mysql -u root -p company_db_restored < company_db_backup.sql
+                </div>
+
+                <h4>PostgreSQL Backup and Recovery</h4>
+                <div class="code-block">
+<span class="comment">-- Backup entire database (pg_dump)</span>
+<span class="comment">-- Command line: pg_dump -U username -d database_name > backup.sql</span>
+pg_dump -U postgres -d company_db > company_db_backup.sql
+
+<span class="comment">-- Backup with custom format (allows selective restore)</span>
+pg_dump -U postgres -d company_db -F c -f company_db_backup.dump
+
+<span class="comment">-- Backup all databases</span>
+pg_dumpall -U postgres > all_databases_backup.sql
+
+<span class="comment">-- Restore database</span>
+<span class="comment">-- Command line: psql -U username -d database_name < backup.sql</span>
+psql -U postgres -d company_db < company_db_backup.sql
+
+<span class="comment">-- Restore from custom format</span>
+pg_restore -U postgres -d company_db company_db_backup.dump
+
+<span class="comment">-- Create new database and restore</span>
+createdb -U postgres company_db_restored
+psql -U postgres -d company_db_restored < company_db_backup.sql
+                </div>
+
+                <h4>Backup Strategies</h4>
+                <ul>
+                    <li><strong>Full Backup:</strong> Complete backup of entire database</li>
+                    <li><strong>Incremental Backup:</strong> Only changed data since last backup</li>
+                    <li><strong>Differential Backup:</strong> All changes since last full backup</li>
+                    <li><strong>Continuous Backup:</strong> Real-time replication to backup server</li>
+                </ul>
+
+                <div class="note">
+                    <h4>Backup Best Practices</h4>
+                    <ul>
+                        <li>Perform backups during low-activity periods</li>
+                        <li>Test restore procedures regularly</li>
+                        <li>Keep multiple backup generations (daily, weekly, monthly)</li>
+                        <li>Store backups in secure, off-site locations</li>
+                        <li>Document backup and recovery procedures</li>
+                        <li>Monitor backup success/failure</li>
+                    </ul>
+                </div>
+
+                <h3>4.3 Performance Monitoring and Optimization</h3>
+                
+                <h4>Query Performance</h4>
+                <p>Monitoring and optimizing query performance is crucial for maintaining database efficiency.</p>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Explain query execution plan</span>
+<span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees <span class="keyword">WHERE</span> department_id = 1;
+
+<span class="comment">-- Detailed execution plan</span>
+<span class="keyword">EXPLAIN FORMAT=JSON</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees <span class="keyword">WHERE</span> department_id = 1;
+
+<span class="comment">-- Show process list</span>
+<span class="keyword">SHOW PROCESSLIST</span>;
+
+<span class="comment">-- Show table status</span>
+<span class="keyword">SHOW TABLE STATUS</span> <span class="keyword">LIKE</span> <span class="string">'employees'</span>;
+
+<span class="comment">-- Analyze table (update statistics)</span>
+<span class="keyword">ANALYZE TABLE</span> employees;
+
+<span class="comment">-- Optimize table (reorganize and optimize storage)</span>
+<span class="keyword">OPTIMIZE TABLE</span> employees;
+                </div>
+
+                <div class="code-block">
+<span class="comment">-- PostgreSQL: Explain query execution plan</span>
+<span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees <span class="keyword">WHERE</span> department_id = 1;
+
+<span class="comment">-- Explain with actual execution</span>
+<span class="keyword">EXPLAIN ANALYZE</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees <span class="keyword">WHERE</span> department_id = 1;
+
+<span class="comment">-- Show running queries</span>
+<span class="keyword">SELECT</span> pid, usename, query, state, query_start
+<span class="keyword">FROM</span> pg_stat_activity
+<span class="keyword">WHERE</span> state = <span class="string">'active'</span>;
+
+<span class="keyword">-- Analyze table</span>
+<span class="keyword">ANALYZE</span> employees;
+
+<span class="comment">-- Vacuum (reclaim storage and update statistics)</span>
+<span class="keyword">VACUUM</span> employees;
+
+<span class="comment">-- Vacuum with analyze</span>
+<span class="keyword">VACUUM ANALYZE</span> employees;
+                </div>
+
+                <h4>Performance Optimization Tips</h4>
+                <ul>
+                    <li>Use appropriate indexes on frequently queried columns</li>
+                    <li>Avoid SELECT * - only select needed columns</li>
+                    <li>Use LIMIT for large result sets</li>
+                    <li>Optimize JOIN operations</li>
+                    <li>Use prepared statements for repeated queries</li>
+                    <li>Monitor slow query logs</li>
+                    <li>Regularly update table statistics</li>
+                </ul>
+
+                <div class="exercise">
+                    <h4>Exercise 4.1 - 4.3</h4>
+                    <ol>
+                        <li>Create a user with read-only access to the employees table.</li>
+                        <li>Design a backup strategy for a production database that must be available 24/7.</li>
+                        <li>Explain how you would restore a database from a backup taken 3 days ago.</li>
+                        <li>Use EXPLAIN to analyze a complex query and identify optimization opportunities.</li>
+                        <li>What are the security implications of granting ALL PRIVILEGES to a user?</li>
+                        <li>Create a role-based access control system for a multi-department organization.</li>
+                        <li>How would you monitor database performance in a production environment?</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Chapter 5: Database Administration Procedures -->
+            <div class="chapter" id="ch5">
+                <h2>Chapter 5: Database Administration Procedures</h2>
+                
+                <h3>5.1 Database Maintenance Tasks</h3>
+                
+                <h4>Regular Maintenance Activities</h4>
+                <p>Database administrators must perform regular maintenance to ensure optimal performance and reliability.</p>
+
+                <h4>1. Index Maintenance</h4>
+                <div class="code-block">
+<span class="comment">-- MySQL: Rebuild indexes</span>
+<span class="keyword">ALTER TABLE</span> employees <span class="keyword">ENGINE=InnoDB</span>;
+
+<span class="comment">-- Check index usage</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> sys.schema_unused_indexes;
+
+<span class="comment">-- PostgreSQL: Reindex</span>
+<span class="keyword">REINDEX TABLE</span> employees;
+
+<span class="comment">-- Reindex database</span>
+<span class="keyword">REINDEX DATABASE</span> company_db;
+                </div>
+
+                <h4>2. Table Maintenance</h4>
+                <div class="code-block">
+<span class="comment">-- MySQL: Check table</span>
+<span class="keyword">CHECK TABLE</span> employees;
+
+<span class="comment">-- Repair table</span>
+<span class="keyword">REPAIR TABLE</span> employees;
+
+<span class="comment">-- PostgreSQL: Check table integrity</span>
+<span class="keyword">VACUUM FULL</span> employees;
+
+<span class="comment">-- Check for corruption</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> pg_check_table(<span class="string">'employees'</span>);
+                </div>
+
+                <h4>3. Log Management</h4>
+                <p>Database logs are essential for troubleshooting and auditing but can grow large over time.</p>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Enable slow query log</span>
+<span class="keyword">SET GLOBAL</span> slow_query_log = <span class="string">'ON'</span>;
+<span class="keyword">SET GLOBAL</span> long_query_time = 2;
+
+<span class="comment">-- Rotate logs (usually done via system tools)</span>
+<span class="comment">-- Use logrotate on Linux or scheduled tasks on Windows</span>
+
+<span class="comment">-- PostgreSQL: Check log location</span>
+<span class="keyword">SHOW</span> log_directory;
+<span class="keyword">SHOW</span> log_filename;
+                </div>
+
+                <h3>5.2 Database Security Best Practices</h3>
+                
+                <h4>Security Checklist</h4>
+                <ul>
+                    <li>Use strong passwords for all database accounts</li>
+                    <li>Limit user privileges to minimum required</li>
+                    <li>Regularly review and audit user access</li>
+                    <li>Encrypt sensitive data at rest and in transit</li>
+                    <li>Keep database software updated with security patches</li>
+                    <li>Use firewall rules to restrict database access</li>
+                    <li>Enable database auditing and logging</li>
+                    <li>Implement connection encryption (SSL/TLS)</li>
+                </ul>
+
+                <h4>Data Encryption</h4>
+                <div class="code-block">
+<span class="comment">-- MySQL: Enable SSL connections</span>
+<span class="comment">-- Configure in my.cnf or my.ini</span>
+<span class="comment">[mysqld]
+ssl-ca=ca.pem
+ssl-cert=server-cert.pem
+ssl-key=server-key.pem</span>
+
+<span class="comment">-- Check SSL status</span>
+<span class="keyword">SHOW VARIABLES LIKE</span> <span class="string">'%ssl%'</span>;
+
+<span class="comment">-- PostgreSQL: Enable SSL</span>
+<span class="comment">-- Configure in postgresql.conf</span>
+<span class="comment">ssl = on
+ssl_cert_file = 'server.crt'
+ssl_key_file = 'server.key'</span>
+                </div>
+
+                <h3>5.3 Disaster Recovery Planning</h3>
+                
+                <h4>Recovery Time Objective (RTO) and Recovery Point Objective (RPO)</h4>
+                <ul>
+                    <li><strong>RTO (Recovery Time Objective):</strong> Maximum acceptable downtime</li>
+                    <li><strong>RPO (Recovery Point Objective):</strong> Maximum acceptable data loss</li>
+                </ul>
+
+                <h4>Disaster Recovery Strategies</h4>
+                <ul>
+                    <li><strong>Hot Standby:</strong> Real-time replication to backup server</li>
+                    <li><strong>Warm Standby:</strong> Backup server ready but not fully synchronized</li>
+                    <li><strong>Cold Standby:</strong> Backup server available but requires manual activation</li>
+                    <li><strong>Backup and Restore:</strong> Traditional backup with restore procedures</li>
+                </ul>
+
+                <h4>Replication Setup (MySQL)</h4>
+                <div class="code-block">
+<span class="comment">-- Master server configuration (my.cnf)</span>
+<span class="comment">[mysqld]
+server-id = 1
+log-bin = mysql-bin
+binlog-format = ROW</span>
+
+<span class="comment">-- Create replication user on master</span>
+<span class="keyword">CREATE USER</span> <span class="string">'repl'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED BY</span> <span class="string">'replication_password'</span>;
+<span class="keyword">GRANT REPLICATION SLAVE ON</span> *.* <span class="keyword">TO</span> <span class="string">'repl'</span>@<span class="string">'%'</span>;
+
+<span class="comment">-- On slave server, configure replication</span>
+<span class="keyword">CHANGE MASTER TO</span>
+    MASTER_HOST=<span class="string">'master_host'</span>,
+    MASTER_USER=<span class="string">'repl'</span>,
+    MASTER_PASSWORD=<span class="string">'replication_password'</span>,
+    MASTER_LOG_FILE=<span class="string">'mysql-bin.000001'</span>,
+    MASTER_LOG_POS=154;
+
+<span class="keyword">START SLAVE</span>;
+<span class="keyword">SHOW SLAVE STATUS</span>;
+                </div>
+
+                <h3>5.4 Database Migration and Upgrades</h3>
+                
+                <h4>Migration Planning</h4>
+                <p>Database migrations require careful planning to minimize downtime and data loss.</p>
+
+                <h4>Migration Steps</h4>
+                <ol>
+                    <li>Assess current database structure and data</li>
+                    <li>Plan migration strategy and timeline</li>
+                    <li>Test migration in staging environment</li>
+                    <li>Create comprehensive backups</li>
+                    <li>Execute migration during maintenance window</li>
+                    <li>Verify data integrity after migration</li>
+                    <li>Update application connections if needed</li>
+                    <li>Monitor system performance post-migration</li>
+                </ol>
+
+                <div class="code-block">
+<span class="comment">-- Export schema only</span>
+mysqldump -u root -p --no-data company_db > schema_only.sql
+
+<span class="comment">-- Export data only</span>
+mysqldump -u root -p --no-create-info company_db > data_only.sql
+
+<span class="comment">-- Compare schemas between databases</span>
+<span class="comment">-- Use tools like mysqldiff or manual comparison</span>
+                </div>
+
+                <h3>5.5 Monitoring and Alerting</h3>
+                
+                <h4>Key Metrics to Monitor</h4>
+                <ul>
+                    <li>Database size and growth rate</li>
+                    <li>Connection count and active sessions</li>
+                    <li>Query performance and slow queries</li>
+                    <li>Disk I/O and storage usage</li>
+                    <li>Memory usage</li>
+                    <li>Replication lag (if using replication)</li>
+                    <li>Error rates and failed connections</li>
+                </ul>
+
+                <div class="code-block">
+<span class="comment">-- MySQL: Monitor database size</span>
+<span class="keyword">SELECT</span> 
+    table_schema <span class="keyword">AS</span> <span class="string">'Database'</span>,
+    <span class="function">ROUND</span>(<span class="function">SUM</span>(data_length + index_length) / 1024 / 1024, 2) <span class="keyword">AS</span> <span class="string">'Size (MB)'</span>
+<span class="keyword">FROM</span> information_schema.tables
+<span class="keyword">GROUP BY</span> table_schema;
+
+<span class="comment">-- PostgreSQL: Monitor database size</span>
+<span class="keyword">SELECT</span> 
+    pg_database.datname,
+    <span class="function">pg_size_pretty</span>(<span class="function">pg_database_size</span>(pg_database.datname)) <span class="keyword">AS</span> size
+<span class="keyword">FROM</span> pg_database
+<span class="keyword">ORDER BY</span> <span class="function">pg_database_size</span>(pg_database.datname) <span class="keyword">DESC</span>;
+                </div>
+
+                <div class="example">
+                    <h4>Example: Automated Backup Script</h4>
+                    <div class="code-block">
+<span class="comment">#!/bin/bash
+# MySQL Backup Script
+BACKUP_DIR="/backups/mysql"
+DATE=$(date +%Y%m%d_%H%M%S)
+DB_NAME="company_db"
+DB_USER="backup_user"
+DB_PASS="backup_password"
+
+# Create backup directory if it doesn't exist
+mkdir -p $BACKUP_DIR
+
+# Perform backup
+mysqldump -u $DB_USER -p$DB_PASS $DB_NAME | gzip > $BACKUP_DIR/${DB_NAME}_${DATE}.sql.gz
+
+# Keep only last 7 days of backups
+find $BACKUP_DIR -name "${DB_NAME}_*.sql.gz" -mtime +7 -delete
+
+echo "Backup completed: ${DB_NAME}_${DATE}.sql.gz"</span>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercise 5.1 - 5.5</h4>
+                    <ol>
+                        <li>Create a maintenance schedule for a production database including all necessary tasks.</li>
+                        <li>Design a disaster recovery plan for a critical database system.</li>
+                        <li>Explain how you would migrate a database from MySQL to PostgreSQL.</li>
+                        <li>Set up monitoring for database performance metrics.</li>
+                        <li>Create a backup script that runs automatically and maintains a retention policy.</li>
+                        <li>What security measures would you implement for a database containing sensitive customer data?</li>
+                        <li>How would you handle a database corruption incident?</li>
+                        <li>Design a high-availability database architecture with minimal downtime.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Complete Database Management Guide. All rights reserved.</p>
+            <p>This comprehensive guide covers database concepts, SQL programming, and administration best practices.</p>
+        </footer>
+    </div>
+</body>
+</html>

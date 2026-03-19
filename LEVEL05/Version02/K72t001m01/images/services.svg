@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eff6ff"/><stop offset="100%" stop-color="#f0fdfa"/></linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#34d399"/></linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg2)"/>
+  <!-- Title -->
+  <text x="200" y="28" text-anchor="middle" fill="#0369a1" font-size="18" font-weight="bold" font-family="system-ui,sans-serif">SERVICES – Work done for you</text>
+  <!-- Repair card -->
+  <rect x="40" y="55" width="100" height="100" rx="12" fill="url(#card1)" stroke="#0284c7" stroke-width="2"/>
+  <path d="M75 95 L95 75 L105 85 L85 105 L75 95 M88 88 L98 98" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M95 115 L115 95 L125 105 L105 125 L95 115" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <text x="90" y="175" text-anchor="middle" fill="#0c4a6e" font-size="13" font-weight="bold" font-family="system-ui,sans-serif">Repair</text>
+  <!-- Advice card -->
+  <rect x="150" y="55" width="100" height="100" rx="12" fill="url(#card2)" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="200" cy="95" r="18" fill="none" stroke="white" stroke-width="4"/>
+  <path d="M185 105 Q200 115 215 105" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <circle cx="192" cy="88" r="3" fill="white"/><circle cx="200" cy="85" r="3" fill="white"/><circle cx="208" cy="88" r="3" fill="white"/>
+  <text x="200" y="175" text-anchor="middle" fill="#4c1d95" font-size="13" font-weight="bold" font-family="system-ui,sans-serif">Advice</text>
+  <!-- Delivery card -->
+  <rect x="260" y="55" width="100" height="100" rx="12" fill="url(#card3)" stroke="#047857" stroke-width="2"/>
+  <rect x="280" y="80" width="60" height="45" rx="4" fill="white" opacity="0.95"/>
+  <path d="M285 85 L295 75 L315 75 L305 85 L285 85 M290 95 L310 95 M290 105 L305 105" stroke="#059669" stroke-width="2"/>
+  <rect x="298" y="72" width="24" height="12" rx="2" fill="white" opacity="0.9"/>
+  <text x="310" y="175" text-anchor="middle" fill="#064e3b" font-size="13" font-weight="bold" font-family="system-ui,sans-serif">Delivery</text>
+  <!-- Subtitle -->
+  <rect x="50" y="195" width="300" height="50" rx="10" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="200" y="222" text-anchor="middle" fill="#475569" font-size="14" font-family="system-ui,sans-serif">e.g. repair, advice, delivery</text>
+</svg>

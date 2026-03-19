@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Help Desk & SLA - Simple Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100dvh;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100%;
+            height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            width: 90%;
+            max-width: 1000px;
+            height: 85dvh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 50px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            animation: fadeInDown 0.8s ease-out;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 25px 0 15px 0;
+        }
+
+        p {
+            font-size: 1.15em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .big-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #764ba2;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .icon-container {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            animation: bounceIn 1s ease-out 0.3s both;
+        }
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+            animation: pulse 2s infinite;
+        }
+
+        .example-box {
+            background: #f0f4ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .example-box strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out both;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card:nth-child(1) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.4s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.6s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .benefit-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .benefit-text {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .steps-container {
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            animation: fadeInLeft 0.8s ease-out both;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.2s; }
+        .step:nth-child(2) { animation-delay: 0.4s; }
+        .step:nth-child(3) { animation-delay: 0.6s; }
+        .step:nth-child(4) { animation-delay: 0.8s; }
+        .step:nth-child(5) { animation-delay: 1s; }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            font-size: 1.1em;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffd89b 0%, #ff6b6b 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: calc(16px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            z-index: 101;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #667eea;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            max-width: 400px;
+            height: 250px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .presentation {
+                align-items: flex-start;
+                padding: 0 10px;
+            }
+            .slide {
+                padding: 24px 16px 100px 16px; /* extra bottom padding so content stays above controls */
+                width: 100%;
+                max-width: 100%;
+                height: calc(100dvh - 16px);
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.3em;
+            }
+
+            p, .step-desc {
+                font-size: 1em;
+            }
+
+            .icon-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .icon {
+                font-size: 2.5em;
+            }
+
+            button {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .controls {
+                left: 0;
+                right: 0;
+                transform: none;
+                width: 100%;
+                padding: 0 16px;
+                justify-content: space-between;
+                gap: 12px;
+                bottom: calc(12px + env(safe-area-inset-bottom));
+            }
+
+            .controls button {
+                width: calc((100% - 12px) / 2);
+                min-height: 44px; /* tap target */
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+
+            .benefit-card {
+                padding: 20px;
+            }
+
+            .comparison-table {
+                font-size: 0.9em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+            }
+
+            .image-placeholder {
+                max-width: 100%;
+                height: 180px;
+            }
+
+            .slide-number {
+                top: 12px;
+                right: 12px;
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
+
+            .progress {
+                height: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .slide {
+                height: calc(100dvh - 12px);
+                padding: 20px 14px 96px 14px;
+            }
+
+            .controls button {
+                width: calc((100% - 12px) / 2);
+                padding: 10px 14px;
+                font-size: 0.85em;
+                min-height: 44px;
+            }
+
+            .image-placeholder {
+                height: 160px;
+            }
+
+            .slide-number {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+    <div class="slide-number" id="slideNumber">1 / 20</div>
+
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="icon-container">
+                <div class="icon">🎯</div>
+            </div>
+            <h1>IT Help Desk & SLA</h1>
+            <h2>A Simple Guide for Everyone</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-top: 20px;">Learn how IT support works and why promises matter</p>
+        </div>
+
+        <!-- Slide 2: What is IT Help Desk? -->
+        <div class="slide">
+            <h2>What is an IT Help Desk?</h2>
+            <div class="image-placeholder">🖥️</div>
+            <p><strong>Simple Answer:</strong> It's like a customer service center, but for computer and technology problems.</p>
+            <div class="example-box">
+                <strong>Real Life Example:</strong>
+                When your computer stops working or you forget your password, you call the help desk. They help you fix it!
+            </div>
+        </div>
+
+        <!-- Slide 3: Why Do We Need It? -->
+        <div class="slide">
+            <h2>Why Do We Need a Help Desk?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <div class="benefit-text">Quick Help</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Get problems solved fast</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <div class="benefit-text">Expert Support</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Trained people help you</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📝</div>
+                    <div class="benefit-text">Track Issues</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Nothing gets forgotten</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💼</div>
+                    <div class="benefit-text">Keep Working</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Less time wasted</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How Help Desk Works -->
+        <div class="slide">
+            <h2>How Does the Help Desk Work?</h2>
+            <p style="text-align: center;">It's a simple 5-step process:</p>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">You Report a Problem</div>
+                        <div class="step-desc">Call, email, or use a website to tell them what's wrong</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">They Create a Ticket</div>
+                        <div class="step-desc">Your problem gets a unique number so it won't get lost</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">They Check How Urgent</div>
+                        <div class="step-desc">Is it super urgent or can it wait a bit?</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Right Person Fixes It</div>
+                        <div class="step-desc">Someone with the right skills works on your problem</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Problem Solved!</div>
+                        <div class="step-desc">They tell you it's fixed and close the ticket</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Ticket Example -->
+        <div class="slide">
+            <h2>What is a "Ticket"?</h2>
+            <div class="icon-container">
+                <div class="icon">🎫</div>
+            </div>
+            <p><strong>Think of it like a movie ticket, but for problems!</strong></p>
+            <div class="example-box">
+                <strong>Example Ticket:</strong>
+                <p style="margin: 10px 0;">📌 Ticket Number: #12345</p>
+                <p style="margin: 10px 0;">👤 Your Name: John Smith</p>
+                <p style="margin: 10px 0;">❗ Problem: Can't print documents</p>
+                <p style="margin: 10px 0;">📅 Date: October 16, 2025</p>
+                <p style="margin: 10px 0;">🎯 Status: Being worked on</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Priority Levels -->
+        <div class="slide">
+            <h2>How Urgent is Your Problem?</h2>
+            <p style="text-align: center;">Not all problems are the same. Some need faster help.</p>
+            <table class="comparison-table">
+                <tr>
+                    <th>Level</th>
+                    <th>What It Means</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>🔴 Critical</strong></td>
+                    <td>Very urgent!</td>
+                    <td>Entire system is down</td>
+                </tr>
+                <tr>
+                    <td><strong>🟠 High</strong></td>
+                    <td>Important</td>
+                    <td>Email not working</td>
+                </tr>
+                <tr>
+                    <td><strong>🟡 Medium</strong></td>
+                    <td>Normal</td>
+                    <td>Software is slow</td>
+                </tr>
+                <tr>
+                    <td><strong>🟢 Low</strong></td>
+                    <td>Can wait</td>
+                    <td>Need new mouse</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 7: What is SLA? -->
+        <div class="slide">
+            <h2>What is an SLA?</h2>
+            <div class="image-placeholder">📋</div>
+            <p class="big-text">SLA = Service Level Agreement</p>
+            <p><strong>In simple words:</strong> It's a <u>promise</u> about how fast the help desk will help you.</p>
+            <div class="example-box">
+                <strong>Think of it like:</strong>
+                When you order pizza, they promise "delivery in 30 minutes or less." That's their promise to you. An SLA is the same - a promise about when help will arrive!
+            </div>
+        </div>
+
+        <!-- Slide 8: Why SLA is Important -->
+        <div class="slide">
+            <h2>Why is SLA Important?</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">You Know What to Expect</div>
+                        <div class="step-desc">No more guessing when help will come</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">They Must Keep Their Promise</div>
+                        <div class="step-desc">The help desk has to meet their deadlines</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Better Service for You</div>
+                        <div class="step-desc">You get faster, better help</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Everyone is Happy</div>
+                        <div class="step-desc">Clear promises = less frustration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: SLA Response Times -->
+        <div class="slide">
+            <h2>How Fast Will They Help?</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Here's what typical SLA promises look like:</p>
+            <table class="comparison-table">
+                <tr>
+                    <th>Problem Type</th>
+                    <th>Response Time</th>
+                    <th>What It Means</th>
+                </tr>
+                <tr>
+                    <td><strong>🔴 Critical</strong></td>
+                    <td>15 minutes</td>
+                    <td>They start helping right away</td>
+                </tr>
+                <tr>
+                    <td><strong>🟠 High</strong></td>
+                    <td>1 hour</td>
+                    <td>Help within an hour</td>
+                </tr>
+                <tr>
+                    <td><strong>🟡 Medium</strong></td>
+                    <td>4 hours</td>
+                    <td>Help by end of work day</td>
+                </tr>
+                <tr>
+                    <td><strong>🟢 Low</strong></td>
+                    <td>24 hours</td>
+                    <td>Help within one day</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Slide 10: Real Example -->
+        <div class="slide">
+            <h2>Real Life Example</h2>
+            <div class="icon-container">
+                <div class="icon">💡</div>
+            </div>
+            <h3>Situation:</h3>
+            <p>It's Monday morning. Sarah can't access her email. This is a HIGH priority problem because she needs email to work.</p>
+            
+            <h3>What Happens:</h3>
+            <div class="example-box">
+                <p>⏰ <strong>9:00 AM</strong> - Sarah reports the problem</p>
+                <p>📋 <strong>9:05 AM</strong> - Ticket #5678 is created</p>
+                <p>🎯 <strong>9:10 AM</strong> - Help desk person starts working on it</p>
+                <p>✅ <strong>9:45 AM</strong> - Problem is fixed!</p>
+            </div>
+            <p style="text-align: center; margin-top: 20px;"><strong>Total time: 45 minutes ✓</strong> (Under the 1 hour SLA promise)</p>
+        </div>
+
+        <!-- Slide 11: What's in an SLA? -->
+        <div class="slide">
+            <h2>What Does an SLA Include?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏱️</div>
+                    <div class="benefit-text">Time Promises</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">How fast they'll respond</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📞</div>
+                    <div class="benefit-text">Contact Info</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">How to reach them</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <div class="benefit-text">What They Fix</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Types of problems they handle</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-text">How to Measure</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">How success is tracked</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Escalation -->
+        <div class="slide">
+            <h2>What if the Problem is Too Hard?</h2>
+            <div class="icon-container">
+                <div class="icon">🆙</div>
+            </div>
+            <p><strong>They use "Escalation"</strong> - passing it to someone with more skills</p>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">L1</div>
+                    <div class="step-content">
+                        <div class="step-title">First Level Support</div>
+                        <div class="step-desc">Basic help - password resets, simple fixes</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">L2</div>
+                    <div class="step-content">
+                        <div class="step-title">Technical Support</div>
+                        <div class="step-desc">Harder problems - software issues, network problems</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">L3</div>
+                    <div class="step-content">
+                        <div class="step-title">Expert Support</div>
+                        <div class="step-desc">Very complex issues - system experts</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">L4</div>
+                    <div class="step-content">
+                        <div class="step-title">Outside Help</div>
+                        <div class="step-desc">Vendor support - the company that made the software</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Benefits of Good SLA -->
+        <div class="slide">
+            <h2>Benefits of a Good SLA</h2>
+            <div class="icon-container">
+                <div class="icon">✨</div>
+            </div>
+            <div class="example-box">
+                <strong>For You (The User):</strong>
+                <p>✅ You get help faster</p>
+                <p>✅ You know when to expect help</p>
+                <p>✅ Less frustration waiting</p>
+                <p>✅ You can keep working</p>
+            </div>
+            <div class="example-box">
+                <strong>For the Company:</strong>
+                <p>✅ Happier employees</p>
+                <p>✅ Less time wasted</p>
+                <p>✅ Better productivity</p>
+                <p>✅ Saves money</p>
+            </div>
+        </div>
+
+        <!-- Slide 14: Without SLA -->
+        <div class="slide">
+            <h2>What Happens Without an SLA?</h2>
+            <div class="image-placeholder">😰</div>
+            <div class="highlight-box">
+                Chaos and Confusion!
+            </div>
+            <p>❌ You don't know when help will come</p>
+            <p>❌ Problems take too long to fix</p>
+            <p>❌ Important issues might be ignored</p>
+            <p>❌ No one is responsible</p>
+            <p>❌ People get frustrated</p>
+            <p style="text-align: center; margin-top: 30px; font-size: 1.2em;"><strong>This is why SLAs are so important!</strong></p>
+        </div>
+
+        <!-- Slide 15: Measuring Success -->
+        <div class="slide">
+            <h2>How Do We Know if SLA is Working?</h2>
+            <p style="text-align: center;">We measure these things:</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <div class="benefit-text">Response Time</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">How fast they start helping</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">✅</div>
+                    <div class="benefit-text">Fix Time</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">How fast they solve it</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">😊</div>
+                    <div class="benefit-text">Happy Users</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Are people satisfied?</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <div class="benefit-text">First Try Success</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Fixed on first call?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Communication -->
+        <div class="slide">
+            <h2>Good Communication is Key</h2>
+            <div class="icon-container">
+                <div class="icon">💬</div>
+            </div>
+            <p><strong>The help desk should always tell you:</strong></p>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">We Got Your Request</div>
+                        <div class="step-desc">"We received your ticket #1234"</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">We're Working On It</div>
+                        <div class="step-desc">"John is now fixing your problem"</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Updates on Progress</div>
+                        <div class="step-desc">"Still working, need 30 more minutes"</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">It's Fixed!</div>
+                        <div class="step-desc">"Your problem is solved. Try it now."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Common Problems Help Desk Fixes -->
+        <div class="slide">
+            <h2>What Problems Do They Fix?</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Here are the most common issues:</p>
+            <div class="example-box">
+                <strong>🔐 Password & Login Problems</strong>
+                <p>Forgot password, can't login, account locked</p>
+            </div>
+            <div class="example-box">
+                <strong>💻 Computer Problems</strong>
+                <p>Computer is slow, won't turn on, freezing</p>
+            </div>
+            <div class="example-box">
+                <strong>📧 Email Issues</strong>
+                <p>Can't send/receive emails, inbox full</p>
+            </div>
+            <div class="example-box">
+                <strong>🖨️ Printer Problems</strong>
+                <p>Can't print, paper jams, printer offline</p>
+            </div>
+            <div class="example-box">
+                <strong>📱 Software Help</strong>
+                <p>How to use programs, software crashes</p>
+            </div>
+        </div>
+
+        <!-- Slide 18: Tools They Use -->
+        <div class="slide">
+            <h2>Tools That Make SLA Work</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎫</div>
+                    <div class="benefit-text">Ticket System</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Tracks all problems</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏱️</div>
+                    <div class="benefit-text">Timer</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Counts time to meet SLA</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤖</div>
+                    <div class="benefit-text">Auto-Routing</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Sends to right person</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-text">Reports</div>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Shows how well they're doing</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px;">These tools help them keep their SLA promises!</p>
+        </div>
+
+        <!-- Slide 19: Tips for Users -->
+        <div class="slide">
+            <h2>How You Can Help Get Faster Service</h2>
+            <div class="icon-container">
+                <div class="icon">🎯</div>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Be Clear</div>
+                        <div class="step-desc">Explain the problem simply and clearly</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Give Details</div>
+                        <div class="step-desc">When did it start? What error messages do you see?</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Save Your Ticket Number</div>
+                        <div class="step-desc">Keep it to check status later</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Be Patient</div>
+                        <div class="step-desc">Check the SLA time - they have until then to help</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Be Available</div>
+                        <div class="step-desc">Stay reachable so they can contact you</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Summary -->
+        <div class="slide">
+            <h2>Let's Remember the Key Points!</h2>
+            <div class="icon-container">
+                <div class="icon">🎓</div>
+            </div>
+            <div class="example-box">
+                <strong>✅ Help Desk = Tech Support Center</strong>
+                <p>People who help fix your computer problems</p>
+            </div>
+            <div class="example-box">
+                <strong>✅ SLA = A Promise</strong>
+                <p>How fast they will help you</p>
+            </div>
+            <div class="example-box">
+                <strong>✅ Tickets Track Everything</strong>
+                <p>No problem gets forgotten</p>
+            </div>
+            <div class="example-box">
+                <strong>✅ Different Problems = Different Speed</strong>
+                <p>Urgent problems get faster help</p>
+            </div>
+            <div class="highlight-box">
+                SLA makes sure everyone gets good, fast help!
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            if (n >= totalSlides) currentSlide = totalSlides - 1;
+            if (n < 0) currentSlide = 0;
+            
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                    slide.scrollTop = 0;
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+            
+            document.getElementById('progress').style.width = 
+                ((currentSlide + 1) / totalSlides * 100) + '%';
+            
+            document.getElementById('slideNumber').textContent = 
+                `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

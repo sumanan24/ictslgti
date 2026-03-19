@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positive Attitude & Growth Mindset – Book | Level 5</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --bg: #fefce8;
+      --ch1: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      --ch2: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+      --ch3: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+      --ch4: linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%);
+      --ch5: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+      --ch6: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
+      --ch7: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+      --ch8: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+      --ch9: linear-gradient(135deg, #047857 0%, #34d399 100%);
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden;-webkit-text-size-adjust:100%}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#fffbeb 0%,#fefce8 30%,#f0fdf4 100%);color:var(--text);line-height:1.7;margin:0;min-height:100vh;overflow-x:hidden;max-width:100vw}
+
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;z-index:40;overflow-y:auto;overflow-x:hidden;border-right:2px solid rgba(5,150,105,0.2);-webkit-overflow-scrolling:touch}
+      .page-wrapper{margin-left:260px;max-width:calc(100vw - 260px)}
+    }
+    @media (max-width:991px){
+      .toc-sidebar{position:fixed;top:0;left:0;right:0;width:100%;max-width:100vw;z-index:50}
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;transition:max-height 0.3s ease;padding:0;-webkit-overflow-scrolling:touch}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto;overflow-x:hidden;padding:0.5rem 0 1rem}
+      .page-wrapper{margin-left:0;padding-top:3.5rem;max-width:100vw}
+    }
+
+    .toc-sidebar{background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+    .toc-sidebar .toc-header{background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#fff;padding:1rem;font-weight:700;text-align:center;font-size:1rem}
+    .toc-sidebar .toc-toggle{display:none;width:100%;min-height:48px;padding:0.85rem 1rem;background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#fff;border:none;font-weight:600;cursor:pointer;text-align:left;align-items:center;justify-content:space-between;-webkit-tap-highlight-color:transparent}
+    .toc-sidebar .toc-toggle i.chevron{transition:transform 0.2s}
+    .toc-sidebar.toc-open .toc-toggle i.chevron{transform:rotate(180deg)}
+    @media (max-width:991px){ .toc-sidebar .toc-toggle{display:flex} .toc-sidebar .toc-header{display:none} }
+    @media (min-width:992px){ .toc-sidebar .toc-toggle{display:none} }
+    .toc-sidebar .toc-list a{display:flex;align-items:center;gap:0.5rem;padding:0.6rem 1rem;min-height:44px;color:var(--text);text-decoration:none;font-size:0.9rem;border-bottom:1px solid #f1f5f9;-webkit-tap-highlight-color:transparent}
+    .toc-sidebar .toc-list .toc-ch-icon{flex-shrink:0;width:1.25rem;text-align:center;font-size:0.8rem;opacity:0.85}
+    .toc-sidebar .toc-list a span:last-child{flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word}
+    .toc-sidebar .toc-list a:hover{background:#f0fdf4;color:#059669}
+    .toc-sidebar .toc-list .ch-num-toc{width:2rem;height:2rem;border-radius:50%;background:var(--ch1);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;flex-shrink:0}
+    .toc-sidebar .toc-list a:nth-child(1) .ch-num-toc{background:#059669}
+    .toc-sidebar .toc-list a:nth-child(2) .ch-num-toc{background:#0ea5e9}
+    .toc-sidebar .toc-list a:nth-child(3) .ch-num-toc{background:#8b5cf6}
+    .toc-sidebar .toc-list a:nth-child(4) .ch-num-toc{background:#0d9488}
+    .toc-sidebar .toc-list a:nth-child(5) .ch-num-toc{background:#d97706}
+    .toc-sidebar .toc-list a:nth-child(6) .ch-num-toc{background:#4f46e5}
+    .toc-sidebar .toc-list a:nth-child(7) .ch-num-toc{background:#e11d48}
+    .toc-sidebar .toc-list a:nth-child(8) .ch-num-toc{background:#0284c7}
+    .toc-sidebar .toc-list a:nth-child(9) .ch-num-toc{background:#047857}
+
+    .container-main{max-width:880px;margin:0 auto;padding:clamp(0.75rem,4vw,2rem);width:100%}
+    .book-hero{background:linear-gradient(145deg,#059669 0%,#10b981 40%,#34d399 100%);color:#fff;padding:2.5rem 1.5rem;text-align:center;border-radius:0 0 28px 28px;box-shadow:0 10px 40px rgba(5,150,105,0.3)}
+    .book-hero .hero-icon{margin-bottom:0.75rem}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.35rem,4vw,2rem);font-weight:800;line-height:1.3;word-wrap:break-word;overflow-wrap:break-word}
+    .book-hero .lead{margin:0;font-size:clamp(0.9rem,2.5vw,1rem);opacity:0.95}
+
+    .chapter-card{background:#fff;border-radius:16px;padding:clamp(1.25rem,4vw,2rem);margin-bottom:1.75rem;box-shadow:0 4px 24px rgba(0,0,0,0.06);border-left:5px solid #059669;overflow:hidden}
+    .chapter-card.ch1{border-left-color:#059669}
+    .chapter-card.ch2{border-left-color:#0ea5e9}
+    .chapter-card.ch3{border-left-color:#8b5cf6}
+    .chapter-card.ch4{border-left-color:#0d9488}
+    .chapter-card.ch5{border-left-color:#d97706}
+    .chapter-card.ch6{border-left-color:#4f46e5}
+    .chapter-card.ch7{border-left-color:#e11d48}
+    .chapter-card.ch8{border-left-color:#0284c7}
+    .chapter-card.ch9{border-left-color:#047857}
+    .chapter-card h2{font-size:clamp(1.05rem,3vw,1.4rem);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;word-wrap:break-word;overflow-wrap:break-word;line-height:1.35}
+    .chapter-card h2 > i.fas{font-size:0.95em;opacity:0.9}
+    .chapter-section{margin-top:0.5rem}
+    .chapter-card .ch-num{width:2.25rem;height:2.25rem;border-radius:50%;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:0.95rem;flex-shrink:0}
+    .chapter-card.ch1 .ch-num{background:var(--ch1)}
+    .chapter-card.ch2 .ch-num{background:var(--ch2)}
+    .chapter-card.ch3 .ch-num{background:var(--ch3)}
+    .chapter-card.ch4 .ch-num{background:var(--ch4)}
+    .chapter-card.ch5 .ch-num{background:var(--ch5)}
+    .chapter-card.ch6 .ch-num{background:var(--ch6)}
+    .chapter-card.ch7 .ch-num{background:var(--ch7)}
+    .chapter-card.ch8 .ch-num{background:var(--ch8)}
+    .chapter-card.ch9 .ch-num{background:var(--ch9)}
+    .chapter-card h3{font-size:1.05rem;margin-top:1.35rem;margin-bottom:0.5rem;color:#334155;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap}
+    .chapter-card h3 .h3-icon{width:1.5rem;text-align:center;flex-shrink:0;opacity:0.9}
+    .chapter-card ul,.chapter-card ol{padding-left:1.5rem;margin:0.5rem 0 1rem}
+    .chapter-card li{margin-bottom:0.4rem}
+    .chapter-card p{margin:0.5rem 0 0.75rem;line-height:1.7}
+
+    .info-box,.tip-box,.example-box{position:relative;padding-left:2.75rem}
+    .info-box .box-icon,.tip-box .box-icon,.example-box .box-icon{position:absolute;left:1rem;top:1rem;font-size:1.15rem;opacity:0.85}
+    .info-box{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);border-left:4px solid #059669;padding:1rem 1.25rem 1rem 2.75rem;border-radius:0 12px 12px 0;margin:1rem 0}
+    .info-box .box-icon{color:#059669}
+    .tip-box{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border-left:4px solid #d97706;padding:1rem 1.25rem 1rem 2.75rem;border-radius:0 12px 12px 0;margin:1rem 0}
+    .tip-box .box-icon{color:#b45309}
+    .example-box{background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border:1px solid rgba(14,165,233,0.3);border-radius:12px;padding:1rem 1.25rem 1rem 2.75rem;margin:1rem 0}
+    .example-box .box-icon{color:#0284c7}
+    .example-box .ex-title{font-weight:700;color:#0284c7;margin-bottom:0.5rem}
+    .book-intro{text-align:center;color:var(--text-muted);margin:1.5rem 0;font-size:0.95rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;flex-wrap:wrap}
+    .fig-wrap{text-align:center;margin:1.25rem 0;padding:1rem;background:#f8fafc;border-radius:14px;border:1px solid #e2e8f0;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+    .fig-wrap svg{max-width:100%;height:auto;display:block;margin:0 auto}
+    .fig-wrap .fig-cap{font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem}
+    .table-wrap{overflow-x:auto;margin:1rem 0;-webkit-overflow-scrolling:touch;border-radius:10px}
+    .compare-table{width:100%;min-width:260px;border-collapse:collapse;font-size:0.9rem;margin:0;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .compare-table th,.compare-table td{padding:0.65rem 0.75rem;text-align:left;border-bottom:1px solid #e2e8f0}
+    .compare-table th{background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);color:#065f46;font-weight:700}
+    .compare-table tr:last-child td{border-bottom:none}
+    .page-footer{text-align:center;padding:2rem 1rem;font-size:0.9rem;color:var(--text-muted)}
+    .page-footer .footer-icon{margin-bottom:0.35rem;font-size:1.25rem}
+
+    /* Mobile responsive */
+    @media (max-width:767px){
+      .container-main{padding:0.875rem 1rem}
+      .book-hero{padding:1.75rem 1rem;border-radius:0 0 20px 20px}
+      .book-hero .hero-icon svg{width:56px;height:56px}
+      .chapter-card{padding:1rem 1.25rem;margin-bottom:1.25rem;border-radius:12px}
+      .chapter-card h2{font-size:1.05rem}
+      .chapter-card h3{font-size:1rem;margin-top:1rem}
+      .chapter-card p,.chapter-card li{font-size:0.95rem}
+      .info-box,.tip-box,.example-box{padding:0.875rem 1rem;margin:0.75rem 0;font-size:0.95rem}
+      .fig-wrap{padding:0.875rem;margin:1rem 0}
+      .fig-wrap .fig-cap{font-size:0.8rem}
+      .compare-table{font-size:0.85rem}
+      .compare-table th,.compare-table td{padding:0.5rem 0.6rem}
+      .page-footer{padding:1.5rem 0.75rem;font-size:0.85rem}
+    }
+    @media (max-width:480px){
+      .container-main{padding:0.75rem 0.875rem}
+      .book-hero{padding:1.5rem 0.875rem}
+      .book-hero h1{font-size:1.25rem}
+      .chapter-card{padding:0.875rem 1rem}
+      .chapter-card .ch-num{width:2rem;height:2rem;font-size:0.85rem}
+      .toc-sidebar .toc-list .ch-num-toc{width:1.75rem;height:1.75rem;font-size:0.75rem}
+      .toc-sidebar .toc-list a{font-size:0.85rem;padding:0.5rem 0.75rem;min-height:40px}
+    }
+  </style>
+</head>
+<body>
+  <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapters">
+    <div class="toc-header"><i class="fas fa-book-open me-2"></i>Chapters</div>
+    <button type="button" class="toc-toggle" id="tocToggle" aria-expanded="false">
+      <span><i class="fas fa-book-open me-2"></i>Chapters</span>
+      <i class="fas fa-chevron-down chevron"></i>
+    </button>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="page-wrapper">
+    <div class="container-main">
+      <header class="book-hero" role="banner">
+        <div class="hero-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="32" cy="32" r="28"/>
+            <path d="M20 36 Q32 20 44 36"/>
+            <path d="M24 40 L32 32 L40 40"/>
+          </svg>
+        </div>
+        <h1>Positive Attitude &amp; Growth Mindset</h1>
+        <p class="lead">A simple guide to attitude, emotions, and growth – beginner-friendly</p>
+      </header>
+
+      <main>
+        <p class="book-intro"><span aria-hidden="true">📖</span> 9 chapters – simple language, examples, and tips for everyday use</p>
+
+        <!-- Chapter 1 -->
+        <article id="ch1" class="chapter-card ch1">
+          <h2><span class="ch-num">1</span> <i class="fas fa-seedling" aria-hidden="true"></i> Foundations of Positive Attitude &amp; Growth Mindset</h2>
+          <p>This chapter helps you understand what attitude is and how a positive mindset can change the way you think and act.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">💡</span> Meaning of Attitude</h3>
+          <div class="info-box"><i class="fas fa-info-circle box-icon" aria-hidden="true"></i><strong>Attitude</strong> is the way you think and feel about something or someone. It is like a small lens through which you see the world. When your attitude is good, you feel lighter and do better.</div>
+          <p>Your attitude affects your work, your relationships, and how you feel every day. It is something you can choose to change step by step.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">⚖️</span> Positive vs Negative Attitude</h3>
+          <p>A <strong>positive attitude</strong> means you look for good things, you believe you can improve, and you stay hopeful. A <strong>negative attitude</strong> means you often focus on problems, blame others, and feel stuck.</p>
+          <figure class="fig-wrap">
+            <table class="compare-table">
+              <tr><th>😊 Positive attitude</th><th>😔 Negative attitude</th></tr>
+              <tr><td>“I can try again.”</td><td>“I always fail.”</td></tr>
+              <tr><td>“What can I learn?”</td><td>“It’s not fair.”</td></tr>
+              <tr><td>Looks for solutions</td><td>Focuses on problems</td></tr>
+            </table>
+            <figcaption class="fig-cap">Comparing positive and negative ways of thinking</figcaption>
+          </figure>
+
+          <h3><span class="h3-icon" aria-hidden="true">🌱</span> Growth vs Fixed Mindset</h3>
+          <p><strong>Growth mindset</strong> means you believe you can get better with practice and effort. <strong>Fixed mindset</strong> means you believe your skills are set and cannot change much.</p>
+          <figure class="fig-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80" width="220" height="80" aria-hidden="true">
+              <rect x="10" y="10" width="95" height="60" rx="10" fill="#d1fae5" stroke="#059669"/>
+              <text x="57" y="38" text-anchor="middle" font-size="11" fill="#047857" font-weight="700">Growth</text>
+              <text x="57" y="54" text-anchor="middle" font-size="9" fill="#065f46">I can learn</text>
+              <rect x="115" y="10" width="95" height="60" rx="10" fill="#fee2e2" stroke="#dc2626"/>
+              <text x="162" y="38" text-anchor="middle" font-size="11" fill="#b91c1c" font-weight="700">Fixed</text>
+              <text x="162" y="54" text-anchor="middle" font-size="9" fill="#991b1b">I can't change</text>
+            </svg>
+            <figcaption class="fig-cap">Growth vs fixed mindset – two ways of thinking</figcaption>
+          </figure>
+          <div class="example-box"><i class="fas fa-pen-fancy box-icon" aria-hidden="true"></i>
+            <div class="ex-title">Example</div>
+            <strong>Growth:</strong> “I am not good at this yet, but I can learn.”<br>
+            <strong>Fixed:</strong> “I am just bad at this. I will never be good.”
+          </div>
+
+          <h3><span class="h3-icon" aria-hidden="true">❤️</span> Human Needs &amp; Feelings</h3>
+          <p>Everyone has basic needs: to feel safe, to belong, to be respected, and to grow. When these needs are met, we feel better. When they are not, we may feel sad, angry, or afraid. Understanding this helps us understand ourselves and others.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🔄</span> Shifting the “Because” Mindset</h3>
+          <div class="tip-box"><i class="fas fa-lightbulb box-icon" aria-hidden="true"></i>Instead of saying “I cannot do it <strong>because</strong>…” try “I can try <strong>because</strong>…” For example: “I can try this new task because I have learned similar things before.”</div>
+          </section>
+        </article>
+
+        <!-- Chapter 2 -->
+        <article id="ch2" class="chapter-card ch2">
+          <h2><span class="ch-num">2</span> <i class="fas fa-brain" aria-hidden="true"></i> Self-Awareness, Brain &amp; Emotional Intelligence</h2>
+          <p>Here you learn how your brain works and how to use your feelings in a good way.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">🧠</span> </h3>
+          <p>Your brain has different parts. The <strong>brain stem</strong> keeps you alive (breathing, heartbeat). The <strong>limbic system</strong> handles emotions and memory. The <strong></strong> (the outer part) helps you think, plan, and decide.</p>
+          <figure class="fig-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" width="240" height="100" aria-hidden="true">
+              <rect x="10" y="15" width="65" height="50" rx="8" fill="#dbeafe" stroke="#0ea5e9"/>
+              <text x="42" y="42" text-anchor="middle" font-size="10" fill="#0369a1">Brain stem</text>
+              <text x="42" y="55" text-anchor="middle" font-size="8" fill="#64748b">Basic life</text>
+              <rect x="87" y="15" width="65" height="50" rx="8" fill="#e0e7ff" stroke="#6366f1"/>
+              <text x="119" y="42" text-anchor="middle" font-size="10" fill="#4338ca">Limbic</text>
+              <text x="119" y="55" text-anchor="middle" font-size="8" fill="#64748b">Emotions</text>
+              <rect x="164" y="15" width="65" height="50" rx="8" fill="#d1fae5" stroke="#10b981"/>
+              <text x="196" y="42" text-anchor="middle" font-size="10" fill="#047857"></text>
+              <text x="196" y="55" text-anchor="middle" font-size="8" fill="#64748b">Thinking</text>
+            </svg>
+            <figcaption class="fig-cap">Three main areas of the brain (simple view)</figcaption>
+          </figure>
+
+          <h3><span class="h3-icon" aria-hidden="true">⚡</span> Fight–Flight Response</h3>
+          <p>When you feel in danger (even if it is just stress), your body can go into <strong>fight or flight</strong>. You may want to argue (fight) or run away (flight). This is normal. Knowing it helps you pause before you react.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">⚠️</span> Amygdala Hijack</h3>
+          <div class="info-box"><i class="fas fa-info-circle box-icon" aria-hidden="true"></i>The <strong>amygdala</strong> is a small part of the brain that reacts quickly to fear or anger. When it “hijacks” you, you react without thinking. To reduce this: take a deep breath, count to five, or step away for a moment.</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">✨</span> Self-Acceptance &amp; Wholeness</h3>
+          <p>Self-acceptance means you accept yourself as you are – with strengths and weaknesses. You do not need to be perfect. When you accept yourself, you feel more whole and can grow without so much fear.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">💚</span> Emotional Intelligence (EQ)</h3>
+          <p><strong>Emotional intelligence</strong> means you can name your feelings, manage them, and understand how others feel. It helps at work and in life. You can improve EQ by noticing your feelings and listening to others.</p>
+          <div class="example-box"><i class="fas fa-pen-fancy box-icon" aria-hidden="true"></i>
+            <div class="ex-title">Example</div>
+            When a friend is quiet, instead of ignoring them, you might think: “Maybe they are upset. I can ask gently: Are you okay?” That is using EQ.
+          </div>
+          </section>
+        </article>
+
+        <!-- Chapter 3 -->
+        <article id="ch3" class="chapter-card ch3">
+          <h2><span class="ch-num">3</span> <i class="fas fa-headphones" aria-hidden="true"></i> Deep Listening, Empathy &amp; Connection</h2>
+          <p>Listening well and showing care helps you connect with others and build trust.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">👂</span> Levels of Listening</h3>
+          <p>Listening has levels. <strong>Surface listening</strong> is when you hear words but your mind is elsewhere. <strong>Deep listening</strong> is when you really pay attention to what the person is saying and how they feel.</p>
+          <ul>
+            <li>Level 1: Hearing only words</li>
+            <li>Level 2: Noticing tone and body language</li>
+            <li>Level 3: Understanding the need behind the words</li>
+          </ul>
+
+          <h3><span class="h3-icon" aria-hidden="true">🎯</span> Identifying Needs of Others</h3>
+          <p>Behind every message there is often a need: to be heard, to be respected, to feel safe, or to get help. When you listen deeply, you can guess what the person might need and respond in a kinder way.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">💬</span> Interactive Listening</h3>
+          <p>Interactive listening means you show that you are listening: you nod, you ask short questions like “Then what happened?” or “How did that make you feel?” and you repeat back what you understood so the person feels heard.</p>
+          <div class="tip-box"><i class="fas fa-lightbulb box-icon" aria-hidden="true"></i>Say things like: “So you felt upset when… Is that right?” This shows you are trying to understand.</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">🙏</span> Expressing Gratitude</h3>
+          <p>Thanking others in a clear way (e.g. “Thank you for helping me with the report. It made a difference.”) makes them feel valued and strengthens your connection.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🤝</span> Building Workplace Synergy</h3>
+          <p>When people listen to each other and work together with respect, the team does better. This is synergy – the result is greater than what each person could do alone.</p>
+          </section>
+        </article>
+
+        <!-- Chapter 4 -->
+        <article id="ch4" class="chapter-card ch4">
+          <h2><span class="ch-num">4</span> <i class="fas fa-bullseye" aria-hidden="true"></i> Performance Mindset &amp; Interference Management</h2>
+          <p>You will learn what helps performance and what gets in the way – and how to stay focused.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">📐</span> Performance Equation</h3>
+          <div class="info-box"><i class="fas fa-info-circle box-icon" aria-hidden="true"></i>A simple idea: <strong>Performance = Potential − Interference</strong>. You have potential. When interference (distractions, worry, negative thoughts) is small, your performance goes up.</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">🌐</span> External Interference</h3>
+          <p>These are things outside you: noise, too many tasks, unclear instructions, or people interrupting. You can reduce them by organising your space, listing your tasks, and asking for clear deadlines.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🧩</span> Internal Interference</h3>
+          <p>These are things inside you: fear of failure, self-doubt, or anger. You can reduce them by pausing, breathing, and reminding yourself of your strengths and past successes.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🧊</span> Iceberg Model of Behaviour</h3>
+          <p>What we see is only the tip of the iceberg (behaviour). Below the surface are feelings, needs, beliefs, and experiences. When someone acts in a way we do not like, remembering the “iceberg” helps us stay calm and curious instead of judging.</p>
+          <figure class="fig-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="200" height="120" aria-hidden="true">
+              <path d="M50 20 L150 20 L140 60 L60 60 Z" fill="#0d9488" opacity="0.3"/>
+              <text x="100" y="42" text-anchor="middle" font-size="11" fill="#0f766e">Behaviour (visible)</text>
+              <path d="M60 60 L140 60 L180 110 L20 110 Z" fill="#0d9488"/>
+              <text x="100" y="92" text-anchor="middle" font-size="9" fill="#fff">Feelings, needs, beliefs</text>
+            </svg>
+            <figcaption class="fig-cap">Iceberg: we see behaviour; below are feelings and needs</figcaption>
+          </figure>
+
+          <h3><span class="h3-icon" aria-hidden="true">⏸️</span> Moving from Reaction to Response</h3>
+          <p><strong>Reaction</strong> is quick and often emotional. <strong>Response</strong> is when you pause, think, and then choose what to do or say. Moving from reaction to response improves your relationships and decisions.</p>
+          </section>
+        </article>
+
+        <!-- Chapter 5 -->
+        <article id="ch5" class="chapter-card ch5">
+          <h2><span class="ch-num">5</span> <i class="fas fa-shield-halved" aria-hidden="true"></i> Managing Triggers, Limiting Beliefs &amp; Fear</h2>
+          <p>This chapter is about what pushes your buttons, what holds you back, and how to use fear in a good way.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">🎚️</span> Understanding Triggers</h3>
+          <p>A <strong>trigger</strong> is something that quickly makes you feel strong emotion (e.g. anger or fear). It might be a word, a tone of voice, or a situation. Knowing your triggers helps you prepare and stay calmer.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🛑</span> Pause &amp; Emotional Regulation</h3>
+          <div class="tip-box"><i class="fas fa-lightbulb box-icon" aria-hidden="true"></i>When you feel triggered: (1) Pause. (2) Take a slow breath. (3) Name the feeling: “I feel angry.” (4) Choose what to do next instead of reacting at once.</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">🔒</span> Limiting Beliefs</h3>
+          <p>Limiting beliefs are thoughts that hold you back, like “I am not good enough” or “People like me don’t succeed.” They are often not true. You can question them and replace them with kinder, truer thoughts.</p>
+          <div class="example-box"><i class="fas fa-pen-fancy box-icon" aria-hidden="true"></i>
+            <div class="ex-title">Example</div>
+            <strong>Limiting:</strong> “I always mess up presentations.”<br>
+            <strong>Helping:</strong> “Some presentations go well. I can prepare and improve each time.”
+          </div>
+
+          <h3><span class="h3-icon" aria-hidden="true">😨</span> F.E.A.R Concept</h3>
+          <p>F.E.A.R can mean <strong>F</strong>alse <strong>E</strong>vidence <strong>A</strong>ppearing <strong>R</strong>eal. Sometimes we are afraid of things that are not as bad as we imagine. Asking “What is the real evidence?” can reduce unnecessary fear.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🦋</span> Transforming Fear into Growth</h3>
+          <p>Fear can stop you, or it can show you what matters. When you feel afraid, ask: “What can I learn here? What small step can I take?” This turns fear into a chance to grow.</p>
+          </section>
+        </article>
+
+        <!-- Chapter 6 -->
+        <article id="ch6" class="chapter-card ch6">
+          <h2><span class="ch-num">6</span> <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Problem Solving &amp; Positive Decision Making</h2>
+          <p>You will learn how to think clearly, find solutions, and make better decisions.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">🔍</span> Critical Thinking</h3>
+          <p>Critical thinking means you do not accept everything at face value. You ask: “Is this true? What is the evidence? What else could explain it?” This helps you avoid mistakes and make better choices.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">💡</span> Creative Thinking</h3>
+          <p>Creative thinking means looking for new ideas and different options. Even when there is a problem, asking “What if we tried this?” can open new solutions.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">✅</span> Solution-Focused Approach</h3>
+          <p>Instead of staying stuck on the problem, focus on what you want (the outcome) and what small steps can get you there. “What is one thing I can do today?” is a solution-focused question.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">📚</span> Learning from Failure</h3>
+          <div class="info-box"><i class="fas fa-info-circle box-icon" aria-hidden="true"></i>Failure is not the end. It is feedback. Ask: “What went wrong? What can I do differently next time?” This way, failure becomes a teacher, not a label.</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">📋</span> Decision-Making Framework</h3>
+          <p>A simple framework: (1) What is the decision? (2) What are the options? (3) What are the pros and cons of each? (4) What do I value most? (5) Choose and act. (6) Review later and learn.</p>
+          </section>
+        </article>
+
+        <!-- Chapter 7 -->
+        <article id="ch7" class="chapter-card ch7">
+          <h2><span class="ch-num">7</span> <i class="fas fa-fist-raised" aria-hidden="true"></i> Self-Empowerment, Boundaries &amp; Assertiveness</h2>
+          <p>This chapter is about feeling strong, saying no when needed, and speaking up in a clear and respectful way.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">💪</span> Self-Empowerment Principles</h3>
+          <p>Self-empowerment means you believe you have the right and the ability to make choices and to stand up for yourself. You take responsibility for your actions and you ask for what you need.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">👤</span> Role Awareness (Leader–Guard Concept)</h3>
+          <p>Sometimes we act as a <strong>leader</strong> (taking charge, guiding). Sometimes we act as a <strong>guard</strong> (protecting our time, our values, our team). Knowing which role is needed helps you act in a balanced way.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🚫</span> Four Ways to Say “NO”</h3>
+          <ul>
+            <li><strong>Direct:</strong> “No, I cannot do that.”</li>
+            <li><strong>With reason:</strong> “No, I have another commitment at that time.”</li>
+            <li><strong>With alternative:</strong> “I cannot do X, but I can do Y.”</li>
+            <li><strong>Delayed:</strong> “Let me check my schedule and get back to you.”</li>
+          </ul>
+
+          <h3><span class="h3-icon" aria-hidden="true">🛡️</span> Boundary Setting Skills</h3>
+          <p>Boundaries are limits you set so others know what is okay and what is not. For example: “I do not answer work emails after 6 p.m.” or “I need you to speak to me in a respectful way.” Setting boundaries is not selfish; it keeps you healthy and effective.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🗣️</span> Assertive Communication</h3>
+          <p>Assertive means you say what you think and need in a clear, calm way, without attacking others or hiding your needs. Example: “I feel upset when meetings start late. Can we agree to start on time?”</p>
+          <div class="example-box"><i class="fas fa-pen-fancy box-icon" aria-hidden="true"></i>
+            <div class="ex-title">Example</div>
+            <strong>Passive:</strong> “It’s fine…” (when it is not).<br>
+            <strong>Aggressive:</strong> “You never listen!”<br>
+            <strong>Assertive:</strong> “I would like to finish my point. Can you hear me out?”
+          </div>
+          </section>
+        </article>
+
+        <!-- Chapter 8 -->
+        <article id="ch8" class="chapter-card ch8">
+          <h2><span class="ch-num">8</span> <i class="fas fa-comments" aria-hidden="true"></i> Professional Communication &amp; Workplace Impact</h2>
+          <p>Good communication at work helps everyone understand what to do and reduces mistakes.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">📢</span> Clear &amp; Specific Communication</h3>
+          <p>Say exactly what you mean. Instead of “Do it soon,” say “Please send the report by Friday 5 p.m.” Being clear avoids confusion and saves time.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">📝</span> PLATO Framework</h3>
+          <p>PLATO can help you prepare important messages:<br>
+            <strong>P</strong>urpose – Why are you communicating?<br>
+            <strong>L</strong>isteners – Who needs to hear this?<br>
+            <strong>A</strong>ction – What should they do?<br>
+            <strong>T</strong>one – How should you say it (formal, friendly)?<br>
+            <strong>O</strong>utcome – What result do you want?</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🔄</span> Giving &amp; Receiving Feedback</h3>
+          <p>When you give feedback, be specific and kind. “Your report was clear, and the summary helped.” When you receive feedback, listen first, then ask questions if needed. Thank the person. Use what is useful and let go of what is not.</p>
+          <div class="tip-box"><i class="fas fa-lightbulb box-icon" aria-hidden="true"></i>Use “I” when giving feedback: “I noticed that…” or “I felt that…” This feels less blaming than “You always…”</div>
+
+          <h3><span class="h3-icon" aria-hidden="true">✔️</span> Task Clarity &amp; Accountability</h3>
+          <p>Everyone should know: What is the task? Who does it? By when? How will we know it is done? When this is clear, people can be accountable and the work gets done well.</p>
+          </section>
+        </article>
+
+        <!-- Chapter 9 -->
+        <article id="ch9" class="chapter-card ch9">
+          <h2><span class="ch-num">9</span> <i class="fas fa-rocket" aria-hidden="true"></i> Motivation, Resilience &amp; Continuous Growth</h2>
+          <p>This last chapter is about staying motivated, bouncing back from difficulty, and growing over time.</p>
+
+          <section class="chapter-section">
+          <h3><span class="h3-icon" aria-hidden="true">🔥</span> Internal &amp; External Motivation</h3>
+          <p><strong>External motivation</strong> comes from outside: rewards, praise, or deadlines. <strong>Internal motivation</strong> comes from inside: you enjoy the work, you want to learn, or you care about the result. Both matter; internal motivation often lasts longer.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">🎯</span> SMART Goals</h3>
+          <p>SMART helps you set goals that work:<br>
+            <strong>S</strong>pecific – What exactly do you want?<br>
+            <strong>M</strong>easurable – How will you know you did it?<br>
+            <strong>A</strong>chievable – Can you do it with effort?<br>
+            <strong>R</strong>elevant – Does it matter to you?<br>
+            <strong>T</strong>ime-bound – By when?</p>
+          <div class="example-box"><i class="fas fa-pen-fancy box-icon" aria-hidden="true"></i>
+            <div class="ex-title">Example</div>
+            “I will complete the online course on communication by the end of next month by doing one module per week.”
+          </div>
+
+          <h3><span class="h3-icon" aria-hidden="true">🌿</span> Resilience &amp; Adaptability</h3>
+          <p>Resilience means you can bounce back after a setback. Adaptability means you can change when the situation changes. Both come from practice: try small changes, learn from mistakes, and ask for support when you need it.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">📖</span> Lifelong Learning</h3>
+          <p>Learning does not stop after school. Read, take short courses, ask questions, and try new things. This keeps your mind active and your skills fresh.</p>
+
+          <h3><span class="h3-icon" aria-hidden="true">📌</span> Personal Development Plan</h3>
+          <div class="info-box"><i class="fas fa-info-circle box-icon" aria-hidden="true"></i>Write a simple plan: (1) What do I want to improve? (2) What will I do this month? (3) How will I check my progress? (4) Who can support me? Review it every few weeks and adjust.</div>
+          </section>
+        </article>
+
+      </main>
+
+      <footer class="page-footer" role="contentinfo">
+        <p class="footer-icon" aria-hidden="true">📘</p>
+        <p class="mb-0">Positive Attitude &amp; Growth Mindset – Module Book | NVQ Level 5</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var chapters = [
+        { id: 'ch1', num: '1', icon: 'fa-seedling', title: 'Foundations of Positive Attitude & Growth Mindset' },
+        { id: 'ch2', num: '2', icon: 'fa-brain', title: 'Self-Awareness, Brain & Emotional Intelligence' },
+        { id: 'ch3', num: '3', icon: 'fa-headphones', title: 'Deep Listening, Empathy & Connection' },
+        { id: 'ch4', num: '4', icon: 'fa-bullseye', title: 'Performance Mindset & Interference Management' },
+        { id: 'ch5', num: '5', icon: 'fa-shield-halved', title: 'Managing Triggers, Limiting Beliefs & Fear' },
+        { id: 'ch6', num: '6', icon: 'fa-puzzle-piece', title: 'Problem Solving & Positive Decision Making' },
+        { id: 'ch7', num: '7', icon: 'fa-fist-raised', title: 'Self-Empowerment, Boundaries & Assertiveness' },
+        { id: 'ch8', num: '8', icon: 'fa-comments', title: 'Professional Communication & Workplace Impact' },
+        { id: 'ch9', num: '9', icon: 'fa-rocket', title: 'Motivation, Resilience & Continuous Growth' }
+      ];
+      var list = document.getElementById('tocList');
+      if (list) {
+        chapters.forEach(function(ch) {
+          var a = document.createElement('a');
+          a.href = '#' + ch.id;
+          a.innerHTML = '<span class="ch-num-toc">' + ch.num + '</span><i class="fas ' + ch.icon + ' toc-ch-icon" aria-hidden="true"></i><span>' + ch.title + '</span>';
+          list.appendChild(a);
+        });
+      }
+      var toggle = document.getElementById('tocToggle');
+      var sidebar = document.getElementById('tocSidebar');
+      if (toggle && sidebar) {
+        toggle.addEventListener('click', function() {
+          sidebar.classList.toggle('toc-open');
+          toggle.setAttribute('aria-expanded', sidebar.classList.contains('toc-open'));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

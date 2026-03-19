@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design – Notes | Level 5 ICT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        :root {
+            --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --mod1: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --mod2: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+            --mod3: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+            --mod4: linear-gradient(135deg, #0d9488 0%, #2dd4bf 100%);
+            --mod5: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+            --practical: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            overflow-y: scroll
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(180deg, #f0f9ff 0%, #f8fafc 100%);
+            color: var(--text);
+            line-height: 1.65;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            max-width: 100%
+        }
+
+        @media (min-width:992px) {
+            .toc-sidebar {
+                position: fixed !important;
+                left: 0;
+                top: 0;
+                width: 260px;
+                height: 100vh;
+                z-index: 40;
+                margin: 0;
+                border-radius: 0;
+                border-right: 1px solid rgba(37, 99, 235, 0.2);
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch
+            }
+
+            .page-wrapper {
+                margin-left: 260px;
+                max-width: 100%
+            }
+        }
+
+        @media (min-width:992px) {
+            .toc-sidebar .toc-toggle {
+                display: none !important
+            }
+
+            .toc-sidebar .toc-header {
+                display: block !important
+            }
+        }
+
+        @media (max-width:991px) {
+            .toc-sidebar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: none;
+                border-right: none;
+                z-index: 50
+            }
+
+            .toc-sidebar .toc-list {
+                max-height: 0;
+                overflow: hidden;
+                padding: 0 !important;
+                margin: 0 !important;
+                border: none;
+                transition: max-height 0.25s ease
+            }
+
+            .toc-sidebar.toc-open .toc-list {
+                max-height: 70vh;
+                overflow-y: auto;
+                padding: 0.5rem 0 1.25rem !important
+            }
+
+            .toc-sidebar .toc-toggle {
+                display: flex !important;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+                padding: 0.75rem 1rem;
+                min-height: 3rem
+            }
+
+            .toc-sidebar .toc-toggle span {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem
+            }
+
+            .toc-sidebar .toc-toggle #tocChevron {
+                flex-shrink: 0
+            }
+
+            .toc-sidebar .toc-header {
+                display: none !important
+            }
+
+            .page-wrapper {
+                margin-left: 0 !important;
+                padding-top: 3.25rem
+            }
+        }
+
+        .container-main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 4vw, 1.5rem)
+        }
+
+        .toc-sidebar {
+            background: #fff;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.1)
+        }
+
+        .toc-sidebar .toc-header {
+            padding: 0.875rem 1rem;
+            background: var(--header-bg);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+            letter-spacing: 0.02em
+        }
+
+        .toc-sidebar .toc-toggle {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--header-bg);
+            color: #fff;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left
+        }
+
+        .toc-sidebar .toc-toggle:hover {
+            background: #1e40af;
+            color: #fff
+        }
+
+        .toc-sidebar .toc-toggle #tocChevron {
+            transition: transform 0.2s ease;
+            margin-left: 0.5rem
+        }
+
+        .toc-sidebar .toc-list {
+            padding: 0.5rem 0 1.25rem;
+            background: #fff
+        }
+
+        .toc-sidebar .toc-list a {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.5rem 0.75rem 0.5rem 1rem;
+            line-height: 1.4;
+            border-bottom: 1px solid #f1f5f9;
+            min-height: 2.5rem
+        }
+
+        .toc-sidebar .toc-list a:hover {
+            color: var(--accent);
+            background: #eff6ff
+        }
+
+        .toc-sidebar .toc-list a .ch-num-side {
+            flex-shrink: 0;
+            min-width: 1.75rem;
+            width: 1.75rem;
+            text-align: right;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--accent);
+            line-height: 1.4
+        }
+
+        .toc-sidebar .toc-list a .ch-title-side {
+            flex: 1;
+            min-width: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word
+        }
+
+        @media (min-width:992px) {
+            .toc-sidebar .toc-header {
+                font-size: 1rem;
+                padding: 1rem
+            }
+
+            .toc-sidebar .toc-list a {
+                font-size: 0.84375rem;
+                padding: 0.5rem 0.75rem 0.5rem 1rem
+            }
+
+            .toc-sidebar .toc-list a .ch-num-side {
+                min-width: 2rem;
+                width: 2rem;
+                font-size: 0.8125rem
+            }
+        }
+
+        .content-area {
+            min-width: 0
+        }
+
+        .module-block {
+            margin-bottom: 2.5rem
+        }
+
+        .module-title {
+            background: var(--header-bg);
+            color: #fff;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.1rem, 3vw, 1.25rem);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12)
+        }
+
+        .chapter-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.08);
+            border-left: 4px solid var(--accent)
+        }
+
+        .chapter-card h2 {
+            color: var(--accent);
+            font-size: clamp(1.15rem, 3vw, 1.4rem);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap
+        }
+
+        .chapter-card .ch-num {
+            width: 2rem;
+            height: 2rem;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0
+        }
+
+        .chapter-card h3 {
+            color: #1e40af;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem
+        }
+
+        .chapter-card .ch-hours {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 0.5rem
+        }
+
+        .chapter-card ul,
+        .chapter-card ol {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 1rem
+        }
+
+        .chapter-card li {
+            margin-bottom: 0.35rem
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.25rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0
+        }
+
+        .q-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.25rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.25rem 0
+        }
+
+        .q-box strong {
+            color: #1d4ed8
+        }
+
+        .q-box ol,
+        .q-box ul {
+            margin: 0.5rem 0 0 1.25rem;
+            padding: 0
+        }
+
+        .activity-box {
+            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
+            border-left: 4px solid #eab308;
+            padding: 1rem 1.25rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.25rem 0
+        }
+
+        .activity-box strong {
+            color: #92400e
+        }
+
+        .activity-box p {
+            margin: 0.5rem 0 0;
+            line-height: 1.5
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            font-size: 0.95rem
+        }
+
+        .example-box .ex-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem
+        }
+
+        .simple-english {
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+            margin: 0.75rem 0;
+            font-size: 0.92rem;
+            line-height: 1.55
+        }
+
+        .simple-english strong {
+            color: #1e40af
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border: 1px solid rgba(37, 99, 235, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04)
+        }
+
+        .compare-table {
+            width: 100%;
+            min-width: 280px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            background: #fff
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 0.6rem 0.85rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            color: #1e40af;
+            font-weight: 700
+        }
+
+        .compare-table tr:hover td {
+            background: #f8fafc
+        }
+
+        .chapter-card p,
+        .practical-card p {
+            margin: 0.5rem 0 0.75rem;
+            line-height: 1.6;
+            text-align: left
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 10px;
+            padding: 0;
+            margin: 1rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.2)
+        }
+
+        .code-block .code-caption {
+            background: #334155;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #475569
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 1rem 1.25rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.55
+        }
+
+        .code-block code {
+            background: none;
+            color: #e2e8f0;
+            padding: 0
+        }
+
+        .code-block .tag {
+            color: #7dd3fc
+        }
+
+        .code-block .attr {
+            color: #fcd34d
+        }
+
+        .code-block .str {
+            color: #86efac
+        }
+
+        .code-block .key {
+            color: #c4b5fd
+        }
+
+        .code-block .comment {
+            color: #94a3b8;
+            font-style: italic
+        }
+
+        .fig-wrap {
+            text-align: center;
+            margin: 1.25rem 0;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0
+        }
+
+        .fig-wrap img,
+        .fig-wrap svg {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto
+        }
+
+        .fig-wrap .fig-cap {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem
+        }
+
+        .section-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0.25rem 0 0.75rem
+        }
+
+        .page-footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted)
+        }
+
+        .book-hero {
+            background: linear-gradient(145deg, #1e3a8a 0%, #3b82f6 35%, #60a5fa 70%, #93c5fd 100%);
+            color: #fff;
+            padding: 2rem 1rem 2.5rem;
+            text-align: center;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 8px 30px rgba(30, 58, 138, 0.35)
+        }
+
+        .book-hero h1 {
+            margin: 0 0 0.35rem;
+            font-size: clamp(1.4rem, 4vw, 1.85rem);
+            font-weight: 800
+        }
+
+        .book-hero .lead {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.95
+        }
+
+        .practical-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+            border-radius: 14px;
+            padding: clamp(1.25rem, 4vw, 2rem);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08)
+        }
+
+        .practical-card h2 {
+            color: #15803d;
+            border-bottom-color: #bbf7d0
+        }
+
+        .practical-card .ch-num {
+            background: #22c55e
+        }
+
+        @media (max-width:576px) {
+
+            .chapter-card,
+            .practical-card {
+                padding: 1rem
+            }
+
+            .module-title {
+                font-size: 1rem;
+                padding: 0.875rem 1rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapter navigation">
+        <div class="toc-header"><i class="fas fa-list me-2"></i>Chapters</div>
+        <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="tocList" id="tocToggle">
+            <span><i class="fas fa-list me-2"></i>Chapters</span>
+            <i class="fas fa-chevron-down" id="tocChevron"></i>
+        </button>
+        <div class="toc-list" id="tocList"></div>
+    </aside>
+
+    <div class="page-wrapper">
+        <div id="top"></div>
+        <br>
+        <div class="container-main">
+            <main class="content-area">
+                <header class="book-hero" role="banner">
+                    <div class="fig-wrap"
+                        style="max-width:120px;margin:0 auto 0.75rem;background:rgba(255,255,255,0.2);padding:0.75rem;border-radius:16px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64"
+                            aria-hidden="true">
+                            <rect width="64" height="64" rx="12" fill="rgba(255,255,255,0.25)" />
+                            <path d="M20 18h24v4H20zm0 8h24v4H20zm0 8h16v4H20z" fill="#fff" />
+                            <rect x="12" y="42" width="40" height="6" rx="2" fill="rgba(255,255,255,0.7)" />
+                        </svg>
+                    </div>
+                    <h1><i class="fas fa-palette me-2"></i> Web Site Design and Hosting</h1>
+                    
+                </header>
+
+                <section class="chapters-section" aria-label="Module chapters">
+                    <!-- Chapter 01 -->
+                    <article id="ch1" class="chapter-card">
+                        <h2><span class="ch-num">01</span> Introduction to Web Design <span class="ch-hours">(03
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Why web design matters, web technologies, UX &amp; UI,
+                            tools, and current best practices.</p>
+
+                        <h3>1.1 Importance of Web Design</h3>
+                        <div class="info-box"><strong>Web design</strong> is the process of planning, creating, and
+                            maintaining the look, structure, and usability of websites. Good design builds trust and
+                            helps users find what they need quickly.</div>
+                        <p>Websites play a key role in <strong>business</strong> (e.g. online shops, company info,
+                            booking) and <strong>education</strong> (e.g. LMS, course pages, school sites). They support
+                            <strong>branding</strong> and <strong>online presence</strong> so that people can find and
+                            recognise an organisation. The <strong>first impression</strong> of a site (layout, colours,
+                            clarity) affects <strong>credibility</strong>—a messy or slow site can make users leave.</p>
+                        <ul>
+                            <li>Role of websites in business &amp; education</li>
+                            <li>Branding and online presence</li>
+                            <li>First impression &amp; credibility</li>
+                        </ul>
+
+                        <h3>1.2 Overview of Web Technologies</h3>
+                        <p><strong>Front-end</strong> is what the user sees and uses in the browser (HTML, CSS,
+                            JavaScript). <strong>Back-end</strong> runs on the server (databases, APIs, server logic). A
+                            <strong>static</strong> site shows fixed content; a <strong>dynamic</strong> site changes
+                            content (e.g. from a database or user input).</p>
+                        <figure class="fig-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 140" width="320" height="140"
+                                aria-hidden="true">
+                                <rect x="20" y="30" width="70" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6"
+                                    stroke-width="1.5" />
+                                <text x="55" y="58" text-anchor="middle" font-size="11" fill="#1e40af"
+                                    font-weight="600">Browser</text>
+                                <text x="55" y="72" text-anchor="middle" font-size="9" fill="#64748b">HTML/CSS/JS</text>
+                                <path d="M90 55 L130 55" stroke="#64748b" stroke-width="1.5" marker-end="url(#ar)" />
+                                <rect x="140" y="30" width="70" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b"
+                                    stroke-width="1.5" />
+                                <text x="175" y="58" text-anchor="middle" font-size="11" fill="#b45309"
+                                    font-weight="600">Server</text>
+                                <text x="175" y="72" text-anchor="middle" font-size="9" fill="#64748b">PHP/Node</text>
+                                <path d="M210 55 L250 55" stroke="#64748b" stroke-width="1.5" marker-end="url(#ar)" />
+                                <rect x="260" y="30" width="60" height="50" rx="6" fill="#dcfce7" stroke="#22c55e"
+                                    stroke-width="1.5" />
+                                <text x="290" y="58" text-anchor="middle" font-size="11" fill="#15803d"
+                                    font-weight="600">DB</text>
+                                <defs>
+                                    <marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                        <path d="M0 0 L8 4 L0 8 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                            <figcaption class="fig-cap">Figure 1.1: Browser → Server → Database (basic web architecture)
+                            </figcaption>
+                        </figure>
+                        <div class="table-wrap">
+                            <table class="compare-table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                                <tr>
+                                    <td>Static</td>
+                                    <td>Pre-written HTML pages; same for every user</td>
+                                </tr>
+                                <tr>
+                                    <td>Dynamic</td>
+                                    <td>Content generated or changed (e.g. login, search, CMS)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <ul>
+                            <li>Front-end vs Back-end</li>
+                            <li>Static vs Dynamic websites</li>
+                            <li>Basic web architecture (browser ↔ server ↔ database)</li>
+                        </ul>
+
+                        <h3>1.3 Understanding UX &amp; UI</h3>
+                        <p><strong>User Experience (UX)</strong> is how a user feels when using a product—ease of use,
+                            speed, and whether goals are met. <strong>User Interface (UI)</strong> is the visual part:
+                            buttons, menus, colours, typography. UX is the overall experience; UI is the look and
+                            controls. Both must work together for a good website.</p>
+                        <ul>
+                            <li>What is User Experience (UX)?</li>
+                            <li>What is User Interface (UI)?</li>
+                            <li>UX vs UI differences</li>
+                        </ul>
+
+                        <h3>1.4 Tools for Web Design</h3>
+                        <p><strong>Web authoring tools</strong> (e.g. Adobe Dreamweaver, VS Code) help you write and
+                            edit HTML, CSS, and JavaScript. <strong>Content Management Systems (CMS)</strong> like
+                            WordPress and Joomla let you build and manage sites with less code—templates, plugins, and
+                            an admin panel.</p>
+                        <ul>
+                            <li>Web Authoring Tools (Dreamweaver, VS Code)</li>
+                            <li>Content Management Systems (WordPress, Joomla)</li>
+                        </ul>
+
+                        <h3>1.5 Web Design Trends &amp; Best Practices</h3>
+                        <p><strong>Responsive design</strong> means the layout adapts to different screen sizes.
+                            <strong>Minimal layouts</strong> reduce clutter and focus on content.
+                            <strong>Accessibility</strong> ensures people with disabilities can use the site (e.g. alt
+                            text, keyboard support). <strong>Mobile-first</strong> means designing for small screens
+                            first, then scaling up.</p>
+                        <ul>
+                            <li>Responsive design</li>
+                            <li>Minimal layouts</li>
+                            <li>Accessibility</li>
+                            <li>Mobile-first approach</li>
+                        </ul>
+
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>Explain the difference between front-end and back-end in a website.</li>
+                                <li>What is the difference between UX and UI? Give one example of each.</li>
+                                <li>Why is a mobile-first approach useful in web design?</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Visit two websites (e.g. a school and a shop). Note down: (1) First
+                                impression, (2) Ease of finding information, (3) Whether the layout works on a small
+                                screen. Write a short comparison.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 02 -->
+                    <article id="ch2" class="chapter-card">
+                        <h2><span class="ch-num">02</span> Wireframing and Prototyping <span class="ch-hours">(06
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Plan layout with wireframes, then build clickable prototypes
+                            to test user flow before coding.</p>
+
+                        <h3>2.1 Introduction to Wireframing</h3>
+                        <div class="info-box">A <strong>wireframe</strong> is a simple, often black-and-white sketch of
+                            a web page. It shows where elements (header, menu, content, footer) go—without colours or
+                            final design. It helps agree structure before spending time on visuals.</div>
+                        <p><strong>Low-fidelity (lo-fi)</strong> wireframes are rough (e.g. boxes and lines on paper or
+                            simple shapes). <strong>High-fidelity (hi-fi)</strong> wireframes are more detailed, closer
+                            to the final layout, sometimes with real text and spacing.</p>
+                        <ul>
+                            <li>What is a wireframe?</li>
+                            <li>Low-fidelity vs High-fidelity wireframes</li>
+                        </ul>
+
+                        <h3>2.2 Introduction to Prototyping</h3>
+                        <p>A <strong>prototype</strong> is a clickable model of the site. Buttons and links work so you
+                            can test <strong>user flow</strong> (e.g. “Click Login → Enter details → See dashboard”).
+                            <strong>Interactive prototypes</strong> help find usability issues before development.</p>
+                        <ul>
+                            <li>What is a prototype?</li>
+                            <li>Interactive prototypes</li>
+                        </ul>
+
+                        <h3>2.3 Tools for Wireframing &amp; Prototyping</h3>
+                        <p><strong>Figma</strong> and <strong>Adobe XD</strong> support both wireframes and
+                            high-fidelity designs with links and simple interactions. <strong>Balsamiq</strong> is
+                            focused on quick, sketch-style wireframes. Choose based on team and need for collaboration.
+                        </p>
+                        <ul>
+                            <li>Figma – design and prototype in browser/desktop</li>
+                            <li>Adobe XD – design and prototype, good for UI</li>
+                            <li>Balsamiq – fast wireframing, hand-drawn look</li>
+                        </ul>
+
+                        <h3>2.4 Drawing Wireframes</h3>
+                        <p>Start with <strong>layout planning</strong>: header at top, main content area, sidebar if
+                            needed, footer. Define <strong>navigation structure</strong> (main menu items, sub-menus) so
+                            users can move between sections easily.</p>
+                        <figure class="fig-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 180" width="280" height="180"
+                                aria-hidden="true">
+                                <rect x="10" y="10" width="260" height="28" rx="2" fill="#f1f5f9" stroke="#94a3b8"
+                                    stroke-width="1" />
+                                <text x="140" y="27" text-anchor="middle" font-size="10" fill="#64748b">Header /
+                                    Logo</text>
+                                <rect x="10" y="42" width="260" height="18" rx="2" fill="#e2e8f0" stroke="#94a3b8"
+                                    stroke-width="1" />
+                                <text x="140" y="54" text-anchor="middle" font-size="9" fill="#64748b">Nav: Home | About
+                                    | Contact</text>
+                                <rect x="10" y="64" width="165" height="75" rx="2" fill="#f8fafc" stroke="#94a3b8"
+                                    stroke-width="1" />
+                                <text x="92" y="102" text-anchor="middle" font-size="10" fill="#64748b">Main content
+                                    area</text>
+                                <rect x="180" y="64" width="90" height="75" rx="2" fill="#f1f5f9" stroke="#94a3b8"
+                                    stroke-width="1" />
+                                <text x="225" y="102" text-anchor="middle" font-size="9" fill="#64748b">Sidebar</text>
+                                <rect x="10" y="143" width="260" height="28" rx="2" fill="#f1f5f9" stroke="#94a3b8"
+                                    stroke-width="1" />
+                                <text x="140" y="161" text-anchor="middle" font-size="10" fill="#64748b">Footer</text>
+                            </svg>
+                            <figcaption class="fig-cap">Figure 2.1: Simple wireframe layout (header, nav, main, sidebar,
+                                footer)</figcaption>
+                        </figure>
+                        <ul>
+                            <li>Layout planning</li>
+                            <li>Navigation structure</li>
+                        </ul>
+
+                        <h3>2.5 Developing Prototypes</h3>
+                        <p>Add <strong>interactions</strong> (e.g. button click opens a form). Then <strong>test user
+                                flow</strong> by clicking through as a user would—check if steps are clear and nothing
+                            is missing.</p>
+                        <ul>
+                            <li>Adding interactions</li>
+                            <li>Testing user flow</li>
+                        </ul>
+
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the main purpose of a wireframe? When would you use lo-fi vs hi-fi?</li>
+                                <li>How does a prototype differ from a wireframe?</li>
+                                <li>Name two tools for prototyping and one advantage of each.</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Draw a low-fidelity wireframe for a simple website (e.g. personal
+                                portfolio or small business) with header, navigation, main content area, and footer.
+                                Label each section.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 03 -->
+                    <article id="ch3" class="chapter-card">
+                        <h2><span class="ch-num">03</span> Fundamentals of Web Technologies <span class="ch-hours">(03
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> How the web works—browsers, servers, URLs, HTTP/HTTPS—and
+                            the difference between client-side and server-side code.</p>
+
+                        <h3>3.1 The World Wide Web (WWW)</h3>
+                        <p><strong>Web browsers</strong> (Chrome, Firefox, Edge, Safari) request pages from <strong>web
+                                servers</strong>, receive HTML/CSS/JS, and display them. A <strong>URL</strong> (e.g.
+                            <code>https://example.com/page</code>) identifies the resource. <strong>HTTP</strong> is the
+                            protocol for sending requests and responses; <strong>HTTPS</strong> is HTTP with encryption
+                            (SSL/TLS) for security.</p>
+                        <figure class="fig-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="300" height="100"
+                                aria-hidden="true">
+                                <rect x="15" y="25" width="80" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6" />
+                                <text x="55" y="52" text-anchor="middle" font-size="11" fill="#1e40af"
+                                    font-weight="600">Client</text>
+                                <text x="55" y="66" text-anchor="middle" font-size="9" fill="#64748b">1. Request
+                                    URL</text>
+                                <path d="M95 50 L145 50" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4 2" />
+                                <text x="120" y="42" text-anchor="middle" font-size="8" fill="#64748b">HTTP(S)</text>
+                                <rect x="155" y="25" width="80" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b" />
+                                <text x="195" y="52" text-anchor="middle" font-size="11" fill="#b45309"
+                                    font-weight="600">Server</text>
+                                <text x="195" y="66" text-anchor="middle" font-size="9" fill="#64748b">2. Send
+                                    HTML/CSS/JS</text>
+                                <path d="M235 50 L285 50" stroke="#22c55e" stroke-width="1.5" />
+                                <text x="260" y="42" text-anchor="middle" font-size="8" fill="#15803d">Response</text>
+                            </svg>
+                            <figcaption class="fig-cap">Figure 3.1: Request–response flow (client requests, server
+                                responds)</figcaption>
+                        </figure>
+                        <div class="example-box">
+                            <div class="ex-title">Example: URL parts</div>
+                            <code>https://www.school.edu.lk/courses</code> — <strong>https</strong> = protocol,
+                            <strong>www.school.edu.lk</strong> = domain, <strong>/courses</strong> = path.
+                        </div>
+                        <ul>
+                            <li>Web Browsers – display content, run JavaScript</li>
+                            <li>Web Servers – store and send files, run server code</li>
+                            <li>URLs – address of a resource</li>
+                            <li>HTTP &amp; HTTPS – request/response protocol (HTTPS = secure)</li>
+                        </ul>
+
+                        <h3>3.2 Client-side vs Server-side Scripting</h3>
+                        <div class="info-box"><strong>Client-side</strong> code runs in the user’s browser (HTML
+                            structure, CSS style, JavaScript behaviour). <strong>Server-side</strong> code runs on the
+                            server (e.g. PHP, Node.js) and can access databases and generate HTML before sending it to
+                            the browser.</div>
+                        <div class="table-wrap">
+                            <table class="compare-table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Runs on</th>
+                                    <th>Examples</th>
+                                </tr>
+                                <tr>
+                                    <td>Client-side</td>
+                                    <td>User’s browser</td>
+                                    <td>HTML, CSS, JavaScript</td>
+                                </tr>
+                                <tr>
+                                    <td>Server-side</td>
+                                    <td>Web server</td>
+                                    <td>PHP, Node.js, Python</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <ul>
+                            <li>Client-side (HTML, CSS, JavaScript)</li>
+                            <li>Server-side (PHP, Node.js)</li>
+                        </ul>
+
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the role of a web browser? Name two web browsers.</li>
+                                <li>Explain the difference between HTTP and HTTPS.</li>
+                                <li>Give one example of a task suited to client-side code and one to server-side code.
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Open a website in your browser. Use developer tools (F12) to view the
+                                Network tab. Reload the page and note the HTTP/HTTPS requests. Write one sentence on
+                                what you see.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 04 -->
+                    <article id="ch4" class="chapter-card">
+                        <h2><span class="ch-num">04</span> Hypertext Markup Language (HTML) <span class="ch-hours">(15
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Structure web pages with HTML—elements, tags, links, images,
+                            lists, tables, forms—and use semantic HTML for accessibility.</p>
+
+                        <h3>4.1 Introduction to HTML</h3>
+                        <div class="info-box"><strong>HTML</strong> (HyperText Markup Language) is the standard language
+                            for creating web pages. Browsers read HTML tags and display content. HTML has evolved from
+                            early versions (HTML 2, 3.2) to HTML5, which added semantic elements and better support for
+                            media and forms.</div>
+                        <p><strong>HTML history</strong>: From simple document markup to HTML5 (current standard),
+                            supporting video, audio, canvas, and semantic structure.</p>
+                        <ul>
+                            <li>What is HTML?</li>
+                            <li>HTML history (HTML5 and standards)</li>
+                        </ul>
+
+                        <h3>4.2 HTML Elements &amp; Structure</h3>
+                        <p>Elements use <strong>tags</strong> (e.g. <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>) and
+                            <strong>attributes</strong> (e.g. <code>href</code>, <code>src</code>, <code>id</code>). The
+                            <strong>head</strong> holds meta information, title, and links to CSS/JS; the
+                            <strong>body</strong> holds the visible content. Use <strong>headings</strong> (h1–h6) for
+                            hierarchy and <strong>paragraphs</strong> (<code>&lt;p&gt;</code>) for text blocks.</p>
+                        <div class="simple-english">
+                            <strong>Tags</strong> come in pairs: opening <code>&lt;tag&gt;</code> and closing <code>&lt;/tag&gt;</code>. Some elements are <strong>void</strong> (no closing tag): <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;input&gt;</code>. <strong>Attributes</strong> go inside the opening tag: <code>name="value"</code>. Common ones: <code>id</code> (unique), <code>class</code> (reusable), <code>href</code> (link URL), <code>src</code> (image/script source).
+                        </div>
+                        <p class="section-note">Example: minimal HTML5 page structure and semantic layout.</p>
+                        <div class="code-block">
+                            <div class="code-caption">HTML – Basic page structure (index.html)</div>
+                            <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang="en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">charset="UTF-8"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;meta</span> <span class="attr">name="viewport"</span> <span class="attr">content="width=device-width, initial-scale=1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;title&gt;</span>My Page<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;link</span> <span class="attr">rel="stylesheet"</span> <span class="attr">href="styles.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+  <span class="tag">&lt;header&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Welcome<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;nav&gt;</span>
+      <span class="tag">&lt;a</span> <span class="attr">href="index.html"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span> |
+      <span class="tag">&lt;a</span> <span class="attr">href="contact.html"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/nav&gt;</span>
+  <span class="tag">&lt;/header&gt;</span>
+  <span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;p&gt;</span>This is the main content area.<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/main&gt;</span>
+  <span class="tag">&lt;footer&gt;</span>&amp;copy; 2025<span class="tag">&lt;/footer&gt;</span>
+  <span class="tag">&lt;script</span> <span class="attr">src="script.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+                        </div>
+                        <ul>
+                            <li>Tags &amp; Attributes</li>
+                            <li>Head, Body</li>
+                            <li>Headings, Paragraphs</li>
+                        </ul>
+
+                        <h3>4.3 Creating Basic Web Pages</h3>
+                        <p><strong>Links</strong>: <code>&lt;a href="url"&gt;text&lt;/a&gt;</code>.
+                            <strong>Images</strong>: <code>&lt;img src="path" alt="description"&gt;</code>—always use
+                            <code>alt</code> for accessibility. <strong>Lists</strong>:
+                            <code>&lt;ul&gt;&lt;li&gt;</code> (unordered) or <code>&lt;ol&gt;&lt;li&gt;</code>
+                            (ordered). <strong>Tables</strong>: <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>,
+                            <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>. <strong>Forms</strong>:
+                            <code>&lt;form action="..." method="get|post"&gt;</code> with inputs (text, email, password,
+                            submit, etc.), labels, and optional validation (required, type).</p>
+                        <p class="section-note">Example: links, image, list, and a simple form.</p>
+                        <div class="code-block">
+                            <div class="code-caption">HTML – Links, image, list, form</div>
+                            <pre><code><span class="tag">&lt;a</span> <span class="attr">href="https://example.com"</span><span class="tag">&gt;</span>Visit Example<span class="tag">&lt;/a&gt;</span>
+
+<span class="tag">&lt;img</span> <span class="attr">src="images/logo.png"</span> <span class="attr">alt="Company logo"</span> <span class="attr">width="200"</span><span class="tag">&gt;</span>
+
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Item one<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span>Item two<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+
+<span class="tag">&lt;form</span> <span class="attr">action="submit.php"</span> <span class="attr">method="post"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for="email"</span><span class="tag">&gt;</span>Email:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type="email"</span> <span class="attr">id="email"</span> <span class="attr">name="email"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">type="submit"</span><span class="tag">&gt;</span>Send<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span></code></pre>
+                        </div>
+                        <p><strong>Tables</strong> use <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>/<code>&lt;tbody&gt;</code> for structure, <code>&lt;tr&gt;</code> for rows, <code>&lt;th&gt;</code> for header cells, <code>&lt;td&gt;</code> for data cells. Use for tabular data (e.g. marks, schedules), not for page layout.</p>
+                        <p class="section-note">Example: table with header and body.</p>
+                        <div class="code-block">
+                            <div class="code-caption">HTML – Table (thead, tbody, th, td)</div>
+                            <pre><code><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Subject<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th&gt;</span>Mark<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Ali<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>ICT<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>85<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Sara<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>Web Design<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td&gt;</span>92<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span></code></pre>
+                        </div>
+                        <p><strong>Forms – method:</strong> <code>get</code> sends data in the URL (visible, bookmarkable); <code>post</code> sends data in the request body (better for passwords and large data). Use <code>name</code> on each input so the server receives the values.</p>
+                        <p class="section-note">Example: form with text, number, checkbox, radio, select, and textarea.</p>
+                        <div class="code-block">
+                            <div class="code-caption">HTML – Form with multiple input types</div>
+                            <pre><code><span class="tag">&lt;form</span> <span class="attr">action="save.php"</span> <span class="attr">method="post"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for="fname"</span><span class="tag">&gt;</span>Full name:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type="text"</span> <span class="attr">id="fname"</span> <span class="attr">name="fname"</span> <span class="attr">required</span> <span class="attr">placeholder="Your name"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for="age"</span><span class="tag">&gt;</span>Age:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type="number"</span> <span class="attr">id="age"</span> <span class="attr">name="age"</span> <span class="attr">min="1"</span> <span class="attr">max="120"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;input</span> <span class="attr">type="checkbox"</span> <span class="attr">id="agree"</span> <span class="attr">name="agree"</span> <span class="attr">value="yes"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for="agree"</span><span class="tag">&gt;</span>I agree<span class="tag">&lt;/label&gt;</span>
+
+  <span class="tag">&lt;p&gt;</span>Gender: <span class="tag">&lt;input</span> <span class="attr">type="radio"</span> <span class="attr">name="gender"</span> <span class="attr">value="M"</span> <span class="attr">id="g1"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for="g1"</span><span class="tag">&gt;</span>Male<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;input</span> <span class="attr">type="radio"</span> <span class="attr">name="gender"</span> <span class="attr">value="F"</span> <span class="attr">id="g2"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;label</span> <span class="attr">for="g2"</span><span class="tag">&gt;</span>Female<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;/p&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for="course"</span><span class="tag">&gt;</span>Course:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;select</span> <span class="attr">id="course"</span> <span class="attr">name="course"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value=""</span><span class="tag">&gt;</span>Select...<span class="tag">&lt;/option&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value="web"</span><span class="tag">&gt;</span>Web Design<span class="tag">&lt;/option&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value="ict"</span><span class="tag">&gt;</span>ICT<span class="tag">&lt;/option&gt;</span>
+  <span class="tag">&lt;/select&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for="msg"</span><span class="tag">&gt;</span>Message:<span class="tag">&lt;/label&gt;</span>
+  <span class="tag">&lt;textarea</span> <span class="attr">id="msg"</span> <span class="attr">name="msg"</span> <span class="attr">rows="4"</span> <span class="attr">cols="40"</span><span class="tag">&gt;&lt;/textarea&gt;</span>
+
+  <span class="tag">&lt;button</span> <span class="attr">type="submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">type="reset"</span><span class="tag">&gt;</span>Reset<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span></code></pre>
+                        </div>
+                        <ul>
+                            <li>Links (anchor, href), Images (src, alt), Lists (ul, ol, li)</li>
+                            <li>Tables (table, thead, tbody, tr, td, th)</li>
+                            <li>Forms (form, input types, label, placeholder, select, textarea)</li>
+                        </ul>
+
+                        <h3>4.4 Semantic HTML &amp; Accessibility</h3>
+                        <p><strong>Semantic elements</strong> describe meaning: <code>&lt;header&gt;</code>,
+                            <code>&lt;footer&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>,
+                            <code>&lt;nav&gt;</code>. They help <strong>screen readers</strong> and search engines
+                            understand the page. Use <strong>alt text</strong> on images; keep a logical heading order
+                            (h1 → h2 → h3); associate labels with form controls.</p>
+                        <ul>
+                            <li>header, footer, section, article, nav</li>
+                            <li>alt text for images</li>
+                            <li>Proper structure for screen readers</li>
+                        </ul>
+
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the purpose of the &lt;head&gt; and &lt;body&gt; sections?</li>
+                                <li>Why should images have an alt attribute?</li>
+                                <li>Name three semantic HTML elements and say what each is used for.</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Create an HTML page with: semantic structure (header, section, footer),
+                                one heading, two paragraphs, a list, a link, an image with alt text, a simple table, and
+                                a form with name and email fields.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 05 -->
+                    <article id="ch5" class="chapter-card">
+                        <h2><span class="ch-num">05</span> Cascading Style Sheets (CSS) <span class="ch-hours">(12
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Style web pages with CSS—where to put CSS, selectors,
+                            colours, fonts, box model, and layout (Flexbox/Grid).</p>
+
+                        <h3>5.1 Introduction to CSS</h3>
+                        <div class="info-box"><strong>CSS</strong> (Cascading Style Sheets) controls how HTML looks:
+                            colours, fonts, spacing, layout. You can add CSS in three ways: <strong>inline</strong>
+                            (style attribute on one element), <strong>internal</strong> (&lt;style&gt; in head), or
+                            <strong>external</strong> (separate .css file linked in head). External is best for
+                            maintainability and re-use across pages.</div>
+                        <div class="simple-english">
+                            <strong>Inline</strong> styles apply to a single element: <code>&lt;p style="color: red;"&gt;</code>. <strong>Internal</strong> CSS goes in <code>&lt;style&gt;&lt;/style&gt;</code> in the <code>&lt;head&gt;</code> and applies to that page only. <strong>External</strong> CSS is in a separate file (e.g. <code>styles.css</code>) and is linked with <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> so many pages can share the same styles.
+                        </div>
+                        <p class="section-note">Examples: inline, internal, and external CSS.</p>
+                        <div class="code-block">
+                            <div class="code-caption">CSS – Inline (on one element) vs Internal (in head) vs External (file)</div>
+                            <pre><code><span class="comment">/* INLINE – in HTML: */</span>
+<span class="tag">&lt;p</span> <span class="attr">style="color: blue; font-size: 18px;"</span><span class="tag">&gt;</span>Text<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">/* INTERNAL – inside &lt;style&gt; in &lt;head&gt;: */</span>
+<span class="key">p</span> { <span class="attr">color</span>: blue; <span class="attr">font-size</span>: 18px; }
+
+<span class="comment">/* EXTERNAL – in styles.css, linked by: */</span>
+<span class="tag">&lt;link</span> <span class="attr">rel="stylesheet"</span> <span class="attr">href="styles.css"</span><span class="tag">&gt;</span></code></pre>
+                        </div>
+                        <ul>
+                            <li>Inline, Internal, External CSS</li>
+                        </ul>
+
+                        <h3>5.2 CSS Selectors &amp; Properties</h3>
+                        <p><strong>Selectors</strong> target elements: by <strong>element</strong> (e.g.
+                            <code>p { }</code>), by <strong>class</strong> (e.g. <code>.highlight { }</code>), by
+                            <strong>ID</strong> (e.g. <code>#main { }</code>). You can combine: <code>div.box</code> (div with class box), <code>ul li</code> (li inside ul). Common <strong>properties</strong>:
+                            <code>color</code>, <code>font-family</code>, <code>font-size</code>;
+                            <code>background-color</code>, <code>background-image</code>.</p>
+                        <div class="simple-english">
+                            <strong>Colours</strong> can be: name (<code>red</code>), hex (<code>#ff0000</code> or <code>#f00</code>), <code>rgb(255, 0, 0)</code>, or <code>rgba(255, 0, 0, 0.5)</code> for transparency. <strong>Fonts</strong>: use <code>font-family</code> (e.g. <code>Arial, sans-serif</code>), <code>font-size</code> (e.g. <code>1rem</code>, <code>16px</code>), <code>font-weight</code> (bold/normal), <code>line-height</code> for readability.
+                        </div>
+                        <p class="section-note">Example: selectors, colours, fonts, box model, and Flexbox.</p>
+                        <div class="code-block">
+                            <div class="code-caption">CSS – Selectors, box model, Flexbox (styles.css)</div>
+                            <pre><code><span class="comment">/* Element and class selectors */</span>
+<span class="key">body</span> { <span class="attr">font-family</span>: Arial, sans-serif; <span class="attr">color</span>: <span class="str">#333</span>; }
+<span class="key">.highlight</span> { <span class="attr">background-color</span>: <span class="str">#fef3c7</span>; <span class="attr">padding</span>: 4px 8px; }
+<span class="key">#main</span> { <span class="attr">max-width</span>: 900px; <span class="attr">margin</span>: 0 auto; }
+
+<span class="comment">/* Box model */</span>
+<span class="key">.card</span> {
+  <span class="attr">padding</span>: 1rem;
+  <span class="attr">border</span>: 1px solid <span class="str">#e2e8f0</span>;
+  <span class="attr">margin</span>: 1rem 0;
+  <span class="attr">border-radius</span>: 8px;
+}
+
+<span class="comment">/* Flexbox row */</span>
+<span class="key">.row</span> {
+  <span class="attr">display</span>: flex;
+  <span class="attr">gap</span>: 1rem;
+  <span class="attr">flex-wrap</span>: wrap;
+}
+
+<span class="comment">/* Responsive: stack on small screens */</span>
+<span class="key">@media</span> (max-width: 600px) {
+  <span class="key">.row</span> { <span class="attr">flex-direction</span>: column; }
+}</code></pre>
+                        </div>
+                        <p class="section-note">Example: CSS Grid for a 2D layout (columns and rows).</p>
+                        <div class="code-block">
+                            <div class="code-caption">CSS – Grid layout (columns, rows, gap)</div>
+                            <pre><code><span class="comment">/* Grid: 3 equal columns, gap between items */</span>
+<span class="key">.grid-container</span> {
+  <span class="attr">display</span>: grid;
+  <span class="attr">grid-template-columns</span>: 1fr 1fr 1fr;   <span class="comment">/* or repeat(3, 1fr) */</span>
+  <span class="attr">gap</span>: 1rem;
+}
+
+<span class="comment">/* Responsive: 2 cols on tablet, 1 on mobile */</span>
+<span class="key">@media</span> (max-width: 768px) {
+  <span class="key">.grid-container</span> { <span class="attr">grid-template-columns</span>: 1fr 1fr; }
+}
+<span class="key">@media</span> (max-width: 480px) {
+  <span class="key">.grid-container</span> { <span class="attr">grid-template-columns</span>: 1fr; }
+}</code></pre>
+                        </div>
+                        <ul>
+                            <li>Element, Class, ID selectors (and combinators: space, .class)</li>
+                            <li>Colors (hex, rgb, names), Fonts, Backgrounds</li>
+                            <li>Grid: grid-template-columns, gap, repeat()</li>
+                        </ul>
+
+                        <h3>5.3 Styling Web Pages</h3>
+                        <p>The <strong>Box Model</strong>: each element has content, padding, border, and margin.
+                            <strong>Flexbox</strong> (<code>display: flex</code>) arranges items in a row or column with
+                            alignment and spacing. <strong>Grid</strong> (<code>display: grid</code>) creates
+                            two-dimensional layouts with rows and columns. <strong>Media Queries</strong>
+                            (<code>@media (max-width: 768px) { }</code>) apply different styles for different screen
+                            sizes—essential for responsive design.</p>
+                        <figure class="fig-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 140" width="260" height="140"
+                                aria-hidden="true">
+                                <rect x="70" y="20" width="120" height="100" fill="none" stroke="#94a3b8"
+                                    stroke-width="2" stroke-dasharray="4 2" />
+                                <text x="130" y="95" text-anchor="middle" font-size="10" fill="#64748b">margin</text>
+                                <rect x="82" y="32" width="96" height="76" fill="none" stroke="#f59e0b"
+                                    stroke-width="2" />
+                                <text x="130" y="82" text-anchor="middle" font-size="10" fill="#b45309">border</text>
+                                <rect x="94" y="44" width="72" height="52" fill="#dbeafe" stroke="#3b82f6"
+                                    stroke-width="1.5" />
+                                <text x="130" y="68" text-anchor="middle" font-size="10" fill="#1e40af">padding</text>
+                                <rect x="106" y="56" width="48" height="28" fill="#1e293b" />
+                                <text x="130" y="73" text-anchor="middle" font-size="9" fill="#e2e8f0">content</text>
+                            </svg>
+                            <figcaption class="fig-cap">Figure 5.1: CSS Box Model (margin → border → padding → content)
+                            </figcaption>
+                        </figure>
+                        <ul>
+                            <li>Box Model</li>
+                            <li>Flexbox</li>
+                            <li>Grid</li>
+                            <li>Responsive design (Media Queries)</li>
+                        </ul>
+
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the difference between inline, internal, and external CSS? Which do you
+                                    prefer and why?</li>
+                                <li>Explain the CSS Box Model (content, padding, border, margin).</li>
+                                <li>When would you use Flexbox instead of Grid?</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Create an external CSS file. Style a page with: a class for highlighted
+                                text (e.g. background colour), a simple flex row of three boxes, and a media query that
+                                stacks the boxes vertically on screens under 600px.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 06 -->
+                    <article id="ch6" class="chapter-card">
+                        <h2><span class="ch-num">06</span> Introduction to Front-End Development Tools <span
+                                class="ch-hours">(03 Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> When and why to use JavaScript, TypeScript, and Next.js in
+                            front-end development.</p>
+                        <h3>6.1 JavaScript</h3>
+                        <div class="info-box"><strong>JavaScript (JS)</strong> runs in the browser and adds behaviour to
+                            web pages: form validation, menus, animations, fetching data without reloading the page. Use
+                            it when you need interactivity, dynamic content, or to talk to APIs.</div>
+                        <p><strong>Purpose:</strong> Interactivity, DOM manipulation, form checks, AJAX/fetch.
+                            <strong>When to use:</strong> Any site that needs buttons, dropdowns, sliders, or live
+                            updates.</p>
+                        <h3>6.2 TypeScript</h3>
+                        <p><strong>TypeScript</strong> is JavaScript with static types (you declare types for variables
+                            and function parameters). It helps catch errors in the editor and scales better in large
+                            projects. Use it when building bigger apps or when working in a team.</p>
+                        <h3>6.3 Next.js</h3>
+                        <p><strong>Next.js</strong> is a React-based framework for building full websites: server-side
+                            rendering (SSR), static generation, file-based routing, and API routes. Use it when you need
+                            SEO-friendly pages, fast loading, or a full-stack React app.</p>
+                        <ul>
+                            <li><strong>6.1 JavaScript</strong> – Purpose and when to use</li>
+                            <li><strong>6.2 TypeScript</strong> – Purpose and when to use</li>
+                            <li><strong>6.3 Next.js</strong> – Purpose and when to use</li>
+                        </ul>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>Give two examples of what you would use JavaScript for on a website.</li>
+                                <li>What is the main benefit of TypeScript over plain JavaScript?</li>
+                                <li>When might you choose Next.js instead of plain HTML/CSS/JS?</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">List three features you could add to a static HTML page using
+                                JavaScript (e.g. button click, form check, show/hide). For one of them, write the type
+                                of code you would add (e.g. “a function that runs when the button is clicked”).</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 07 -->
+                    <article id="ch7" class="chapter-card">
+                        <h2><span class="ch-num">07</span> JavaScript Fundamentals <span class="ch-hours">(06
+                                Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Core JavaScript: variables, data types, operators,
+                            functions, and control flow (if, loops).</p>
+                        <h3>7.1 Introduction to JavaScript</h3>
+                        <p>JavaScript can be added in HTML with <code>&lt;script&gt;</code> (inline or external file).
+                            It runs in the browser and can change the page (DOM), react to events (click, submit), and
+                            communicate with servers.</p>
+                        <div class="simple-english">
+                            <strong>Where to put &lt;script&gt;:</strong> Placing the script at the <strong>end of body</strong> (before <code>&lt;/body&gt;</code>) ensures the HTML is loaded before the script runs. For external JS: <code>&lt;script src="script.js"&gt;&lt;/script&gt;</code>. To run code only after the page is ready, use <code>document.addEventListener('DOMContentLoaded', function() { ... });</code>.
+                        </div>
+                        <h3>7.2 Variables &amp; Data Types</h3>
+                        <p>Declare variables with <code>let</code> (changeable) or <code>const</code> (constant).
+                            <strong>Data types</strong>: numbers, strings (text in quotes), booleans (true/false), arrays
+                            <code>[]</code>, objects <code>{}</code>, and undefined/null.</p>
+                        <div class="example-box">
+                            <div class="ex-title">Example: variables</div>
+                            <code>let name = "Ali"; const score = 85; let passed = true;</code>
+                        </div>
+                        <p class="section-note">Example: arrays – create, length, access by index, loop.</p>
+                        <div class="code-block">
+                            <div class="code-caption">JavaScript – Arrays (create, index, length, for loop)</div>
+                            <pre><code><span class="key">const</span> fruits = [<span class="str">"Apple"</span>, <span class="str">"Banana"</span>, <span class="str">"Orange"</span>];
+<span class="key">const</span> len = fruits.length;        <span class="comment">// 3</span>
+<span class="key">const</span> first = fruits[0];         <span class="comment">// "Apple" (index starts at 0)</span>
+fruits.push(<span class="str">"Mango"</span>);             <span class="comment">// add at end</span>
+
+<span class="comment">// Loop over array</span>
+<span class="key">for</span> (<span class="key">let</span> i = 0; i &lt; fruits.length; i++) {
+  console.log(fruits[i]);
+}
+<span class="comment">// Or: for (const item of fruits) { console.log(item); }</span></code></pre>
+                        </div>
+                        <h3>7.3 Operators</h3>
+                        <p>Arithmetic: <code>+ - * / %</code>. Comparison:
+                            <code>== === != !== &lt; &gt; &lt;= &gt;=</code>. Logical: <code>&amp;&amp;</code> (and),
+                            <code>||</code> (or), <code>!</code> (not). Use <code>===</code> for equality to avoid type
+                            coercion. String concatenation: <code>"Hello " + name</code> or template literal <code>`Hello ${name}`</code>.</p>
+                        <h3>7.4 Functions</h3>
+                        <p>Functions bundle reusable code. Define with <code>function name() { }</code> or
+                            <code>const name = () => { }</code>. They can take parameters and return a value. <code>return</code> sends a value back; without it the function returns <code>undefined</code>.</p>
+                        <h3>7.5 Control Structures (if, loops)</h3>
+                        <p><strong>if / else if / else</strong> for decisions. <strong>for</strong> and
+                            <strong>while</strong> for repetition. <code>for (let i = 0; i &lt; arr.length; i++)</code>
+                            or <code>for (const item of arr)</code> to loop over arrays.</p>
+                        <p class="section-note">Example: variables, function, if/else, and button click handler.</p>
+                        <div class="code-block">
+                            <div class="code-caption">JavaScript – Variables, function, condition, event (script.js)
+                            </div>
+                            <pre><code><span class="comment">// Variables and data types</span>
+<span class="key">let</span> userName = <span class="str">"Student"</span>;
+<span class="key">const</span> maxScore = 100;
+
+<span class="comment">// Function with return value</span>
+<span class="key">function</span> greet(name) {
+  <span class="key">return</span> <span class="str">"Hello, "</span> + name;
+}
+
+<span class="comment">// Condition</span>
+<span class="key">function</span> checkAge(age) {
+  <span class="key">if</span> (age &gt;= 18) {
+    <span class="key">return</span> <span class="str">"Adult"</span>;
+  } <span class="key">else</span> {
+    <span class="key">return</span> <span class="str">"Minor"</span>;
+  }
+}
+
+<span class="comment">// Run when DOM is ready; button click</span>
+document.addEventListener(<span class="str">'DOMContentLoaded'</span>, <span class="key">function</span>() {
+  <span class="key">const</span> btn = document.getElementById(<span class="str">'myBtn'</span>);
+  <span class="key">if</span> (btn) {
+    btn.addEventListener(<span class="str">'click'</span>, <span class="key">function</span>() {
+      alert(greet(userName));
+    });
+  }
+});</code></pre>
+                        </div>
+                        <p><strong>DOM (Document Object Model):</strong> JavaScript can find and change HTML elements. Use <code>document.getElementById('id')</code>, <code>document.querySelector('css-selector')</code>, <code>document.querySelectorAll('selector')</code>. Then change content with <code>.textContent</code> or <code>.innerHTML</code>, and add listeners with <code>.addEventListener('click', function() { ... })</code>.</p>
+                        <p class="section-note">Example: reading form input and showing a message (simple validation).</p>
+                        <div class="code-block">
+                            <div class="code-caption">JavaScript – DOM: get element, read value, show message</div>
+                            <pre><code><span class="comment">// HTML: &lt;input id="username"&gt; &lt;span id="msg"&gt;&lt;/span&gt; &lt;button id="btn"&gt;Check&lt;/button&gt;</span>
+document.getElementById(<span class="str">'btn'</span>).addEventListener(<span class="str">'click'</span>, <span class="key">function</span>() {
+  <span class="key">const</span> input = document.getElementById(<span class="str">'username'</span>);
+  <span class="key">const</span> value = input.value.trim();
+  <span class="key">const</span> msgEl = document.getElementById(<span class="str">'msg'</span>);
+
+  <span class="key">if</span> (value.length === 0) {
+    msgEl.textContent = <span class="str">'Please enter a name.'</span>;
+    msgEl.style.color = <span class="str">'red'</span>;
+  } <span class="key">else</span> {
+    msgEl.textContent = <span class="str">'Hello, '</span> + value;
+    msgEl.style.color = <span class="str">'green'</span>;
+  }
+});</code></pre>
+                        </div>
+                        <ul>
+                            <li>7.1 Introduction to JavaScript (script placement, DOMContentLoaded)</li>
+                            <li>7.2 Variables &amp; Data Types (let, const, arrays, objects)</li>
+                            <li>7.3 Operators (arithmetic, comparison, logical, strings)</li>
+                            <li>7.4 Functions (parameters, return)</li>
+                            <li>7.5 Control Structures (if, for, while); DOM (getElementById, querySelector, addEventListener)</li>
+                        </ul>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the difference between let and const?</li>
+                                <li>Name three JavaScript data types.</li>
+                                <li>Write a simple if statement that checks whether a variable <code>age</code> is 18 or
+                                    more.</li>
+                                <li>How do you get an HTML element by ID in JavaScript? How do you attach a click handler?</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Write a small script: (1) Store your name in a variable and display it
+                                in an alert or in the console. (2) Write a function that takes two numbers and returns
+                                their sum. Call it and log the result. (3) Add a button in HTML and use JavaScript to show an alert when it is clicked.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 08 -->
+                    <article id="ch8" class="chapter-card">
+                        <h2><span class="ch-num">08</span> Front-End Frameworks &amp; Libraries <span
+                                class="ch-hours">(03 Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> Difference between frameworks and libraries; examples like
+                            React, Angular, Vue.</p>
+                        <div class="info-box">A <strong>library</strong> is a set of tools you call when you need them
+                            (e.g. jQuery, Lodash). A <strong>framework</strong> provides a structure and flow; your code
+                            fits into its rules (e.g. React, Angular, Vue). Frameworks often include routing, state
+                            management, and build tools.</div>
+                        <div class="table-wrap">
+                            <table class="compare-table">
+                                <tr>
+                                    <th>Library</th>
+                                    <th>Framework</th>
+                                </tr>
+                                <tr>
+                                    <td>You control when to use it</td>
+                                    <td>It controls the flow; you fill in the parts</td>
+                                </tr>
+                                <tr>
+                                    <td>e.g. jQuery, Axios</td>
+                                    <td>e.g. React, Angular, Vue</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p><strong>React</strong> (Facebook): component-based, virtual DOM, huge ecosystem.
+                            <strong>Angular</strong> (Google): full framework with TypeScript, routing, forms, HTTP.
+                            <strong>Vue</strong>: progressive, easy to learn, flexible—can be used as a library or full
+                            framework.</p>
+                        <ul>
+                            <li>What is a Framework?</li>
+                            <li>What is a Library?</li>
+                            <li>Examples: React, Angular, Vue</li>
+                        </ul>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>Explain the difference between a library and a framework in one sentence each.</li>
+                                <li>Name one front-end framework and one thing it is used for.</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Search for “React hello world” or “Vue getting started”. Read the first
+                                few steps. Write two sentences: what you need to install and what one component or
+                                template looks like.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 09 -->
+                    <article id="ch9" class="chapter-card">
+                        <h2><span class="ch-num">09</span> Website Hosting <span class="ch-hours">(03 Hours)</span></h2>
+                        <p><strong>Learning focus:</strong> What hosting is, types (shared, VPS, dedicated, cloud),
+                            choosing a provider, and using cPanel.</p>
+                        <h3>9.1 What is Website Hosting?</h3>
+                        <div class="info-box"><strong>Web hosting</strong> is a service that stores your website files
+                            on a server connected to the internet so that visitors can access your site 24/7. The host
+                            provides space, bandwidth, and often email and databases.</div>
+                        <h3>9.2 Types of Hosting</h3>
+                        <p><strong>Shared hosting</strong>: many sites on one server; cheap, good for small sites.
+                            <strong>VPS</strong> (Virtual Private Server): your own virtual slice of a server; more
+                            control and power. <strong>Dedicated</strong>: entire server for you; for high traffic.
+                            <strong>Cloud</strong>: resources scale across many servers; flexible and scalable.</p>
+                        <div class="table-wrap">
+                            <table class="compare-table">
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Best for</th>
+                                </tr>
+                                <tr>
+                                    <td>Shared</td>
+                                    <td>Small sites, blogs, portfolios</td>
+                                </tr>
+                                <tr>
+                                    <td>VPS</td>
+                                    <td>Growing sites, more control</td>
+                                </tr>
+                                <tr>
+                                    <td>Dedicated</td>
+                                    <td>High traffic, full control</td>
+                                </tr>
+                                <tr>
+                                    <td>Cloud</td>
+                                    <td>Variable traffic, scaling</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <ul>
+                            <li>Shared Hosting</li>
+                            <li>VPS</li>
+                            <li>Dedicated</li>
+                            <li>Cloud</li>
+                        </ul>
+                        <h3>9.3 Choosing Hosting Provider</h3>
+                        <p>Consider: uptime, support, price, storage and bandwidth, ease of use (cPanel or custom
+                            panel), and whether you need email, databases, or SSL.</p>
+                        <h3>9.4 Using cPanel</h3>
+                        <p><strong>cPanel</strong> is a web-based control panel. You use it to: upload files (File
+                            Manager), create databases, set up email accounts, manage domains, install apps (e.g.
+                            WordPress), and view statistics.</p>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is web hosting? Why do you need it to put a website online?</li>
+                                <li>When would you choose VPS over shared hosting?</li>
+                                <li>Name three things you can do in cPanel.</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Compare two hosting providers (e.g. for shared hosting). List: price,
+                                storage, bandwidth, and one feature each (e.g. free SSL, backup). Write which you would
+                                choose for a small business site and why.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 10 -->
+                    <article id="ch10" class="chapter-card">
+                        <h2><span class="ch-num">10</span> Domain Names and DNS <span class="ch-hours">(03 Hours)</span>
+                        </h2>
+                        <p><strong>Learning focus:</strong> What a domain is, how to register one, how DNS works, and
+                            how to configure DNS for your site.</p>
+                        <h3>10.1 What is a Domain Name?</h3>
+                        <div class="info-box">A <strong>domain name</strong> is the human-friendly address of your
+                            website (e.g. <code>myschool.edu.lk</code>). It maps to an IP address (e.g. 192.168.1.1) so
+                            users can type a name instead of numbers. It is your online identity.</div>
+                        <h3>10.2 Domain Registration</h3>
+                        <p>You <strong>register</strong> a domain through a registrar (e.g. GoDaddy, Namecheap, or local
+                            registrars for .lk). You pay yearly. Choose a name that is short, memorable, and matches
+                            your brand. Check availability first.</p>
+                        <h3>10.3 Understanding DNS</h3>
+                        <p><strong>DNS</strong> (Domain Name System) translates domain names to IP addresses. When
+                            someone types your domain, their browser asks DNS servers “What IP is this?” and gets the
+                            server address. <strong>Records</strong>: A (domain → IP), CNAME (alias), MX (mail), etc.
+                        </p>
+                        <figure class="fig-wrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 90" width="280" height="90"
+                                aria-hidden="true">
+                                <rect x="15" y="25" width="75" height="40" rx="6" fill="#dbeafe" stroke="#3b82f6" />
+                                <text x="52" y="50" text-anchor="middle" font-size="10"
+                                    fill="#1e40af">example.com</text>
+                                <text x="52" y="63" text-anchor="middle" font-size="8" fill="#64748b">(domain
+                                    name)</text>
+                                <path d="M90 45 L120 45" stroke="#64748b" stroke-width="1.5" marker-end="url(#ar2)" />
+                                <text x="105" y="38" text-anchor="middle" font-size="8" fill="#64748b">DNS lookup</text>
+                                <rect x="130" y="20" width="60" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b" />
+                                <text x="160" y="42" text-anchor="middle" font-size="9" fill="#b45309">DNS</text>
+                                <text x="160" y="55" text-anchor="middle" font-size="9" fill="#b45309">Server</text>
+                                <path d="M190 45 L220 45" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ar2)" />
+                                <rect x="230" y="25" width="50" height="40" rx="6" fill="#dcfce7" stroke="#22c55e" />
+                                <text x="255" y="50" text-anchor="middle" font-size="9" fill="#15803d">IP</text>
+                                <text x="255" y="62" text-anchor="middle" font-size="8"
+                                    fill="#64748b">203.0.113.5</text>
+                                <defs>
+                                    <marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                                        <path d="M0 0 L8 4 L0 8 Z" fill="#64748b" />
+                                    </marker>
+                                </defs>
+                            </svg>
+                            <figcaption class="fig-cap">Figure 10.1: Domain name → DNS → IP address</figcaption>
+                        </figure>
+                        <div class="example-box">
+                            <div class="ex-title">Example: common records</div>
+                            <strong>A</strong> – example.com → 203.0.113.5<br>
+                            <strong>CNAME</strong> – www.example.com → example.com<br>
+                            <strong>MX</strong> – mail server for email
+                        </div>
+                        <h3>10.4 Configuring DNS Settings</h3>
+                        <p>At your registrar or host you edit <strong>DNS settings</strong>: add an A record pointing
+                            your domain to your hosting server’s IP, and often a CNAME for <code>www</code>. Changes can
+                            take a few minutes to 48 hours to spread (DNS propagation).</p>
+                        <ul>
+                            <li>10.1 What is a Domain Name?</li>
+                            <li>10.2 Domain Registration</li>
+                            <li>10.3 Understanding DNS</li>
+                            <li>10.4 Configuring DNS Settings</li>
+                        </ul>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the purpose of a domain name?</li>
+                                <li>What does DNS do? Name one type of DNS record.</li>
+                                <li>What is DNS propagation and why might you have to wait after changing DNS?</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Use an online “DNS lookup” tool. Enter a domain (e.g. google.com) and
+                                note the A record (IP) and any MX records shown. Write one sentence on what each tells
+                                you.</p>
+                        </div>
+                    </article>
+
+                    <!-- Chapter 11 -->
+                    <article id="ch11" class="chapter-card">
+                        <h2><span class="ch-num">11</span> Deploying a Website <span class="ch-hours">(03 Hours)</span>
+                        </h2>
+                        <p><strong>Learning focus:</strong> Upload files (FTP or File Manager), set permissions,
+                            backups, and basic database setup.</p>
+                        <h3>11.1 Uploading Website Files</h3>
+                        <div class="info-box">To put your site live, you upload your HTML, CSS, JS, and other files to
+                            the hosting server. The main folder is often <code>public_html</code> or <code>www</code>.
+                            Use <strong>FTP</strong> (File Transfer Protocol) with a client like FileZilla, or the
+                            host’s <strong>File Manager</strong> in the browser.</div>
+                        <p><strong>FTP</strong>: Connect with host, username, password, and port (often 21). Upload to
+                            the correct folder; keep the same folder structure as on your computer. <strong>File
+                                Manager</strong>: Log into cPanel (or similar), open File Manager, go to
+                            <code>public_html</code>, and upload or create files there.</p>
+                        <ul>
+                            <li>FTP (client: FileZilla, etc.)</li>
+                            <li>File Manager (cPanel)</li>
+                        </ul>
+                        <h3>11.2 Basic Server Administration</h3>
+                        <p><strong>File permissions</strong>: Typically folders 755, files 644. Restrict sensitive files
+                            (e.g. config) so they are not readable by the public. <strong>Backups</strong>: Use cPanel
+                            backup or a plugin; keep regular copies of files and database off the server.
+                            <strong>Database setup</strong>: Create database and user in cPanel; note host, database
+                            name, username, password; use these in your app (e.g. WordPress, custom script).</p>
+                        <ul>
+                            <li>File permissions (755, 644)</li>
+                            <li>Backups</li>
+                            <li>Database setup</li>
+                        </ul>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+                            <ol>
+                                <li>What is the difference between uploading via FTP and using File Manager?</li>
+                                <li>Why are file permissions important? What are typical values for folders and files?
+                                </li>
+                                <li>List two things you should do before and after deploying a website.</li>
+                            </ol>
+                        </div>
+                        <div class="activity-box">
+                            <strong><i class="fas fa-pencil-alt me-1"></i> Practical</strong>
+                            <p class="mb-0 mt-1">Upload a simple HTML page to your hosting (via FTP or File Manager).
+                                Ensure the file is in <code>public_html</code> and open the site in a browser. Note any
+                                problems (e.g. wrong path, permission) and how you fixed them.</p>
+                        </div>
+                    </article>
+
+                </section>
+
+                <section class="practicals-section" aria-label="Practical assignments">
+                    <h2 class="module-title mt-5"><i class="fas fa-tools me-2"></i> Practical Chapters</h2>
+
+                    <article id="p1" class="practical-card">
+                        <h2><span class="ch-num">P1</span> Practical 01 – Website with HTML, CSS &amp; JavaScript</h2>
+                        <p><strong>Objective:</strong> Build a small multi-page or single-page website using only HTML,
+                            CSS, and JavaScript, with clear navigation and simple interactions.</p>
+                        <h3>Requirements</h3>
+                        <ul>
+                            <li><strong>HTML</strong> – Valid structure, semantic tags (header, nav, main, footer),
+                                links, images (with alt), lists or tables where suitable.</li>
+                            <li><strong>CSS</strong> – External stylesheet; layout (e.g. Flexbox or Grid), colours,
+                                fonts, and at least one media query for different screen sizes.</li>
+                            <li><strong>JavaScript</strong> – At least one interactive feature (e.g. button click, form
+                                validation, show/hide section, simple menu toggle).</li>
+                            <li><strong>Navigation &amp; interactions</strong> – Easy-to-use navigation between pages or
+                                sections; interactions should work and be clearly visible.</li>
+                        </ul>
+                        <h3>Suggested steps</h3>
+                        <ol>
+                            <li>Plan: 2–3 pages or sections (e.g. Home, About, Contact) and one or two interactions.
+                            </li>
+                            <li>Create the HTML structure for each page/section; add content and links.</li>
+                            <li>Create a single CSS file; style layout, typography, and make it responsive.</li>
+                            <li>Add JavaScript for your chosen interaction(s); test in the browser.</li>
+                            <li>Check links, images, and responsiveness on a small screen.</li>
+                        </ol>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Check your work</strong>
+                            <ol>
+                                <li>Does every page have a clear title and working navigation?</li>
+                                <li>Do all images have alt text? Does the layout work on a narrow screen?</li>
+                                <li>Can you describe what your JavaScript does and where it is used?</li>
+                            </ol>
+                        </div>
+                    </article>
+
+                    <article id="p2" class="practical-card">
+                        <h2><span class="ch-num">P2</span> Practical 02 – Website using Web Authoring Tool or CMS</h2>
+                        <p><strong>Objective:</strong> Create a website using a web authoring tool (e.g. Adobe
+                            Dreamweaver) or a Content Management System (e.g. WordPress, Joomla).</p>
+                        <h3>Requirements</h3>
+                        <ul>
+                            <li><strong>Web Authoring Tool</strong> – Use a tool such as Dreamweaver to design and build
+                                a multi-page site (templates, links, images, basic styling).</li>
+                            <li><strong>OR CMS</strong> – Install and use WordPress/Joomla (or similar): choose a theme,
+                                create pages, add content, menus, and at least one plugin or extension if required.</li>
+                        </ul>
+                        <h3>Suggested steps</h3>
+                        <ol>
+                            <li>Choose: authoring tool or CMS; install or open the software.</li>
+                            <li>Plan: site structure (e.g. Home, Services, About, Contact) and main content.</li>
+                            <li>Create pages and add text, images, and links; set up navigation/menus.</li>
+                            <li>Apply a consistent look (theme or template) and adjust if needed.</li>
+                            <li>Preview and test links and layout on different devices if possible.</li>
+                        </ol>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Check your work</strong>
+                            <ol>
+                                <li>Can you explain the advantage of using a CMS or authoring tool over hand-coding for
+                                    this site?</li>
+                                <li>Is the navigation clear and do all links work?</li>
+                            </ol>
+                        </div>
+                    </article>
+
+                    <article id="p3" class="practical-card">
+                        <h2><span class="ch-num">P3</span> Practical 03 – Host and Deploy Website</h2>
+                        <p><strong>Objective:</strong> Host the website you created (in P1 or P2), configure the domain
+                            (or subdomain), and deploy it so it is accessible on the internet.</p>
+                        <h3>Requirements</h3>
+                        <ul>
+                            <li><strong>Host the website</strong> – Use a hosting account (shared or free tier). Upload
+                                files via FTP or File Manager to the correct folder (e.g. <code>public_html</code>).
+                            </li>
+                            <li><strong>Configure domain</strong> – Point a domain (or subdomain) to your hosting using
+                                DNS (A record or CNAME as instructed by the host).</li>
+                            <li><strong>Deploy live</strong> – Ensure the site loads at the given URL; fix any path or
+                                permission issues. Optionally add SSL (HTTPS) if available.</li>
+                        </ul>
+                        <h3>Suggested steps</h3>
+                        <ol>
+                            <li>Get hosting and note: FTP/cPanel login, <code>public_html</code> path, and IP or
+                                nameservers.</li>
+                            <li>Upload your site files (or export/import if using CMS) and set file permissions if
+                                needed.</li>
+                            <li>In DNS, add A record (or CNAME) so your domain points to the host; wait for propagation.
+                            </li>
+                            <li>Open the site in a browser; test homepage, links, and images. Fix broken paths if any.
+                            </li>
+                            <li>Enable HTTPS in cPanel/host if offered; confirm the site works over https.</li>
+                        </ol>
+                        <div class="q-box">
+                            <strong><i class="fas fa-question-circle me-1"></i> Check your work</strong>
+                            <ol>
+                                <li>Can someone else open your site using the URL you configured?</li>
+                                <li>What DNS record did you use to point the domain to your host?</li>
+                                <li>What would you do next to keep the site secure and backed up?</li>
+                            </ol>
+                        </div>
+                    </article>
+
+                </section>
+
+                <footer class="page-footer" role="contentinfo">
+                    <p class="mb-0">Web Design – Module Notes | NVQ Level 5 ICT</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        var chapters = [
+            { id: "ch1", title: "Introduction to Web Design" },
+            { id: "ch2", title: "Wireframing and Prototyping" },
+            { id: "ch3", title: "Fundamentals of Web Technologies" },
+            { id: "ch4", title: "HTML" },
+            { id: "ch5", title: "CSS" },
+            { id: "ch6", title: "Front-End Development Tools" },
+            { id: "ch7", title: "JavaScript Fundamentals" },
+            { id: "ch8", title: "Front-End Frameworks & Libraries" },
+            { id: "ch9", title: "Website Hosting" },
+            { id: "ch10", title: "Domain Names and DNS" },
+            { id: "ch11", title: "Deploying a Website" },
+            { id: "p1", title: "HTML/CSS/JS Website" },
+            { id: "p2", title: "Web Authoring / CMS" },
+            { id: "p3", title: "Host & Deploy" }
+        ];
+        var list = document.getElementById("tocList");
+        if (list) {
+            chapters.forEach(function (c, i) {
+                var a = document.createElement("a"); a.href = "#" + c.id; a.setAttribute("title", c.title);
+                var num = c.id.indexOf("p") === 0 ? "P" + c.id.replace("p", "") : ("0" + c.id.replace("ch", "")).slice(-2);
+                a.innerHTML = "<span class=\"ch-num-side\">" + num + "</span><span class=\"ch-title-side\">" + c.title + "</span>";
+                list.appendChild(a);
+            });
+        }
+        var tocToggle = document.getElementById("tocToggle");
+        var tocSidebar = document.getElementById("tocSidebar");
+        if (tocToggle && tocSidebar) {
+            tocToggle.addEventListener("click", function () {
+                tocSidebar.classList.toggle("toc-open");
+                var open = tocSidebar.classList.contains("toc-open");
+                tocToggle.setAttribute("aria-expanded", open);
+                var chev = document.getElementById("tocChevron");
+                if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+            });
+        }
+        var tocList = document.getElementById("tocList");
+        if (tocList && tocSidebar) {
+            tocList.addEventListener("click", function (e) {
+                var link = e.target.closest("a");
+                if (link && link.getAttribute("href") && link.getAttribute("href").indexOf("#") === 0) {
+                    tocSidebar.classList.remove("toc-open");
+                    if (tocToggle) tocToggle.setAttribute("aria-expanded", "false");
+                    var chev = document.getElementById("tocChevron");
+                    if (chev) chev.style.transform = "rotate(0deg)";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

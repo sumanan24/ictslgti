@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training Plan - User Requirements for Software Solution</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 36px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h3 {
+      color: #1e40af;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .badge-pill {
+      border-radius: 50px;
+      padding-inline: 0.9rem;
+      padding-block: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .info-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 0.2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Week blocks styling */
+    .content-card-weeks {
+      background: #f3f4f6;
+    }
+
+    .week-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .week-card h4 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      padding: 0.7rem 1rem;
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: #ffffff;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .content-card-weeks h5 {
+      font-size: 1rem;
+      margin-top: 1.1rem;
+      margin-bottom: 0.4rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .content-card-weeks p,
+    .content-card-weeks ul {
+      margin-bottom: 0.75rem;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      display: block;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.95rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 700px;
+    }
+
+    table th {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-weight: 700;
+      border: 1px solid #e2e8f0;
+      padding: 0.9rem 0.75rem;
+      text-align: left;
+      color: #1e293b;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table td {
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      padding: 0.9rem 0.75rem;
+      background: white;
+    }
+
+    table tbody tr:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 28px;
+        font-size: 0.95rem;
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      .module-header {
+        padding: 1.75rem 0;
+        margin-bottom: 1.5rem;
+      }
+
+      .module-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .content-card {
+        padding: 1.4rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+      }
+
+      .week-card {
+        padding: 1.1rem 1.2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      table {
+        font-size: 0.85rem;
+        min-width: 720px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body {
+        font-size: 0.9rem;
+        padding-top: 20px;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      .content-card {
+        padding: 1.1rem;
+      }
+
+      .week-card {
+        padding: 1rem 1.05rem;
+      }
+
+      table {
+        font-size: 0.78rem;
+        min-width: 620px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="module-header">
+    <div class="container">
+      <h1>User Requirements for Software Solution</h1>
+      <p class="lead mb-2">
+        Module Code: <strong>K72T001M01</strong> / Level 05 &nbsp;|&nbsp;
+        Module Type: <strong>Compulsory</strong> &nbsp;|&nbsp;
+        Relevant Unit/s: <strong>K72T001U01</strong>
+      </p>
+      
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- General Objective -->
+    <div class="content-card">
+      <h3><i class="fas fa-bullseye text-primary"></i> General Objective</h3>
+      <p class="mb-1">
+        At the end of this module, students will be able to understand and describe business processes of selected
+        organizations, gather and analyse user requirements, and evaluate the feasibility of proposed software
+        solutions.
+      </p>
+    </div>
+
+    <!-- Specific Objectives -->
+    <div class="content-card">
+      <h3><i class="fas fa-graduation-cap text-primary"></i> Specific Objectives</h3>
+      <p>At the end of this module the student shall be able to:</p>
+      <ol>
+        <li>Explain the business processes of a selected domain.</li>
+        <li>Prepare and present a requirement analysis report of the selected project.</li>
+        <li>Prepare and present a feasibility study report of the selected project.</li>
+      </ol>
+    </div>
+
+    <!-- Training Plan Table -->
+    <div class="content-card">
+      <h3><i class="fas fa-calendar-check text-primary"></i> Training Plan</h3>
+     
+
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+             
+              <th>Week No</th>
+              <th>Session (Hrs)</th>
+              <th>Tasks Expected to Cover</th>
+              <th>Resources (Consumables) Required</th>
+              <th>Special Services if Needed</th>
+              <th>Assessment Methods &amp; Guidance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+           
+              <td>Week 1</td>
+              <td>4.5</td>
+              <td>Introduction to business and business process concepts; define key terms; discuss real-life examples</td>
+              <td>Whiteboard, markers, slides</td>
+              <td>Multimedia projector</td>
+              <td>Oral questioning, short written exercise</td>
+            </tr>
+            <tr>
+              
+              <td>Week 2</td>
+              <td>4.5</td>
+              <td>Explain components of business process (IPO); classify process types</td>
+              <td>Slides, chart papers</td>
+              <td>Projector</td>
+              <td>Worksheet evaluation</td>
+            </tr>
+            <tr>
+              
+              <td>Week 3</td>
+              <td>4.5</td>
+              <td>Study business domains and compare processes across industries</td>
+              <td>Case study handouts</td>
+              <td>Smart board</td>
+              <td>Group discussion assessment</td>
+            </tr>
+            <tr>
+             
+              <td>Week 4</td>
+              <td>4.5</td>
+              <td>Identify stakeholders; compare current and proposed systems</td>
+              <td>Comparison templates</td>
+              <td>Computer lab (if needed)</td>
+              <td>Written comparison task</td>
+            </tr>
+            <tr>
+              
+              <td>Week 5</td>
+              <td>4.5</td>
+              <td>Study existing system structure and workflow</td>
+              <td>Case documents</td>
+              <td>Projector</td>
+              <td>Workflow diagram submission</td>
+            </tr>
+            <tr>
+             
+              <td>Week 6</td>
+              <td>4.5</td>
+              <td>Analyze workflow and identify bottlenecks</td>
+              <td>Chart paper, markers</td>
+              <td>&mdash;</td>
+              <td>Practical evaluation</td>
+            </tr>
+            <tr>
+              
+              <td>Week 7</td>
+              <td>4.5</td>
+              <td>Identify operational problems; document weaknesses</td>
+              <td>Worksheets</td>
+              <td>&mdash;</td>
+              <td>Case study report</td>
+            </tr>
+            <tr>
+             
+              <td>Week 8</td>
+              <td>4.5</td>
+              <td>Recommend process improvements; present redesigned model</td>
+              <td>Presentation sheets</td>
+              <td>Smart board</td>
+              <td>Presentation evaluation</td>
+            </tr>
+            <tr>
+             
+              <td>Week 9</td>
+              <td>4.5</td>
+              <td>Introduction to requirements; explain importance</td>
+              <td>Slides</td>
+              <td>&mdash;</td>
+              <td>Quiz</td>
+            </tr>
+            <tr>
+              
+              <td>Week 10</td>
+              <td>4.5</td>
+              <td>Identify and write functional requirements</td>
+              <td>Requirement templates</td>
+              <td>Computer lab</td>
+              <td>Written requirement exercise</td>
+            </tr>
+            <tr>
+              
+              <td>Week 11</td>
+              <td>4.5</td>
+              <td>Identify non-functional requirements; classify examples</td>
+              <td>Worksheets</td>
+              <td>&mdash;</td>
+              <td>Classification worksheet</td>
+            </tr>
+            <tr>
+              
+              <td>Week 12</td>
+              <td>4.5</td>
+              <td>Conduct interview and questionnaire techniques (role play)</td>
+              <td>Sample questionnaires</td>
+              <td>Simulation setup</td>
+              <td>Observation checklist</td>
+            </tr>
+            <tr>
+              
+              <td>Week 13</td>
+              <td>4.5</td>
+              <td>Define project scope; establish boundaries</td>
+              <td>SRS template</td>
+              <td>Projector</td>
+              <td>Scope definition review</td>
+            </tr>
+            <tr>
+             
+              <td>Week 14</td>
+              <td>4.5</td>
+              <td>Structure and organize requirements</td>
+              <td>Computer lab</td>
+              <td>IT lab support</td>
+              <td>Draft evaluation</td>
+            </tr>
+            <tr>
+              
+              <td>Week 15</td>
+              <td>4.5</td>
+              <td>Validate requirements; identify gaps and conflicts</td>
+              <td>Case documents</td>
+              <td>&mdash;</td>
+              <td>Peer review assessment</td>
+            </tr>
+            <tr>
+              
+              <td>Week 16</td>
+              <td>4.5</td>
+              <td>Prepare SRS draft</td>
+              <td>Computer lab</td>
+              <td>IT lab support</td>
+              <td>SRS submission</td>
+            </tr>
+            <tr>
+              
+              <td>Week 17</td>
+              <td>4.5</td>
+              <td>Introduction to feasibility; explain types</td>
+              <td>Slides</td>
+              <td>&mdash;</td>
+              <td>Oral questioning</td>
+            </tr>
+            <tr>
+             
+              <td>Week 18</td>
+              <td>4.5</td>
+              <td>Conduct technical and economic feasibility analysis; cost-benefit calculation</td>
+              <td>Calculator, templates</td>
+              <td>&mdash;</td>
+              <td>Calculation exercise</td>
+            </tr>
+            <tr>
+              
+              <td>Week 19</td>
+              <td>4.5</td>
+              <td>Prepare feasibility report and finalize documentation</td>
+              <td>Computer lab</td>
+              <td>IT lab support</td>
+              <td>Report submission</td>
+            </tr>
+            <tr>
+              
+              <td>Week 20</td>
+              <td>4.5</td>
+              <td>Student presentations; module revision; final preparation</td>
+              <td>Presentation equipment</td>
+              <td>Smart board</td>
+              <td>Presentation marking + feedback</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detailed Week-wise Lesson Plans -->
+    <div class="content-card content-card-weeks">
+      <h3><i class="fas fa-calendar-alt text-primary"></i> Lesson Plans</h3>
+
+      <!-- Week 1 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 1 &ndash; Introduction to Business Process</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To introduce the concept of business processes and their importance in organizations.</li>
+        <li>To develop foundational understanding of structured business activities.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Define business process.</li>
+          <li>Explain purpose of business operations.</li>
+          <li>Identify real-life business process examples.</li>
+          <li>Describe the Input&ndash;Process&ndash;Output (IPO) model.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Introduction to Business</td>
+                <td>Explain concept of business with simple local examples; elicit prior knowledge.</td>
+                <td>Participate in discussion; share examples; respond to questions.</td>
+                <td>Whiteboard</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Business Process Definition</td>
+                <td>Provide structured explanation of business process; highlight key terms.</td>
+                <td>Listen and take notes; clarify doubts.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>IPO Model</td>
+                <td>Demonstrate IPO model using one or two processes.</td>
+                <td>Identify input, process and output elements from examples.</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Case Example</td>
+                <td>Present a short case scenario.</td>
+                <td>Analyze the example in pairs; map steps as a process.</td>
+                <td>Case sheet</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Summary</td>
+                <td>Review main points; clarify doubts.</td>
+                <td>Ask questions; summarise key learning.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Oral questioning and a short written task on key definitions and IPO model.</p>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 2 &ndash; Components &amp; Types of Business Processes</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To deepen understanding of business process structure.</li>
+        <li>To enable classification of different types of processes.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify components of business processes.</li>
+          <li>Differentiate core, support and management processes.</li>
+          <li>Analyze practical process examples from industry.</li>
+          <li>Create a simple business process diagram.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Process Components</td>
+                <td>Explain main components (inputs, activities, outputs, controls, resources).</td>
+                <td>Listen, take notes, respond to questions.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Process Types</td>
+                <td>Provide examples of core, support and management processes.</td>
+                <td>Participate in discussion; classify examples.</td>
+                <td>Whiteboard</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Industry Examples</td>
+                <td>Present short industry cases (e.g. supermarket, telecom).</td>
+                <td>Analyze cases and identify process types.</td>
+                <td>Case sheet</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Diagram Practice</td>
+                <td>Guide students to draw a simple process diagram.</td>
+                <td>Individually draw and label diagrams.</td>
+                <td>Paper</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Review</td>
+                <td>Provide feedback on diagrams; recap key points.</td>
+                <td>Participate in quick review.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Evaluation of individual process diagrams and brief explanation of process type.</p>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 3 &ndash; Business Domains and Cross-industry Comparison</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To introduce common business domains.</li>
+        <li>To compare how business processes differ across industries.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify key business domains (e.g. telecom, health, retail, education).</li>
+          <li>Describe typical core processes in each selected domain.</li>
+          <li>Compare similarities and differences of processes across domains.</li>
+          <li>Document findings from group analysis.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Introduction to Business Domains</td>
+                <td>Introduce concept of domains and give examples.</td>
+                <td>Listen and note key domains.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Domain Overviews</td>
+                <td>Describe core processes in 2&ndash;3 domains.</td>
+                <td>Ask questions; relate to prior knowledge.</td>
+                <td>Case study handouts</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Group Comparison Activity</td>
+                <td>Assign groups different domains; guide comparison.</td>
+                <td>Analyze and complete comparison worksheet.</td>
+                <td>Worksheets, smart board</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Group Presentations</td>
+                <td>Facilitate brief group presentations.</td>
+                <td>Present group findings.</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Summary</td>
+                <td>Highlight main similarities/differences; conclude.</td>
+                <td>Summarise in individual notes.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Group discussion assessment using a simple rubric and short reflective note.</p>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 4 &ndash; Stakeholders and Current vs Proposed Systems</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To understand stakeholder roles in business processes.</li>
+        <li>To compare current and proposed system views.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify key stakeholders in a selected business process.</li>
+          <li>Classify stakeholders as internal or external.</li>
+          <li>Describe main features of current and proposed systems.</li>
+          <li>Compare advantages and limitations of both systems.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Stakeholder Identification</td>
+                <td>Explain term stakeholder; show examples.</td>
+                <td>List stakeholders for known systems.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Internal vs External Stakeholders</td>
+                <td>Demonstrate simple classification.</td>
+                <td>Classify sample stakeholders.</td>
+                <td>Whiteboard</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Current System Overview</td>
+                <td>Present a current system description.</td>
+                <td>Note current flows and issues.</td>
+                <td>Comparison templates</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Proposed System Overview</td>
+                <td>Explain improvements in proposed system.</td>
+                <td>Identify expected benefits.</td>
+                <td>Slides, lab (if needed)</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Comparison</td>
+                <td>Guide students to fill comparison table.</td>
+                <td>Complete written comparison.</td>
+                <td>Templates</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Written comparison task between current and proposed systems.</p>
+      </div>
+
+      <!-- Week 5 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 5 &ndash; Existing System Structure and Workflow</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To study the structure and workflow of an existing system.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify major components of an existing system.</li>
+          <li>Describe the sequence of activities in the workflow.</li>
+          <li>Draw a basic workflow diagram.</li>
+          <li>Highlight key documents and data flows.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Overview of Existing System</td>
+                <td>Introduce selected case and system context.</td>
+                <td>Listen; ask clarification questions.</td>
+                <td>Case documents</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Workflow Steps</td>
+                <td>Walk through step-by-step workflow.</td>
+                <td>Note sequence of activities.</td>
+                <td>Projector</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Workflow Diagram</td>
+                <td>Demonstrate drawing a workflow diagram.</td>
+                <td>Draw individual workflow diagrams.</td>
+                <td>Board, paper</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Documents &amp; Data</td>
+                <td>Show key forms/reports in the workflow.</td>
+                <td>Identify where documents are used.</td>
+                <td>Sample documents</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Recap</td>
+                <td>Summarise main workflow and components.</td>
+                <td>Review diagrams with peers.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Submission of a workflow diagram for the given existing system.</p>
+      </div>
+
+      <!-- Week 6 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 6 &ndash; Workflow Analysis and Bottlenecks</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To analyze workflows and identify bottlenecks and inefficiencies.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Review a given workflow diagram.</li>
+          <li>Locate points of delay, duplication and error.</li>
+          <li>Suggest initial ideas to reduce bottlenecks.</li>
+          <li>Document findings using simple notation.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Review of Workflow</td>
+                <td>Recap last week&rsquo;s workflow diagrams.</td>
+                <td>Revisit and refine own diagram.</td>
+                <td>Charts</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>What is a Bottleneck?</td>
+                <td>Explain bottlenecks, delays and queues.</td>
+                <td>Identify examples in sample workflows.</td>
+                <td>Slides, chart paper</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Group Analysis</td>
+                <td>Assign each group a workflow to analyze.</td>
+                <td>Mark bottlenecks on chart paper.</td>
+                <td>Markers, chart paper</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Improvement Ideas</td>
+                <td>Facilitate brainstorming of improvement ideas.</td>
+                <td>Propose and record suggestions.</td>
+                <td>Whiteboard</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Sharing &amp; Wrap-up</td>
+                <td>Invite quick group reports.</td>
+                <td>Share main findings.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Practical evaluation of group analysis charts identifying bottlenecks.</p>
+      </div>
+
+      <!-- Week 7 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 7 &ndash; Operational Problems and Weaknesses</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To identify operational problems and document weaknesses in existing processes.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>List common operational problems in a given case.</li>
+          <li>Categorise issues (e.g. time, cost, quality, customer service).</li>
+          <li>Write clear problem statements.</li>
+          <li>Prepare a short case-based problem report.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Types of Operational Problems</td>
+                <td>Explain categories of operational problems.</td>
+                <td>Give examples from experience.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Case Study Reading</td>
+                <td>Provide detailed case document.</td>
+                <td>Read and highlight problem areas.</td>
+                <td>Worksheets</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Problem Identification</td>
+                <td>Guide students to extract issues.</td>
+                <td>List and categorise problems.</td>
+                <td>Board, worksheet</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Writing Problem Statements</td>
+                <td>Demonstrate good problem statement format.</td>
+                <td>Write individual statements.</td>
+                <td>Samples, board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Recap</td>
+                <td>Summarise key problems and categories.</td>
+                <td>Clarify doubts.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Case study report focusing on identified operational problems.</p>
+      </div>
+
+      <!-- Week 8 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 8 &ndash; Process Improvement and Redesigned Model</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To recommend process improvements and present a redesigned process model.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Transform identified problems into improvement objectives.</li>
+          <li>Design a simplified improved workflow.</li>
+          <li>Prepare a visual presentation of the redesigned process.</li>
+          <li>Justify improvements based on benefits.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>From Problems to Improvements</td>
+                <td>Show example of converting problems to objectives.</td>
+                <td>Draft initial improvement ideas.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Redesigned Workflow</td>
+                <td>Demonstrate simplified improved process.</td>
+                <td>Sketch improved workflow in groups.</td>
+                <td>Presentation sheets</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Preparing Presentation</td>
+                <td>Guide structure of short presentation.</td>
+                <td>Prepare group charts/slides.</td>
+                <td>Smart board, markers</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Group Presentations</td>
+                <td>Facilitate and time presentations.</td>
+                <td>Present redesigned models.</td>
+                <td>Smart board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Feedback &amp; Wrap-up</td>
+                <td>Provide feedback; highlight good practices.</td>
+                <td>Note feedback.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Presentation evaluation based on clarity of redesigned model and justification.</p>
+      </div>
+
+      <!-- Week 9 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 9 &ndash; Introduction to Requirements</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To introduce the concept and importance of software requirements.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Define &ldquo;requirement&rdquo; in the context of software systems.</li>
+          <li>Explain why clear requirements are important.</li>
+          <li>Identify common problems caused by poor requirements.</li>
+          <li>Relate requirements to earlier business process study.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>What are Requirements?</td>
+                <td>Provide formal and simple definitions.</td>
+                <td>Note definitions; ask questions.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Importance of Requirements</td>
+                <td>Explain link to project success or failure.</td>
+                <td>Discuss examples.</td>
+                <td>Case vignettes</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Common Requirement Issues</td>
+                <td>Illustrate typical issues (unclear, incomplete, changing).</td>
+                <td>Identify issues in sample statements.</td>
+                <td>Handouts</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Link to Business Processes</td>
+                <td>Show how requirements originate from processes.</td>
+                <td>Map a few requirements from earlier processes.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Quiz Preparation</td>
+                <td>Review main points; set expectations for quiz.</td>
+                <td>Clarify doubts.</td>
+                <td>Slides</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Short quiz on key concepts and importance of requirements.</p>
+      </div>
+
+      <!-- Week 10 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 10 &ndash; Functional Requirements</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To enable students to identify and write functional requirements.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Explain what is meant by a functional requirement.</li>
+          <li>Recognise good and poor examples of functional requirements.</li>
+          <li>Write functional requirements for a simple system.</li>
+          <li>Use a requirement template correctly.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Definition &amp; Examples</td>
+                <td>Explain and show examples of functional requirements.</td>
+                <td>Discuss and classify examples.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Template Introduction</td>
+                <td>Demonstrate requirement template usage.</td>
+                <td>Follow along using template.</td>
+                <td>Requirement templates, PC</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Writing Requirements (Lab)</td>
+                <td>Guide students to write requirements for sample system.</td>
+                <td>Individually write requirements.</td>
+                <td>Computer lab</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Peer Review</td>
+                <td>Show basic peer review checklist.</td>
+                <td>Review partner&rsquo;s requirements.</td>
+                <td>Checklist</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Wrap-up</td>
+                <td>Highlight common issues and corrections.</td>
+                <td>Revise their own work.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Written requirement exercise using the template.</p>
+      </div>
+
+      <!-- Week 11 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 11 &ndash; Non-functional Requirements</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To understand non-functional requirements and their categories.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Define non-functional requirements.</li>
+          <li>Classify examples into performance, security, usability, reliability etc.</li>
+          <li>Write sample non-functional requirement statements.</li>
+          <li>Differentiate clearly between functional and non-functional requirements.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Introduction to NFRs</td>
+                <td>Explain concept with simple examples.</td>
+                <td>Note key terms.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Categories</td>
+                <td>Present main NFR categories.</td>
+                <td>Classify given examples.</td>
+                <td>Worksheets</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Writing NFRs</td>
+                <td>Demonstrate writing NFRs with measurable criteria.</td>
+                <td>Write individual sample NFRs.</td>
+                <td>Board, worksheets</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Comparison with FRs</td>
+                <td>Contrast NFRs and FRs using pairs.</td>
+                <td>Label examples as FR or NFR.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Review</td>
+                <td>Summarise categories and examples.</td>
+                <td>Clarify doubts.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Classification worksheet and short written NFR examples.</p>
+      </div>
+
+      <!-- Week 12 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 12 &ndash; Interviews and Questionnaires (Role Play)</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To practise interview and questionnaire techniques for requirements gathering.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>List basic principles of good interviewing.</li>
+          <li>Prepare simple interview questions and questionnaire items.</li>
+          <li>Conduct role-play interviews.</li>
+          <li>Record and reflect on findings.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Interview Basics</td>
+                <td>Explain do&rsquo;s and don&rsquo;ts of interviews.</td>
+                <td>Note guidelines.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Question Design</td>
+                <td>Show examples of good questions.</td>
+                <td>Draft own questions.</td>
+                <td>Sample questionnaires</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Role Play &ndash; Round 1</td>
+                <td>Organise pairs/groups and monitor.</td>
+                <td>Conduct interviews in role play.</td>
+                <td>Simulation setup</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Role Play &ndash; Round 2</td>
+                <td>Rotate roles (analyst/customer).</td>
+                <td>Repeat interviews and record findings.</td>
+                <td>Observation sheets</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Debrief</td>
+                <td>Discuss what went well and challenges.</td>
+                <td>Share reflections.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Observation checklist and brief reflection on role play.</p>
+      </div>
+
+      <!-- Week 13 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 13 &ndash; Project Scope and Boundaries</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To define and document project scope and boundaries.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Explain the concept of project scope.</li>
+          <li>Identify in-scope and out-of-scope items.</li>
+          <li>Use SRS template sections related to scope.</li>
+          <li>Draft a basic scope statement.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Scope Concepts</td>
+                <td>Introduce scope, boundaries and constraints.</td>
+                <td>Take notes; ask questions.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Scope in SRS</td>
+                <td>Show SRS template sections on scope.</td>
+                <td>Review sample SRS excerpts.</td>
+                <td>SRS template, projector</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Identifying Scope</td>
+                <td>Guide students for a chosen project.</td>
+                <td>List in-scope and out-of-scope items.</td>
+                <td>Worksheet</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Writing Scope Statement</td>
+                <td>Model writing a concise statement.</td>
+                <td>Write own scope statement.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Review</td>
+                <td>Collect a few examples and discuss.</td>
+                <td>Self-review using guidance.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Scope definition review using SRS-based checklist.</p>
+      </div>
+
+      <!-- Week 14 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 14 &ndash; Structuring and Organising Requirements</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To structure gathered requirements into a clear, organised document.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Group related requirements.</li>
+          <li>Apply numbering and headings consistent with SRS.</li>
+          <li>Use computer tools to format requirement lists.</li>
+          <li>Prepare a draft organised requirement set.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Organisation Principles</td>
+                <td>Explain grouping and prioritising requirements.</td>
+                <td>Note principles.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Using Headings &amp; Numbering</td>
+                <td>Demonstrate SRS-style numbering.</td>
+                <td>Practise on sample list.</td>
+                <td>Example SRS</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Lab &ndash; Structuring</td>
+                <td>Guide students in computer lab.</td>
+                <td>Organise own requirement set.</td>
+                <td>Computer lab, IT support</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Checking Consistency</td>
+                <td>Show quick checks for duplicates and gaps.</td>
+                <td>Apply checks to their draft.</td>
+                <td>Checklist</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Discussion</td>
+                <td>Take questions; share tips.</td>
+                <td>Clarify issues.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Draft requirements document checked for basic structure and organisation.</p>
+      </div>
+
+      <!-- Week 15 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 15 &ndash; Requirement Validation, Gaps and Conflicts</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To validate requirements and identify gaps or conflicts.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Explain the purpose of requirement validation.</li>
+          <li>Check requirements for completeness and consistency.</li>
+          <li>Identify conflicting or ambiguous requirements.</li>
+          <li>Use peer review to improve requirement quality.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Validation Concepts</td>
+                <td>Explain validation vs verification.</td>
+                <td>Note definitions.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Checklist-based Review</td>
+                <td>Introduce validation checklist.</td>
+                <td>Apply checklist to sample.</td>
+                <td>Case documents</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Peer Review</td>
+                <td>Organise pair/group reviews.</td>
+                <td>Review peers&rsquo; requirements.</td>
+                <td>Review forms</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Gaps &amp; Conflicts</td>
+                <td>Discuss examples of gaps and conflicts.</td>
+                <td>Identify in their own documents.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Reflection</td>
+                <td>Summarise findings.</td>
+                <td>Note improvements to make.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Peer review assessment of requirement set, focusing on gaps and conflicts.</p>
+      </div>
+
+      <!-- Week 16 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 16 &ndash; SRS Draft Preparation</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To prepare a structured SRS draft for the selected project.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Combine scope, functional and non-functional requirements into one document.</li>
+          <li>Follow SRS template headings and sequence.</li>
+          <li>Format document clearly in the computer lab.</li>
+          <li>Prepare draft ready for teacher feedback.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>SRS Structure Recap</td>
+                <td>Briefly revisit SRS template.</td>
+                <td>Review own sections.</td>
+                <td>SRS template</td>
+              </tr>
+              <tr>
+                <td>60&ndash;180</td>
+                <td>Lab &ndash; Drafting</td>
+                <td>Support students while drafting.</td>
+                <td>Type and compile SRS in lab.</td>
+                <td>Computer lab, IT support</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Self-check</td>
+                <td>Share a simple self-check list.</td>
+                <td>Apply checklist and adjust draft.</td>
+                <td>Checklist</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Submission Guidance</td>
+                <td>Explain submission expectations.</td>
+                <td>Clarify any doubts.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Submission of SRS draft for marking.</p>
+      </div>
+
+      <!-- Week 17 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 17 &ndash; Feasibility Study Introduction and Types</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To introduce feasibility study and its main types.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Define feasibility study.</li>
+          <li>Identify major types (technical, economic, practical, organisational, legal).</li>
+          <li>Explain role of feasibility in project approval.</li>
+          <li>Relate feasibility to the chosen project.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Feasibility Concepts</td>
+                <td>Explain definition and purpose.</td>
+                <td>Note key ideas.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Types Overview</td>
+                <td>Describe each type with examples.</td>
+                <td>Match examples to types.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Project Approval Process</td>
+                <td>Show how feasibility fits into life cycle.</td>
+                <td>Draw simple project approval flow.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Application to Case</td>
+                <td>Use chosen project as example.</td>
+                <td>Identify which feasibility types are most critical.</td>
+                <td>Case sheet</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Q&amp;A</td>
+                <td>Conduct short oral questioning.</td>
+                <td>Respond and clarify.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Oral questioning on feasibility concepts and types.</p>
+      </div>
+
+      <!-- Week 18 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 18 &ndash; Technical and Economic Feasibility, Cost&ndash;Benefit</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To conduct basic technical and economic feasibility analysis including cost&ndash;benefit calculations.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify technical requirements and constraints.</li>
+          <li>List major cost and benefit items.</li>
+          <li>Use simple formulas to calculate cost&ndash;benefit and payback.</li>
+          <li>Interpret the results for decision-making.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Technical Feasibility</td>
+                <td>Discuss hardware, software and skill requirements.</td>
+                <td>List items for project.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;120</td>
+                <td>Cost and Benefit Items</td>
+                <td>Explain one-time vs recurring costs; tangible benefits.</td>
+                <td>Identify items from a case.</td>
+                <td>Templates</td>
+              </tr>
+              <tr>
+                <td>120&ndash;180</td>
+                <td>Cost&ndash;Benefit Calculation</td>
+                <td>Demonstrate simple calculations.</td>
+                <td>Calculate using given figures.</td>
+                <td>Calculator, templates</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Interpretation</td>
+                <td>Discuss what the numbers mean.</td>
+                <td>Write short conclusion.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Review</td>
+                <td>Check answers and clarify.</td>
+                <td>Correct any errors.</td>
+                <td>Board</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Calculation exercise worksheet on cost&ndash;benefit examples.</p>
+      </div>
+
+      <!-- Week 19 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 19 &ndash; Feasibility Report and Documentation</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To prepare a feasibility report and finalise documentation.</li>
+      </ul>
+
+        <h5>Specific Objectives</h5>
+        <ul>
+          <li>Identify main sections of a feasibility report.</li>
+          <li>Summarise findings from technical and economic analysis.</li>
+          <li>Write a recommendation based on evidence.</li>
+          <li>Format report using computer tools.</li>
+        </ul>
+
+       
+        <div class="table-wrapper">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th>Time (min)</th>
+                <th>Topic</th>
+                <th>Teacher Activity</th>
+                <th>Student Activity</th>
+                <th>Aids</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0&ndash;60</td>
+                <td>Report Structure</td>
+                <td>Explain typical structure of feasibility report.</td>
+                <td>Note headings.</td>
+                <td>Slides</td>
+              </tr>
+              <tr>
+                <td>60&ndash;180</td>
+                <td>Lab &ndash; Drafting Report</td>
+                <td>Guide students in computer lab.</td>
+                <td>Prepare report sections.</td>
+                <td>Computer lab, IT support</td>
+              </tr>
+              <tr>
+                <td>180&ndash;240</td>
+                <td>Writing Recommendation</td>
+                <td>Model sample recommendation.</td>
+                <td>Write recommendation for project.</td>
+                <td>Board</td>
+              </tr>
+              <tr>
+                <td>240&ndash;270</td>
+                <td>Final Checks</td>
+                <td>Highlight common mistakes to avoid.</td>
+                <td>Check and finalise document.</td>
+                <td>Checklist</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h5>Assessment</h5>
+        <p>Submission of feasibility report.</p>
+      </div>
+
+      <!-- Week 20 -->
+      <div class="week-card">
+        <h4 class="mt-3">Week 20 &ndash; Presentations, Revision and Final Preparation</h4>
+        <h5>General Objective</h5>
+      <ul>
+        <li>To present project work, revise key module content and prepare for final assessment.</li>
+      </ul>
+
+      <h5>Specific Objectives</h5>
+      <ul>
+        <li>Present requirement and feasibility work to peers and teacher.</li>
+        <li>Receive and respond to feedback.</li>
+        <li>Review key concepts from entire module.</li>
+        <li>Clarify doubts before final assessments.</li>
+      </ul>
+
+     
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>Time (min)</th>
+              <th>Topic</th>
+              <th>Teacher Activity</th>
+              <th>Student Activity</th>
+              <th>Aids</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0&ndash;180</td>
+              <td>Student Presentations</td>
+              <td>Coordinate presentations; assess using rubric.</td>
+              <td>Present project work.</td>
+              <td>Presentation equipment, smart board</td>
+            </tr>
+            <tr>
+              <td>180&ndash;240</td>
+              <td>Module Revision</td>
+              <td>Summarise main topics from all weeks.</td>
+              <td>Participate in revision activities.</td>
+              <td>Slides, board</td>
+            </tr>
+            <tr>
+              <td>240&ndash;270</td>
+              <td>Final Preparation</td>
+              <td>Answer final questions; give exam tips.</td>
+              <td>Clarify remaining doubts.</td>
+              <td>Board</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h5>Assessment</h5>
+      <p>Presentation marking with feedback and guidance for final written exam.</p>
+
+    </div>
+
+    <!-- Assessment Plan -->
+    <div class="content-card">
+      <h3><i class="fas fa-clipboard-check text-primary"></i> Assessment Plan</h3>
+      <p class="text-muted">
+        Assessment for this module is based on continuous coursework and an end-of-module written examination. The two
+        main assignments directly support preparation of the user requirement document and feasibility study report.
+      </p>
+
+      <h5 class="mt-3">Continuous Assessment</h5>
+      <div class="table-wrapper">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Description</th>
+              <th>Timing (Weeks)</th>
+              <th>Evidence / Product</th>
+              <th>Related Learning Outcome/s</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Assignment 01</strong></td>
+              <td>Prepare a user requirement document for a selected business organization, based on the requirement
+                gathering and analysis carried out in the module.</td>
+              <td>Weeks 9 &ndash; 16</td>
+              <td>Completed user requirement document (URD)</td>
+              <td>LO2 &ndash; Prepare and present requirement analysis report of the selected project</td>
+            </tr>
+            <tr>
+              <td><strong>Assignment 02</strong></td>
+              <td>Prepare a feasibility study report for a given industry-specific scenario, including technical,
+                economic and other relevant feasibility aspects.</td>
+              <td>Weeks 17 &ndash; 19</td>
+              <td>Feasibility study report</td>
+              <td>LO3 &ndash; Prepare and present feasibility study report of the selected project</td>
+            </tr>
+            <tr>
+              <td><strong>Ongoing class work</strong></td>
+              <td>Short quizzes, worksheets, practical exercises, group discussions and presentations used during weeks
+                1&ndash;20 (e.g. IPO activities, diagrams, case analyses).</td>
+              <td>Throughout module</td>
+              <td>Completed worksheets, diagrams, quiz scripts, presentation slides</td>
+              <td>LO1, LO2, LO3 (reinforcement across the module)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+            <p class="text-center"><strong>Department of Information and Communication Technology - SLGTI</strong></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

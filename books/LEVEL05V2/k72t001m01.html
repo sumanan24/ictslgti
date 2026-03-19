@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Requirements for Software Solution - K72T001M01</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --dark-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --lighter-blue: #60a5fa;
+            --lightest-blue: #dbeafe;
+            --bg-blue: #eff6ff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --border-blue: #bfdbfe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-blue);
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding-top: 70px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Cover Page */
+        .cover-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cover-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cover-info p {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .content-section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+
+        .chapter-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--lightest-blue);
+        }
+
+        .section-title {
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .subsection-title {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hour-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--lightest-blue), var(--border-blue));
+            color: var(--dark-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Typography */
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Highlight Boxes */
+        .info-box {
+            background: var(--lightest-blue);
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-box h5 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .example-box {
+            background: #f0f9ff;
+            border: 2px solid var(--border-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example-box h5 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, var(--lightest-blue), white);
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .key-point h5 {
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Tables */
+        .table-responsive {
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table th {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        table tr:hover {
+            background: var(--lightest-blue);
+        }
+
+        /* Images/Diagrams Placeholder */
+        .diagram-placeholder {
+            background: var(--lightest-blue);
+            border: 2px dashed var(--primary-blue);
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-blue);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--dark-blue);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cover-title {
+                font-size: 2rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .content-section {
+                padding: 40px 15px;
+            }
+
+            .chapter-card {
+                padding: 1.5rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .subsection-title {
+                font-size: 1.1rem;
+            }
+
+            p, li {
+                font-size: 1rem;
+            }
+
+            .cover-info {
+                padding: 1.5rem;
+            }
+
+            .cover-info p {
+                font-size: 0.95rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table th,
+            table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cover-title {
+                font-size: 1.75rem;
+            }
+
+            .cover-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .chapter-card {
+                padding: 1.25rem;
+            }
+
+            .chapter-title {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+                padding-left: 0.75rem;
+            }
+
+            ul, ol {
+                margin-left: 1.5rem;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,
+            .back-to-top {
+                display: none;
+            }
+
+            body {
+                padding-top: 0;
+            }
+
+            .chapter-card {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-book"></i> User Requirements for Software Solution</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: 1px solid white; color: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cover">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapter1">Chapter 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapter2">Chapter 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapter3">Chapter 3</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapter4">Chapter 4</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chapter5">Chapter 5</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cover Section -->
+    <section id="cover" class="cover-section">
+        <div class="cover-content">
+            <h1 class="cover-title"><i class="fas fa-clipboard-list"></i> User Requirements for Software Solution</h1>
+            <p class="cover-subtitle">Module K72T001M01 - Level 05</p>
+            <div class="cover-info">
+                <p><strong>Module Code:</strong> K72T001M01</p>
+                <p><strong>Module Type:</strong> Compulsory</p>
+                <p><strong>Relevant Unit:</strong> K72T001U01</p>
+                <p><strong>Pre-Requisites:</strong> Relevant NVQ Level 4 Qualification or GCE (A/L) or equivalent qualification</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content-section">
+        <!-- Chapter 1: Introduction to Business Processes -->
+        <div id="chapter1" class="chapter-card">
+            <h2 class="chapter-title"><i class="fas fa-building"></i> Chapter 1: Introduction to Various Business Processes</h2>
+            <span class="hour-badge"><i class="fas fa-clock"></i> 15 Hours</span>
+
+            <div class="section-title">1.1 Business Domains</div>
+            <p>
+                Business domains represent distinct sectors of economic activity, each with unique characteristics, operational requirements, and stakeholder needs. Understanding various business domains is fundamental to identifying appropriate software solutions that can enhance operational efficiency, improve customer service, and drive business growth.
+            </p>
+
+            <div class="subsection-title">1.1.1 Telecommunication</div>
+            <p>
+                The telecommunication industry encompasses companies that provide communication services through various technologies including voice, data, and video transmission. This domain includes mobile network operators, internet service providers, satellite communication companies, and telecommunications equipment manufacturers.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>High Volume Transactions:</strong> Telecommunication companies handle millions of calls, messages, and data transfers daily, requiring robust systems capable of processing massive volumes of real-time data.</li>
+                    <li><strong>Network Management:</strong> Continuous monitoring and management of network infrastructure, including towers, switches, routers, and transmission equipment.</li>
+                    <li><strong>Customer Relationship Management:</strong> Managing millions of subscribers with diverse service plans, billing cycles, and support requirements.</li>
+                    <li><strong>Billing and Revenue Management:</strong> Complex billing systems that handle prepaid, postpaid, and hybrid payment models with real-time balance updates.</li>
+                    <li><strong>Regulatory Compliance:</strong> Adherence to government regulations regarding data privacy, network security, and service quality standards.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Billing Systems:</strong> Automated billing platforms that calculate charges based on usage, service plans, and promotional offers.</li>
+                    <li><strong>Network Monitoring Tools:</strong> Real-time dashboards that track network performance, identify bottlenecks, and predict potential failures.</li>
+                    <li><strong>Customer Self-Service Portals:</strong> Web and mobile applications allowing customers to manage accounts, pay bills, and access support.</li>
+                    <li><strong>Inventory Management:</strong> Systems tracking SIM cards, devices, network equipment, and spare parts across multiple locations.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.1.2 Hotels and Hospitality</div>
+            <p>
+                The hospitality industry focuses on providing accommodation, food services, and entertainment to travelers and guests. This domain includes hotels, resorts, restaurants, travel agencies, and event management companies.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>Reservation Management:</strong> Handling bookings from multiple channels including direct bookings, online travel agencies (OTAs), and walk-in customers.</li>
+                    <li><strong>Room Inventory:</strong> Real-time tracking of room availability, room status (clean, occupied, maintenance), and room types.</li>
+                    <li><strong>Guest Services:</strong> Managing guest requests, housekeeping schedules, concierge services, and special accommodations.</li>
+                    <li><strong>Revenue Management:</strong> Dynamic pricing strategies based on demand, seasonality, and market conditions to maximize revenue.</li>
+                    <li><strong>Point of Sale (POS):</strong> Integrated systems for restaurants, bars, spas, and other hotel amenities.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Property Management Systems (PMS):</strong> Centralized systems managing reservations, check-ins, check-outs, and guest information.</li>
+                    <li><strong>Channel Management:</strong> Synchronizing room availability and rates across multiple booking platforms in real-time.</li>
+                    <li><strong>Customer Relationship Management:</strong> Tracking guest preferences, booking history, and loyalty program points.</li>
+                    <li><strong>Housekeeping Management:</strong> Mobile applications for housekeeping staff to update room status and report maintenance issues.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.1.3 Healthcare</div>
+            <p>
+                The healthcare domain encompasses hospitals, clinics, pharmacies, laboratories, and medical equipment suppliers. This industry requires high levels of accuracy, security, and compliance with medical regulations.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>Patient Records Management:</strong> Maintaining comprehensive medical histories, treatment records, and diagnostic results with strict privacy requirements.</li>
+                    <li><strong>Appointment Scheduling:</strong> Managing patient appointments, doctor availability, and resource allocation (operating rooms, equipment).</li>
+                    <li><strong>Billing and Insurance:</strong> Processing medical bills, insurance claims, and payment transactions.</li>
+                    <li><strong>Pharmacy Management:</strong> Tracking medication inventory, prescriptions, drug interactions, and expiration dates.</li>
+                    <li><strong>Regulatory Compliance:</strong> Adherence to healthcare regulations such as HIPAA (Health Insurance Portability and Accountability Act) and local medical standards.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Electronic Health Records (EHR):</strong> Digital systems storing patient medical information accessible to authorized healthcare providers.</li>
+                    <li><strong>Hospital Information Systems (HIS):</strong> Integrated platforms managing all hospital operations including admissions, billing, and clinical workflows.</li>
+                    <li><strong>Laboratory Information Systems:</strong> Managing test orders, results, and quality control in medical laboratories.</li>
+                    <li><strong>Telemedicine Platforms:</strong> Enabling remote consultations between patients and healthcare providers.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.1.4 Transport and Logistics</div>
+            <p>
+                The transport and logistics industry involves the movement of goods and people from one location to another. This includes freight companies, courier services, public transportation, and logistics management companies.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>Fleet Management:</strong> Tracking vehicles, routes, fuel consumption, and maintenance schedules.</li>
+                    <li><strong>Route Optimization:</strong> Determining the most efficient routes to minimize time, fuel costs, and distance traveled.</li>
+                    <li><strong>Package Tracking:</strong> Real-time tracking of shipments from origin to destination with status updates.</li>
+                    <li><strong>Warehouse Management:</strong> Inventory control, storage optimization, and order fulfillment processes.</li>
+                    <li><strong>Documentation:</strong> Managing shipping documents, customs clearance, and delivery confirmations.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Transport Management Systems (TMS):</strong> Planning, executing, and optimizing the physical movement of goods.</li>
+                    <li><strong>GPS Tracking Systems:</strong> Real-time vehicle location tracking with geofencing and route monitoring.</li>
+                    <li><strong>Warehouse Management Systems (WMS):</strong> Optimizing warehouse operations including receiving, storage, picking, and shipping.</li>
+                    <li><strong>Customer Portals:</strong> Allowing customers to book services, track shipments, and access delivery confirmations.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.1.5 Supermarkets and Retail</div>
+            <p>
+                The retail and supermarket industry involves selling goods directly to consumers. This domain includes supermarkets, convenience stores, department stores, and e-commerce platforms.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>Inventory Management:</strong> Tracking stock levels, managing suppliers, and ensuring product availability across multiple locations.</li>
+                    <li><strong>Point of Sale (POS):</strong> Processing customer transactions, handling payments, and generating receipts.</li>
+                    <li><strong>Pricing Management:</strong> Dynamic pricing, promotions, discounts, and loyalty program integration.</li>
+                    <li><strong>Supply Chain:</strong> Managing relationships with suppliers, purchase orders, and delivery schedules.</li>
+                    <li><strong>Customer Analytics:</strong> Analyzing purchasing patterns, customer preferences, and sales trends.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Retail Management Systems:</strong> Integrated platforms managing inventory, sales, and customer data.</li>
+                    <li><strong>E-commerce Platforms:</strong> Online stores with shopping carts, payment processing, and order management.</li>
+                    <li><strong>Inventory Optimization Tools:</strong> Systems using algorithms to predict demand and optimize stock levels.</li>
+                    <li><strong>Customer Loyalty Programs:</strong> Applications tracking customer purchases and rewarding repeat customers.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.1.6 Education</div>
+            <p>
+                The education sector includes schools, colleges, universities, training institutes, and online learning platforms. This domain focuses on delivering knowledge and managing educational processes.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-info-circle"></i> Key Characteristics:</h5>
+                <ul>
+                    <li><strong>Student Information Management:</strong> Maintaining student records, academic history, attendance, and performance data.</li>
+                    <li><strong>Course Management:</strong> Managing curriculum, course schedules, class assignments, and learning materials.</li>
+                    <li><strong>Assessment and Grading:</strong> Creating and grading assignments, exams, and tracking student progress.</li>
+                    <li><strong>Resource Management:</strong> Allocating classrooms, laboratories, equipment, and library resources.</li>
+                    <li><strong>Communication:</strong> Facilitating communication between students, teachers, parents, and administrators.</li>
+                </ul>
+            </div>
+            <div class="example-box">
+                <h5><i class="fas fa-lightbulb"></i> Example Software Solutions:</h5>
+                <ul>
+                    <li><strong>Learning Management Systems (LMS):</strong> Platforms for delivering online courses, managing assignments, and tracking student progress.</li>
+                    <li><strong>Student Information Systems (SIS):</strong> Comprehensive databases managing all aspects of student information and academic records.</li>
+                    <li><strong>Virtual Classrooms:</strong> Video conferencing and collaboration tools for remote learning.</li>
+                    <li><strong>Library Management Systems:</strong> Managing book catalogs, borrowing, returns, and digital resources.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">1.2 Involvement of Stakeholders in Business Processes</div>
+            <p>
+                Stakeholders are individuals, groups, or organizations that have an interest in or are affected by a business process. Understanding stakeholder involvement is crucial for designing software solutions that meet the needs of all parties involved in business operations.
+            </p>
+
+            <div class="subsection-title">1.2.1 Types of Stakeholders</div>
+            
+            <div class="key-point">
+                <h5><i class="fas fa-users"></i> Primary Stakeholders</h5>
+                <p>These are directly involved in the business process and have a direct impact on or are directly impacted by the process outcomes.</p>
+                <ul>
+                    <li><strong>Customers:</strong> End users who purchase products or services. Their needs drive business requirements and software features.</li>
+                    <li><strong>Employees:</strong> Staff members who execute business processes daily. They require user-friendly interfaces and efficient workflows.</li>
+                    <li><strong>Management:</strong> Decision-makers who need reporting, analytics, and oversight capabilities.</li>
+                    <li><strong>Suppliers:</strong> External parties providing goods or services. Integration with supplier systems may be necessary.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-handshake"></i> Secondary Stakeholders</h5>
+                <p>These have an indirect interest in the business process but may be affected by its outcomes.</p>
+                <ul>
+                    <li><strong>Regulatory Bodies:</strong> Government agencies requiring compliance with laws and regulations.</li>
+                    <li><strong>Investors:</strong> Financial stakeholders interested in business performance and profitability.</li>
+                    <li><strong>Community:</strong> Local communities affected by business operations.</li>
+                    <li><strong>Competitors:</strong> Other businesses in the same industry that may be affected by market changes.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.2.2 Stakeholder Roles in Business Processes</div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stakeholder Type</th>
+                            <th>Role in Process</th>
+                            <th>Software Requirements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Process Initiators</strong></td>
+                            <td>Start business processes (e.g., customers placing orders)</td>
+                            <td>User-friendly interfaces, mobile accessibility, clear workflows</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Process Executors</strong></td>
+                            <td>Perform process activities (e.g., employees processing orders)</td>
+                            <td>Efficient task management, role-based access, automation tools</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Process Approvers</strong></td>
+                            <td>Review and approve process steps (e.g., managers approving expenses)</td>
+                            <td>Notification systems, approval workflows, audit trails</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Process Monitors</strong></td>
+                            <td>Oversee process performance (e.g., quality assurance teams)</td>
+                            <td>Reporting dashboards, analytics, real-time monitoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Process Beneficiaries</strong></td>
+                            <td>Receive process outputs (e.g., customers receiving products)</td>
+                            <td>Status tracking, communication channels, feedback mechanisms</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subsection-title">1.2.3 Stakeholder Analysis for Software Development</div>
+            <p>
+                Before developing software solutions, it is essential to conduct stakeholder analysis to understand:
+            </p>
+            <ul>
+                <li><strong>Stakeholder Interests:</strong> What each stakeholder group wants to achieve from the software solution.</li>
+                <li><strong>Stakeholder Influence:</strong> The power each stakeholder has to affect project success or failure.</li>
+                <li><strong>Stakeholder Requirements:</strong> Specific functional and non-functional requirements from each stakeholder group.</li>
+                <li><strong>Communication Needs:</strong> How and when to communicate with different stakeholders during development.</li>
+                <li><strong>Change Management:</strong> How stakeholders will adapt to new software systems and processes.</li>
+            </ul>
+
+            <div class="section-title">1.3 Software Solutions to Improve Business Functions</div>
+            <p>
+                Software solutions can significantly enhance business operations by automating manual processes, improving data accuracy, enabling real-time decision-making, and enhancing customer experiences. Understanding how software can improve business functions is essential for identifying opportunities for digital transformation.
+            </p>
+
+            <div class="subsection-title">1.3.1 Automation of Manual Processes</div>
+            <p>
+                Many business processes involve repetitive, time-consuming manual tasks that can be automated through software solutions. Automation reduces human error, increases processing speed, and allows employees to focus on higher-value activities.
+            </p>
+            <div class="example-box">
+                <h5><i class="fas fa-cogs"></i> Examples of Process Automation:</h5>
+                <ul>
+                    <li><strong>Data Entry Automation:</strong> Software can automatically extract data from documents, forms, or emails and populate databases without manual input.</li>
+                    <li><strong>Report Generation:</strong> Automated systems can generate scheduled reports, eliminating the need for manual data compilation and formatting.</li>
+                    <li><strong>Invoice Processing:</strong> Automated invoice matching, approval workflows, and payment processing reduce manual accounting tasks.</li>
+                    <li><strong>Inventory Reordering:</strong> Systems can automatically generate purchase orders when stock levels fall below predefined thresholds.</li>
+                    <li><strong>Email Responses:</strong> Automated email systems can handle common customer inquiries, routing complex issues to human agents.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.3.2 Data Management and Analytics</div>
+            <p>
+                Modern businesses generate vast amounts of data. Software solutions enable effective data collection, storage, analysis, and visualization, providing insights that drive informed decision-making.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-database"></i> Data Management Benefits:</h5>
+                <ul>
+                    <li><strong>Centralized Data Storage:</strong> All business data stored in one location, accessible to authorized users from anywhere.</li>
+                    <li><strong>Data Integrity:</strong> Validation rules and constraints ensure data accuracy and consistency.</li>
+                    <li><strong>Historical Tracking:</strong> Maintaining audit trails and version history for compliance and analysis.</li>
+                    <li><strong>Real-time Analytics:</strong> Dashboards and reports providing up-to-date business metrics and KPIs.</li>
+                    <li><strong>Predictive Analytics:</strong> Using historical data to forecast trends, demand, and potential issues.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.3.3 Enhanced Communication and Collaboration</div>
+            <p>
+                Software solutions facilitate better communication and collaboration among employees, departments, and external stakeholders, breaking down silos and improving organizational efficiency.
+            </p>
+            <div class="example-box">
+                <h5><i class="fas fa-comments"></i> Communication Solutions:</h5>
+                <ul>
+                    <li><strong>Internal Messaging Platforms:</strong> Instant messaging, video conferencing, and collaboration tools for team communication.</li>
+                    <li><strong>Project Management Tools:</strong> Platforms for task assignment, progress tracking, and team coordination.</li>
+                    <li><strong>Document Collaboration:</strong> Cloud-based systems allowing multiple users to edit documents simultaneously.</li>
+                    <li><strong>Customer Communication:</strong> CRM systems tracking all customer interactions across multiple channels.</li>
+                    <li><strong>Notification Systems:</strong> Automated alerts for important events, deadlines, and process updates.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.3.4 Customer Experience Enhancement</div>
+            <p>
+                Software solutions can significantly improve customer satisfaction by providing faster service, personalized experiences, and convenient self-service options.
+            </p>
+            <div class="key-point">
+                <h5><i class="fas fa-smile"></i> Customer Experience Improvements:</h5>
+                <ul>
+                    <li><strong>Self-Service Portals:</strong> Customers can access information, make purchases, and resolve issues without contacting support.</li>
+                    <li><strong>Personalization:</strong> Systems that remember customer preferences and provide tailored recommendations.</li>
+                    <li><strong>Multi-Channel Support:</strong> Consistent service experience across web, mobile, phone, and in-person channels.</li>
+                    <li><strong>Faster Response Times:</strong> Automated systems providing immediate responses to common queries.</li>
+                    <li><strong>Loyalty Programs:</strong> Digital systems tracking and rewarding customer loyalty.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.3.5 Compliance and Risk Management</div>
+            <p>
+                Software solutions help organizations comply with regulations, manage risks, and maintain security standards through automated controls, monitoring, and reporting.
+            </p>
+            <div class="info-box">
+                <h5><i class="fas fa-shield-alt"></i> Compliance Features:</h5>
+                <ul>
+                    <li><strong>Audit Trails:</strong> Automatic logging of all system activities for compliance verification.</li>
+                    <li><strong>Access Controls:</strong> Role-based permissions ensuring only authorized users access sensitive data.</li>
+                    <li><strong>Data Encryption:</strong> Protecting sensitive information from unauthorized access.</li>
+                    <li><strong>Regulatory Reporting:</strong> Automated generation of reports required by regulatory bodies.</li>
+                    <li><strong>Risk Monitoring:</strong> Systems that detect anomalies and potential security threats.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">1.3.6 Scalability and Growth Support</div>
+            <p>
+                Well-designed software solutions can scale with business growth, accommodating increased transaction volumes, additional users, and expanded operations without requiring complete system replacement.
+            </p>
+            <div class="key-point">
+                <h5><i class="fas fa-chart-line"></i> Scalability Benefits:</h5>
+                <ul>
+                    <li><strong>Cloud-Based Solutions:</strong> Easily scalable infrastructure that grows with business needs.</li>
+                    <li><strong>Modular Architecture:</strong> Systems designed to add new features and modules without disrupting existing operations.</li>
+                    <li><strong>Multi-Location Support:</strong> Software that can manage operations across multiple branches or locations.</li>
+                    <li><strong>Integration Capabilities:</strong> Systems that can connect with other software solutions as business needs evolve.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chapter 2: Study of Business Processes -->
+        <div id="chapter2" class="chapter-card">
+            <h2 class="chapter-title"><i class="fas fa-search"></i> Chapter 2: Study of Business Processes</h2>
+            <span class="hour-badge"><i class="fas fa-clock"></i> 15 Hours</span>
+
+            <div class="section-title">2.1 Study Current System/Processes</div>
+            <p>
+                Before designing new software solutions, it is essential to thoroughly understand existing business processes and systems. This study provides the foundation for identifying improvement opportunities, understanding user needs, and ensuring that new solutions integrate seamlessly with current operations.
+            </p>
+
+            <div class="subsection-title">2.1.1 Objectives of Studying Current Systems</div>
+            <p>
+                The primary objectives of studying current systems include:
+            </p>
+            <ul>
+                <li><strong>Understanding Current Workflows:</strong> Documenting how business processes currently operate, including all steps, decision points, and handoffs between departments or individuals.</li>
+                <li><strong>Identifying Pain Points:</strong> Discovering inefficiencies, bottlenecks, errors, and areas where current processes fail to meet business needs.</li>
+                <li><strong>Documenting Requirements:</strong> Capturing functional requirements that must be preserved in new systems and identifying new requirements.</li>
+                <li><strong>Assessing Technology:</strong> Evaluating existing hardware, software, and infrastructure to understand integration requirements and constraints.</li>
+                <li><strong>Understanding User Needs:</strong> Learning how current users interact with systems and what features they value or find problematic.</li>
+                <li><strong>Risk Assessment:</strong> Identifying risks associated with current processes and systems that new solutions should address.</li>
+            </ul>
+
+            <div class="subsection-title">2.1.2 Methods for Studying Current Systems</div>
+            
+            <div class="key-point">
+                <h5><i class="fas fa-file-alt"></i> Document Review</h5>
+                <p>Reviewing existing documentation provides valuable insights into system design, business rules, and operational procedures.</p>
+                <ul>
+                    <li><strong>System Documentation:</strong> Technical manuals, user guides, and system architecture documents.</li>
+                    <li><strong>Process Documentation:</strong> Standard operating procedures (SOPs), workflow diagrams, and process maps.</li>
+                    <li><strong>Business Documents:</strong> Forms, reports, invoices, and other documents used in daily operations.</li>
+                    <li><strong>Historical Records:</strong> Past project documentation, change requests, and system modification records.</li>
+                    <li><strong>Regulatory Documents:</strong> Compliance requirements, audit reports, and regulatory filings.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-user-friends"></i> Interviews</h5>
+                <p>Conducting interviews with key stakeholders provides qualitative insights into how systems are actually used and perceived.</p>
+                <ul>
+                    <li><strong>Structured Interviews:</strong> Pre-planned questions ensuring consistent information gathering across all interviewees.</li>
+                    <li><strong>Unstructured Interviews:</strong> Open-ended conversations allowing stakeholders to share insights and concerns freely.</li>
+                    <li><strong>Semi-Structured Interviews:</strong> Combination of planned questions and flexible follow-up discussions.</li>
+                    <li><strong>Group Interviews:</strong> Focus groups bringing together multiple stakeholders to discuss processes and identify consensus.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-eye"></i> Observation</h5>
+                <p>Direct observation of users performing their daily tasks reveals actual workflows, workarounds, and issues not documented elsewhere.</p>
+                <ul>
+                    <li><strong>Passive Observation:</strong> Watching users work without interference to understand natural workflows.</li>
+                    <li><strong>Active Observation:</strong> Asking questions during observation to clarify actions and motivations.</li>
+                    <li><strong>Contextual Inquiry:</strong> Observing users in their actual work environment to understand context and constraints.</li>
+                    <li><strong>Task Analysis:</strong> Breaking down complex tasks into steps to understand detailed workflows.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-clipboard-list"></i> Surveys and Questionnaires</h5>
+                <p>Surveys enable gathering quantitative data from large numbers of stakeholders efficiently.</p>
+                <ul>
+                    <li><strong>Online Surveys:</strong> Web-based questionnaires reaching many respondents quickly.</li>
+                    <li><strong>Paper Surveys:</strong> Traditional questionnaires for stakeholders without easy internet access.</li>
+                    <li><strong>Rating Scales:</strong> Likert scales measuring satisfaction, importance, or frequency of issues.</li>
+                    <li><strong>Multiple Choice Questions:</strong> Structured questions with predefined answer options.</li>
+                    <li><strong>Open-Ended Questions:</strong> Allowing respondents to provide detailed feedback in their own words.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">2.1.3 Documentation Techniques</div>
+            <p>
+                Effective documentation of current systems requires various techniques to capture different aspects of business processes.
+            </p>
+
+            <div class="info-box">
+                <h5><i class="fas fa-sitemap"></i> Process Mapping</h5>
+                <p>Visual representations of business processes showing:</p>
+                <ul>
+                    <li><strong>Flowcharts:</strong> Step-by-step representation of process flows with decision points and branches.</li>
+                    <li><strong>Swimlane Diagrams:</strong> Processes showing responsibilities of different departments or roles.</li>
+                    <li><strong>Business Process Model and Notation (BPMN):</strong> Standardized notation for modeling business processes.</li>
+                    <li><strong>Value Stream Maps:</strong> Identifying value-adding and non-value-adding activities in processes.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h5><i class="fas fa-table"></i> Data Flow Diagrams (DFD)</h5>
+                <p>Illustrating how data moves through systems:</p>
+                <ul>
+                    <li><strong>Level 0 (Context Diagram):</strong> High-level view showing the system and its interactions with external entities.</li>
+                    <li><strong>Level 1 DFD:</strong> Breaking down the system into major processes and data flows.</li>
+                    <li><strong>Level 2+ DFD:</strong> Further decomposition of processes into detailed sub-processes.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-list"></i> Use Cases</h5>
+                <p>Describing interactions between users (actors) and systems:</p>
+                <ul>
+                    <li><strong>Use Case Diagrams:</strong> Visual representation of actors and use cases.</li>
+                    <li><strong>Use Case Narratives:</strong> Detailed written descriptions of use cases including preconditions, main flow, alternative flows, and postconditions.</li>
+                    <li><strong>User Stories:</strong> Simple descriptions of features from the user's perspective.</li>
+                </ul>
+            </div>
+
+            <div class="section-title">2.2 Roles of Stakeholders</div>
+            <p>
+                Understanding stakeholder roles is crucial for designing software solutions that support each stakeholder's responsibilities and interactions within business processes. Different stakeholders have different needs, permissions, and expectations from software systems.
+            </p>
+
+            <div class="subsection-title">2.2.1 Internal Stakeholders</div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stakeholder Role</th>
+                            <th>Responsibilities</th>
+                            <th>Software Needs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Executive Management</strong></td>
+                            <td>Strategic decision-making, business oversight, resource allocation</td>
+                            <td>Executive dashboards, high-level reports, strategic analytics, KPI monitoring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Department Managers</strong></td>
+                            <td>Departmental operations, team management, performance monitoring</td>
+                            <td>Departmental reports, team performance metrics, resource planning tools</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Supervisors</strong></td>
+                            <td>Daily operations oversight, staff coordination, quality control</td>
+                            <td>Real-time monitoring, task assignment, approval workflows, exception handling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operational Staff</strong></td>
+                            <td>Executing daily tasks, data entry, customer interaction</td>
+                            <td>User-friendly interfaces, task management, data entry forms, quick access to information</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IT Staff</strong></td>
+                            <td>System maintenance, technical support, system administration</td>
+                            <td>Administration tools, system monitoring, configuration management, troubleshooting tools</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Finance/Accounting</strong></td>
+                            <td>Financial management, billing, reporting, compliance</td>
+                            <td>Financial reporting, billing systems, audit trails, integration with accounting software</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Human Resources</strong></td>
+                            <td>Employee management, payroll, recruitment, training</td>
+                            <td>HRIS systems, employee databases, payroll integration, performance management</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subsection-title">2.2.2 External Stakeholders</div>
+            
+            <div class="info-box">
+                <h5><i class="fas fa-users"></i> Customer Roles</h5>
+                <ul>
+                    <li><strong>End Users:</strong> Individuals who use products or services. Need intuitive interfaces, self-service options, and support channels.</li>
+                    <li><strong>Business Customers:</strong> Organizations purchasing products or services. Require account management, bulk ordering, and integration capabilities.</li>
+                    <li><strong>Prospects:</strong> Potential customers. Need information access, inquiry systems, and lead management.</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h5><i class="fas fa-truck"></i> Supplier/Vendor Roles</h5>
+                <ul>
+                    <li><strong>Product Suppliers:</strong> Companies providing goods. Need purchase order systems, inventory integration, and payment processing.</li>
+                    <li><strong>Service Providers:</strong> External service vendors. Require service request systems, scheduling tools, and performance tracking.</li>
+                    <li><strong>Technology Partners:</strong> Software and hardware vendors. Need integration capabilities and technical documentation access.</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <h5><i class="fas fa-gavel"></i> Regulatory and Compliance Stakeholders</h5>
+                <ul>
+                    <li><strong>Government Agencies:</strong> Regulatory bodies requiring compliance reporting and data access for audits.</li>
+                    <li><strong>Industry Regulators:</strong> Sector-specific regulatory bodies with compliance requirements.</li>
+                    <li><strong>Certification Bodies:</strong> Organizations providing certifications that require evidence of compliance.</li>
+                </ul>
+            </div>
+
+            <div class="subsection-title">2.2.3 Stakeholder Interaction Patterns</div>
+            <p>
+                Understanding how stakeholders interact with each other and with systems helps design effective workflows and communication channels.
+            </p>
+            <ul>
+                <li><strong>Sequential Interactions:</strong> Stakeholders perform tasks in a specific order, where one person's output becomes another's input.</li>
+                <li><strong>Parallel Interactions:</strong> Multiple stakeholders work simultaneously on different aspects of the same process.</li>
+                <li><strong>Collaborative Interactions:</strong> Stakeholders work together on shared tasks requiring coordination and communication.</li>
+                <li><strong>Approval Workflows:</strong> Hierarchical interactions where work requires approval from higher-level stakeholders.</li>
+                <li><strong>Customer-Service Interactions:</strong> Direct interactions between customers and service providers requiring real-time communication.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 3: Requirements Gathering -->
+    <div id="chapter3" class="chapter-card">
+        <h2 class="chapter-title"><i class="fas fa-clipboard-check"></i> Chapter 3: Requirements Gathering</h2>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 20 Hours</span>
+
+        <div class="section-title">3.1 Identify Requirements through Data Gathering Techniques</div>
+        <p>
+            Requirements gathering is a critical phase in software development where business analysts collect information about what the system should do from various stakeholders. Effective data gathering ensures that the software solution meets user needs and business objectives.
+        </p>
+
+        <div class="subsection-title">3.1.1 Document Review</div>
+        <p>
+            Document review involves analyzing existing documentation to understand current systems, processes, and business rules. This technique is particularly useful when stakeholders have limited availability or when historical context is needed.
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-info-circle"></i> Types of Documents to Review:</h5>
+            <ul>
+                <li><strong>Business Process Documents:</strong> Standard operating procedures (SOPs), workflow diagrams, process maps</li>
+                <li><strong>System Documentation:</strong> Technical manuals, user guides, system architecture documents</li>
+                <li><strong>Business Documents:</strong> Forms, reports, invoices, contracts, policy documents</li>
+                <li><strong>Historical Records:</strong> Past project documentation, change requests, incident reports</li>
+                <li><strong>Regulatory Documents:</strong> Compliance requirements, audit reports, regulatory filings</li>
+            </ul>
+        </div>
+        <div class="key-point">
+            <h5><i class="fas fa-check-circle"></i> Advantages of Document Review:</h5>
+            <ul>
+                <li>Provides historical context and background information</li>
+                <li>Less time-consuming than interviews for large groups</li>
+                <li>Can reveal implicit requirements not mentioned in conversations</li>
+                <li>Helps understand business rules and constraints</li>
+                <li>Useful for identifying data structures and relationships</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.1.2 Interviews</div>
+        <p>
+            Interviews are one-on-one or small group conversations with stakeholders to gather detailed, qualitative information about requirements, processes, and expectations.
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-comments"></i> Interview Types:</h5>
+            <ul>
+                <li><strong>Structured Interviews:</strong> Pre-planned questions ensuring consistent information gathering across all interviewees</li>
+                <li><strong>Unstructured Interviews:</strong> Open-ended conversations allowing stakeholders to share insights and concerns freely</li>
+                <li><strong>Semi-Structured Interviews:</strong> Combination of planned questions and flexible follow-up discussions</li>
+                <li><strong>Group Interviews:</strong> Focus groups bringing together multiple stakeholders to discuss processes and identify consensus</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h5><i class="fas fa-lightbulb"></i> Interview Best Practices:</h5>
+            <ul>
+                <li>Prepare questions in advance based on document review findings</li>
+                <li>Create a comfortable environment to encourage open communication</li>
+                <li>Listen actively and take comprehensive notes</li>
+                <li>Ask follow-up questions to clarify ambiguities</li>
+                <li>Summarize key points at the end to confirm understanding</li>
+                <li>Record interviews (with permission) for later reference</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.1.3 Questionnaires and Surveys</div>
+        <p>
+            Questionnaires enable gathering quantitative data from large numbers of stakeholders efficiently. They are particularly useful when you need standardized information from many respondents.
+        </p>
+        <div class="key-point">
+            <h5><i class="fas fa-clipboard-list"></i> Questionnaire Design Principles:</h5>
+            <ul>
+                <li><strong>Clear Questions:</strong> Use simple, unambiguous language</li>
+                <li><strong>Appropriate Question Types:</strong> Multiple choice, rating scales, yes/no, open-ended</li>
+                <li><strong>Logical Flow:</strong> Organize questions from general to specific</li>
+                <li><strong>Reasonable Length:</strong> Keep questionnaires concise to improve response rates</li>
+                <li><strong>Pilot Testing:</strong> Test with a small group before full distribution</li>
+            </ul>
+        </div>
+        <div class="example-box">
+            <h5><i class="fas fa-chart-bar"></i> When to Use Questionnaires:</h5>
+            <ul>
+                <li>Gathering information from many stakeholders simultaneously</li>
+                <li>Collecting standardized, quantitative data</li>
+                <li>Stakeholders are geographically dispersed</li>
+                <li>Time constraints prevent individual interviews</li>
+                <li>Anonymous feedback is needed for sensitive topics</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.1.4 Workshops</div>
+        <p>
+            Workshops are facilitated group sessions where multiple stakeholders collaborate to identify, discuss, and prioritize requirements. They are effective for building consensus and generating creative solutions.
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-users"></i> Workshop Benefits:</h5>
+            <ul>
+                <li>Encourages collaboration and team building</li>
+                <li>Builds consensus among stakeholders</li>
+                <li>Can generate creative solutions through brainstorming</li>
+                <li>Efficient use of stakeholder time</li>
+                <li>Allows immediate clarification of conflicting viewpoints</li>
+            </ul>
+        </div>
+        <div class="key-point">
+            <h5><i class="fas fa-tasks"></i> Workshop Facilitation Tips:</h5>
+            <ul>
+                <li>Set clear objectives and agenda beforehand</li>
+                <li>Use visual aids like whiteboards and sticky notes</li>
+                <li>Encourage participation from all attendees</li>
+                <li>Manage time effectively to cover all topics</li>
+                <li>Document decisions and action items in real-time</li>
+                <li>Follow up with meeting minutes and next steps</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.1.5 Observations</div>
+        <p>
+            Direct observation of users performing their daily tasks reveals actual workflows, workarounds, and issues not documented elsewhere. This technique provides context that interviews and documents cannot capture.
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-eye"></i> Observation Approaches:</h5>
+            <ul>
+                <li><strong>Passive Observation:</strong> Watching users work without interference to understand natural workflows</li>
+                <li><strong>Active Observation:</strong> Asking questions during observation to clarify actions and motivations</li>
+                <li><strong>Contextual Inquiry:</strong> Observing users in their actual work environment to understand context and constraints</li>
+                <li><strong>Task Analysis:</strong> Breaking down complex tasks into steps to understand detailed workflows</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h5><i class="fas fa-exclamation-triangle"></i> Observation Considerations:</h5>
+            <ul>
+                <li>Users may alter behavior when being observed (Hawthorne effect)</li>
+                <li>Requires permission and access to work environments</li>
+                <li>Can be time-consuming depending on process complexity</li>
+                <li>May need to observe multiple users to get complete picture</li>
+                <li>Document observations immediately while details are fresh</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.1.6 Prototypes</div>
+        <p>
+            Creating early versions or mockups of the system helps gather feedback and clarify requirements. Prototypes can range from simple sketches to interactive mockups.
+        </p>
+        <div class="key-point">
+            <h5><i class="fas fa-drafting-compass"></i> Prototype Types:</h5>
+            <ul>
+                <li><strong>Low-Fidelity Prototypes:</strong> Paper sketches, wireframes, storyboards - quick to create, easy to modify</li>
+                <li><strong>High-Fidelity Prototypes:</strong> Interactive mockups, working demos - closer to final product, more realistic</li>
+                <li><strong>Horizontal Prototypes:</strong> Show wide range of features at surface level</li>
+                <li><strong>Vertical Prototypes:</strong> Show deep functionality of specific features</li>
+            </ul>
+        </div>
+        <div class="example-box">
+            <h5><i class="fas fa-lightbulb"></i> Prototyping Benefits:</h5>
+            <ul>
+                <li>Helps users visualize the solution and provide concrete feedback</li>
+                <li>Encourages early feedback before significant development investment</li>
+                <li>Can reveal unstated requirements and usability issues</li>
+                <li>Facilitates communication between stakeholders and developers</li>
+                <li>Reduces risk of building the wrong solution</li>
+            </ul>
+        </div>
+
+        <div class="section-title">3.2 Recognize Present Workflow by Observing Existing Processes</div>
+        <p>
+            Understanding current workflows is essential for identifying requirements and potential improvements. Workflow observation helps analysts understand how business processes actually operate, which may differ from documented procedures.
+        </p>
+
+        <div class="subsection-title">3.2.1 Workflow Components</div>
+        <p>
+            A workflow consists of several key components that must be identified and documented:
+        </p>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Inputs</strong></td>
+                        <td>Resources, data, or materials that enter the process</td>
+                        <td>Customer order form, inventory data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activities</strong></td>
+                        <td>Tasks or steps performed in the process</td>
+                        <td>Validate order, check inventory, process payment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outputs</strong></td>
+                        <td>Results or deliverables produced</td>
+                        <td>Confirmed order, shipping notification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actors</strong></td>
+                        <td>People or systems performing activities</td>
+                        <td>Sales staff, inventory system, payment gateway</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Decisions</strong></td>
+                        <td>Points where choices are made</td>
+                        <td>Is inventory available? Is payment valid?</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flow</strong></td>
+                        <td>Sequence and relationships between activities</td>
+                        <td>Order → Validation → Inventory Check → Payment</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection-title">3.2.2 Workflow Documentation Techniques</div>
+        <p>
+            Workflows can be documented using various visual and textual techniques:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-sitemap"></i> Documentation Methods:</h5>
+            <ul>
+                <li><strong>Flowcharts:</strong> Visual representation of process flow with decision points and branches</li>
+                <li><strong>Swimlane Diagrams:</strong> Processes showing responsibilities of different departments or roles</li>
+                <li><strong>Business Process Model and Notation (BPMN):</strong> Standardized notation for modeling business processes</li>
+                <li><strong>Process Maps:</strong> High-level overview of processes showing major steps</li>
+                <li><strong>Narrative Descriptions:</strong> Written descriptions of processes in step-by-step format</li>
+            </ul>
+        </div>
+
+        <div class="section-title">3.3 Identify Source Documents from Present System</div>
+        <p>
+            Source documents are original records that provide evidence of business transactions or activities. Identifying these documents is crucial for understanding data requirements and business rules.
+        </p>
+
+        <div class="subsection-title">3.3.1 Types of Source Documents</div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document Type</th>
+                        <th>Purpose</th>
+                        <th>Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Transaction Documents</strong></td>
+                        <td>Record business transactions</td>
+                        <td>Invoices, receipts, purchase orders, delivery notes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reference Documents</strong></td>
+                        <td>Provide reference information</td>
+                        <td>Price lists, catalogs, manuals, code tables</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Authorization Documents</strong></td>
+                        <td>Provide approval or authorization</td>
+                        <td>Approval forms, authorization letters, signatures</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reporting Documents</strong></td>
+                        <td>Summarize information</td>
+                        <td>Reports, statements, summaries, dashboards</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Master Data Documents</strong></td>
+                        <td>Define core business entities</td>
+                        <td>Customer records, product catalogs, employee files</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="subsection-title">3.3.2 Document Identification Process</div>
+        <p>
+            To identify source documents effectively:
+        </p>
+        <ul>
+            <li>Review existing system documentation and file structures</li>
+            <li>Observe processes and note documents used at each step</li>
+            <li>Interview users about documents they work with daily</li>
+            <li>Review physical and digital file systems and document storage</li>
+            <li>Analyze data entry points in current systems</li>
+            <li>Examine forms and templates used in business processes</li>
+        </ul>
+
+        <div class="section-title">3.4 Record Key Decisions from Client Meetings</div>
+        <p>
+            Recording key decisions from client meetings is essential for project success. Organizations typically have Standard Operating Procedures (SOP) for documenting meetings and decisions to ensure consistency and completeness.
+        </p>
+
+        <div class="subsection-title">3.4.1 Meeting Documentation Components</div>
+        <div class="key-point">
+            <h5><i class="fas fa-file-alt"></i> Essential Meeting Documentation Elements:</h5>
+            <ul>
+                <li><strong>Meeting Information:</strong> Date, time, location, attendees, meeting type</li>
+                <li><strong>Agenda Items:</strong> Topics discussed, questions raised</li>
+                <li><strong>Decisions Made:</strong> Key decisions and outcomes with rationale</li>
+                <li><strong>Action Items:</strong> Tasks assigned with owners and deadlines</li>
+                <li><strong>Next Steps:</strong> Follow-up activities and future meetings</li>
+                <li><strong>Open Issues:</strong> Items requiring further discussion or resolution</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.4.2 Decision Recording Format</div>
+        <p>
+            When recording decisions, include the following information:
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-check-circle"></i> Decision Record Structure:</h5>
+            <ul>
+                <li><strong>Decision Statement:</strong> Clear description of what was decided</li>
+                <li><strong>Rationale:</strong> Reasons for the decision</li>
+                <li><strong>Decision Maker:</strong> Who made the decision (individual or group)</li>
+                <li><strong>Date:</strong> When the decision was made</li>
+                <li><strong>Impact:</strong> How this decision affects the project or system</li>
+                <li><strong>Alternatives Considered:</strong> Other options that were discussed</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chapter 4: Requirements Documentation -->
+    <div id="chapter4" class="chapter-card">
+        <h2 class="chapter-title"><i class="fas fa-file-alt"></i> Chapter 4: Requirements Documentation</h2>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 15 Hours</span>
+
+        <div class="section-title">4.1 Document Requirement Specifications</div>
+        <p>
+            A Requirement Specification Document (RSD) is a formal document that describes the functional and non-functional requirements of a software system. It serves as a contract between stakeholders and developers, ensuring everyone understands what needs to be built.
+        </p>
+
+        <div class="subsection-title">4.1.1 Document Structure</div>
+        <p>
+            Requirement specification documents typically follow organizational standards and include the following sections:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-list"></i> Typical RSD Sections:</h5>
+            <ol>
+                <li><strong>Introduction:</strong> Purpose, scope, definitions, references, document overview</li>
+                <li><strong>Overall Description:</strong> Product perspective, functions, user characteristics, constraints</li>
+                <li><strong>System Features:</strong> Detailed functional requirements organized by feature</li>
+                <li><strong>External Interface Requirements:</strong> User interfaces, hardware interfaces, software interfaces, communication interfaces</li>
+                <li><strong>Non-functional Requirements:</strong> Performance, security, usability, reliability, scalability</li>
+                <li><strong>Appendices:</strong> Glossary, diagrams, data models, references, change history</li>
+            </ol>
+        </div>
+
+        <div class="subsection-title">4.1.2 Writing Good Requirements</div>
+        <p>
+            Requirements should be written clearly and precisely to avoid ambiguity and ensure successful implementation:
+        </p>
+        <div class="key-point">
+            <h5><i class="fas fa-check-double"></i> Requirements Quality Characteristics:</h5>
+            <ul>
+                <li><strong>Complete:</strong> All necessary information included, no missing details</li>
+                <li><strong>Clear:</strong> Unambiguous and easy to understand by all stakeholders</li>
+                <li><strong>Consistent:</strong> No contradictions between requirements</li>
+                <li><strong>Verifiable:</strong> Can be tested or validated to confirm implementation</li>
+                <li><strong>Traceable:</strong> Linked to source (business need) and design (implementation)</li>
+                <li><strong>Feasible:</strong> Can be implemented within project constraints</li>
+                <li><strong>Prioritized:</strong> Ranked by importance for planning and development</li>
+            </ul>
+        </div>
+
+        <div class="section-title">4.2 Highlight Functional and Non-functional Requirements</div>
+        <p>
+            Requirements are typically categorized into functional and non-functional requirements. Understanding and clearly distinguishing between these types is essential for effective requirement documentation.
+        </p>
+
+        <div class="subsection-title">4.2.1 Functional Requirements</div>
+        <p>
+            Functional requirements describe <strong>what</strong> the system should do - the functions, features, and behaviors it must provide to meet user needs and business objectives.
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-cogs"></i> Characteristics of Functional Requirements:</h5>
+            <ul>
+                <li>Describe system behavior and functions</li>
+                <li>Specify inputs and expected outputs</li>
+                <li>Define business rules and logic</li>
+                <li>Can be verified through testing</li>
+                <li>Answer the question: "What should the system do?"</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h5><i class="fas fa-lightbulb"></i> Example Functional Requirements:</h5>
+            <ul>
+                <li>The system shall allow users to create new accounts with email and password</li>
+                <li>The system shall validate user login credentials against the user database</li>
+                <li>The system shall generate monthly sales reports in PDF format</li>
+                <li>The system shall process payment transactions using secure payment gateway</li>
+                <li>The system shall send email notifications when orders are shipped</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">4.2.2 Non-functional Requirements</div>
+        <p>
+            Non-functional requirements describe <strong>how well</strong> the system should perform - quality attributes, constraints, and performance criteria that affect the user experience and system operation.
+        </p>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Performance</strong></td>
+                        <td>Speed and efficiency requirements</td>
+                        <td>Response time < 2 seconds, support 1000 concurrent users</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>Protection of data and systems</td>
+                        <td>Encryption, authentication, access control, audit trails</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usability</strong></td>
+                        <td>Ease of use and user experience</td>
+                        <td>Intuitive interface, learnability, accessibility standards</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reliability</strong></td>
+                        <td>System availability and fault tolerance</td>
+                        <td>99.9% uptime, error recovery, backup and restore</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scalability</strong></td>
+                        <td>Ability to handle growth</td>
+                        <td>User capacity, data volume, transaction throughput</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintainability</strong></td>
+                        <td>Ease of maintenance and updates</td>
+                        <td>Code quality, documentation, modular design</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Compatibility</strong></td>
+                        <td>Integration with other systems</td>
+                        <td>Browser support, operating system compatibility, API standards</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="key-point">
+            <h5><i class="fas fa-shield-alt"></i> Example Non-functional Requirements:</h5>
+            <ul>
+                <li>The system shall respond to user requests within 2 seconds under normal load</li>
+                <li>The system shall support 1000 concurrent users without performance degradation</li>
+                <li>The system shall encrypt all sensitive data using AES-256 encryption</li>
+                <li>The system shall be available 99.9% of the time (less than 8.76 hours downtime per year)</li>
+                <li>The system shall comply with WCAG 2.1 Level AA accessibility standards</li>
+            </ul>
+        </div>
+
+        <div class="section-title">4.3 Include Suggested Business Process Improvements</div>
+        <p>
+            While gathering requirements, analysts often identify opportunities to improve existing business processes. Documenting and presenting these improvements can add significant value to the project.
+        </p>
+
+        <div class="subsection-title">4.3.1 Identifying Improvement Opportunities</div>
+        <p>
+            Look for the following indicators of improvement opportunities:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-search"></i> Improvement Opportunity Indicators:</h5>
+            <ul>
+                <li><strong>Bottlenecks:</strong> Processes that slow down workflow or create delays</li>
+                <li><strong>Redundancies:</strong> Duplicate or unnecessary steps that waste resources</li>
+                <li><strong>Manual Processes:</strong> Tasks that could be automated to save time and reduce errors</li>
+                <li><strong>Error-prone Steps:</strong> Areas with frequent mistakes that could be prevented</li>
+                <li><strong>Inefficiencies:</strong> Processes that waste time, money, or resources</li>
+                <li><strong>Communication Gaps:</strong> Areas where information flow could be improved</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">4.3.2 Documenting Process Improvements</div>
+        <p>
+            When documenting improvements, include the following information:
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-file-signature"></i> Improvement Documentation Structure:</h5>
+            <ul>
+                <li><strong>Current State:</strong> Description of how the process currently works</li>
+                <li><strong>Issues Identified:</strong> Problems, inefficiencies, or pain points with current process</li>
+                <li><strong>Proposed Improvement:</strong> Detailed description of suggested change</li>
+                <li><strong>Benefits:</strong> Expected advantages (time savings, cost reduction, error reduction, etc.)</li>
+                <li><strong>Implementation Considerations:</strong> What needs to be done, resources required, timeline</li>
+                <li><strong>Risks and Mitigation:</strong> Potential challenges and how to address them</li>
+            </ul>
+        </div>
+        <div class="key-point">
+            <h5><i class="fas fa-chart-line"></i> Example Process Improvement:</h5>
+            <p><strong>Current State:</strong> Customer orders are manually entered into the system by staff members, who type information from paper forms.</p>
+            <p><strong>Issue:</strong> High error rate (approximately 5%), time-consuming (average 10 minutes per order), limited to business hours.</p>
+            <p><strong>Proposed Improvement:</strong> Implement online order form with automatic validation, real-time inventory checking, and integration with payment processing.</p>
+            <p><strong>Benefits:</strong> Reduced errors (estimated < 1%), faster processing (instant), 24/7 availability, reduced staff workload.</p>
+            <p><strong>Implementation:</strong> Develop web form, integrate with existing inventory and payment systems, provide staff training.</p>
+        </div>
+    </div>
+
+    <!-- Chapter 5: Requirement Analysis -->
+    <div id="chapter5" class="chapter-card">
+        <h2 class="chapter-title"><i class="fas fa-chart-line"></i> Chapter 5: Requirement Analysis</h2>
+        <span class="hour-badge"><i class="fas fa-clock"></i> 10 Hours</span>
+
+        <div class="section-title">5.1 Present and Explain Requirement Specifications to Client</div>
+        <p>
+            Presenting requirements effectively is crucial for ensuring client understanding and obtaining approval. The presentation should be clear, organized, and tailored to the audience's background and interests.
+        </p>
+
+        <div class="subsection-title">5.1.1 Presentation Preparation</div>
+        <p>
+            Effective presentation requires thorough preparation:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-clipboard-check"></i> Preparation Steps:</h5>
+            <ul>
+                <li><strong>Know Your Audience:</strong> Understand stakeholders' backgrounds, technical knowledge, and interests</li>
+                <li><strong>Prepare Materials:</strong> Create slides, handouts, visual aids, and demonstration materials</li>
+                <li><strong>Practice:</strong> Rehearse your presentation to ensure smooth delivery</li>
+                <li><strong>Anticipate Questions:</strong> Prepare answers for likely questions and concerns</li>
+                <li><strong>Check Technology:</strong> Ensure equipment, software, and internet connectivity work properly</li>
+                <li><strong>Prepare Backup Plans:</strong> Have alternative methods if technology fails</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">5.1.2 Presentation Structure</div>
+        <p>
+            A well-structured presentation follows a logical flow:
+        </p>
+        <div class="key-point">
+            <h5><i class="fas fa-list-ol"></i> Typical Presentation Structure:</h5>
+            <ol>
+                <li><strong>Introduction:</strong> Overview, objectives, agenda, and meeting purpose</li>
+                <li><strong>Background:</strong> Context, scope, and business drivers for the project</li>
+                <li><strong>Requirements Overview:</strong> High-level summary of key requirements</li>
+                <li><strong>Detailed Requirements:</strong> Key functional and non-functional requirements with examples</li>
+                <li><strong>Process Improvements:</strong> Suggested improvements and their benefits</li>
+                <li><strong>Next Steps:</strong> Timeline, action items, and follow-up activities</li>
+                <li><strong>Q&A:</strong> Address questions, concerns, and feedback</li>
+            </ol>
+        </div>
+
+        <div class="subsection-title">5.1.3 Effective Communication Techniques</div>
+        <div class="example-box">
+            <h5><i class="fas fa-comments"></i> Communication Best Practices:</h5>
+            <ul>
+                <li><strong>Use Visual Aids:</strong> Diagrams, charts, graphs, and mockups to illustrate concepts</li>
+                <li><strong>Speak Clearly:</strong> Use simple language, avoid technical jargon when possible</li>
+                <li><strong>Engage Audience:</strong> Ask questions, encourage participation, check for understanding</li>
+                <li><strong>Provide Examples:</strong> Use real-world scenarios and use cases</li>
+                <li><strong>Summarize Key Points:</strong> Reinforce important information throughout</li>
+                <li><strong>Manage Time:</strong> Allocate time appropriately to each section</li>
+                <li><strong>Handle Questions:</strong> Listen carefully, acknowledge concerns, provide clear answers</li>
+            </ul>
+        </div>
+
+        <div class="section-title">5.2 Develop and Present Prototypes</div>
+        <p>
+            Prototypes are early versions or mockups of the system that help stakeholders visualize the solution and provide feedback. Developing and presenting prototypes is an effective way to validate requirements and gather early feedback.
+        </p>
+
+        <div class="subsection-title">5.2.1 Prototype Development Process</div>
+        <p>
+            The prototype development process involves several steps:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-tasks"></i> Prototype Development Steps:</h5>
+            <ol>
+                <li><strong>Identify Key Features:</strong> Select the most important features to prototype</li>
+                <li><strong>Choose Prototype Type:</strong> Decide between low-fidelity or high-fidelity based on needs</li>
+                <li><strong>Create Prototype:</strong> Build the prototype using appropriate tools</li>
+                <li><strong>Test Internally:</strong> Review prototype with team before client presentation</li>
+                <li><strong>Present to Stakeholders:</strong> Demonstrate prototype and gather feedback</li>
+                <li><strong>Iterate:</strong> Refine prototype based on feedback</li>
+            </ol>
+        </div>
+
+        <div class="subsection-title">5.2.2 Prototype Presentation</div>
+        <p>
+            When presenting prototypes:
+        </p>
+        <div class="key-point">
+            <h5><i class="fas fa-presentation"></i> Prototype Presentation Guidelines:</h5>
+            <ul>
+                <li>Explain that it's a prototype, not the final product</li>
+                <li>Demonstrate key workflows and user interactions</li>
+                <li>Highlight how requirements are addressed in the prototype</li>
+                <li>Encourage stakeholders to interact with the prototype</li>
+                <li>Collect specific feedback on features, layout, and functionality</li>
+                <li>Document all feedback for incorporation into requirements</li>
+            </ul>
+        </div>
+
+        <div class="section-title">5.3 Obtain Client Confirmation for Requirement Specification</div>
+        <p>
+            Obtaining formal client confirmation for the requirement specification document is essential for project success. This confirmation serves as an agreement on what will be built and helps prevent scope creep.
+        </p>
+
+        <div class="subsection-title">5.3.1 Confirmation Process</div>
+        <p>
+            The confirmation process typically involves:
+        </p>
+        <div class="example-box">
+            <h5><i class="fas fa-handshake"></i> Steps to Obtain Confirmation:</h5>
+            <ol>
+                <li><strong>Distribute Document:</strong> Provide requirement specification to all stakeholders for review</li>
+                <li><strong>Review Period:</strong> Allow sufficient time for stakeholders to review and provide feedback</li>
+                <li><strong>Address Feedback:</strong> Incorporate valid feedback and clarify misunderstandings</li>
+                <li><strong>Final Review:</strong> Present updated document and confirm all concerns are addressed</li>
+                <li><strong>Obtain Sign-off:</strong> Get formal approval from authorized stakeholders</li>
+                <li><strong>Document Confirmation:</strong> Record confirmation with signatures, dates, and version numbers</li>
+            </ol>
+        </div>
+
+        <div class="subsection-title">5.3.2 Confirmation Documentation</div>
+        <p>
+            Confirmation should be documented according to organizational standards:
+        </p>
+        <div class="info-box">
+            <h5><i class="fas fa-file-signature"></i> Confirmation Documentation Elements:</h5>
+            <ul>
+                <li><strong>Document Version:</strong> Version number and date of confirmed specification</li>
+                <li><strong>Approvers:</strong> Names, titles, and signatures of approving stakeholders</li>
+                <li><strong>Approval Date:</strong> Date when confirmation was obtained</li>
+                <li><strong>Scope Confirmation:</strong> Clear statement of what is included and excluded</li>
+                <li><strong>Conditions:</strong> Any conditions or assumptions associated with approval</li>
+                <li><strong>Change Process:</strong> Process for handling future requirement changes</li>
+            </ul>
+        </div>
+        <div class="key-point">
+            <h5><i class="fas fa-exclamation-circle"></i> Importance of Confirmation:</h5>
+            <ul>
+                <li>Establishes clear agreement on project scope</li>
+                <li>Prevents misunderstandings and disputes later</li>
+                <li>Provides baseline for change management</li>
+                <li>Ensures all stakeholders are aligned</li>
+                <li>Protects both client and development team</li>
+            </ul>
+        </div>
+    </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

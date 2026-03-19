@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fefce8"/><stop offset="100%" stop-color="#f8fafc"/></linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg3)"/>
+  <!-- Document -->
+  <rect x="80" y="50" width="240" height="180" rx="4" fill="white" stroke="#c4b5fd" stroke-width="2"/>
+  <rect x="80" y="50" width="240" height="36" rx="4" fill="#e9d5ff"/>
+  <rect x="88" y="58" width="100" height="8" rx="2" fill="#7c3aed" opacity="0.6"/>
+  <rect x="88" y="72" width="60" height="4" rx="1" fill="#c4b5fd" opacity="0.5"/>
+  <!-- Lines of text -->
+  <rect x="88" y="98" width="220" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="88" y="110" width="180" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="88" y="122" width="200" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="88" y="134" width="160" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="88" y="152" width="220" height="6" rx="2" fill="#e2e8f0"/>
+  <rect x="88" y="164" width="140" height="6" rx="2" fill="#e2e8f0"/>
+  <!-- Signature line -->
+  <line x1="88" y1="195" x2="220" y2="195" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 2"/>
+  <text x="230" y="198" fill="#64748b" font-size="10" font-family="system-ui,sans-serif">Signature</text>
+  <!-- Stamp -->
+  <rect x="250" y="175" width="55" height="40" rx="4" fill="#fecaca" opacity="0.8" stroke="#ef4444"/>
+  <text x="277" y="198" text-anchor="middle" fill="#b91c1c" font-size="9" font-weight="bold" font-family="system-ui,sans-serif">APPROVED</text>
+  <!-- Label -->
+  <text x="200" y="32" text-anchor="middle" fill="#6d28d9" font-size="16" font-weight="bold" font-family="system-ui,sans-serif">CONTRACTUAL DOCUMENT</text>
+  <text x="200" y="48" text-anchor="middle" fill="#64748b" font-size="11" font-family="system-ui,sans-serif">Written agreement � Scope � Terms</text>
+</svg>

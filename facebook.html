@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Web Application – Complete Guide (HTML + CSS + PHP + MySQL + AJAX)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
+      --primary: #1877f2;
+      --primary-dark: #0d65d9;
+      --success: #42b72a;
+      --danger: #e74c3c;
+      --ch1: #1877f2; --ch2: #0ea5e9; --ch3: #8b5cf6; --ch4: #0d9488; --ch5: #d97706; --ch6: #e11d48; --ch7: #0284c7; --ch8: #047857; --ch9: #6366f1; --ch10: #0891b2; --ch11: #be185d;
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#f0f9ff 0%,#f8fafc 50%,#f0fdf4 100%);color:var(--text);line-height:1.7;margin:0;min-height:100vh;overflow-x:hidden}
+
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;z-index:40;overflow-y:auto;border-right:2px solid rgba(24,119,242,0.2)}
+      .page-wrapper{margin-left:260px;max-width:calc(100vw - 260px)}
+    }
+    @media (max-width:991px){
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto}
+      .page-wrapper{margin-left:0;padding-top:3.5rem}
+    }
+
+    .toc-sidebar{background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+    .toc-sidebar .toc-header{background:linear-gradient(135deg,#1877f2 0%,#42b72a 100%);color:#fff;padding:1rem;font-weight:700;text-align:center;font-size:0.9rem}
+    .toc-sidebar .toc-toggle{display:none;width:100%;min-height:48px;padding:0.85rem 1rem;background:linear-gradient(135deg,#1877f2 0%,#42b72a 100%);color:#fff;border:none;font-weight:600;cursor:pointer;align-items:center;justify-content:space-between}
+    .toc-sidebar.toc-open .toc-toggle i.chevron{transform:rotate(180deg)}
+    @media (max-width:991px){ .toc-sidebar .toc-toggle{display:flex} .toc-sidebar .toc-header{display:none} }
+    .toc-sidebar .toc-list a{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;color:var(--text);text-decoration:none;font-size:0.85rem;border-bottom:1px solid #f1f5f9}
+    .toc-sidebar .toc-list a:hover{background:#eff6ff;color:var(--primary)}
+    .toc-sidebar .toc-list .ch-num-toc{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--primary);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.7rem;flex-shrink:0}
+
+    .container-main{max-width:900px;margin:0 auto;padding:clamp(0.75rem,4vw,2rem)}
+    .book-hero{background:linear-gradient(145deg,#1877f2 0%,#42b72a 50%,#0ea5e9 100%);color:#fff;padding:2.5rem 1.5rem;text-align:center;border-radius:0 0 28px 28px;box-shadow:0 10px 40px rgba(24,119,242,0.35)}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:800;line-height:1.3}
+    .book-hero .lead{margin:0;font-size:clamp(0.8rem,2.5vw,0.9rem);opacity:0.95}
+    .book-hero .checklist{margin:0.75rem 0 0;text-align:left;max-width:360px;margin-left:auto;margin-right:auto}
+
+    .chapter-card{background:#fff;border-radius:16px;padding:clamp(1.25rem,4vw,2rem);margin-bottom:1.75rem;box-shadow:0 4px 24px rgba(0,0,0,0.06);border-left:5px solid var(--primary);overflow:hidden}
+    .chapter-card.ch2{border-left-color:var(--ch2)}.chapter-card.ch3{border-left-color:var(--ch3)}.chapter-card.ch4{border-left-color:var(--ch4)}
+    .chapter-card.ch5{border-left-color:var(--ch5)}.chapter-card.ch6{border-left-color:var(--ch6)}.chapter-card.ch7{border-left-color:var(--ch7)}
+    .chapter-card.ch8{border-left-color:var(--ch8)}.chapter-card.ch9{border-left-color:var(--ch9)}.chapter-card.ch10{border-left-color:var(--ch10)}.chapter-card.ch11{border-left-color:var(--ch11)}
+    .chapter-card h2{font-size:clamp(1rem,3vw,1.25rem);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap}
+    .chapter-card h2 > i{font-size:0.9em;opacity:0.9}
+    .chapter-card .ch-num{width:1.9rem;height:1.9rem;border-radius:50%;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;background:var(--primary)}
+    .chapter-card.ch2 .ch-num{background:var(--ch2)}.chapter-card.ch3 .ch-num{background:var(--ch3)}.chapter-card.ch4 .ch-num{background:var(--ch4)}
+    .chapter-card.ch5 .ch-num{background:var(--ch5)}.chapter-card.ch6 .ch-num{background:var(--ch6)}.chapter-card.ch7 .ch-num{background:var(--ch7)}
+    .chapter-card.ch8 .ch-num{background:var(--ch8)}.chapter-card.ch9 .ch-num{background:var(--ch9)}.chapter-card.ch10 .ch-num{background:var(--ch10)}.chapter-card.ch11 .ch-num{background:var(--ch11)}
+
+    .code-block{background:#1e293b;color:#e2e8f0;padding:1rem 1.25rem;border-radius:12px;overflow-x:auto;font-family:'Consolas','Monaco',monospace;font-size:0.82rem;line-height:1.5;margin:0.75rem 0}
+    .code-block .tag{color:#7dd3fc}.code-block .attr{color:#fcd34d}.code-block .val{color:#86efac}.code-block .comment{color:#94a3b8}
+    .tip-box{background:#eff6ff;border-left:4px solid var(--primary);padding:1rem 1.25rem;border-radius:0 12px 12px 0;margin:1rem 0;font-size:0.9rem}
+    .tip-box strong{color:var(--primary)}
+    .warn-box{background:#fef2f2;border-left:4px solid var(--danger);padding:1rem 1.25rem;border-radius:0 12px 12px 0;margin:1rem 0;font-size:0.9rem}
+    pre{margin:0;white-space:pre-wrap;word-wrap:break-word}
+    h3{font-size:1.05rem;margin:1.25rem 0 0.5rem;color:var(--text)}
+    ul{margin:0.5rem 0;padding-left:1.5rem}
+    .flow-diagram{background:#f1f5f9;border-radius:12px;padding:1.25rem;margin:1rem 0;font-family:monospace;text-align:center;line-height:2}
+    .file-tree{background:#1e293b;color:#e2e8f0;padding:1rem 1.25rem;border-radius:12px;font-family:monospace;font-size:0.85rem;overflow-x:auto}
+  </style>
+</head>
+<body>
+  <aside class="toc-sidebar" id="toc">
+    <div class="toc-header">📘 Social Media App Guide</div>
+    <button class="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-list" id="toc-btn">
+      <span>Chapters</span><i class="fas fa-chevron-down chevron" aria-hidden="true"></i>
+    </button>
+    <nav class="toc-list" id="toc-list">
+      <a href="#intro"><span class="ch-num-toc">0</span> Introduction</a>
+      <a href="#ch1"><span class="ch-num-toc">1</span> Project Structure</a>
+      <a href="#ch2"><span class="ch-num-toc">2</span> Database Design (MySQL)</a>
+      <a href="#ch3"><span class="ch-num-toc">3</span> Database Connection (db.php)</a>
+      <a href="#ch4"><span class="ch-num-toc">4</span> CSS Design (style.css)</a>
+      <a href="#ch5"><span class="ch-num-toc">5</span> Register (register.php)</a>
+      <a href="#ch6"><span class="ch-num-toc">6</span> Login & Logout</a>
+      <a href="#ch7"><span class="ch-num-toc">7</span> Home & Create Post</a>
+      <a href="#ch7-edit"><span class="ch-num-toc">7b</span> Edit & Delete Own Post</a>
+      <a href="#ch8"><span class="ch-num-toc">8</span> Like (AJAX – like.php)</a>
+      <a href="#ch9"><span class="ch-num-toc">9</span> Comment (AJAX – comment.php)</a>
+      <a href="#ch10"><span class="ch-num-toc">10</span> JavaScript AJAX (script.js)</a>
+      <a href="#ajax-explain"><span class="ch-num-toc">—</span> How AJAX Works</a>
+      <a href="#security"><span class="ch-num-toc">—</span> Security Improvements</a>
+      <a href="#flow"><span class="ch-num-toc">—</span> System Flow Diagram</a>
+      <a href="#learned"><span class="ch-num-toc">—</span> What You Learned</a>
+    </nav>
+  </aside>
+
+  <main class="page-wrapper">
+    <div class="container-main">
+      <header class="book-hero" id="intro">
+        <h1>📘 Social Media Web Application – Complete Guide Book</h1>
+        <p class="lead">HTML + CSS + PHP + MySQL + AJAX – Login, Register, Post, Like, Comment</p>
+        <p class="checklist">
+          ✅ Create Account (Register)<br>
+          ✅ Login / Logout<br>
+          ✅ Create Post · Edit & Delete Own Post<br>
+          ✅ Like Post (AJAX – no page refresh)<br>
+          ✅ Comment on Post (AJAX – no page refresh)<br>
+          ✅ Proper Database Tables<br>
+          ✅ Clean Form Design
+        </p>
+      </header>
+
+      <!-- Introduction -->
+      <section class="chapter-card" id="intro">
+        <h2><span class="ch-num">0</span> <i class="fas fa-book-open"></i> Introduction</h2>
+        <p>This guide explains <strong>step-by-step</strong> how to create a simple <strong>Social Media Web Application</strong> with:</p>
+        <ul>
+          <li>Create Account (Register)</li>
+          <li>Login / Logout</li>
+          <li>Create Post · Edit & Delete own post</li>
+          <li>Like Post (AJAX – without page refresh)</li>
+          <li>Comment on Post (AJAX – without page refresh)</li>
+          <li>Proper Database Tables (MySQL)</li>
+          <li>Clean Form Design (CSS)</li>
+        </ul>
+      </section>
+
+      <!-- 1. Project Structure -->
+      <section class="chapter-card ch1" id="ch1">
+        <h2><span class="ch-num">1</span> <i class="fas fa-folder-tree"></i> Project Structure</h2>
+        <p>Create a folder <code>social_media</code> and these files:</p>
+        <div class="file-tree">
+<pre>social_media/
+│
+├── db.php
+├── register.php
+├── login.php
+├── logout.php
+├── home.php
+├── create_post.php
+├── edit_post.php
+├── delete_post.php
+├── like.php
+├── comment.php
+├── style.css
+└── script.js</pre>
+        </div>
+      </section>
+
+      <!-- 2. Database Design -->
+      <section class="chapter-card ch2" id="ch2">
+        <h2><span class="ch-num">2</span> <i class="fas fa-database"></i> Database Design (MySQL)</h2>
+
+        <h3>Create Database</h3>
+        <div class="code-block">
+<pre><span class="comment">-- Run in phpMyAdmin or MySQL</span>
+CREATE DATABASE social_media;
+USE social_media;</pre>
+        </div>
+
+        <h3>Users Table</h3>
+        <div class="code-block">
+<pre>CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);</pre>
+        </div>
+        <p><strong>Explanation:</strong> <code>id</code> → Primary key. <code>email</code> → Unique for login. <code>password</code> → Store with <code>password_hash()</code>.</p>
+
+        <h3>Posts Table</h3>
+        <div class="code-block">
+<pre>CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);</pre>
+        </div>
+
+        <h3>Likes Table</h3>
+        <div class="code-block">
+<pre>CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    post_id INT,
+    UNIQUE KEY unique_like (user_id, post_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);</pre>
+        </div>
+        <p><code>UNIQUE KEY</code> prevents the same user from liking the same post more than once.</p>
+
+        <h3>Comments Table</h3>
+        <div class="code-block">
+<pre>CREATE TABLE comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    post_id INT,
+    comment TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);</pre>
+        </div>
+      </section>
+
+      <!-- 3. db.php -->
+      <section class="chapter-card ch3" id="ch3">
+        <h2><span class="ch-num">3</span> <i class="fas fa-plug"></i> Database Connection (db.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+$conn = new mysqli("localhost", "root", "", "social_media");
+
+if ($conn-&gt;connect_error) {
+    die("Connection failed: " . $conn-&gt;connect_error);
+}
+?&gt;</pre>
+        </div>
+      </section>
+
+      <!-- 4. style.css -->
+      <section class="chapter-card ch4" id="ch4">
+        <h2><span class="ch-num">4</span> <i class="fas fa-palette"></i> Simple CSS Design (style.css)</h2>
+        <div class="code-block">
+<pre>body {
+    font-family: Arial;
+    background: #f0f2f5;
+}
+
+.container {
+    width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+button {
+    padding: 8px 15px;
+    background: #1877f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.post {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+}</pre>
+        </div>
+      </section>
+
+      <!-- 5. register.php -->
+      <section class="chapter-card ch5" id="ch5">
+        <h2><span class="ch-num">5</span> <i class="fas fa-user-plus"></i> Register Page (register.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+include "db.php";
+
+if(isset($_POST['register'])){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    $sql = "INSERT INTO users(name,email,password) VALUES('$name','$email','$password')";
+    $conn-&gt;query($sql);
+    header("Location: login.php");
+}
+?&gt;
+
+&lt;<span class="tag">form</span> <span class="attr">method</span>=<span class="val">"POST"</span> <span class="attr">class</span>=<span class="val">"container"</span>&gt;
+    &lt;<span class="tag">h2</span>&gt;Create Account&lt;/<span class="tag">h2</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">name</span>=<span class="val">"name"</span> <span class="attr">placeholder</span>=<span class="val">"Name"</span> <span class="attr">required</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">name</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"Email"</span> <span class="attr">required</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"password"</span> <span class="attr">name</span>=<span class="val">"password"</span> <span class="attr">placeholder</span>=<span class="val">"Password"</span> <span class="attr">required</span>&gt;
+    &lt;<span class="tag">button</span> <span class="attr">name</span>=<span class="val">"register"</span>&gt;Register&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;</pre>
+        </div>
+      </section>
+
+      <!-- 6. Login & Logout -->
+      <section class="chapter-card ch6" id="ch6">
+        <h2><span class="ch-num">6</span> <i class="fas fa-sign-in-alt"></i> Login Page (login.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $result = $conn-&gt;query("SELECT * FROM users WHERE email='$email'");
+    $user = $result-&gt;fetch_assoc();
+
+    if(password_verify($password, $user['password'])){
+        $_SESSION['user_id'] = $user['id'];
+        header("Location: home.php");
+    }
+}
+?&gt;
+
+&lt;<span class="tag">form</span> <span class="attr">method</span>=<span class="val">"POST"</span> <span class="attr">class</span>=<span class="val">"container"</span>&gt;
+    &lt;<span class="tag">h2</span>&gt;Login&lt;/<span class="tag">h2</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">name</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"Email"</span> <span class="attr">required</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"password"</span> <span class="attr">name</span>=<span class="val">"password"</span> <span class="attr">placeholder</span>=<span class="val">"Password"</span> <span class="attr">required</span>&gt;
+    &lt;<span class="tag">button</span> <span class="attr">name</span>=<span class="val">"login"</span>&gt;Login&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;</pre>
+        </div>
+        <h3>Logout (logout.php)</h3>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+session_destroy();
+header("Location: login.php");
+?&gt;</pre>
+        </div>
+      </section>
+
+      <!-- 7. Home & Create Post -->
+      <section class="chapter-card ch7" id="ch7">
+        <h2><span class="ch-num">7</span> <i class="fas fa-home"></i> Home Page (home.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+$user_id = $_SESSION['user_id'];
+?&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span>&gt;
+
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"container"</span>&gt;
+&lt;<span class="tag">form</span> <span class="attr">method</span>=<span class="val">"POST"</span> <span class="attr">action</span>=<span class="val">"create_post.php"</span>&gt;
+&lt;<span class="tag">textarea</span> <span class="attr">name</span>=<span class="val">"content"</span> <span class="attr">placeholder</span>=<span class="val">"What's on your mind?"</span> <span class="attr">required</span>&gt;&lt;/<span class="tag">textarea</span>&gt;
+&lt;<span class="tag">button</span> <span class="attr">name</span>=<span class="val">"post"</span>&gt;Post&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;
+
+&lt;?php
+$posts = $conn-&gt;query("SELECT posts.*, users.name FROM posts
+JOIN users ON posts.user_id = users.id
+ORDER BY posts.id DESC");
+
+while($row = $posts-&gt;fetch_assoc()){
+    $is_own = ($row['user_id'] == $user_id);
+?&gt;
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"post"</span> <span class="attr">id</span>=<span class="val">"post-&lt;?= $row['id'] ?&gt;"</span>&gt;
+    &lt;<span class="tag">b</span>&gt;&lt;?= $row['name'] ?&gt;&lt;/<span class="tag">b</span>&gt;
+    &lt;?php if($is_own){ ?&gt;
+    &lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"edit_post.php?id=&lt;?= $row['id'] ?&gt;"</span>&gt;Edit&lt;/<span class="tag">a</span>&gt;
+    &lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"delete_post.php?id=&lt;?= $row['id'] ?&gt;"</span> <span class="attr">onclick</span>=<span class="val">"return confirm('Delete this post?')"</span>&gt;Delete&lt;/<span class="tag">a</span>&gt;
+    &lt;?php } ?&gt;
+    &lt;<span class="tag">p</span>&gt;&lt;?= $row['content'] ?&gt;&lt;/<span class="tag">p</span>&gt;
+
+    &lt;<span class="tag">button</span> <span class="attr">onclick</span>=<span class="val">"likePost(&lt;?= $row['id'] ?&gt;)"</span>&gt;Like&lt;/<span class="tag">button</span>&gt;
+    &lt;<span class="tag">span</span> <span class="attr">id</span>=<span class="val">"like-count-&lt;?= $row['id'] ?&gt;"</span>&gt;
+        &lt;?php
+        $likes = $conn-&gt;query("SELECT COUNT(*) as total FROM likes WHERE post_id=".$row['id']);
+        echo $likes-&gt;fetch_assoc()['total'];
+        ?&gt;
+    &lt;/<span class="tag">span</span>&gt;
+
+    &lt;<span class="tag">div</span> <span class="attr">id</span>=<span class="val">"comments-&lt;?= $row['id'] ?&gt;"</span>&gt;&lt;/<span class="tag">div</span>&gt;
+    &lt;<span class="tag">input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"comment-input-&lt;?= $row['id'] ?&gt;"</span>&gt;
+    &lt;<span class="tag">button</span> <span class="attr">onclick</span>=<span class="val">"commentPost(&lt;?= $row['id'] ?&gt;)"</span>&gt;Comment&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">div</span>&gt;
+&lt;?php } ?&gt;
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"logout.php"</span>&gt;Logout&lt;/<span class="tag">a</span>&gt;
+&lt;<span class="tag">script</span> <span class="attr">src</span>=<span class="val">"script.js"</span>&gt;&lt;/<span class="tag">script</span>&gt;</pre>
+        </div>
+        <h3>Create Post (create_post.php)</h3>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+if(isset($_POST['post'])){
+    $user_id = $_SESSION['user_id'];
+    $content = $_POST['content'];
+    $conn-&gt;query("INSERT INTO posts(user_id, content) VALUES('$user_id','$content')");
+    header("Location: home.php");
+}
+?&gt;</pre>
+        </div>
+        <p>Edit and Delete links appear only when <code>$row['user_id'] == $user_id</code> (own post).</p>
+      </section>
+
+      <!-- 7b. Edit & Delete Own Post -->
+      <section class="chapter-card ch11" id="ch7-edit">
+        <h2><span class="ch-num">7b</span> <i class="fas fa-edit"></i> Edit & Delete Own Post</h2>
+        <p>Only the post owner can <strong>edit</strong> or <strong>delete</strong> their post. PHP checks <code>user_id</code> before UPDATE or DELETE.</p>
+
+        <h3>Edit Post (edit_post.php)</h3>
+        <p>Shows a form with current content; on submit, updates the post only if it belongs to the logged-in user.</p>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+$post_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if($post_id &lt;= 0){
+    header("Location: home.php");
+    exit;
+}
+
+<span class="comment">// Get post - only if it belongs to current user</span>
+$result = $conn-&gt;query("SELECT * FROM posts WHERE id=$post_id AND user_id=$user_id");
+if($result-&gt;num_rows == 0){
+    header("Location: home.php");
+    exit;
+}
+$post = $result-&gt;fetch_assoc();
+
+<span class="comment">// Update on form submit</span>
+if(isset($_POST['update'])){
+    $content = $conn-&gt;real_escape_string($_POST['content']);
+    $conn-&gt;query("UPDATE posts SET content='$content' WHERE id=$post_id AND user_id=$user_id");
+    header("Location: home.php");
+    exit;
+}
+?&gt;
+&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span>&gt;
+&lt;<span class="tag">div</span> <span class="attr">class</span>=<span class="val">"container"</span>&gt;
+&lt;<span class="tag">h2</span>&gt;Edit Post&lt;/<span class="tag">h2</span>&gt;
+&lt;<span class="tag">form</span> <span class="attr">method</span>=<span class="val">"POST"</span>&gt;
+    &lt;<span class="tag">textarea</span> <span class="attr">name</span>=<span class="val">"content"</span> <span class="attr">required</span>&gt;&lt;?= htmlspecialchars($post['content']) ?&gt;&lt;/<span class="tag">textarea</span>&gt;
+    &lt;<span class="tag">button</span> <span class="attr">name</span>=<span class="val">"update"</span>&gt;Update Post&lt;/<span class="tag">button</span>&gt;
+&lt;/<span class="tag">form</span>&gt;
+&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val">"home.php"</span>&gt;Cancel&lt;/<span class="tag">a</span>&gt;
+&lt;/<span class="tag">div</span>&gt;</pre>
+        </div>
+
+        <h3>Delete Post (delete_post.php)</h3>
+        <p>Deletes the post only if it belongs to the logged-in user, then redirects to home.</p>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+$post_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+if($post_id &gt; 0){
+    <span class="comment">// Delete only own post</span>
+    $conn-&gt;query("DELETE FROM posts WHERE id=$post_id AND user_id=$user_id");
+}
+
+header("Location: home.php");
+exit;
+?&gt;</pre>
+        </div>
+
+        <div class="tip-box"><strong>Summary:</strong> In <code>home.php</code> show Edit/Delete only when <code>$row['user_id'] == $_SESSION['user_id']</code>. In <code>edit_post.php</code> use <code>SELECT ... AND user_id=$user_id</code> and <code>UPDATE ... AND user_id=$user_id</code>. In <code>delete_post.php</code> use <code>DELETE ... WHERE id=? AND user_id=?</code>. This ensures users can only edit or delete their own posts.</div>
+      </section>
+
+      <!-- 8. like.php -->
+      <section class="chapter-card ch8" id="ch8">
+        <h2><span class="ch-num">8</span> <i class="fas fa-heart"></i> Like Using AJAX (like.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+$user_id = $_SESSION['user_id'];
+$post_id = $_POST['post_id'];
+
+$conn-&gt;query("INSERT IGNORE INTO likes(user_id,post_id) VALUES('$user_id','$post_id')");
+
+$result = $conn-&gt;query("SELECT COUNT(*) as total FROM likes WHERE post_id='$post_id'");
+echo $result-&gt;fetch_assoc()['total'];
+?&gt;</pre>
+        </div>
+        <p>PHP inserts the like (or ignores if already liked) and returns the new like count. JavaScript updates the count on the page without refresh.</p>
+      </section>
+
+      <!-- 9. comment.php -->
+      <section class="chapter-card ch9" id="ch9">
+        <h2><span class="ch-num">9</span> <i class="fas fa-comment"></i> Comment Using AJAX (comment.php)</h2>
+        <div class="code-block">
+<pre>&lt;?php
+session_start();
+include "db.php";
+
+$user_id = $_SESSION['user_id'];
+$post_id = $_POST['post_id'];
+$comment = $_POST['comment'];
+
+$conn-&gt;query("INSERT INTO comments(user_id,post_id,comment) VALUES('$user_id','$post_id','$comment')");
+
+echo "Comment Added";
+?&gt;</pre>
+        </div>
+      </section>
+
+      <!-- 10. script.js -->
+      <section class="chapter-card ch10" id="ch10">
+        <h2><span class="ch-num">10</span> <i class="fas fa-bolt"></i> JavaScript AJAX (script.js)</h2>
+        <div class="code-block">
+<pre>function likePost(post_id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST","like.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.onload = function(){
+        document.getElementById("like-count-"+post_id).innerHTML = this.responseText;
+    };
+    xhr.send("post_id="+post_id);
+}
+
+function commentPost(post_id){
+    var comment = document.getElementById("comment-input-"+post_id).value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST","comment.php",true);
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xhr.onload = function(){
+        alert(this.responseText);
+    };
+    xhr.send("post_id="+post_id+"&comment="+comment);
+}</pre>
+        </div>
+      </section>
+
+      <!-- How AJAX Works -->
+      <section class="chapter-card" id="ajax-explain">
+        <h2><i class="fas fa-exchange-alt"></i> How AJAX Works (Explanation)</h2>
+        <ol>
+          <li>User clicks <strong>Like</strong></li>
+          <li>JavaScript sends data to <code>like.php</code></li>
+          <li>PHP updates the database</li>
+          <li>PHP returns the new like count</li>
+          <li>JavaScript updates only that part of the page</li>
+        </ol>
+        <p><strong>No page refresh needed.</strong></p>
+      </section>
+
+      <!-- Security -->
+      <section class="chapter-card" id="security">
+        <h2><i class="fas fa-shield-alt"></i> Security Improvements (Important)</h2>
+        <div class="warn-box"><p style="margin:0 0 0.5rem">For a production system:</p>
+        <ul>
+          <li>Use <strong>Prepared Statements</strong> (avoid SQL injection)</li>
+          <li>Add input validation</li>
+          <li>Add CSRF protection</li>
+          <li>Use proper session check on every protected page</li>
+          <li>Escape output with <code>htmlspecialchars()</code></li>
+        </ul>
+        </div>
+      </section>
+
+      <!-- System Flow -->
+      <section class="chapter-card" id="flow">
+        <h2><i class="fas fa-project-diagram"></i> System Flow Diagram</h2>
+        <div class="flow-diagram">
+<pre>User → Register → Login → Home
+        ↓
+    Create Post
+        ↓
+    Like / Comment (AJAX)
+        ↓
+    Database Update</pre>
+        </div>
+      </section>
+
+      <!-- What You Learned -->
+      <section class="chapter-card" id="learned">
+        <h2><i class="fas fa-graduation-cap"></i> What You Learned</h2>
+        <ul>
+          <li>✔ Database table design (users, posts, likes, comments)</li>
+          <li>✔ Login &amp; Registration system</li>
+          <li>✔ Session handling</li>
+          <li>✔ AJAX without page refresh (Like &amp; Comment)</li>
+          <li>✔ Foreign keys and UNIQUE constraints</li>
+          <li>✔ Basic UI design with CSS</li>
+        </ul>
+       
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      var toc = document.getElementById('toc');
+      var btn = document.getElementById('toc-btn');
+      if (btn && toc) {
+        btn.addEventListener('click', function() {
+          toc.classList.toggle('toc-open');
+          btn.setAttribute('aria-expanded', toc.classList.contains('toc-open'));
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

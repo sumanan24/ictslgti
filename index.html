@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of Information and Communication Technology - SLGTI</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --pink: #ec4899;
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --yellow: #eab308;
+      --red: #ef4444;
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --light-bg: #f8fafc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light-bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text-dark);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: var(--blue);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .hero-section .badge {
+      display: inline-block;
+      background: var(--purple);
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Department Info Section */
+    .dept-section {
+      padding: 60px 0;
+      background: var(--white);
+    }
+
+    .info-card.color-blue {
+      border-top-color: var(--blue);
+    }
+
+    .info-card.color-blue .icon,
+    .info-card.color-blue h3 {
+      color: var(--blue);
+    }
+
+    .info-card.color-purple {
+      border-top-color: var(--purple);
+    }
+
+    .info-card.color-purple .icon,
+    .info-card.color-purple h3 {
+      color: var(--purple);
+    }
+
+    .info-card.color-cyan {
+      border-top-color: var(--cyan);
+    }
+
+    .info-card.color-cyan .icon,
+    .info-card.color-cyan h3 {
+      color: var(--cyan);
+    }
+
+    .info-card.color-green {
+      border-top-color: var(--green);
+    }
+
+    .info-card.color-green .icon,
+    .info-card.color-green h3 {
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .info-card {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      border-top: 5px solid var(--blue);
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .info-card .icon {
+      font-size: 3rem;
+      color: var(--blue);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-card h3 {
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Course Cards */
+    .course-section {
+      padding: 60px 0;
+      background: var(--light-bg);
+    }
+
+    .course-card {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+      border-top: 5px solid var(--purple);
+      height: 100%;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .course-card.level4 {
+      border-top-color: var(--green);
+    }
+
+    .course-card.level5 {
+      border-top-color: var(--blue);
+    }
+
+    .course-badge {
+      display: inline-block;
+      background: var(--blue);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .course-badge.level4 {
+      background: var(--green);
+    }
+
+    .course-badge.level5 {
+      background: var(--blue);
+    }
+
+    .course-card h3 {
+      color: var(--text-dark);
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .course-detail {
+      display: flex;
+      align-items: center;
+      margin: 1rem 0;
+      color: var(--text-light);
+    }
+
+    .course-detail i {
+      color: var(--blue);
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      width: 25px;
+      flex-shrink: 0;
+    }
+
+    .course-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 1rem 2.5rem;
+      background: var(--blue);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .course-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+      color: white;
+      background: var(--purple);
+    }
+
+    .course-link.level4 {
+      background: var(--green);
+    }
+
+    .course-link.level4:hover {
+      background: #059669;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 60px 0;
+      background: var(--light-bg);
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: var(--white);
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-card.stat-blue {
+      border-top: 5px solid var(--blue);
+    }
+
+    .stat-card.stat-purple {
+      border-top: 5px solid var(--purple);
+    }
+
+    .stat-card.stat-green {
+      border-top: 5px solid var(--green);
+    }
+
+    .stat-card.stat-orange {
+      border-top: 5px solid var(--orange);
+    }
+
+    .stat-card .number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card.stat-blue .number {
+      color: var(--blue);
+    }
+
+    .stat-card.stat-purple .number {
+      color: var(--purple);
+    }
+
+    .stat-card.stat-green .number {
+      color: var(--green);
+    }
+
+    .stat-card.stat-orange .number {
+      color: var(--orange);
+    }
+
+    .stat-card .label {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .footer h5 {
+      margin-bottom: 1rem;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .footer p {
+      margin: 0.5rem 0;
+      opacity: 0.85;
+    }
+
+    .footer i {
+      color: var(--cyan);
+      margin-right: 0.5rem;
+    }
+
+    /* Responsive Design */
+    /* Large Tablets and Small Desktops */
+    @media (max-width: 1200px) {
+      .hero-section {
+        padding: 100px 0 80px;
+      }
+
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* Tablets */
+    @media (max-width: 992px) {
+      .hero-section {
+        padding: 80px 0 60px;
+      }
+
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 1.3rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .section-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .info-card {
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .info-card .icon {
+        font-size: 2.5rem;
+      }
+
+      .course-card {
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat-card .number {
+        font-size: 3rem;
+      }
+
+      .stat-card .label {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Mobile Devices */
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .hero-section {
+        padding: 60px 0 50px;
+      }
+
+      .hero-section h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero-section .subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+      }
+
+      .hero-section .badge {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.95rem;
+        margin: 0 1rem;
+      }
+
+      .dept-section {
+        padding: 40px 0;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+        padding: 0 1rem;
+      }
+
+      .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+      }
+
+      .info-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 15px;
+      }
+
+      .info-card .icon {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .info-card p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .info-card .lead {
+        font-size: 1rem;
+      }
+
+      .course-section {
+        padding: 40px 0;
+      }
+
+      .course-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        border-radius: 15px;
+      }
+
+      .course-badge {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .course-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+      }
+
+      .course-detail {
+        margin: 0.75rem 0;
+        font-size: 0.9rem;
+      }
+
+      .course-detail i {
+        font-size: 1rem;
+        margin-right: 0.75rem;
+        width: 20px;
+      }
+
+      .course-link {
+        padding: 0.85rem 2rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+        width: 100%;
+        text-align: center;
+        display: block;
+      }
+
+      .stats-section {
+        padding: 40px 0;
+      }
+
+      .stat-card {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .stat-card .number {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card .label {
+        font-size: 1rem;
+      }
+
+      .footer {
+        padding: 2rem 0;
+      }
+
+      .footer h5 {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .footer p {
+        font-size: 0.9rem;
+        margin: 0.4rem 0;
+      }
+    }
+
+    /* Small Mobile Devices */
+    @media (max-width: 576px) {
+      .hero-section {
+        padding: 50px 0 40px;
+      }
+
+      .hero-section h1 {
+        font-size: 1.75rem;
+        padding: 0 0.5rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+      }
+
+      .hero-section .badge {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
+        display: block;
+        margin: 0 auto;
+        max-width: 90%;
+      }
+
+      .dept-section,
+      .course-section,
+      .stats-section {
+        padding: 30px 0;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        padding: 0 0.5rem;
+      }
+
+      .section-subtitle {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+      }
+
+      .info-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+      }
+
+      .info-card .icon {
+        font-size: 2rem;
+      }
+
+      .info-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .info-card p,
+      .info-card .lead {
+        font-size: 0.9rem;
+      }
+
+      .course-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+      }
+
+      .course-badge {
+        padding: 0.35rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .course-card h3 {
+        font-size: 1.25rem;
+      }
+
+      .course-detail {
+        font-size: 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .course-detail i {
+        margin-bottom: 0.25rem;
+      }
+
+      .course-link {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .stat-card {
+        padding: 1.25rem 0.5rem;
+      }
+
+      .stat-card .number {
+        font-size: 2rem;
+      }
+
+      .stat-card .label {
+        font-size: 0.9rem;
+      }
+
+      .footer {
+        padding: 1.5rem 0;
+      }
+
+      .footer h5 {
+        font-size: 1rem;
+      }
+
+      .footer p {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Extra Small Devices */
+    @media (max-width: 400px) {
+      .hero-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 0.9rem;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+      }
+
+      .info-card,
+      .course-card {
+        padding: 1rem;
+      }
+
+      .course-card h3 {
+        font-size: 1.1rem;
+      }
+
+      .stat-card .number {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Landscape Orientation on Mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero-section {
+        padding: 40px 0 30px;
+      }
+
+      .hero-section h1 {
+        font-size: 1.75rem;
+      }
+
+      .dept-section,
+      .course-section,
+      .stats-section {
+        padding: 30px 0;
+      }
+    }
+
+    /* Touch Device Optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .info-card:hover,
+      .course-card:hover {
+        transform: none;
+      }
+
+      .course-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stat-card:hover {
+        transform: none;
+      }
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1><i class="fas fa-laptop-code"></i> Department of ICT</h1>
+        <p class="subtitle">Information and Communication Technology</p>
+        <div class="badge">
+          <i class="fas fa-graduation-cap"></i> Producing Skilled ICT Professionals
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Department Information Section -->
+  <section class="dept-section">
+    <div class="container">
+      <h2 class="section-title">About Our Department</h2>
+      <p class="section-subtitle">Empowering the Future of Technology</p>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="info-card color-blue">
+            <div class="icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3>Our Main Objective</h3>
+            <p class="lead">Our main objective is to produce more than promising employees who are well knowledgeable and skilled in computer software, hardware, and networking and fit the demands of labour market.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="info-card color-purple">
+            <div class="icon">
+              <i class="fas fa-book-open"></i>
+            </div>
+            <h3>Course Coverage</h3>
+            <p>The Department of Information and Communication Technology (ICT) covers all areas of <strong>Application Development, Networking and Computer Hardware</strong> for NVQ Levels 4, 5 and 6, in order to produce skilled employees.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="info-card color-cyan">
+            <div class="icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3>Training Programs</h3>
+            <p>The lecturers and instructors of ICT train students to develop application web based and desktop based software, design database systems as well as fundamental aspects of computer hardware and architecture, operating systems, architectures of networks, network configuration, network devices, and ICT maintenance.</p>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="info-card" style="background: #d1fae5; border-top-color: var(--green);">
+            <div class="icon" style="color: var(--green);">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3 style="color: var(--green);">Career Success</h3>
+            <p class="lead" style="color: #065f46;"><strong>Successful students have secured jobs in the state sector as ICT Officer, whilst some have joined leading private software development companies for attractive salaries.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card stat-blue">
+            <div class="number">3</div>
+            <div class="label">NVQ Levels</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card stat-purple">
+            <div class="number">4, 5, 6</div>
+            <div class="label">Course Levels</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card stat-green">
+            <div class="number">100%</div>
+            <div class="label">Job Ready</div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card stat-orange">
+            <div class="number">∞</div>
+            <div class="label">Career Opportunities</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section class="course-section">
+    <div class="container">
+      <h2 class="section-title">Our Courses</h2>
+      <p class="section-subtitle">Choose Your Path to Success</p>
+
+      <div class="row">
+        <!-- NVQ Level 4 Course -->
+        <div class="col-lg-6 col-md-12">
+          <div class="course-card level4 fade-in">
+            <span class="course-badge level4">NVQ Level 4</span>
+            <h3>Computer Hardware and Networking Technician & ICT Technician</h3>
+            
+            <div class="course-detail">
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Course Duration:</strong><br>
+                2 years. One year and 6 months in the centre with 6 months OJT.
+              </div>
+            </div>
+
+            <div class="course-detail">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <strong>Minimum Entry Requirements:</strong><br>
+                G.C.E Ordinary level 6 Passes or NVQ L3 ICT related
+              </div>
+            </div>
+
+            <div class="course-detail">
+              <i class="fas fa-laptop-code"></i>
+              <div>
+                <strong>Focus Areas:</strong><br>
+                Computer Hardware, Networking, ICT Maintenance
+              </div>
+            </div>
+
+            <a href="#" class="course-link level4">
+              Explore Course <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- NVQ Level 5 Course -->
+        <div class="col-lg-6 col-md-12">
+          <div class="course-card level5 fade-in">
+            <span class="course-badge level5">NVQ Level 5</span>
+            <h3>Information and Communication Technology</h3>
+            
+            <div class="course-detail">
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Course Duration:</strong><br>
+                One year training at the SLGTI centre with 6 months OJT at Innovay Jaffna.
+              </div>
+            </div>
+
+            <div class="course-detail">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <strong>Minimum Entry Requirements:</strong><br>
+                NVQ Level 4 in ICT related<br>
+                G.C.E Advanced level 3 Passes in Maths, Science and Technology
+              </div>
+            </div>
+
+            <div class="course-detail">
+              <i class="fas fa-code"></i>
+              <div>
+                <strong>Focus Areas:</strong><br>
+                Application Development, System Analysis & Design, Database Systems, Web Development
+              </div>
+            </div>
+
+            <a href="LEVEL05/index.html" class="course-link">
+              View Course Details <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5><i class="fas fa-building"></i> Department of ICT</h5>
+          <p>SLGTI - Sri Lanka German Training Institute</p>
+          <p>Producing skilled ICT professionals for the modern workforce</p>
+        </div>
+        <div class="col-md-6">
+          <h5><i class="fas fa-envelope"></i> Contact Information</h5>
+          <p><i class="fas fa-phone"></i> Phone:</p>
+          <p><i class="fas fa-envelope"></i> Email: [Email Address]</p>
+          <p><i class="fas fa-map-marker-alt"></i> Address: [Institution Address]</p>
+        </div>
+      </div>
+      <hr style="border-color: rgba(255,255,255,0.2); margin: 2rem 0;">
+      <p class="mb-0">&copy; 2024 Department of ICT, SLGTI. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

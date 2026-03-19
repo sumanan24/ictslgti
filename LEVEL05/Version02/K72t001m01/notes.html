@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Requirements for Software Solution – Full Notes | Level 5 ICT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --header-bg: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+      --accent: #0d9488;
+      --accent-light: #ccfbf1;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --mod1: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+      --mod2: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+      --mod3: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+      --mod4: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+      --mod5: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden;overflow-y:scroll}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#f0fdfa 0%,#f8fafc 100%);color:var(--text);line-height:1.65;padding:0;min-height:100vh;overflow-x:hidden;max-width:100%}
+
+    /* Sidebar: fixed on desktop, collapsible on mobile */
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed!important;left:0;top:0;width:260px;height:100vh;z-index:40;margin:0;border-radius:0;border-right:1px solid rgba(13,148,136,0.2);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+      .page-wrapper{margin-left:260px;max-width:100%}
+    }
+    @media (min-width:992px){
+      .toc-sidebar .toc-toggle{display:none!important}
+      .toc-sidebar .toc-header{display:block!important}
+    }
+    @media (max-width:991px){
+      .toc-sidebar{position:fixed!important;top:0;left:0;right:0;width:100%;max-height:none;border-right:none;z-index:50}
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;padding:0!important;margin:0!important;border:none;transition:max-height 0.25s ease}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto;padding:0.5rem 0 1.25rem!important}
+      .toc-sidebar .toc-toggle{display:flex!important;align-items:center;justify-content:space-between;flex-wrap:nowrap;padding:0.75rem 1rem;min-height:3rem}
+      .toc-sidebar .toc-toggle span{display:inline-flex;align-items:center;gap:0.35rem}
+      .toc-sidebar .toc-toggle #tocChevron{flex-shrink:0}
+      .toc-sidebar .toc-header{display:none!important}
+      .page-wrapper{margin-left:0!important;padding-top:3.25rem}
+    }
+
+    .container-main{max-width:900px;margin:0 auto;padding:0 clamp(1rem,4vw,1.5rem)}
+    .toc-sidebar{background:#fff;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(13,148,136,0.1)}
+    .toc-sidebar .toc-header{padding:0.875rem 1rem;background:var(--header-bg);color:#fff;font-weight:700;font-size:0.95rem;text-align:center;letter-spacing:0.02em}
+    .toc-sidebar .toc-toggle{display:none;align-items:center;justify-content:space-between;width:100%;padding:0.75rem 1rem;background:var(--header-bg);color:#fff;border:none;font-size:0.95rem;font-weight:600;cursor:pointer;text-align:left}
+    .toc-sidebar .toc-toggle:hover{background:#0f766e;color:#fff}
+    .toc-sidebar .toc-toggle #tocChevron{transition:transform 0.2s ease;margin-left:0.5rem}
+    .toc-sidebar .toc-list{padding:0.5rem 0 1.25rem;background:#fff}
+    .toc-sidebar .toc-list a{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8125rem;color:var(--text);text-decoration:none;padding:0.5rem 0.75rem 0.5rem 1rem;line-height:1.4;border-bottom:1px solid #f1f5f9;min-height:2.5rem}
+    .toc-sidebar .toc-list a:hover{color:var(--accent);background:#f0fdfa}
+    .toc-sidebar .toc-list a .ch-num-side{flex-shrink:0;min-width:1.75rem;width:1.75rem;text-align:right;font-weight:700;font-size:0.8rem;color:var(--accent);line-height:1.4}
+    .toc-sidebar .toc-list a .ch-title-side{flex:1;min-width:0;word-wrap:break-word;overflow-wrap:break-word}
+    @media (min-width:992px){
+      .toc-sidebar .toc-header{font-size:1rem;padding:1rem}
+      .toc-sidebar .toc-list a{font-size:0.84375rem;padding:0.5rem 0.75rem 0.5rem 1rem}
+      .toc-sidebar .toc-list a .ch-num-side{min-width:2rem;width:2rem;font-size:0.8125rem}
+    }
+    .content-area{min-width:0}
+    .module-block{margin-bottom:2.5rem}
+    .module-title{background:var(--header-bg);color:#fff;padding:1rem 1.25rem;border-radius:12px;margin-bottom:1.5rem;font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:0.75rem;box-shadow:0 4px 14px rgba(0,0,0,0.12)}
+    #mod1 .module-title{background:var(--mod1)}
+    #mod2 .module-title{background:var(--mod2)}
+    #mod3 .module-title{background:var(--mod3)}
+    #mod4 .module-title{background:var(--mod4)}
+    #mod5 .module-title{background:var(--mod5)}
+    .chapter-card{background:#fff;border-radius:14px;padding:clamp(1.25rem,4vw,2rem);margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(13,148,136,0.08);border-left:4px solid var(--accent)}
+    #mod1 .chapter-card{border-left-color:#0d9488}
+    #mod2 .chapter-card{border-left-color:#0ea5e9}
+    #mod3 .chapter-card{border-left-color:#f59e0b}
+    #mod4 .chapter-card{border-left-color:#a78bfa}
+    #mod5 .chapter-card{border-left-color:#22c55e}
+    .chapter-card > p:first-of-type{background:linear-gradient(90deg,#f0fdfa 0%,#fff 100%);padding:0.5rem 0.75rem;border-radius:8px;border-left:3px solid var(--accent);font-size:0.9rem;margin-bottom:1rem}
+    .chapter-card h2{color:var(--accent);font-size:clamp(1.15rem,3vw,1.4rem);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:3px solid var(--accent-light);display:flex;align-items:center;gap:0.5rem}
+    .chapter-card .ch-num{width:2rem;height:2rem;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem}
+    .chapter-card h3{color:#0f766e;font-size:1.1rem;margin-top:1.25rem;margin-bottom:0.5rem}
+    .chapter-card ul,.chapter-card ol{padding-left:1.5rem;margin:0.5rem 0 1rem}
+    .chapter-card li{margin-bottom:0.35rem}
+    .info-box{background:linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 100%);border-left:4px solid var(--accent);padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .diagram-wrap{background:linear-gradient(180deg,#f8fafc 0%,#f1f5f9 100%);border-radius:12px;padding:1.25rem;margin:1.25rem 0;border:1px solid rgba(13,148,136,0.25);text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .diagram-wrap svg{max-width:100%;height:auto}
+    .diagram-wrap .fig-caption{font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem}
+    .diagram-wrap .diagram-title{font-weight:700;color:#0f766e;font-size:0.95rem;margin-bottom:0.5rem}
+    .example-img-wrap{margin:1rem 0;border-radius:12px;overflow:hidden;border:1px solid rgba(13,148,136,0.2);box-shadow:0 4px 14px rgba(0,0,0,0.06)}
+    .example-img-wrap img{width:100%;height:auto;display:block}
+    .example-img-wrap .fig-caption{padding:0.5rem;background:#f1f5f9;font-size:0.85rem;color:var(--text-muted)}
+    .q-box{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-left:4px solid #3b82f6;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .q-box strong{color:#1d4ed8}
+    .activity-box{background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);border-left:4px solid #eab308;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .activity-box strong{color:#92400e}
+    .simple-english{background:linear-gradient(135deg,#f8fafc 0%,#f0fdfa 100%);padding:0.6rem 0.9rem;border-radius:8px;border-left:3px solid var(--accent);margin:0.6rem 0;font-size:0.92rem;line-height:1.5}
+    .simple-english strong{color:#0f766e}
+    .page-footer{text-align:center;padding:2rem 1rem;font-size:0.9rem;color:var(--text-muted)}
+    .book-hero{background:linear-gradient(145deg,#0f766e 0%,#0d9488 35%,#14b8a6 70%,#2dd4bf 100%);color:#fff;padding:2rem 1rem 2.5rem;text-align:center;border-radius:0 0 24px 24px;box-shadow:0 8px 30px rgba(15,118,110,0.35);position:relative;overflow:hidden}
+    .book-hero::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3C/svg%3E");opacity:0.5;pointer-events:none}
+    .book-hero .hero-img-wrap{max-width:220px;margin:0 auto 1rem;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.2);border:3px solid rgba(255,255,255,0.4)}
+    .book-hero .hero-img-wrap img{width:100%;height:auto;display:block}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800;text-shadow:0 2px 4px rgba(0,0,0,0.15)}
+    .book-hero .lead{margin:0;font-size:0.95rem;opacity:0.95}
+    .table-wrap{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid rgba(13,148,136,0.2);box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .compare-table{width:100%;border-collapse:collapse;font-size:0.9rem;background:#fff}
+    .compare-table th,.compare-table td{padding:0.65rem 0.85rem;text-align:left;border-bottom:1px solid #e2e8f0}
+    .compare-table th{background:linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 100%);color:#0f766e;font-weight:700}
+    .compare-table tr:hover td{background:#f8fafc}
+  </style>
+</head>
+<body>
+  <!-- Sidebar: Chapter 1–40 list only. Fixed on desktop, collapsible on mobile. -->
+  <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapter navigation">
+    <div class="toc-header"><i class="fas fa-list me-2"></i>Chapters </div>
+    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="tocList" id="tocToggle">
+      <span><i class="fas fa-list me-2"></i>Chapters </span>
+      <i class="fas fa-chevron-down" id="tocChevron"></i>
+    </button>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <!-- Scrollable content area -->
+  <div class="page-wrapper">
+  <div id="top" >
+   
+    
+  </div>
+<br>
+  <div class="container-main">
+    <main class="content-area">
+
+      <!-- MODULE OVERVIEW (aligned with lesson plan) -->
+      <section id="overview" class="module-block">
+        <h2 class="module-title">
+          <i class="fas fa-book-open me-2"></i>
+          MODULE OVERVIEW: User Requirements for Software Solution (K72T001M01 / Level 05)
+        </h2>
+        <article id="ch0" class="chapter-card">
+          <h2><span class="ch-num">0</span> General and Specific Objectives</h2>
+          <p><strong>Module focus:</strong> Understand business processes of selected organisations, gather and analyse
+            user requirements, and evaluate the feasibility of proposed software solutions.</p>
+
+          <h3>General Objective</h3>
+          <p>
+            At the end of this module, students will be able to understand and describe business processes of selected
+            organisations, gather and analyse user requirements, and evaluate the feasibility of proposed software
+            solutions.
+          </p>
+
+          <h3>Specific Objectives</h3>
+          <p>At the end of this module the student shall be able to:</p>
+          <ol>
+            <li>Explain the business processes of a selected domain.</li>
+            <li>Prepare and present a requirement analysis report of the selected project.</li>
+            <li>Prepare and present a feasibility study report of the selected project.</li>
+          </ol>
+        </article>
+      </section>
+
+      <!-- MODULE 1 -->
+      <section id="mod1" class="module-block">
+        <h2 class="module-title"><i class="fas fa-store me-2"></i> MODULE 1: User requirements for software solution </h2>
+
+        <!-- Chapter 1 -->
+        <article id="ch1" class="chapter-card">
+          <h2><span class="ch-num">1</span> Introduction to Business &amp; Business Process</h2>
+          <p><strong>Learning focus:</strong> Definition of business, business process, Input→Process→Output model, Sri Lankan examples (tea shop, mobile shop).</p>
+          <h3>Definition of Business</h3>
+          <div class="info-box"><strong>Business</strong> is any organisation or activity that provides goods or services to customers in exchange for money or other value. The aim is usually to make a profit.</div>
+          <p class="simple-english"><strong></strong> A business does something useful for people and gets paid. Customers buy from it. The money left after costs is <strong>profit</strong>. It can be small (tea shop) or big (company).</p>
+          <p>Examples: shop, factory, salon, online seller—e.g. tea shop (kade), mobile shop.</p>
+          <h3>What is a Business Process?</h3>
+          <p>A <strong>business process</strong> is linked steps: <strong>inputs</strong> → <strong>process</strong> → <strong>outputs</strong>. Same steps each time = consistent and efficient.</p>
+          <p class="simple-english"><strong></strong> Like a recipe: you have things at the start (<strong>inputs</strong>), you do steps (<strong>process</strong>), you get something at the end (<strong>output</strong>). Example: tea leaves + order → make tea → cup of tea + payment. Same steps each time = same quality.</p>
+          <h3>Input → Process → Output Model</h3>
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:320px;">
+              <rect x="10" y="20" width="80" height="40" rx="8" fill="#fef3c7" stroke="#eab308"/>
+              <text x="50" y="45" text-anchor="middle" fill="#92400e" font-size="12" font-weight="bold">INPUT</text>
+              <path d="M95 40 L125 40" stroke="#0d9488" stroke-width="2"/><polygon points="125,40 118,36 118,44" fill="#0d9488"/>
+              <rect x="130" y="20" width="80" height="40" rx="8" fill="#0d9488" stroke="#0f766e"/>
+              <text x="170" y="45" text-anchor="middle" fill="white" font-size="12" font-weight="bold">PROCESS</text>
+              <path d="M215 40 L245 40" stroke="#0d9488" stroke-width="2"/><polygon points="245,40 238,36 238,44" fill="#0d9488"/>
+              <rect x="250" y="20" width="60" height="40" rx="8" fill="#d1fae5" stroke="#10b981"/>
+              <text x="280" y="45" text-anchor="middle" fill="#065f46" font-size="11" font-weight="bold">OUTPUT</text>
+            </svg>
+            <p class="fig-caption">Input → Process → Output</p>
+          </div>
+          <h3>Examples from Sri Lanka</h3>
+          <ul>
+            <li><strong>Tea shop (kade):</strong> Input = order + tea/sugar/milk; Process = boil, mix, pour; Output = cup of tea + payment.</li>
+            <li><strong>Mobile shop:</strong> Input = customer + phone/cash; Process = show phones, explain, take payment, hand over; Output = sold phone + money.</li>
+          </ul>
+          <div class="example-img-wrap">
+            <img src="images/shop.svg" alt="Small shop example" width="400" height="auto">
+            <p class="fig-caption">Example: A small shop (goods and service)</p>
+          </div>
+          <div class="q-box">
+            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+            <ol start="1" style="margin:0.5rem 0 0 1.25rem;padding:0;">
+              <li>What is the difference between a business and a hobby?</li>
+              <li>Give one example of input, process, and output for a tea shop.</li>
+            </ol>
+          </div>
+          <div class="activity-box">
+            <strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+            <p class="mb-0 mt-1">Draw a simple business process (with 4–5 steps) for a mobile shop. Label inputs and outputs.</p>
+          </div>
+        </article>
+
+        <!-- Chapter 2 -->
+        <article id="ch2" class="chapter-card">
+          <h2><span class="ch-num">2</span> Types of Business Processes</h2>
+          <p><strong>Learning focus:</strong> Core, support, and management processes; example in a supermarket; group discussion.</p>
+          <h3>Core Processes</h3>
+          <p><strong>Core</strong> = main work that creates value and revenue (e.g. selling, making food, repair).</p>
+          <p class="simple-english"><strong></strong> Core = the work the customer sees and pays for (e.g. selling a phone, making tea). No core work = no money in.</p>
+          <h3>Support Processes</h3>
+          <p><strong>Support</strong> = behind the scenes (stock, cleaning, bills, IT). Needed so core can work.</p>
+          <p class="simple-english"><strong></strong> Support processes are the work that happens behind the scenes. The customer does not buy “cleaning” or “stock keeping”, but the business needs them. If the shop is dirty or has no stock, the core process (selling) cannot work well.</p>
+          <h3>Management Processes</h3>
+          <p><strong>Management</strong> = planning, controlling, improving (targets, reports, decisions).</p>
+          <p class="simple-english"><strong></strong> Management = the owner or manager plans and decides (what to sell, price, who works when). They don’t serve the customer directly but their decisions affect the whole business.</p>
+          <h3>Example in a Supermarket</h3>
+          <ul>
+            <li>Core: Billing at checkout, restocking shelves (visible to customer).</li>
+            <li>Support: Receiving goods from suppliers, cleaning, security.</li>
+            <li>Management: Manager rosters, sales reports, pricing decisions.</li>
+          </ul>
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:280px;">
+              <rect x="20" y="10" width="75" height="36" rx="6" fill="#0d9488" stroke="#0f766e"/>
+              <text x="57" y="32" text-anchor="middle" fill="white" font-size="10" font-weight="bold">CORE</text>
+              <rect x="105" y="10" width="75" height="36" rx="6" fill="#64748b" stroke="#475569"/>
+              <text x="142" y="32" text-anchor="middle" fill="white" font-size="10" font-weight="bold">SUPPORT</text>
+              <rect x="190" y="10" width="75" height="36" rx="6" fill="#6366f1" stroke="#4f46e5"/>
+              <text x="227" y="32" text-anchor="middle" fill="white" font-size="10" font-weight="bold">MANAGEMENT</text>
+              <text x="140" y="75" text-anchor="middle" fill="#64748b" font-size="9">Types of business processes</text>
+            </svg>
+            <p class="fig-caption">Three types of processes</p>
+          </div>
+          <div class="q-box">
+            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+            <ol start="1" style="margin:0.5rem 0 0 1.25rem;padding:0;">
+              <li>Why is billing a core process and cleaning a support process?</li>
+              <li>Name one management process in a small shop.</li>
+            </ol>
+          </div>
+          <div class="activity-box">
+            <strong><i class="fas fa-users me-1"></i> Activity</strong>
+            <p class="mb-0 mt-1">Group discussion: List core, support, and management processes for a supermarket. Compare with another group.</p>
+          </div>
+        </article>
+
+        <!-- Chapter 3 -->
+        <article id="ch3" class="chapter-card">
+          <h2><span class="ch-num">3</span> Business Domains Overview</h2>
+          <p><strong>Learning focus:</strong> Business domain, public vs private sector, service vs manufacturing, ICT in domains.</p>
+          <h3>What is a Business Domain?</h3>
+          <div class="info-box">A <strong>business domain</strong> is the industry or area: telecom, hotels, health, transport, retail, education.</div>
+          <p class="simple-english"><strong></strong> “Domain” here means the type of business or industry. Telecom domain = companies like Dialog and Mobitel. Health domain = hospitals and clinics. Education domain = schools and institutes. When we say “hotel domain” we mean the hotel industry and the way hotels work.</p>
+          <h3>Public vs Private Sector</h3>
+          <p><strong>Public</strong> = government-run (state hospitals, railways). <strong>Private</strong> = run by companies or individuals (Dialog, private schools).</p>
+          <p class="simple-english"><strong></strong> Government runs it = public (e.g. state hospital). A person or company runs it for profit = private (e.g. private clinic, Dialog).</p>
+          <h3>Service vs Manufacturing</h3>
+          <p><strong>Service</strong> = labour/expertise (telecom, hotels). <strong>Manufacturing</strong> = physical products (factories). Many do both.</p>
+          <p class="simple-english"><strong></strong> When you buy a thing you can touch (soap, phone, rice), that is from <strong>manufacturing</strong> or selling <strong>goods</strong>. When you pay for someone to do something for you (haircut, room for a night, doctor’s check-up), that is a <strong>service</strong>. A mobile shop sells goods (phones) and may also give a service (repair).</p>
+          <div class="example-img-wrap"><img src="images/services.svg" alt="Services – work done for the customer" width="400" height="auto"><p class="fig-caption">Services: work done for you (e.g. repair, advice, delivery)</p></div>
+          <h3>ICT Involvement</h3>
+          <p>ICT in every domain: billing, booking, patient records, POS, LMS—faster work, less error, data in one place.</p>
+          <p class="simple-english"><strong></strong> ICT = computers, software, internet. Shops use it to bill; hospitals for patient records; schools for grades. It makes work faster and keeps data in one place.</p>
+          <div class="q-box">
+            <strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+            <ol start="1" style="margin:0.5rem 0 0 1.25rem;padding:0;">
+              <li>Is a government hospital in the public or private sector?</li>
+              <li>Give one example of ICT used in the education domain.</li>
+            </ol>
+          </div>
+          <div class="activity-box">
+            <strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+            <p class="mb-0 mt-1">List three business domains and one main process for each. Mark whether each is mainly service or manufacturing.</p>
+          </div>
+        </article>
+
+        <!-- Chapter 4 -->
+        <article id="ch4" class="chapter-card">
+          <h2><span class="ch-num">4</span> Telecommunication Domain</h2>
+          <p><strong>Learning focus:</strong> Examples (Dialog, Mobitel), SIM registration, recharge process, stakeholders, software (billing, CRM).</p>
+          <h3>Example: Dialog, Mobitel</h3>
+          <p>In Sri Lanka, telecom operators like Dialog and Mobitel provide mobile voice, data, and value-added services. Their main processes include selling SIMs, recharging, customer care, and network management.</p>
+          <p class="simple-english"><strong></strong> Telecom gives you a SIM to call and use the internet. You can add money (recharge) when balance is low. Buy SIM or recharge = part of their business process.</p>
+          <h3>SIM Registration Process</h3>
+          <ul><li>Customer visits outlet with NIC → Staff verifies ID → Form filled → Data entered in system → SIM activated → Hand over to customer.</li></ul>
+          <p class="simple-english"><strong></strong> You must show your National Identity Card (NIC) when you buy a new SIM. The shop checks your ID, fills a form, and enters your details in the company’s computer. Then the SIM is activated and given to you. This is done for security and to follow the law.</p>
+          <h3>Recharge Process</h3>
+          <ul><li>Customer gives mobile number and amount → Cash/card payment → System credits balance → Receipt/SMS confirmation.</li></ul>
+          <p class="simple-english"><strong></strong> To recharge: give your number and amount, pay by cash or card. The system adds the amount to your number. You get a receipt or SMS. Same steps every time.</p>
+          <h3>Stakeholders &amp; Software</h3>
+          <p>Stakeholders: customers, dealers, call centre, network team, regulator (TRC). Software: <strong>Billing system</strong> (recharges, usage), <strong>CRM</strong> (customer data, complaints).</p>
+          <p class="simple-english"><strong></strong> Many are involved: you, the shop (dealer), call centre, network team, and regulator (TRC). The company uses a <strong>billing system</strong> for recharges and <strong>CRM</strong> for customer details and complaints.</p>
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:300px;">
+              <rect x="10" y="15" width="65" height="40" rx="6" fill="#e0f2fe"/><text x="42" y="40" text-anchor="middle" font-size="9">Customer</text>
+              <rect x="90" y="15" width="65" height="40" rx="6" fill="#0d9488"/><text x="122" y="40" text-anchor="middle" fill="white" font-size="9">SIM Reg</text>
+              <rect x="170" y="15" width="65" height="40" rx="6" fill="#0d9488"/><text x="202" y="40" text-anchor="middle" fill="white" font-size="9">Recharge</text>
+              <rect x="250" y="15" width="40" height="40" rx="6" fill="#d1fae5"/><text x="270" y="40" text-anchor="middle" font-size="8">Billing</text>
+            </svg>
+            <p class="fig-caption">Telecom: registration and recharge flow</p>
+          </div>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Why is SIM registration required?</li><li>Name two software systems used in telecom.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw the recharge process (4–5 steps) and label who does each step.</p></div>
+        </article>
+
+        <!-- Chapter 5 -->
+        <article id="ch5" class="chapter-card">
+          <h2><span class="ch-num">5</span> Hotel Industry Domain</h2>
+          <p><strong>Learning focus:</strong> Booking, check-in/check-out, room management, hotel software.</p>
+          <h3>Booking Process</h3>
+          <p>Guest requests room (phone/online) → Check availability → Confirm rate and dates → Take payment or guarantee → Send confirmation (email/SMS).</p>
+          <p class="simple-english"><strong></strong> You ask for a room (phone or online). Hotel checks if a room is free and tells you the price. You pay or give a guarantee; they send a confirmation. Booking done.</p>
+          <h3>Check-in / Check-out</h3>
+          <p><strong>Check-in:</strong> Guest arrives → Verify booking and ID → Collect payment if not done → Assign room → Hand key/card. <strong>Check-out:</strong> Guest returns key → Settle extras → Print bill → Payment → Depart.</p>
+          <p class="simple-english"><strong></strong> <strong>Check-in</strong> = you arrive, show booking and ID, get room and key. <strong>Check-out</strong> = you return the key, pay extras and final bill, then leave.</p>
+          <h3>Room Management &amp; Software</h3>
+          <p>Room status (vacant/occupied/cleaning), housekeeping schedule, maintenance. Hotel software: Property Management System (PMS), booking engine, point-of-sale for restaurant/minibar.</p>
+          <p class="simple-english"><strong></strong> Hotel tracks which rooms are empty, occupied, or being cleaned. They use <strong>PMS</strong> for bookings and billing. Restaurant and minibar may use a separate system to bill guests.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is the main output of the check-in process?</li><li>Name one hotel software system.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">List the steps of the check-out process in order. Identify one support process in a hotel.</p></div>
+        </article>
+
+        <!-- Chapter 6 -->
+        <article id="ch6" class="chapter-card">
+          <h2><span class="ch-num">6</span> Health Sector Domain</h2>
+          <p><strong>Learning focus:</strong> Patient registration, appointments, laboratory process, Hospital Information Systems (HIS).</p>
+          <h3>Patient Registration</h3>
+          <p>Patient arrives → Fill registration form → Enter details in system → Issue OPD card/ID → Direct to department or queue.</p>
+          <p class="simple-english"><strong></strong> First time at hospital: you fill a form with your details. Staff enter it in the computer and give you an OPD card or ID. Then you go to the right department or queue for the doctor.</p>
+          <h3>Appointment System</h3>
+          <p>Patient or staff books slot (in person/phone/online) → System checks doctor availability → Confirms date/time → Reminder sent.</p>
+          <p class="simple-english"><strong></strong> You can book a time to see the doctor (in person, phone, or online). The system checks when the doctor is free and gives you a date and time. Hospital may send a reminder.</p>
+          <h3>Laboratory Process</h3>
+          <p>Doctor requests test → Sample collected → Sent to lab → Lab performs test → Result entered in HIS → Doctor/patient views result.</p>
+          <p class="simple-english"><strong></strong> When the doctor needs a blood test or other lab test, he or she orders it. Your blood or sample is taken and sent to the laboratory. The lab does the test and types the result into the hospital’s computer system (HIS). The doctor (and sometimes you) can then see the result on the screen.</p>
+          <h3>Hospital Information Systems (HIS)</h3>
+          <p>HIS supports registration, appointments, lab, pharmacy, billing, and patient records. It links departments and keeps data in one place.</p>
+          <p class="simple-english"><strong></strong> <strong>HIS</strong> is the main hospital software. It is used for registration, appointments, lab results, pharmacy, billing, and patient records. One system for all departments instead of paper files.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is the purpose of patient registration?</li><li>How does the laboratory process use HIS?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw a simple flow: from doctor’s test request to patient receiving the result.</p></div>
+        </article>
+
+        <!-- Chapter 7 -->
+        <article id="ch7" class="chapter-card">
+          <h2><span class="ch-num">7</span> Transport Domain</h2>
+          <p><strong>Learning focus:</strong> Ticket booking, fleet management, GPS tracking, e-ticketing.</p>
+          <h3>Ticket Booking Process</h3>
+          <p>Customer selects route and date → System shows availability and fare → Customer pays → Ticket (paper or e-ticket) issued → Customer travels on scheduled trip.</p>
+          <p class="simple-english"><strong></strong> You choose route and date. The system shows if seats are free and the price. You pay and get a ticket (paper or e-ticket on phone). On the day, you show the ticket and travel.</p>
+          <h3>Fleet Management</h3>
+          <p>Managing vehicles: maintenance schedule, fuel, driver assignment, route planning. Ensures buses/trains run on time and are safe.</p>
+          <p class="simple-english"><strong></strong> “Fleet” means all the buses or trains the company owns. Fleet management is the work of keeping them in good condition (maintenance), giving them fuel, assigning drivers, and planning routes. This helps trips run on time and keeps passengers safe.</p>
+          <h3>GPS Tracking &amp; E-ticketing</h3>
+          <p><strong>GPS</strong> shows vehicle location in real time (safety, delays). <strong>E-ticketing</strong> = digital ticket (app/email/SMS), no need for paper; reduces queues and fraud.</p>
+          <p class="simple-english"><strong></strong> <strong>GPS</strong> shows where each bus or train is. Company can tell passengers about delays and improve safety. <strong>E-ticketing</strong> = ticket on your phone or email, no paper. Faster and less cheating.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Give two benefits of e-ticketing.</li><li>How does GPS help in transport?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">List inputs and outputs of the ticket booking process. Suggest one improvement using ICT.</p></div>
+        </article>
+
+        <!-- Chapter 8 -->
+        <article id="ch8" class="chapter-card">
+          <h2><span class="ch-num">8</span> Supermarket Domain</h2>
+          <p><strong>Learning focus:</strong> Inventory, billing, supplier management, POS.</p>
+          <h3>Inventory Management</h3>
+          <p>Tracking stock: what is in the warehouse and on shelves. Reorder when level is low. Reduces stock-outs and overstocking.</p>
+          <p class="simple-english"><strong></strong> Inventory means “how much of each product we have”. The supermarket must know what is in the store and in the warehouse. When something is running low, they order more from the supplier. This way they do not run out of products (stock-out) and do not keep too much (overstocking).</p>
+          <h3>Billing Process</h3>
+          <p>Customer brings items → Cashier scans/enters items → POS calculates total → Customer pays (cash/card) → Receipt printed → Items packed.</p>
+          <p class="simple-english"><strong></strong> You bring items to the checkout. Cashier scans (or types) each item. Computer adds the total. You pay by cash or card. Cashier prints a receipt and packs. That is the billing process.</p>
+          <h3>Supplier Management &amp; POS</h3>
+          <p>Ordering from suppliers, receiving goods, checking quality and quantity. <strong>POS (Point of Sale)</strong> = system at checkout: scans barcode, applies prices, records sale, updates inventory.</p>
+          <p class="simple-english"><strong></strong> Suppliers sell products to the supermarket. Supermarket orders, receives goods, and checks quality. <strong>POS</strong> = computer at checkout: reads barcodes, shows prices, records sale, updates stock.</p>
+          <div class="example-img-wrap"><img src="images/goods.svg" alt="Goods and inventory" width="400" height="auto"><p class="fig-caption">Goods on shelf – inventory and billing</p></div>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What does POS do at checkout?</li><li>Why is inventory management important?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-users me-1"></i> Activity</strong><p class="mb-0 mt-1">Group discussion: List core, support, and management processes in a supermarket. Compare with Chapter 2.</p></div>
+        </article>
+
+        <!-- Chapter 9 -->
+        <article id="ch9" class="chapter-card">
+          <h2><span class="ch-num">9</span> Education Domain</h2>
+          <p><strong>Learning focus:</strong> Student registration, examination process, LMS, result processing.</p>
+          <h3>Student Registration</h3>
+          <p>Student submits form and documents → Office verifies → Data entered in system → Student gets ID and course schedule.</p>
+          <p class="simple-english"><strong></strong> When you join a school or course, you fill a form and give documents (e.g. birth certificate, previous results). The office checks them and enters your details in the computer. You get a student ID and a schedule that shows your subjects and classes.</p>
+          <h3>Examination Process</h3>
+          <p>Schedule announced → Hall slips issued → Exams conducted → Answer scripts collected → Marking → Results entered → Results published.</p>
+          <p class="simple-english"><strong></strong> First the exam dates and times are announced. You get a hall slip that says which room you sit in. On the day you write the exam and hand in your answer script. Teachers mark the scripts, marks are entered in the system, and then results are published so you can see your grades.</p>
+          <h3>LMS &amp; Result Processing</h3>
+          <p><strong>LMS (Learning Management System)</strong> = online platform for courses, materials, assignments, grades. Result processing: marks from exams/assignments → entered/imported → grades calculated → transcripts and reports generated.</p>
+          <p class="simple-english"><strong></strong> An <strong>LMS</strong> is an online system where you can see your courses, download materials, submit assignments, and check your grades. Result processing means: after exams, marks are entered (or imported) into the system, the system calculates grades and GPAs, and then it produces result sheets and reports.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is an LMS used for?</li><li>Name three steps in the examination process.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw the student registration process (5 steps). Identify one ICT tool used in education.</p></div>
+        </article>
+
+        <!-- Chapter 10 -->
+        <article id="ch10" class="chapter-card">
+          <h2><span class="ch-num">10</span> Stakeholders in Business Process</h2>
+          <p><strong>Learning focus:</strong> Internal/external stakeholders, customers/suppliers/government, responsibilities, stakeholder diagram.</p>
+          <h3>Internal Stakeholders</h3>
+          <p>People inside the organisation: owners, managers, employees. They run the business and are affected by its performance.</p>
+          <p class="simple-english"><strong></strong> Internal stakeholders are the people who work inside the business. The owner owns it; the manager runs it; the employees do the day-to-day work. They all have an interest in the business doing well because their job and income depend on it.</p>
+          <h3>External Stakeholders</h3>
+          <p>Outside the organisation: <strong>customers</strong> (buy goods/services), <strong>suppliers</strong> (provide materials), <strong>government</strong> (laws, tax, regulations), banks, community.</p>
+          <p class="simple-english"><strong></strong> External stakeholders are outside the business but are still affected by it or affect it. Customers buy from the business. Suppliers sell materials to the business. The government makes laws and collects tax. Banks may lend money. The local community is affected by the business (e.g. jobs, noise).</p>
+          <h3>Stakeholder Responsibilities</h3>
+          <p>Each has a role: customers pay and give feedback; suppliers deliver on time; government enforces rules; business must satisfy customers and comply with law.</p>
+          <p class="simple-english"><strong></strong> Everyone has a role. Customers should pay and can give feedback. Suppliers should deliver good quality on time. The government makes sure rules are followed. The business should serve customers well and follow the law. When everyone does their part, the business can run smoothly.</p>
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:280px;">
+              <rect x="100" y="30" width="80" height="50" rx="8" fill="#0d9488"/><text x="140" y="58" text-anchor="middle" fill="white" font-size="11">BUSINESS</text>
+              <rect x="20" y="90" width="60" height="36" rx="6" fill="#e0f2fe"/><text x="50" y="112" text-anchor="middle" font-size="9">Customers</text>
+              <rect x="200" y="90" width="60" height="36" rx="6" fill="#fef3c7"/><text x="230" y="112" text-anchor="middle" font-size="9">Suppliers</text>
+              <rect x="110" y="0" width="60" height="28" rx="6" fill="#e0e7ff"/><text x="140" y="18" text-anchor="middle" font-size="8">Government</text>
+              <line x1="140" y1="80" x2="50" y2="90" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="140" y1="80" x2="230" y2="90" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="140" y1="30" x2="140" y2="0" stroke="#94a3b8" stroke-width="1"/>
+            </svg>
+            <p class="fig-caption">Stakeholder relationship diagram</p>
+          </div>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Who are internal and who are external stakeholders?</li><li>What is the government’s role as a stakeholder?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw a stakeholder diagram for a mobile shop. Label at least four stakeholders and their link to the business.</p></div>
+        </article>
+
+      </section>
+
+      <!-- MODULE 2 -->
+      <section id="mod2" class="module-block">
+        <h2 class="module-title"><i class="fas fa-search me-2"></i> MODULE 2: Study of Business Processes</h2>
+
+        <article id="ch11" class="chapter-card">
+          <h2><span class="ch-num">11</span> Understanding Current Systems</h2>
+          <p><strong>Learning focus:</strong> What is current system study, why analyse existing systems, real-world example.</p>
+          <h3>What is Current System Study?</h3>
+          <div class="info-box"><strong>Current system study</strong> means studying how an organisation does its work today: processes, people, tools, and data. We look at what works well and what does not.</div>
+          <p class="simple-english"><strong></strong> Before we change anything, we must understand how work is done now. We look at the steps people follow, who does what, what forms and tools they use, and what data they have. We also note what is slow, wrong, or wasteful. This is called studying the current system.</p>
+          <h3>Why Analyse Existing Systems?</h3>
+          <p>To find problems (delays, errors, waste), to design better processes or new software, and to avoid repeating the same mistakes. It is the first step before improvement or IT projects.</p>
+          <p class="simple-english"><strong></strong> If we do not study the current system, we might build something that does not fit. We might repeat the same mistakes or miss real problems. By studying first, we know what to improve and what the new system must do.</p>
+          <h3>Real-world Example</h3>
+          <p>Before introducing a new billing system, we study: How does the shop bill now? Who does it? What forms are used? Where do errors happen? This study gives the basis for requirements.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Why do we study the current system before changing it?</li><li>Name two things we look at in a current system study.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Choose one process (e.g. school registration). List what you would observe and ask in a current system study.</p></div>
+        </article>
+
+        <article id="ch12" class="chapter-card">
+          <h2><span class="ch-num">12</span> Process Mapping Techniques</h2>
+          <p><strong>Learning focus:</strong> Flowcharts, swimlane diagrams, BPMN basics, practical drawing.</p>
+          <h3>Flowcharts</h3>
+          <p>Flowcharts use shapes (start/end, process, decision, arrow) to show steps and choices. Easy to read and good for simple processes.</p>
+          <p class="simple-english"><strong></strong> A flowchart is a picture of a process. We use an oval for start and end, a rectangle for a step (e.g. “Take payment”), a diamond for a decision (e.g. “Cash or card?”), and arrows to show the order. Anyone can follow the flow and understand the process.</p>
+          <h3>Swimlane Diagrams</h3>
+          <p>Same as flowchart but each <strong>swimlane</strong> is one person or department. Shows who does which step. Reduces confusion in multi-role processes.</p>
+          <p class="simple-english"><strong></strong> A swimlane diagram is like a flowchart split into rows or columns. Each row (or column) is one person or department—like “Cashier”, “Manager”. The steps are placed in the row of whoever does them. So you can see at a glance who does what.</p>
+          <h3>BPMN Basics</h3>
+          <p>BPMN (Business Process Model and Notation) is a standard. It has events (circle), activities (rounded rectangle), gateways (diamond), and flows. Used in professional tools.</p>
+          <p class="simple-english"><strong></strong> BPMN is a set of rules and shapes used worldwide to draw business processes. Circles show events (e.g. “Order received”), rounded rectangles show activities (e.g. “Send confirmation”), diamonds show decisions or splits. Using the same symbols everywhere avoids confusion.</p>
+          <div class="diagram-wrap">
+            <svg viewBox="0 0 260 90" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:260px;">
+              <ellipse cx="40" cy="45" rx="25" ry="15" fill="#0d9488"/><text x="40" y="49" text-anchor="middle" fill="white" font-size="9">Start</text>
+              <rect x="85" y="32" width="60" height="26" rx="4" fill="#e0f2fe"/><text x="115" y="48" text-anchor="middle" font-size="9">Process</text>
+              <polygon points="165,45 195,32 225,45 195,58" fill="#fef3c7"/><text x="195" y="49" text-anchor="middle" font-size="8">Decision</text>
+              <ellipse cx="255" cy="45" rx="20" ry="12" fill="#0f766e"/><text x="255" y="49" text-anchor="middle" fill="white" font-size="8">End</text>
+              <path d="M65 45 L85 45 M145 45 L165 45 M225 45 L235 45" stroke="#64748b" stroke-width="2"/>
+            </svg>
+            <p class="fig-caption">Simple flowchart: Start → Process → Decision → End</p>
+          </div>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is a swimlane used for?</li><li>Name two BPMN elements.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw a flowchart for “customer pays by cash or card” with a decision shape. Then add one swimlane for Cashier.</p></div>
+        </article>
+
+        <article id="ch13" class="chapter-card">
+          <h2><span class="ch-num">13</span> Identifying Process Problems</h2>
+          <p><strong>Learning focus:</strong> Bottlenecks, delays, manual errors, duplicate data entry.</p>
+          <h3>Bottlenecks</h3>
+          <p>A <strong>bottleneck</strong> is a step that slows down the whole process because capacity is limited (e.g. one cashier, one machine). Fix: add capacity or balance workload.</p>
+          <p class="simple-english"><strong></strong> A bottleneck is like a narrow part of a bottle—everything has to pass through it, so it gets stuck. In a process, it is the step that everyone waits at. Example: only one cashier, so a long queue forms. To fix it we can add another cashier or make the step faster.</p>
+          <h3>Delays</h3>
+          <p>Delays = waiting time between steps (e.g. forms waiting for approval, queue at checkout). Reduce by simplifying steps or parallel work.</p>
+          <p class="simple-english"><strong></strong> Delays are when work has to wait. For example forms wait for the manager’s approval, or customers wait in a queue. We can reduce delays by doing some steps in parallel (at the same time) or by removing unnecessary steps.</p>
+          <h3>Manual Errors &amp; Duplicate Entry</h3>
+          <p><strong>Manual errors</strong> = mistakes when typing or calculating. <strong>Duplicate data entry</strong> = same data entered more than once (waste and more errors). Solution: automate, validate, single source of data.</p>
+          <p class="simple-english"><strong></strong> When people type or calculate by hand, they can make mistakes—wrong number, wrong name. “Duplicate entry” means the same information is typed in more than once (e.g. once at reception and again in the lab). That wastes time and increases errors. We can reduce this by using a single system where data is entered once and shared, and by using validation (e.g. the system checks that the value is allowed).</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is a bottleneck? Give one example.</li><li>How can duplicate data entry be reduced?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">List three possible problems in a hospital registration process and suggest one improvement for each.</p></div>
+        </article>
+
+        <article id="ch14" class="chapter-card">
+          <h2><span class="ch-num">14</span> Stakeholder Role Analysis</h2>
+          <p><strong>Learning focus:</strong> Role identification, responsibility matrix (RACI), case study.</p>
+          <h3>Role Identification</h3>
+          <p>Identify who is involved in each process: by job title or role (e.g. Cashier, Manager, Customer). Clarifies who does what.</p>
+          <p class="simple-english"><strong></strong> For each process we list the people (or roles) involved: for example Cashier, Manager, Customer. We do not always use real names—we use the role or job title. This makes it clear who does each step.</p>
+          <h3>RACI Matrix</h3>
+          <p><strong>R</strong> = Responsible (does the work), <strong>A</strong> = Accountable (finally answerable), <strong>C</strong> = Consulted (asked for input), <strong>I</strong> = Informed (told of result). RACI table: rows = tasks, columns = roles; cell = R/A/C/I.</p>
+          <p class="simple-english"><strong></strong> RACI is a simple way to say who is involved in each task. <strong>R</strong> = the person who does the work. <strong>A</strong> = the person who is finally answerable (usually one per task). <strong>C</strong> = people we ask for advice before deciding. <strong>I</strong> = people we just inform after. We draw a table: tasks in rows, roles in columns, and write R, A, C, or I in each cell.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What does R and A mean in RACI?</li><li>Why use a RACI matrix?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-users me-1"></i> Activity</strong><p class="mb-0 mt-1">Case study: For “approve leave request”, assign R, A, C, I to Manager, Employee, HR. Discuss in group.</p></div>
+        </article>
+
+        <article id="ch15" class="chapter-card">
+          <h2><span class="ch-num">15</span> Data Flow in Business Process</h2>
+          <p><strong>Learning focus:</strong> What is data flow, DFD Level 0, data stores, practical example.</p>
+          <h3>What is Data Flow?</h3>
+          <p><strong>Data flow</strong> = how data moves between processes, external entities (people/systems), and data stores. Shown in Data Flow Diagrams (DFD).</p>
+          <p class="simple-english"><strong></strong> Data flow means “where does information go?” For example: the customer gives an order (data flows from customer to the process), the process saves it in a file (data flows to a data store), and the process sends a receipt (data flows back to the customer). We draw this in a Data Flow Diagram (DFD).</p>
+          <h3>DFD Level 0</h3>
+          <p>Level 0 (context diagram): one process in the centre, external entities (customer, supplier) and data flows in/out. No internal detail. Good for scope.</p>
+          <p class="simple-english"><strong></strong> Level 0 DFD is the simplest picture. We draw one box in the middle for the whole system (e.g. “Library System”). Around it we draw the people or systems that send or receive data (e.g. Member, Librarian). Arrows show what data goes in and out. We do not show internal steps yet—just the big picture.</p>
+          <h3>Data Stores</h3>
+          <p>Data store = where data is kept (e.g. database, file). In DFD it is a rectangle open on two sides. Flows show data read from or written to the store.</p>
+          <p class="simple-english"><strong></strong> A data store is a place where we keep data—like a database or a file. In the diagram we draw it as a rectangle with two short lines on the sides. Arrows show when data is written to the store (e.g. “Save booking”) or read from it (e.g. “Get member details”).</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What does a data store represent in a DFD?</li><li>What is shown in a Level 0 DFD?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Draw a Level 0 DFD for “Library issue book”: one process, two external entities (Member, Librarian), and label two data flows.</p></div>
+        </article>
+
+        <article id="ch16" class="chapter-card">
+          <h2><span class="ch-num">16</span> Performance Measurement</h2>
+          <p><strong>Learning focus:</strong> KPIs, productivity metrics, customer satisfaction.</p>
+          <h3>KPIs</h3>
+          <p><strong>Key Performance Indicators (KPIs)</strong> = numbers used to measure success (e.g. sales per day, number of complaints, on-time delivery %). Must be clear and measurable.</p>
+          <p class="simple-english"><strong></strong> A KPI is a number we use to see if we are doing well. For a shop, examples are: sales per day, how many customers came, how many complaints we got. We must be able to measure it (count it or calculate it). If the number is good, we are on track; if not, we need to improve.</p>
+          <h3>Productivity Metrics</h3>
+          <p>Productivity = output per unit of input (e.g. bills per hour, orders per day). Helps compare periods or teams and find bottlenecks.</p>
+          <p class="simple-english"><strong></strong> Productivity means how much we get done for the time or effort we put in. For example: how many bills per hour, or how many orders per day. When we measure this, we can compare different days or different staff and see where we are slow (bottleneck).</p>
+          <h3>Customer Satisfaction</h3>
+          <p>Measured by surveys, ratings, or repeat visits. High satisfaction usually means the process meets customer needs.</p>
+          <p class="simple-english"><strong></strong> Customer satisfaction means whether customers are happy with our service or product. We can measure it by asking them (survey), by a rating out of 5, or by seeing if they come again. If satisfaction is high, our process is probably good; if low, we need to improve.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Give two examples of KPIs for a shop.</li><li>Why measure customer satisfaction?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Define two KPIs for a hospital OPD and say how you would collect the data.</p></div>
+        </article>
+
+        <article id="ch17" class="chapter-card">
+          <h2><span class="ch-num">17</span> Risk Identification in Processes</h2>
+          <p><strong>Learning focus:</strong> Operational, financial, technical risks.</p>
+          <h3>Operational Risks</h3>
+          <p>Risks in day-to-day work: staff absent, machine breakdown, supplier delay. Can disrupt the process.</p>
+          <p class="simple-english"><strong></strong> Operational risks are things that can go wrong in daily work. For example: a staff member is absent, a machine breaks, or a supplier is late. When these happen, the process can slow down or stop. We identify them so we can plan (e.g. backup staff, maintenance).</p>
+          <h3>Financial Risks</h3>
+          <p>Cash flow, cost overrun, fraud, bad debt. Affect profit and sustainability.</p>
+          <p class="simple-english"><strong></strong> Financial risks are about money. Examples: not enough cash to pay bills (cash flow), the project costs more than planned (cost overrun), someone steals money (fraud), or customers do not pay (bad debt). These can hurt profit and whether the business can continue.</p>
+          <h3>Technical Risks</h3>
+          <p>System failure, data loss, security breach, wrong software choice. Important when processes depend on IT.</p>
+          <p class="simple-english"><strong></strong> Technical risks are about technology. The system might fail, we might lose data, someone might hack in (security breach), or we might choose software that does not work well. When the business depends on IT, we must think about these and plan (e.g. backups, security, training).</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Give one operational and one technical risk.</li><li>Why identify risks before implementing a new system?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">List three risks for an online ticket booking system and one mitigation for each.</p></div>
+        </article>
+
+        <article id="ch18" class="chapter-card">
+          <h2><span class="ch-num">18</span> Business Process Documentation</h2>
+          <p><strong>Learning focus:</strong> System documentation, process manuals, SOPs.</p>
+          <h3>System Documentation</h3>
+          <p>Written description of how the system works: purpose, users, steps, inputs/outputs, screens, data. Helps training and future changes.</p>
+          <p class="simple-english"><strong></strong> Documentation is writing down how the system works: what it is for, who uses it, what steps they follow, what data goes in and out, and what appears on the screen. New staff can learn from it, and when we want to change the system later, we have a clear reference.</p>
+          <h3>Process Manuals &amp; SOPs</h3>
+          <p><strong>Process manual</strong> = document describing processes. <strong>SOP (Standard Operating Procedure)</strong> = step-by-step instructions for a specific task so everyone does it the same way.</p>
+          <p class="simple-english"><strong></strong> A process manual describes one or more processes in words and maybe with diagrams. An <strong>SOP</strong> is a short, step-by-step guide for one task (e.g. “How to recharge a mobile”). When everyone follows the same steps, quality is consistent and mistakes are fewer.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is an SOP used for?</li><li>Who benefits from process documentation?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Write a short SOP (5 steps) for “How to recharge a mobile at the counter”.</p></div>
+        </article>
+
+        <article id="ch19" class="chapter-card">
+          <h2><span class="ch-num">19</span> Introduction to Business Process Re-engineering (BPR)</h2>
+          <p><strong>Learning focus:</strong> Definition of BPR, need for BPR, examples.</p>
+          <h3>Definition of BPR</h3>
+          <div class="info-box"><strong>BPR</strong> = redesigning business processes from scratch to achieve big improvements in cost, speed, quality, or service. Often involves removing unnecessary steps and using technology.</div>
+          <p class="simple-english"><strong></strong> BPR means we do not just improve a process a little—we rethink it from the beginning. We ask: “If we started today, how would we do this?” We often remove steps that are no longer needed and use technology to do things faster and with fewer errors.</p>
+          <h3>Need for BPR</h3>
+          <p>When processes are slow, costly, or no longer fit the market. BPR asks “How would we do this if we started today?” instead of small tweaks.</p>
+          <p class="simple-english"><strong></strong> We need BPR when the current way of working is too slow, too expensive, or not what customers want anymore. Instead of small changes, we redesign the whole process to get a big improvement.</p>
+          <h3>Examples</h3>
+          <p>Bank: from paper forms to online banking. Hospital: from paper files to HIS and online appointments. Retail: from manual stock to integrated POS and inventory.</p>
+          <p class="simple-english"><strong></strong> Banks used to use only paper; now many things are done online. Hospitals used to keep paper files; now they use HIS and online appointments. Shops used to count stock by hand; now POS and inventory systems do it automatically. These are all examples of BPR.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is the main idea behind BPR?</li><li>Give one example of BPR in Sri Lanka.</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-users me-1"></i> Activity</strong><p class="mb-0 mt-1">Group discussion: One process in your institution that could be re-engineered. What would you change?</p></div>
+        </article>
+
+        <article id="ch20" class="chapter-card">
+          <h2><span class="ch-num">20</span> BPR Implementation Strategies</h2>
+          <p><strong>Learning focus:</strong> Process redesign, automation, digital transformation, case study.</p>
+          <h3>Process Redesign</h3>
+          <p>Change the order or content of steps: combine steps, remove duplication, parallel work. Focus on value for the customer.</p>
+          <p class="simple-english"><strong></strong> Process redesign means we change how we do the steps. We might combine two steps into one, remove a step that is not needed, or do two things at the same time (in parallel). The aim is to give more value to the customer with less waste.</p>
+          <h3>Automation</h3>
+          <p>Use software to do repetitive tasks (e.g. auto calculations, reminders, reports). Reduces manual errors and time.</p>
+          <p class="simple-english"><strong></strong> Automation means the computer does the work instead of a person typing or calculating every time. For example: the system calculates the total, sends a reminder, or generates a report. This reduces mistakes and saves time.</p>
+          <h3>Digital Transformation</h3>
+          <p>Broader use of digital tools: online services, mobile app, cloud, data analytics. Often goes with BPR to support new processes.</p>
+          <p class="simple-english"><strong></strong> Digital transformation means the whole organisation starts using digital tools more: online services, mobile apps, cloud storage, and data analysis. It is a big change in how the business works, and it often supports the new processes we design in BPR.</p>
+          <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Difference between automation and process redesign?</li><li>What is digital transformation in one sentence?</li></ol></div>
+          <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong><p class="mb-0 mt-1">Case study: Choose a real organisation. Suggest one BPR strategy (redesign / automation / digital) and justify.</p></div>
+        </article>
+
+      </section>
+
+      <!-- MODULE 3 -->
+      <section id="mod3" class="module-block">
+        <h2 class="module-title"><i class="fas fa-clipboard-list me-2"></i> MODULE 3: Requirements Gathering</h2>
+        <article id="ch21" class="chapter-card"><h2><span class="ch-num">21</span> Introduction to Requirements Engineering</h2><p><strong>Learning focus:</strong> What are requirements, importance of requirements.</p><h3>What are Requirements?</h3><div class="info-box"><strong>Requirements</strong> are what the system or product must do (functional) and how well it must do it (non-functional). They come from users and stakeholders.</div><p class="simple-english"><strong></strong> A requirement is something the system must do or how it must behave. For example: “The system must print a receipt” or “The system must respond within 3 seconds”. We get requirements from the people who will use the system. Writing them clearly helps us build the right thing.</p><h3>Importance</h3><p>Clear requirements reduce rework, avoid wrong solutions, and form the basis for design and testing. Poor requirements lead to project failure.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Define requirement in one sentence.</li><li>Why are requirements important?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">List three possible requirements for a school registration system.</p></div></article>
+        <article id="ch22" class="chapter-card"><h2><span class="ch-num">22</span> Importance of Requirements Gathering</h2><p><strong>Learning focus:</strong> Avoid project failure, reduce cost, improve quality.</p><p>Gathering requirements properly helps <strong>avoid project failure</strong> (building the wrong thing), <strong>reduce cost</strong> (fewer changes later), and <strong>improve quality</strong> (system meets real needs).</p><p class="simple-english"><strong></strong> If we do not ask users what they need, we might build something they cannot use. Fixing it later costs more time and money. When we gather requirements well, we build the right system once, so cost is lower and quality is better.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>How does requirements gathering reduce cost?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Discuss: What can go wrong if we skip requirements gathering?</p></div></article>
+        <article id="ch23" class="chapter-card"><h2><span class="ch-num">23</span> Stakeholder Identification for Requirements</h2><p><strong>Learning focus:</strong> Primary users, secondary users, IT team.</p><p><strong>Primary users</strong> = use the system daily (e.g. cashier). <strong>Secondary users</strong> = use sometimes or get reports (e.g. manager). <strong>IT team</strong> = build and maintain the system. All can give requirements.</p><p class="simple-english"><strong></strong> We must know who will use the system and who is affected by it. Primary users use it every day (e.g. the cashier). Secondary users use it sometimes or only see reports (e.g. the manager). The IT team builds the system. We ask all of them what they need so we do not miss important requirements.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Who are primary and secondary users?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">For a hospital appointment system, list primary and secondary stakeholders.</p></div></article>
+        <article id="ch24" class="chapter-card"><h2><span class="ch-num">24</span> Document Review Technique</h2><p><strong>Learning focus:</strong> Studying manuals, existing reports, forms and templates.</p><p>Review <strong>manuals</strong>, <strong>reports</strong>, and <strong>forms</strong> to understand current process and data. Low cost; good for existing systems. Complements interviews.</p><p class="simple-english"><strong></strong> We read the documents the organisation already has: user manuals, reports they produce, and forms they fill. From these we learn how the process works and what data is used. It is cheap and quick, and it helps us prepare better questions for interviews.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Name two documents to review when gathering requirements.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Bring one form used in your institution. List what requirements you can infer from it.</p></div></article>
+        <article id="ch25" class="chapter-card"><h2><span class="ch-num">25</span> Interview Technique</h2><p><strong>Learning focus:</strong> Structured interviews, open-ended questions, preparation.</p><p><strong>Structured interviews</strong> = fixed questions. <strong>Open-ended</strong> = let user explain. Prepare: list goals, key questions, and who to interview. Record and summarise after.</p><p class="simple-english"><strong></strong> We talk to users one to one and ask them what they need. In a structured interview we ask the same questions to everyone. Open-ended questions let them explain in their own words. Before the interview we decide what we want to learn and who to talk to. After the interview we write a short summary so we do not forget.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>When to use open-ended questions?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Prepare 5 interview questions for a shop owner about their billing process.</p></div></article>
+        <article id="ch26" class="chapter-card"><h2><span class="ch-num">26</span> Surveys &amp; Questionnaires</h2><p><strong>Learning focus:</strong> Designing surveys, online tools (e.g. Google Forms), data collection.</p><p>Surveys reach many people quickly. Design: clear questions, mix of closed and open. Use <strong>Google Forms</strong> or similar for online collection and basic analysis.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>One advantage of surveys over interviews.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Create a short Google Form (5 questions) to gather requirements for a library system.</p></div></article>
+        <article id="ch27" class="chapter-card"><h2><span class="ch-num">27</span> Observation Technique</h2><p><strong>Learning focus:</strong> Direct observation, shadowing, recording findings.</p><p><strong>Direct observation</strong> = watch how work is done. <strong>Shadowing</strong> = follow a user. Record steps, tools, time, and problems. Do not disturb the user unnecessarily.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Why is observation useful for requirements?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Observe one process (e.g. photocopy). Write 5 observations and one requirement from each.</p></div></article>
+        <article id="ch28" class="chapter-card"><h2><span class="ch-num">28</span> Workshops &amp; Brainstorming</h2><p><strong>Learning focus:</strong> Group sessions, JAD, idea generation.</p><p><strong>Workshops</strong> = group sessions with users and analysts. <strong>JAD (Joint Application Development)</strong> = facilitated workshop to agree requirements. <strong>Brainstorming</strong> = generate many ideas first, then filter.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is JAD?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">In a small group, run a 10-minute brainstorm: “What should an ideal student portal do?” List and prioritise top 5.</p></div></article>
+      </section>
+
+      <!-- MODULE 4 -->
+      <section id="mod4" class="module-block">
+        <h2 class="module-title"><i class="fas fa-tasks me-2"></i> MODULE 4: Requirement Analysis</h2>
+        <article id="ch29" class="chapter-card"><h2><span class="ch-num">29</span> Project Scope Definition</h2><p><strong>Learning focus:</strong> Objectives, boundaries, constraints, limitations.</p><p><strong>Objectives</strong> = what the project must achieve. <strong>Boundaries</strong> = what is in/out of scope. <strong>Constraints</strong> = time, budget, technology. <strong>Limitations</strong> = what the system will not do. All must be written and agreed.</p><p class="simple-english"><strong></strong> Scope means “what we will do and what we will not do”. We write the goals (objectives), what is inside and outside the project (boundaries), limits like time and money (constraints), and what the system will not do (limitations). Everyone must agree so there are no surprises later.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Difference between boundaries and constraints?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Write one objective, one boundary, and one constraint for a small billing project.</p></div></article>
+        <article id="ch30" class="chapter-card"><h2><span class="ch-num">30</span> Functional Requirements</h2><p><strong>Learning focus:</strong> System features, user actions, use case examples.</p><p><strong>Functional requirements</strong> = what the system must do: features and user actions (e.g. “User can search by ID”, “System shall print receipt”). Often written as “The system shall…” or “User can…”.</p><p class="simple-english"><strong></strong> A functional requirement describes an action or feature: what the user can do or what the system does. Examples: “The user can search for a patient by ID”, “The system shall print a receipt after payment”. We write them in clear sentences so we can test later whether the system does it.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Give two functional requirements for POS.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Write 3 functional requirements for an appointment booking system.</p></div></article>
+        <article id="ch31" class="chapter-card"><h2><span class="ch-num">31</span> Non-Functional Requirements</h2><p><strong>Learning focus:</strong> Performance, security, usability, reliability.</p><p><strong>Performance</strong> = speed, response time. <strong>Security</strong> = access control, data protection. <strong>Usability</strong> = easy to learn and use. <strong>Reliability</strong> = available when needed, few failures. These describe how well the system behaves.</p><p class="simple-english"><strong></strong> Non-functional requirements describe how the system should behave, not what it does. For example: it must be fast (performance), only authorised people can access data (security), it must be easy to use (usability), and it must be available when needed (reliability). We write these so the system is not only correct but also good to use and safe.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Give one non-functional requirement each for performance and security.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">List 2 NFRs for a hospital patient database.</p></div></article>
+        <article id="ch32" class="chapter-card"><h2><span class="ch-num">32</span> Requirement Prioritization</h2><p><strong>Learning focus:</strong> Must Have, Should Have, Could Have.</p><p><strong>Must Have</strong> = essential; project fails without it. <strong>Should Have</strong> = important but workaround exists. <strong>Could Have</strong> = nice to have. Prioritisation helps when time or budget is limited.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is “Must Have”?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Take 5 requirements for a library system and label each Must/Should/Could Have.</p></div></article>
+        <article id="ch33" class="chapter-card">
+          <h2><span class="ch-num">33</span> Use Case Modeling</h2>
+          <p><strong>Learning focus:</strong> Use case diagram details, symbols, actors, use cases, relationships, and diagram-based questions.</p>
+
+          <h3>What is a Use Case Diagram?</h3>
+          <p>A <strong>use case diagram</strong> shows who uses the system (actors) and what they can do (use cases). It is drawn from the user’s point of view and helps agree the scope of the system with the client. It does not show the order of steps or the inside of the system—only the goals and who interacts with them.</p>
+          <p class="simple-english"><strong></strong> The diagram is like a menu of what the system can do. Each “use case” is one goal (e.g. “Book appointment”, “Print receipt”). Each “actor” is a person or another system that does something with the system. Lines connect actors to the use cases they can perform.</p>
+
+          <h3>Symbols in a Use Case Diagram</h3>
+          <div class="table-wrap">
+            <table class="compare-table">
+              <thead><tr><th>Symbol</th><th>Meaning</th><th>How it looks</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Actor</strong></td><td>A user or external system that interacts with the system. Can be a person (e.g. Customer, Cashier) or another system.</td><td>Stick figure (or rectangle with «actor»). Drawn outside the system boundary.</td></tr>
+                <tr><td><strong>Use Case</strong></td><td>One goal or function the system offers. Named with a verb (e.g. “Book ticket”, “Login”).</td><td>Oval (ellipse). Drawn inside the system boundary.</td></tr>
+                <tr><td><strong>Association</strong></td><td>Link between an actor and a use case. Shows that the actor can perform that use case.</td><td>Solid line from actor to the oval. No arrow, or arrow can point to the use case.</td></tr>
+                <tr><td><strong>System boundary</strong></td><td>Rectangle that contains all use cases. Everything inside is part of the system; actors are outside.</td><td>Large rectangle. System name often at the top (e.g. “Library System”).</td></tr>
+                <tr><td><strong>Include</strong></td><td>One use case always uses another. E.g. “Print receipt” always includes “Calculate total”.</td><td>Dashed arrow from use case A to use case B, labelled «include».</td></tr>
+                <tr><td><strong>Extend</strong></td><td>One use case can optionally extend another. E.g. “Cancel booking” extends “Book ticket”.</td><td>Dashed arrow from extending use case to base use case, labelled «extend».</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Symbol shapes (summary)</h3>
+          <div class="diagram-wrap">
+            <p class="diagram-title">Use case diagram symbols</p>
+            <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:380px;">
+              <rect x="120" y="10" width="140" height="160" rx="4" fill="none" stroke="#0d9488" stroke-width="2"/>
+              <text x="190" y="28" text-anchor="middle" fill="#0f766e" font-size="11" font-weight="bold">System</text>
+              <ellipse cx="190" cy="65" rx="52" ry="22" fill="#f0fdfa" stroke="#0d9488"/>
+              <text x="190" y="69" text-anchor="middle" font-size="10">Use Case (oval)</text>
+              <line x1="65" y1="65" x2="138" y2="65" stroke="#334155" stroke-width="1.5"/>
+              <circle cx="40" cy="65" r="12" fill="none" stroke="#334155"/>
+              <line x1="40" y1="53" x2="40" y2="77" stroke="#334155"/>
+              <line x1="28" y1="65" x2="52" y2="65" stroke="#334155"/>
+              <line x1="32" y1="58" x2="48" y2="72" stroke="#334155"/>
+              <line x1="48" y1="58" x2="32" y2="72" stroke="#334155"/>
+              <text x="40" y="95" text-anchor="middle" font-size="9">Actor</text>
+              <text x="100" y="62" text-anchor="middle" font-size="8">association</text>
+              <ellipse cx="190" cy="115" rx="48" ry="20" fill="#f0fdfa" stroke="#0d9488"/>
+              <text x="190" y="119" text-anchor="middle" font-size="9">Another use case</text>
+              <path d="M 190 87 L 190 105" stroke="#64748b" stroke-width="1" stroke-dasharray="4 2"/>
+              <text x="215" y="98" font-size="7">«include»</text>
+            </svg>
+            <p class="fig-caption">Actor (stick figure) → association line → Use case (oval) inside system boundary. «include» = dashed arrow between use cases.</p>
+          </div>
+
+          <h3>Example: Library system use case diagram</h3>
+          <div class="diagram-wrap">
+            <p class="diagram-title">Example – Library system</p>
+            <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:360px;">
+              <rect x="80" y="20" width="200" height="180" rx="6" fill="#f8fafc" stroke="#0d9488" stroke-width="2"/>
+              <text x="180" y="42" text-anchor="middle" fill="#0f766e" font-size="12" font-weight="bold">Library System</text>
+              <ellipse cx="180" cy="75" rx="58" ry="24" fill="#f0fdfa" stroke="#0d9488"/>
+              <text x="180" y="79" text-anchor="middle" font-size="10">Search catalogue</text>
+              <ellipse cx="180" cy="120" rx="50" ry="22" fill="#f0fdfa" stroke="#0d9488"/>
+              <text x="180" y="124" text-anchor="middle" font-size="10">Issue book</text>
+              <ellipse cx="180" cy="165" rx="52" ry="22" fill="#f0fdfa" stroke="#0d9488"/>
+              <text x="180" y="169" text-anchor="middle" font-size="10">Return book</text>
+              <circle cx="35" cy="75" r="14" fill="none" stroke="#334155"/>
+              <line x1="35" y1="61" x2="35" y2="89" stroke="#334155"/>
+              <line x1="21" y1="75" x2="49" y2="75" stroke="#334155"/>
+              <line x1="25" y1="68" x2="45" y2="82" stroke="#334155"/>
+              <line x1="45" y1="68" x2="25" y2="82" stroke="#334155"/>
+              <text x="35" y="108" text-anchor="middle" font-size="9">Member</text>
+              <line x1="49" y1="75" x2="122" y2="75" stroke="#334155"/>
+              <line x1="49" y1="75" x2="122" y2="120" stroke="#334155"/>
+              <line x1="49" y1="75" x2="122" y2="165" stroke="#334155"/>
+              <circle cx="35" cy="165" r="14" fill="none" stroke="#334155"/>
+              <line x1="35" y1="151" x2="35" y2="179" stroke="#334155"/>
+              <line x1="21" y1="165" x2="49" y2="165" stroke="#334155"/>
+              <line x1="25" y1="158" x2="45" y2="172" stroke="#334155"/>
+              <line x1="45" y1="158" x2="25" y2="172" stroke="#334155"/>
+              <text x="35" y="198" text-anchor="middle" font-size="9">Librarian</text>
+              <line x1="49" y1="165" x2="128" y2="120" stroke="#334155"/>
+              <line x1="49" y1="165" x2="128" y2="165" stroke="#334155"/>
+            </svg>
+            <p class="fig-caption">Member can Search catalogue, Issue book, Return book. Librarian can Issue book and Return book. Use cases are inside the Library System boundary.</p>
+          </div>
+
+          <h3>Scenario</h3>
+          <p>A <strong>scenario</strong> is a step-by-step description of one way a use case can happen. The <strong>main (happy) path</strong> is when everything goes normally. <strong>Alternative paths</strong> cover errors or choices (e.g. “If book not available, show message”).</p>
+          <p class="simple-english"><strong></strong> For the use case “Issue book”, a scenario might be: 1. Member gives ID and book. 2. Librarian enters details in system. 3. System checks member has no overdue books. 4. System records the issue and prints slip. 5. Librarian hands book to member. This is the happy path. An alternative path: “If member has overdue books, system shows error and does not issue.”</p>
+
+          <div class="q-box">
+            <strong><i class="fas fa-question-circle me-1"></i> Questions – Use case diagram</strong>
+            <ol start="1" style="margin:0.5rem 0 0 1.25rem;padding:0;">
+              <li>What is an <strong>actor</strong> in a use case diagram? Give two examples.</li>
+              <li>What shape is used for a <strong>use case</strong>? Why do we use that shape?</li>
+              <li>What does the <strong>system boundary</strong> (rectangle) represent?</li>
+              <li>What is the difference between <strong>include</strong> and <strong>extend</strong>?</li>
+              <li>In the Library example, which actor can “Search catalogue”? Can the Librarian do “Issue book”?</li>
+              <li>What is a <strong>scenario</strong>? What is the “happy path”?</li>
+            </ol>
+          </div>
+          <div class="activity-box">
+            <strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+            <p class="mb-0 mt-1">Draw a use case diagram for a <strong>ticket booking system</strong>: 2 actors (Customer, Counter staff), 3 use cases (Book ticket, Cancel booking, View schedule). Show system boundary and association lines. Then write the main scenario (happy path) for “Book ticket” in 5 steps.</p>
+          </div>
+        </article>
+        <article id="ch34" class="chapter-card"><h2><span class="ch-num">34</span> Requirement Documentation (SRS)</h2><p><strong>Learning focus:</strong> Structure of SRS, writing clear requirements.</p><p><strong>SRS (Software Requirements Specification)</strong> = document with introduction, functional requirements, non-functional requirements, glossary. Write clear, testable requirements; avoid vague words like “fast” or “user-friendly” without criteria.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What sections are in an SRS?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Write one requirement in vague form, then rewrite it to be clear and testable.</p></div></article>
+        <article id="ch35" class="chapter-card"><h2><span class="ch-num">35</span> Requirement Validation</h2><p><strong>Learning focus:</strong> Reviewing requirements, client approval.</p><p><strong>Validation</strong> = checking that requirements are correct and complete. Methods: reviews (walkthrough with stakeholders), prototypes, client sign-off. Ensures we build the right thing.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Why get client approval on requirements?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">List three ways to validate requirements.</p></div></article>
+        <article id="ch36" class="chapter-card"><h2><span class="ch-num">36</span> Requirement Traceability</h2><p><strong>Learning focus:</strong> Traceability matrix, change management.</p><p><strong>Traceability matrix</strong> = table linking requirements to design, code, and tests. So we know what covers each requirement. <strong>Change management</strong> = process to request, review, and approve requirement changes so scope is controlled.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is a traceability matrix used for?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Draw a simple traceability table: 3 requirements, link each to one test case.</p></div></article>
+      </section>
+
+      <!-- MODULE 5 -->
+      <section id="mod5" class="module-block">
+        <h2 class="module-title"><i class="fas fa-check-double me-2"></i> MODULE 5: Feasibility Study</h2>
+        <article id="ch37" class="chapter-card"><h2><span class="ch-num">37</span> Introduction to Feasibility Study</h2><p><strong>Learning focus:</strong> Why feasibility study, project approval process.</p><p>A <strong>feasibility study</strong> checks whether a project is practical and worth doing (technical, economic, organisational, legal). It is done before full commitment. Results support <strong>project approval</strong>: go / no-go or conditional go.</p><p class="simple-english"><strong></strong> Before we spend a lot of time and money on a project, we check if it is possible and worth it. We ask: Can we do it technically? Is it affordable? Is the organisation ready? Is it legal? The result helps the management decide: go ahead, do not go, or go with conditions.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>Why do a feasibility study?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">List three questions a feasibility study should answer.</p></div></article>
+        <article id="ch38" class="chapter-card"><h2><span class="ch-num">38</span> Technical Feasibility</h2><p><strong>Learning focus:</strong> Hardware, software, skills availability.</p><p><strong>Technical feasibility</strong> = can we build and run it? Check: <strong>hardware</strong> (servers, devices), <strong>software</strong> (platform, tools), <strong>skills</strong> (in-house or training/outsource). If something is missing, plan to get it or the project may fail.</p><p class="simple-english"><strong></strong> Technical feasibility answers: can we actually build and run this system? We check: Do we have the right computers and devices (hardware)? Do we have the right software and tools? Do we have people with the right skills, or do we need training or to hire? If something is missing, we must plan how to get it, or the project might fail.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What do we check in technical feasibility?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">For an online exam system, list 2 technical feasibility checks.</p></div></article>
+        <article id="ch39" class="chapter-card"><h2><span class="ch-num">39</span> Economic &amp; Practical Feasibility</h2><p><strong>Learning focus:</strong> Cost-benefit analysis, ROI, time feasibility.</p><p><strong>Economic feasibility</strong> = benefits outweigh costs? Use <strong>cost-benefit analysis</strong> (list costs and benefits, compare). <strong>ROI (Return on Investment)</strong> = (benefit − cost) / cost. <strong>Time feasibility</strong> = can we finish in the given time with available resources?</p><p class="simple-english"><strong></strong> Economic feasibility asks: will the benefits be more than the costs? We list all costs (hardware, software, training, etc.) and all benefits (savings, more sales, etc.) and compare. <strong>ROI</strong> is a simple way to see how much we get back for the money we put in. Time feasibility asks: can we finish the project by the deadline with the people and resources we have?</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is ROI in simple words?</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">List 3 costs and 3 benefits for a new POS in a small shop.</p></div></article>
+        <article id="ch40" class="chapter-card"><h2><span class="ch-num">40</span> Organizational &amp; Legal Feasibility</h2><p><strong>Learning focus:</strong> Policy compliance, legal regulations, organisational readiness.</p><p><strong>Organisational feasibility</strong> = will the organisation support the change? (culture, training, resistance.) <strong>Legal feasibility</strong> = does the project comply with <strong>laws and regulations</strong> (data protection, contracts, sector rules)? <strong>Policy compliance</strong> = internal policies and standards. All must be checked before approval.</p>
+          <div class="example-img-wrap"><img src="images/contract.svg" alt="Contractual document" width="400" height="auto"><p class="fig-caption">Contractual documents – agreements and legal compliance</p></div>
+          <p class="simple-english"><strong></strong> Organisational feasibility asks: will the staff and management accept and use the new system? Do we need training? Is there resistance? Legal feasibility asks: does the project follow the law? For example, if we store customer data, we must follow data protection rules. Policy compliance means we also follow the organisation’s own internal rules. We check all of this before saying the project is feasible.</p><div class="q-box"><strong>Questions</strong><ol start="1" style="margin:0.5rem 0 0 1.25rem;"><li>What is organisational feasibility?</li><li>Give one legal concern for a system that stores customer data.</li></ol></div><div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">For a school management system, list one organisational and one legal feasibility check.</p></div></article>
+      </section>
+
+      <!-- DETAILED EXPLANATION WITH BEGINNER-LEVEL EXAMPLES (after all modules) -->
+      <section id="detailed-explanation" class="module-block">
+        <h2 class="module-title"><i class="fas fa-lightbulb me-2"></i> Detailed Explanation with Beginner-Level Examples</h2>
+        <article class="chapter-card">
+          <p><strong>What you have learned in this module:</strong> This course is about understanding how businesses work, what users need from software, and how to check if a software project is practical. Below is a simple summary with everyday examples so you can see how everything fits together.</p>
+
+          <h3>1. Business and processes (Modules 1 &amp; 2)</h3>
+          <p class="simple-english"><strong>In simple words:</strong> A <strong>business</strong> is any place or activity that gives people something they need (goods or services) and gets money in return. A <strong>business process</strong> is the set of steps that the business follows again and again to do that work.</p>
+          <p><strong>Example – A small tea shop:</strong></p>
+          <ul>
+            <li><strong>Input:</strong> Customer’s order (“one plain tea”), tea leaves, sugar, milk, water.</li>
+            <li><strong>Process:</strong> Boil water, add tea and ingredients, pour into cup.</li>
+            <li><strong>Output:</strong> A cup of tea for the customer and payment (e.g. Rs. 50).</li>
+          </ul>
+          <p>The same steps every time give the same quality. If the shop also sells biscuits, that is another small process (take biscuit packet → give to customer → take payment).</p>
+
+          <h3>2. Types of processes</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Not all work is the same. <strong>Core</strong> work is what the customer pays for (e.g. selling, making tea). <strong>Support</strong> work is what happens behind the scenes (cleaning, keeping stock). <strong>Management</strong> work is planning and deciding (what to sell, when to open, who works when).</p>
+          <p><strong>Example – A mobile shop:</strong></p>
+          <ul>
+            <li><strong>Core:</strong> Selling a phone, recharging a number, repairing a phone.</li>
+            <li><strong>Support:</strong> Keeping the shop clean, ordering stock from the supplier, keeping bills.</li>
+            <li><strong>Management:</strong> Owner decides which phones to keep, what price to set, and who works on which day.</li>
+          </ul>
+
+          <h3>3. Studying the current system before building software</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Before we build or change any software, we must understand how the work is done <em>today</em>. We look at the steps, who does what, what forms and tools they use, and where there are problems (delays, mistakes, waste). This is called studying the current system.</p>
+          <p><strong>Example – A school registration:</strong></p>
+          <ul>
+            <li>Today: Student brings a form → office staff writes details in a book → another person types the same details in a computer later. Problems: same data written twice (waste and more errors), and the book and computer can get out of sync.</li>
+            <li>After study: We see that “enter data once and use it everywhere” would be better. So we write a requirement: “The system shall allow the office to enter student details once and use that record for fee, attendance, and results.”</li>
+          </ul>
+
+          <h3>4. Gathering requirements (what the system must do)</h3>
+          <p class="simple-english"><strong>In simple words:</strong> <strong>Requirements</strong> are the list of what the system must do (e.g. “print a receipt”) and how well it must do it (e.g. “respond within 3 seconds”). We get these by talking to users, reading forms and reports, and watching how work is done.</p>
+          <p><strong>Example – A simple billing system for a shop:</strong></p>
+          <ul>
+            <li><strong>Functional requirement:</strong> “The system shall allow the cashier to scan or type each item and show the total. After payment, the system shall print a receipt.”</li>
+            <li><strong>Non-functional requirement:</strong> “The system shall be available during shop hours (e.g. 8 a.m. to 8 p.m.) and shall not lose data if the power goes off for a short time.”</li>
+          </ul>
+          <p>We write requirements in clear, simple English so that both the shop owner and the programmer understand the same thing.</p>
+
+          <h3>5. Analysing and documenting requirements</h3>
+          <p class="simple-english"><strong>In simple words:</strong> We put all requirements in one document (often called SRS – Software Requirements Specification). We decide what is “Must Have” (without it the system is not useful), “Should Have” (important but we can manage without it for a while), and “Could Have” (nice to have). We also draw use case diagrams to show who uses the system and what they can do.</p>
+          <p><strong>Example – Library system:</strong></p>
+          <ul>
+            <li><strong>Actor:</strong> Member (student), Librarian.</li>
+            <li><strong>Use cases:</strong> Search catalogue, Issue book, Return book.</li>
+            <li>Member can search, issue, and return. Librarian can issue and return. The diagram does not show the order of steps inside each use case; it only shows the “menu” of what the system offers.</li>
+          </ul>
+
+          <h3>6. Feasibility – Can we do it and is it worth it?</h3>
+          <p class="simple-english"><strong>In simple words:</strong> Before spending a lot of time and money, we check: Can we build and run the system? (technical). Will the benefits be more than the cost? (economic). Can we finish in time? (time). Will the organisation use it? (organisational). Is it legal? (legal). This is the feasibility study.</p>
+          <p><strong>Example – New POS for a small shop:</strong></p>
+          <ul>
+            <li><strong>Technical:</strong> Do we have a computer and space for it? Can we get a barcode scanner and printer? If yes, it is technically feasible.</li>
+            <li><strong>Economic:</strong> Cost = computer + software + training. Benefit = faster billing, fewer calculation errors, automatic stock update. If benefit is greater than cost over one or two years, it is economically feasible.</li>
+            <li><strong>Organisational:</strong> Will the cashier and owner accept the new system? If we train them and they are willing, it is organisationally feasible.</li>
+            <li><strong>Legal:</strong> If we store customer data (e.g. for loyalty), we must follow data protection rules. If we do, it is legally feasible.</li>
+          </ul>
+
+          <h3>7. Putting it all together – One full example</h3>
+          <p><strong>Scenario:</strong> A small clinic wants a simple appointment and patient record system.</p>
+          <ol>
+            <li><strong>Current system:</strong> Patients call or come to the clinic. The receptionist writes names in a notebook and tells the doctor who is next. Sometimes the notebook is lost or names are unclear.</li>
+            <li><strong>Problems:</strong> No clear record of who came when; hard to remind patients; no easy way to see past visits.</li>
+            <li><strong>Requirements (examples):</strong> (1) Receptionist can add a patient and book an appointment with date and time. (2) System can show today’s list of appointments. (3) System can store basic visit notes (e.g. “fever, medicine given”). (4) Only staff with login can see patient data (security).</li>
+            <li><strong>Feasibility:</strong> Clinic has one computer and internet; doctor and receptionist are ready to learn. Cost of a simple system is low. So technically, economically, and organisationally it is feasible. They must keep patient data private (legal).</li>
+            <li><strong>Result:</strong> A clear list of what the system must do (requirements) and a decision that the project is feasible. Next step would be to design and build the system, then test it against these requirements.</li>
+          </ol>
+
+          <div class="info-box">
+            <strong>Summary for beginners:</strong> This module teaches you to (1) understand how a business works (inputs, processes, outputs, core/support/management), (2) study the current way of working before building software, (3) gather and write clear requirements from users, (4) analyse and document them (e.g. SRS, use cases), and (5) check if the project is feasible (technical, economic, organisational, legal). Use simple examples like a tea shop, a mobile shop, a school, or a clinic to see how these ideas apply in real life.
+          </div>
+        </article>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="page-footer"><p class="mb-0">Level 5 ICT – Business Processes · Teaching Material</p></footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var chapters = [
+      {mod:0, id:"ch0", title:"Ch 0 – Module Overview"},
+      {mod:1, id:"ch1", title:"Ch 1 – Introduction to Business & Process"},
+      {mod:2, id:"ch2", title:"Ch 2 – Types of Business Processes"},
+      {mod:3, id:"ch3", title:"Ch 3 – Business Domains Overview"},
+      {mod:4, id:"ch4", title:"Ch 4 – Telecommunication Domain"},
+      {mod:5, id:"ch5", title:"Ch 5 – Hotel Industry Domain"},
+      {mod:6, id:"ch6", title:"Ch 6 – Health Sector Domain"},
+      {mod:7, id:"ch7", title:"Ch 7 – Transport Domain"},
+      {mod:8, id:"ch8", title:"Ch 8 – Supermarket Domain"},
+      {mod:9, id:"ch9", title:"Ch 9 – Education Domain"},
+      {mod:10, id:"ch10", title:"Ch 10 – Stakeholders in Business Process"},
+      {mod:11, id:"ch11", title:"Ch 11 – Understanding Current Systems"},
+      {mod:12, id:"ch12", title:"Ch 12 – Process Mapping Techniques"},
+      {mod:13, id:"ch13", title:"Ch 13 – Identifying Process Problems"},
+      {mod:14, id:"ch14", title:"Ch 14 – Stakeholder Role Analysis"},
+      {mod:15, id:"ch15", title:"Ch 15 – Data Flow in Business Process"},
+      {mod:16, id:"ch16", title:"Ch 16 – Performance Measurement"},
+      {mod:17, id:"ch17", title:"Ch 17 – Risk Identification"},
+      {mod:18, id:"ch18", title:"Ch 18 – Business Process Documentation"},
+      {mod:19, id:"ch19", title:"Ch 19 – Introduction to BPR"},
+      {mod:20, id:"ch20", title:"Ch 20 – BPR Implementation"},
+      {mod:21, id:"ch21", title:"Ch 21 – Requirements Engineering"},
+      {mod:22, id:"ch22", title:"Ch 22 – Importance of Requirements"},
+      {mod:23, id:"ch23", title:"Ch 23 – Stakeholder Identification"},
+      {mod:24, id:"ch24", title:"Ch 24 – Document Review"},
+      {mod:25, id:"ch25", title:"Ch 25 – Interview Technique"},
+      {mod:26, id:"ch26", title:"Ch 26 – Surveys & Questionnaires"},
+      {mod:27, id:"ch27", title:"Ch 27 – Observation Technique"},
+      {mod:28, id:"ch28", title:"Ch 28 – Workshops & Brainstorming"},
+      {mod:29, id:"ch29", title:"Ch 29 – Project Scope Definition"},
+      {mod:30, id:"ch30", title:"Ch 30 – Functional Requirements"},
+      {mod:31, id:"ch31", title:"Ch 31 – Non-Functional Requirements"},
+      {mod:32, id:"ch32", title:"Ch 32 – Requirement Prioritization"},
+      {mod:33, id:"ch33", title:"Ch 33 – Use Case Modeling"},
+      {mod:34, id:"ch34", title:"Ch 34 – Requirement Documentation (SRS)"},
+      {mod:35, id:"ch35", title:"Ch 35 – Requirement Validation"},
+      {mod:36, id:"ch36", title:"Ch 36 – Requirement Traceability"},
+      {mod:37, id:"ch37", title:"Ch 37 – Introduction to Feasibility"},
+      {mod:38, id:"ch38", title:"Ch 38 – Technical Feasibility"},
+      {mod:39, id:"ch39", title:"Ch 39 – Economic & Practical Feasibility"},
+      {mod:40, id:"ch40", title:"Ch 40 – Organizational & Legal Feasibility"},
+      {mod:41, id:"detailed-explanation", title:"Detailed Explanation & Examples"}
+    ];
+    var list = document.getElementById("tocList");
+    if(list){
+      chapters.forEach(function(c){
+        var a = document.createElement("a"); a.href = "#"+c.id; a.setAttribute("title", c.title);
+        var num = c.id.replace("ch","");
+        var label = c.title.replace(/^Ch \d+\s*[–\-]\s*/i, "").trim() || c.title;
+        a.innerHTML = "<span class=\"ch-num-side\">"+num+"</span><span class=\"ch-title-side\">"+label+"</span>";
+        list.appendChild(a);
+      });
+    }
+    var tocToggle = document.getElementById("tocToggle");
+    var tocSidebar = document.getElementById("tocSidebar");
+    if(tocToggle && tocSidebar){
+      tocToggle.addEventListener("click", function(){
+        tocSidebar.classList.toggle("toc-open");
+        var open = tocSidebar.classList.contains("toc-open");
+        tocToggle.setAttribute("aria-expanded", open);
+        var chev = document.getElementById("tocChevron");
+        if(chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+      });
+    }
+    // Mobile: close dropdown when a chapter link is clicked (so only the green bar shows again)
+    var tocList = document.getElementById("tocList");
+    if(tocList && tocSidebar){
+      tocList.addEventListener("click", function(e){
+        var link = e.target.closest("a");
+        if(link && link.getAttribute("href") && link.getAttribute("href").indexOf("#") === 0){
+          tocSidebar.classList.remove("toc-open");
+          if(tocToggle) tocToggle.setAttribute("aria-expanded", "false");
+          var chev = document.getElementById("tocChevron");
+          if(chev) chev.style.transform = "rotate(0deg)";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

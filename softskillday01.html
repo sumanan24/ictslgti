@@ -1,0 +1,2570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soft Skills Development Workshop – Day 1</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --accent: #f97316;
+      --accent-soft: #fee2e2;
+      --bg: #f4f5fb;
+      --bg-card: #ffffff;
+      --bg-card-soft: #f9fafb;
+      --text-main: #0f172a;
+      --text-muted: #4b5563;
+      --shadow-strong: 0 24px 50px rgba(15, 23, 42, 0.12);
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+      --transition-fast: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe 0, #eef2ff 30%, #f9fafb 100%);
+      color: var(--text-main);
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      background-attachment: fixed;
+    }
+
+    /* Subtle gradient overlay + pattern */
+    .background-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.18) 0, transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.14) 0, transparent 55%);
+      opacity: 1;
+      mix-blend-mode: normal;
+      z-index: -2;
+    }
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      opacity: 0.4;
+      background-image: linear-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -3;
+    }
+
+    .deck-wrapper {
+      max-width: 1200px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .deck-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 14px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ffffff, #eef2ff);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.15);
+    }
+
+    .deck-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .deck-title-main {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(56, 189, 248, 0.2));
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      color: #e0f2fe;
+    }
+
+    .deck-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      opacity: 0.9;
+    }
+
+    .deck-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .deck-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(239, 246, 255, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #a3e635);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .deck-main {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .slide-shell {
+      flex: 1;
+      min-height: 0;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 5% 0%, rgba(191, 219, 254, 0.7) 0, transparent 45%),
+      radial-gradient(circle at 100% 100%, rgba(254, 215, 170, 0.8) 0, transparent 55%),
+      linear-gradient(135deg, #ffffff, #f9fafb);
+      box-shadow: var(--shadow-strong);
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slides-viewport {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      border-radius: 16px;
+      background: radial-gradient(circle at top left, #ffffff, #eff6ff);
+      padding: clamp(16px, 3vw, 26px);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: clamp(12px, 2.4vw, 18px);
+      display: none;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: clamp(18px, 3vw, 28px);
+      align-items: center;
+      opacity: 0;
+      transform: translateX(20px) scale(0.99);
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .slide.active {
+      display: grid;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    .slide-layout-centered {
+      grid-template-columns: minmax(0, 1fr);
+      text-align: center;
+      justify-items: center;
+    }
+
+    .slide-header-eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #2563eb;
+      margin-bottom: 4px;
+    }
+
+    .slide-title {
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      line-height: 1.15;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 10px 25px rgba(148, 163, 184, 0.4);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 40rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(239, 246, 255, 0.9);
+      color: #1f2933;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag.badge-primary {
+      background: linear-gradient(135deg, #3b82f6, #38bdf8);
+      border-color: rgba(191, 219, 254, 0.95);
+      color: #eff6ff;
+    }
+
+    .slide-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 5px;
+      background: linear-gradient(135deg, #3b82f6, #f97316);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.45);
+      flex-shrink: 0;
+    }
+
+    .bullet-list strong {
+      color: #fefce8;
+    }
+
+    .slide-highlight {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+      border: 1px solid rgba(129, 140, 248, 0.6);
+      font-size: 0.9rem;
+      color: #1f2937;
+    }
+
+    .slide-highlight-title {
+      font-weight: 600;
+      color: #1d4ed8;
+      margin-bottom: 4px;
+    }
+
+    .activity-box {
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #ecfdf3, #dcfce7);
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
+
+    .activity-title {
+      font-weight: 600;
+      color: #15803d;
+      margin-bottom: 4px;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .compare-card {
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top left, #ffffff, #eff6ff);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .compare-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #bfdbfe;
+      margin-bottom: 4px;
+    }
+
+    .compare-heading {
+      font-weight: 600;
+      color: #f9fafb;
+      margin-bottom: 4px;
+    }
+
+    /* Visual / image side */
+    .slide-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-card {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at top, #ffffff, #eff6ff);
+    }
+
+    .visual-image {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.3) contrast(1.05);
+    }
+
+    .visual-body {
+      padding: 12px 14px 13px;
+    }
+
+    .visual-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .visual-meta {
+      font-size: 0.8rem;
+      color: #cbd5f5;
+      opacity: 0.9;
+    }
+
+    .visual-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .visual-pill {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(239, 246, 255, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #1f2937;
+    }
+
+    .visual-orbit {
+      position: absolute;
+      inset: -6px;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    .visual-orbit span {
+      position: absolute;
+      border-radius: var(--radius-pill);
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 3px 9px;
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(7px);
+    }
+
+    .visual-orbit span:nth-child(1) {
+      top: 0;
+      left: 14%;
+    }
+
+    .visual-orbit span:nth-child(2) {
+      bottom: 6%;
+      right: 4%;
+    }
+
+    .visual-orbit span:nth-child(3) {
+      top: 40%;
+      right: -3%;
+    }
+
+    .visual-orbit span:nth-child(4) {
+      bottom: 16%;
+      left: -1%;
+    }
+
+    /* Slide footer / navigation */
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .progress-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .progress-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .progress-bar-shell {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #a3e635, #f97316);
+      transition: width 0.3s ease;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-button {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+      color: var(--text-main);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast),
+      box-shadow var(--transition-fast), border-color var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .nav-button.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-color: rgba(191, 219, 254, 0.9);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.6);
+    }
+
+    .nav-button.secondary {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.9));
+    }
+
+    .nav-button:disabled {
+      opacity: 0.45;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .nav-button:not(:disabled):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-button.primary:not(:disabled):hover {
+      box-shadow: 0 16px 40px rgba(37, 99, 235, 0.85);
+    }
+
+    .nav-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.8;
+      display: none;
+    }
+
+    /* Slide-specific overrides */
+    .title-slide-main {
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      margin-bottom: 10px;
+    }
+
+    .title-slide-sub {
+      font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+      color: #bfdbfe;
+      margin-bottom: 14px;
+    }
+
+    .title-meta {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .two-column-points {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      margin-top: 6px;
+    }
+
+    .two-column-points .bullet-list {
+      gap: 5px;
+    }
+
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .swot-card {
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.9rem;
+      min-height: 80px;
+    }
+
+    .swot-card-header {
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .swot-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-pill);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.75rem;
+      margin-right: 6px;
+    }
+
+    .quote-box {
+      border-left: 3px solid rgba(96, 165, 250, 0.9);
+      padding-left: 10px;
+      margin-top: 8px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .reflection-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .reflection-list li {
+      padding: 7px 9px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      body {
+        padding: 8px;
+      }
+
+      .deck-wrapper {
+        height: 100vh;
+      }
+
+      .deck-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .slide {
+        grid-template-columns: minmax(0, 1fr);
+        overflow-y: auto;
+      }
+
+      .slide-visual {
+        order: -1;
+      }
+
+      .visual-card {
+        max-width: 360px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      html,
+      body {
+        overflow: hidden;
+      }
+
+      .deck-header {
+        padding: 8px 12px;
+      }
+
+      .slides-viewport {
+        padding: 10px;
+      }
+
+      .slide {
+        padding: 8px;
+      }
+
+      .two-column-points,
+      .swot-grid,
+      .compare-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav-hint {
+        display: none;
+      }
+    }
+
+    @media (pointer: fine) {
+      .nav-hint {
+        display: inline;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-overlay"></div>
+  <div class="background-grid"></div>
+
+  <div class="deck-wrapper">
+    <header class="deck-header">
+      <div class="deck-title">
+        <div class="deck-title-main">
+          Soft Skills Development Workshop
+          <span class="pill">Day 1 · Self Awareness &amp; Positive Mindset</span>
+        </div>
+        <div class="deck-subtitle">
+          A practical session to build self awareness, positive thinking, and essential workplace behaviours.
+        </div>
+      </div>
+      <div class="deck-meta">
+        <span>
+          <span class="status-dot"></span>
+          Live Session · Interactive
+        </span>
+        <span id="meta-slide-count">Slide 1 of 40</span>
+        <span>Use keyboard arrows or buttons</span>
+      </div>
+    </header>
+
+    <main class="deck-main">
+      <section class="slide-shell">
+        <div class="slides-viewport" id="slidesViewport">
+
+          <!-- Slide 1 – Title -->
+          <article class="slide slide-layout-centered active" data-slide="1">
+            <div>
+              <div class="slide-header-eyebrow">Introduction</div>
+              <h1 class="slide-title title-slide-main">Soft Skills Development Workshop</h1>
+              <div class="title-slide-sub">Day 1 – Self Awareness &amp; Positive Mindset</div>
+              <p class="title-meta">
+                Trainer Name · Date<br />
+                Set the tone, welcome participants, and explain how today connects to their studies and career.
+              </p>
+              <div class="tag-row" style="margin-top: 18px;">
+                <span class="tag badge-primary">Self Awareness</span>
+                <span class="tag">Positive Mindset</span>
+                <span class="tag">Career Readiness</span>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181395/pexels-photo-1181395.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Group of students collaborating in a workshop" />
+                <div class="visual-body">
+                  <div class="visual-title">Interactive learning experience</div>
+                  <div class="visual-meta">Reflection · Practice · Discussion</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Student-centred</span>
+                    <span class="visual-pill">Real-world skills</span>
+                    <span class="visual-pill">Growth focused</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 2 – Workshop Overview -->
+          <article class="slide" data-slide="2">
+            <div>
+              <div class="slide-header-eyebrow">Introduction</div>
+              <h2 class="slide-title">Workshop Overview</h2>
+              <p class="slide-subtitle">
+                This workshop helps participants develop important life and career skills that support success in studies,
+                work, and personal life.
+              </p>
+              <div class="slide-body">
+                <div class="slide-highlight">
+                  <div class="slide-highlight-title">Key focus areas today</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Self Awareness</strong> – understanding who you are and how you behave</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Positive Thinking</strong> – choosing helpful ways to think and respond</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Communication &amp; Teamwork</strong> – working and learning with others</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Professional Behaviour</strong> – building habits employers value</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3182764/pexels-photo-3182764.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Team in a meeting discussing ideas" />
+                <div class="visual-body">
+                  <div class="visual-title">From classroom to career</div>
+                  <div class="visual-meta">Link soft skills to real opportunities.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Confidence</span>
+                    <span class="visual-pill">Employability</span>
+                    <span class="visual-pill">Life skills</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 3 – Session Objectives -->
+          <article class="slide" data-slide="3">
+            <div>
+              <div class="slide-header-eyebrow">Introduction</div>
+              <h2 class="slide-title">Session Objectives</h2>
+              <p class="slide-subtitle">
+                By the end of this session, participants should clearly understand the value of soft skills and how to
+                start developing them.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Recognise the <strong>importance of soft skills</strong> in everyday life and future careers.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Begin to <strong>understand yourself</strong> – strengths, weaknesses, behaviour, and emotions.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Learn simple ways to <strong>build positive thinking</strong> and a growth mindset.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Students writing goals and objectives" />
+                <div class="visual-body">
+                  <div class="visual-title">Clear learning goals</div>
+                  <div class="visual-meta">Helps participants follow and reflect.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Understand</span>
+                    <span class="visual-pill">Reflect</span>
+                    <span class="visual-pill">Apply</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 4 – Why Soft Skills Are Important -->
+          <article class="slide" data-slide="4">
+            <div>
+              <div class="slide-header-eyebrow">Introduction</div>
+              <h2 class="slide-title">Why Soft Skills Are Important</h2>
+              <p class="slide-subtitle">
+                Soft skills support how we think, communicate, and act with others — they shape our success in any
+                environment.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They help us <strong>work well with others</strong> in class, at home, and at work.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They support <strong>clear communication</strong> – sharing ideas and listening actively.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They build our ability to <strong>solve problems</strong> calmly and creatively.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They increase <strong>self-confidence</strong> and help us handle challenges better.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Professional team high-fiving in the office" />
+                <div class="visual-body">
+                  <div class="visual-title">Skills that travel with you</div>
+                  <div class="visual-meta">From classroom projects to future jobs.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Confidence</span>
+                    <span class="visual-pill">Collaboration</span>
+                    <span class="visual-pill">Resilience</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 5 – Icebreaker Activity -->
+          <article class="slide" data-slide="5">
+            <div>
+              <div class="slide-header-eyebrow">Introduction</div>
+              <h2 class="slide-title">Icebreaker Activity – Introduce Yourself</h2>
+              <p class="slide-subtitle">
+                Start building comfort and connection in the room. Ask participants to briefly introduce themselves.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Participant introduction</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Name</strong></span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Course / Department</strong></span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>One personal strength</strong> (something they do well)</span>
+                    </li>
+                  </ul>
+                  <p style="margin-top: 8px; font-size: 0.9rem;">
+                    Encourage short, simple sharing so everyone gets a chance and feels included.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Students in a circle introducing themselves" />
+                <div class="visual-body">
+                  <div class="visual-title">Breaking the ice</div>
+                  <div class="visual-meta">Helps students feel safe to participate.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Trust</span>
+                    <span class="visual-pill">Openness</span>
+                    <span class="visual-pill">Engagement</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 6 – What are Soft Skills -->
+          <article class="slide" data-slide="6">
+            <div>
+              <div class="slide-header-eyebrow">Soft Skills</div>
+              <h2 class="slide-title">What Are Soft Skills?</h2>
+              <p class="slide-subtitle">
+                Soft skills are personal skills that help people interact and work well with others in any situation.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They are linked to how you <strong>think, feel, and behave</strong>.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They show in how you <strong>communicate, cooperate, and respond</strong> to challenges.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They can be <strong>practised and improved</strong> over time.</span>
+                  </li>
+                </ul>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Simple idea</div>
+                  Soft skills are about <strong>how you work with people</strong>, not just what you know.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="People putting puzzle pieces together representing skills" />
+                <div class="visual-body">
+                  <div class="visual-title">The human side of work</div>
+                  <div class="visual-meta">Attitude, behaviour, and people skills.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Behaviour</span>
+                    <span class="visual-pill">Attitude</span>
+                    <span class="visual-pill">Mindset</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 7 – Examples of Soft Skills -->
+          <article class="slide" data-slide="7">
+            <div>
+              <div class="slide-header-eyebrow">Soft Skills</div>
+              <h2 class="slide-title">Examples of Soft Skills</h2>
+              <p class="slide-subtitle">
+                These skills help you succeed in group work, projects, internships, and jobs.
+              </p>
+              <div class="slide-body">
+                <div class="two-column-points">
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Communication</strong> – speaking clearly, listening well.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Teamwork</strong> – cooperating and supporting others.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Leadership</strong> – guiding and motivating people.</span>
+                    </li>
+                  </ul>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Problem Solving</strong> – finding solutions calmly.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Time Management</strong> – planning and meeting deadlines.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3153198/pexels-photo-3153198.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Team members collaborating with sticky notes" />
+                <div class="visual-body">
+                  <div class="visual-title">Everyday soft skills</div>
+                  <div class="visual-meta">Used in class projects and real workplaces.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Communication</span>
+                    <span class="visual-pill">Leadership</span>
+                    <span class="visual-pill">Planning</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 8 – Technical Skills -->
+          <article class="slide" data-slide="8">
+            <div>
+              <div class="slide-header-eyebrow">Soft vs Technical Skills</div>
+              <h2 class="slide-title">What Are Technical Skills?</h2>
+              <p class="slide-subtitle">
+                Technical skills are job-specific or subject-specific skills that can often be measured and tested.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Programming</strong> – writing code in languages like C, Java, Python.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Machine operation</strong> – using lab equipment or tools correctly.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Accounting</strong> – working with numbers, reports, and financial records.</span>
+                  </li>
+                </ul>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Key idea</div>
+                  Technical skills are about <strong>what you know and can do</strong> in a specific field.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person typing code on laptop" />
+                <div class="visual-body">
+                  <div class="visual-title">Hard skills at work</div>
+                  <div class="visual-meta">Knowledge-based and task-specific.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Coding</span>
+                    <span class="visual-pill">Lab skills</span>
+                    <span class="visual-pill">Data skills</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 9 – Soft Skills vs Technical Skills -->
+          <article class="slide" data-slide="9">
+            <div>
+              <div class="slide-header-eyebrow">Soft vs Technical Skills</div>
+              <h2 class="slide-title">Soft Skills vs Technical Skills</h2>
+              <p class="slide-subtitle">
+                Both types of skills work together to create a strong professional.
+              </p>
+              <div class="slide-body">
+                <div class="compare-grid">
+                  <div class="compare-card">
+                    <div class="compare-label">Technical Skills</div>
+                    <div class="compare-heading">Job Knowledge</div>
+                    <p>
+                      Subject knowledge, tools, and techniques needed to perform specific tasks.
+                    </p>
+                  </div>
+                  <div class="compare-card">
+                    <div class="compare-label">Soft Skills</div>
+                    <div class="compare-heading">Behaviour &amp; Attitude</div>
+                    <p>
+                      How you communicate, behave, and respond to people and situations.
+                    </p>
+                  </div>
+                </div>
+                <div class="slide-highlight" style="margin-top: 10px;">
+                  <div class="slide-highlight-title">Important message</div>
+                  Both are important for <strong>career success</strong>. Employers look for a healthy balance of
+                  technical and soft skills.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Balanced scales representing different skills" />
+                <div class="visual-body">
+                  <div class="visual-title">The winning combination</div>
+                  <div class="visual-meta">Technical skill + soft skill = strong professional.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Knowledge</span>
+                    <span class="visual-pill">Behaviour</span>
+                    <span class="visual-pill">Attitude</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 10 – Why Employers Value Soft Skills -->
+          <article class="slide" data-slide="10">
+            <div>
+              <div class="slide-header-eyebrow">Soft Skills</div>
+              <h2 class="slide-title">Why Employers Value Soft Skills</h2>
+              <p class="slide-subtitle">
+                Employers hire for technical skills but often promote and retain people for soft skills.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They need people who can <strong>communicate clearly</strong> with colleagues and clients.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They value employees who can <strong>work in teams</strong> and support others.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They look for individuals who can <strong>solve problems</strong> and stay calm under pressure.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>They appreciate <strong>responsible behaviour</strong> – punctuality, reliability, and honesty.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Employer interviewing a candidate" />
+                <div class="visual-body">
+                  <div class="visual-title">Beyond the CV</div>
+                  <div class="visual-meta">Soft skills show in interviews and daily work.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Responsibility</span>
+                    <span class="visual-pill">Team spirit</span>
+                    <span class="visual-pill">Communication</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 11 – Workplace Example -->
+          <article class="slide" data-slide="11">
+            <div>
+              <div class="slide-header-eyebrow">Soft Skills</div>
+              <h2 class="slide-title">Workplace Example</h2>
+              <p class="slide-subtitle">
+                Use this scenario to start a short discussion with participants.
+              </p>
+              <div class="slide-body">
+                <div class="slide-highlight">
+                  <div class="slide-highlight-title">Two employees</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Employee A</strong> – Technical expert but has poor communication.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Employee B</strong> – Good communication and strong teamwork.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="quote-box">
+                  Ask the group: <strong>“Who will succeed more in the long term, and why?”</strong><br />
+                  Encourage them to connect their answers to real-life situations.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/5668859/pexels-photo-5668859.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Two colleagues discussing work with a manager" />
+                <div class="visual-body">
+                  <div class="visual-title">Who stands out?</div>
+                  <div class="visual-meta">Soft skills often make the difference.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Influence</span>
+                    <span class="visual-pill">Trust</span>
+                    <span class="visual-pill">Team fit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 12 – Activity: Dream Job -->
+          <article class="slide" data-slide="12">
+            <div>
+              <div class="slide-header-eyebrow">Soft Skills</div>
+              <h2 class="slide-title">Activity – Soft Skills for My Dream Job</h2>
+              <p class="slide-subtitle">
+                Help participants connect soft skills directly to their own future career interests.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Individual reflection task</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span>Write down your <strong>dream job</strong>.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span>List <strong>five soft skills</strong> needed for that job.</span>
+                    </li>
+                  </ul>
+                  <p style="margin-top: 8px; font-size: 0.9rem;">
+                    Invite a few volunteers to share their job choice and one key soft skill required.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4143794/pexels-photo-4143794.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student planning a future career path" />
+                <div class="visual-body">
+                  <div class="visual-title">Designing your future</div>
+                  <div class="visual-meta">Soft skills are part of your career plan.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Vision</span>
+                    <span class="visual-pill">Planning</span>
+                    <span class="visual-pill">Action</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 13 – What is Self Awareness -->
+          <article class="slide" data-slide="13">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">What Is Self Awareness?</h2>
+              <p class="slide-subtitle">
+                Self awareness means understanding yourself – who you are, how you think, and how you affect others.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Knowing <strong>your strengths and weaknesses</strong>.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Noticing <strong>your thoughts, emotions, and behaviour</strong>.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Understanding how your actions <strong>impact other people</strong>.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person looking at reflection in glass representing self awareness" />
+                <div class="visual-body">
+                  <div class="visual-title">Looking inward</div>
+                  <div class="visual-meta">Awareness is the first step to change.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Reflection</span>
+                    <span class="visual-pill">Insight</span>
+                    <span class="visual-pill">Growth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 14 – Self Awareness Includes -->
+          <article class="slide" data-slide="14">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Self Awareness Includes…</h2>
+              <p class="slide-subtitle">
+                Understanding different parts of yourself helps you make better choices.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Your strengths</strong> – what you do well.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Your weaknesses</strong> – areas that need improvement.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Your behaviour</strong> – how you act in different situations.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Your emotions</strong> – how you feel and how you handle feelings.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/9282761/pexels-photo-9282761.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person journaling about emotions and behaviour" />
+                <div class="visual-body">
+                  <div class="visual-title">Knowing your inner world</div>
+                  <div class="visual-meta">Strengths, limits, and feelings.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Strengths</span>
+                    <span class="visual-pill">Weaknesses</span>
+                    <span class="visual-pill">Emotions</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 15 – Why Self Awareness is Important -->
+          <article class="slide" data-slide="15">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Why Self Awareness Matters</h2>
+              <p class="slide-subtitle">
+                When you know yourself, you can grow yourself.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>It helps you <strong>improve yourself</strong> in a focused way.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>It supports <strong>better decision-making</strong> in studies, work, and relationships.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>It builds <strong>self-confidence</strong> because you understand your abilities and limits.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/935977/pexels-photo-935977.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person standing confidently on a mountain top" />
+                <div class="visual-body">
+                  <div class="visual-title">Clarity brings confidence</div>
+                  <div class="visual-meta">Understanding yourself reduces confusion and doubt.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Clarity</span>
+                    <span class="visual-pill">Confidence</span>
+                    <span class="visual-pill">Direction</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 16 – Personal Strengths -->
+          <article class="slide" data-slide="16">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Personal Strengths</h2>
+              <p class="slide-subtitle">
+                Strengths are things you naturally do well or have developed through practice.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Communication</strong> – explaining ideas, listening, and asking good questions.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Creativity</strong> – thinking of new ideas or different ways to do things.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Hard work</strong> – being disciplined, consistent, and willing to try.</span>
+                  </li>
+                </ul>
+                <div class="quote-box">
+                  Ask: <strong>“What is one strength you feel proud of?”</strong><br />
+                  Give them a moment to think quietly before sharing.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3182804/pexels-photo-3182804.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person speaking confidently to a group" />
+                <div class="visual-body">
+                  <div class="visual-title">Owning your strengths</div>
+                  <div class="visual-meta">Recognising strengths builds motivation.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Communication</span>
+                    <span class="visual-pill">Creativity</span>
+                    <span class="visual-pill">Effort</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 17 – Personal Weaknesses -->
+          <article class="slide" data-slide="17">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Personal Weaknesses</h2>
+              <p class="slide-subtitle">
+                Weaknesses are not permanent failures. They are <strong>areas for improvement</strong>.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Fear of speaking</strong> – feeling nervous to share ideas in front of others.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Poor time management</strong> – difficulty planning or meeting deadlines.</span>
+                  </li>
+                </ul>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Healthy attitude</div>
+                  Instead of hiding weaknesses, we can <strong>notice them and work on them</strong> step by step.
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4101132/pexels-photo-4101132.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student thinking about areas to improve" />
+                <div class="visual-body">
+                  <div class="visual-title">From weakness to growth</div>
+                  <div class="visual-meta">Awareness is the first step to change.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Honesty</span>
+                    <span class="visual-pill">Courage</span>
+                    <span class="visual-pill">Growth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 18 – Self Improvement -->
+          <article class="slide" data-slide="18">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">How Does Self Improvement Happen?</h2>
+              <p class="slide-subtitle">
+                Change is a process. Small actions over time create big results.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Practice</strong> – repeating new behaviours until they become habits.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Learning</strong> – gaining new knowledge from classes, books, or mentors.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Feedback</strong> – listening to others’ observations and using them to improve.</span>
+                  </li>
+                </ul>
+                <div class="quote-box">
+                  Remind them: <strong>“You don’t need to be perfect. You just need to keep improving.”</strong>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184644/pexels-photo-3184644.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Mentor giving feedback to a student" />
+                <div class="visual-body">
+                  <div class="visual-title">Continuous improvement</div>
+                  <div class="visual-meta">Learning, trying, and listening.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Practice</span>
+                    <span class="visual-pill">Learning</span>
+                    <span class="visual-pill">Feedback</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 19 – SWOT Analysis -->
+          <article class="slide" data-slide="19">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">SWOT Analysis</h2>
+              <p class="slide-subtitle">
+                SWOT is a simple tool to understand yourself and plan your growth.
+              </p>
+              <div class="slide-body">
+                <div class="swot-grid">
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">S</span>Strengths
+                    </div>
+                    <p>Things you do well and positive qualities you have.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">W</span>Weaknesses
+                    </div>
+                    <p>Areas that need improvement or skills you lack right now.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">O</span>Opportunities
+                    </div>
+                    <p>Chances you have to grow – courses, activities, people.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">T</span>Threats
+                    </div>
+                    <p>Challenges or obstacles that might slow down your progress.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person mapping strengths and weaknesses on paper" />
+                <div class="visual-body">
+                  <div class="visual-title">A simple self-scan</div>
+                  <div class="visual-meta">See where you are and where you can go.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Strengths</span>
+                    <span class="visual-pill">Opportunities</span>
+                    <span class="visual-pill">Threats</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 20 – SWOT Example -->
+          <article class="slide" data-slide="20">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">SWOT Example</h2>
+              <p class="slide-subtitle">
+                Share a simple, relatable example to show how SWOT looks in real life.
+              </p>
+              <div class="slide-body">
+                <div class="swot-grid">
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">S</span>Strength
+                    </div>
+                    <p>Hardworking and committed to completing tasks.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">W</span>Weakness
+                    </div>
+                    <p>Shy to speak in front of groups.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">O</span>Opportunity
+                    </div>
+                    <p>College offers presentations, clubs, and training programs.</p>
+                  </div>
+                  <div class="swot-card">
+                    <div class="swot-card-header">
+                      <span class="swot-letter">T</span>Threat
+                    </div>
+                    <p>High competition from others who are more confident.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student presenting in front of an audience" />
+                <div class="visual-body">
+                  <div class="visual-title">From shy to confident</div>
+                  <div class="visual-meta">Using opportunities to reduce threats.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Practice</span>
+                    <span class="visual-pill">Courage</span>
+                    <span class="visual-pill">Exposure</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 21 – Activity: Personal SWOT -->
+          <article class="slide" data-slide="21">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Activity – Personal SWOT</h2>
+              <p class="slide-subtitle">
+                Guide participants to create their own personal SWOT analysis.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Write your personal SWOT</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Strengths</strong> – What do I do well?</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Weaknesses</strong> – Where do I struggle?</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Opportunities</strong> – What chances can I use to grow?</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>Threats</strong> – What may stop or slow my progress?</span>
+                    </li>
+                  </ul>
+                  <p style="margin-top: 8px; font-size: 0.9rem;">
+                    Give quiet time for writing, then invite volunteers to share one insight each.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144096/pexels-photo-4144096.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student writing a SWOT analysis" />
+                <div class="visual-body">
+                  <div class="visual-title">Knowing yourself on paper</div>
+                  <div class="visual-meta">Turning thoughts into a clear plan.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Awareness</span>
+                    <span class="visual-pill">Planning</span>
+                    <span class="visual-pill">Action</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 22 – Discussion -->
+          <article class="slide" data-slide="22">
+            <div>
+              <div class="slide-header-eyebrow">Self Awareness</div>
+              <h2 class="slide-title">Discussion – Sharing Insights</h2>
+              <p class="slide-subtitle">
+                Help learners learn from each other’s experiences and reflections.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Invite everyone to share <strong>one strength</strong> they discovered.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Ask them to share <strong>one improvement area</strong> they would like to work on.</span>
+                  </li>
+                </ul>
+                <div class="quote-box">
+                  Emphasise a safe environment: <strong>“We share to learn, not to judge.”</strong>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Group of students in discussion circle" />
+                <div class="visual-body">
+                  <div class="visual-title">Learning together</div>
+                  <div class="visual-meta">Sharing builds connection and insight.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Respect</span>
+                    <span class="visual-pill">Openness</span>
+                    <span class="visual-pill">Support</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 23 – Positive Thinking -->
+          <article class="slide" data-slide="23">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">What Is Positive Thinking?</h2>
+              <p class="slide-subtitle">
+                Positive thinking means focusing on solutions and opportunities instead of only on problems.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Looking for what you <strong>can do</strong> instead of what you cannot do.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Asking, <strong>“What is the next step?”</strong> instead of giving up.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Believing that challenges can be <strong>managed with effort and help</strong>.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3760851/pexels-photo-3760851.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person standing in sunlight with arms outstretched" />
+                <div class="visual-body">
+                  <div class="visual-title">Choosing your focus</div>
+                  <div class="visual-meta">Thoughts shape feelings and actions.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Hope</span>
+                    <span class="visual-pill">Solutions</span>
+                    <span class="visual-pill">Possibility</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 24 – Benefits of Positive Thinking -->
+          <article class="slide" data-slide="24">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Benefits of Positive Thinking</h2>
+              <p class="slide-subtitle">
+                Positive thoughts support better performance and well-being.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>More confidence</strong> – you believe you can learn and improve.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Better motivation</strong> – you feel more energy to try and keep going.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Better problem solving</strong> – you think more clearly under pressure.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3810754/pexels-photo-3810754.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Smiling students working together" />
+                <div class="visual-body">
+                  <div class="visual-title">A helpful mindset</div>
+                  <div class="visual-meta">Positive thinking supports action and resilience.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Energy</span>
+                    <span class="visual-pill">Focus</span>
+                    <span class="visual-pill">Calm</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 25 – Negative Thinking -->
+          <article class="slide" data-slide="25">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">What Is Negative Thinking?</h2>
+              <p class="slide-subtitle">
+                Negative thinking focuses on problems, fear, and what might go wrong.
+              </p>
+              <div class="slide-body">
+                <p>Example of a negative thought:</p>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Example</div>
+                  “I cannot do this.”
+                </div>
+                <p style="margin-top: 10px;">
+                  This kind of thought makes it hard to start, practise, or ask for help.
+                </p>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/5022761/pexels-photo-5022761.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person sitting with head down looking stressed" />
+                <div class="visual-body">
+                  <div class="visual-title">When thoughts hold you back</div>
+                  <div class="visual-meta">Awareness is the first step to change them.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Fear</span>
+                    <span class="visual-pill">Doubt</span>
+                    <span class="visual-pill">Worry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 26 – Effects of Negative Thinking -->
+          <article class="slide" data-slide="26">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Effects of Negative Thinking</h2>
+              <p class="slide-subtitle">
+                Our thoughts influence our feelings and actions.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Low confidence</strong> – you stop believing in your abilities.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Stress</strong> – you feel pressure and tension more easily.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Fear of trying</strong> – you avoid new experiences or challenges.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/6238221/pexels-photo-6238221.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student feeling stressed while studying" />
+                <div class="visual-body">
+                  <div class="visual-title">Breaking the cycle</div>
+                  <div class="visual-meta">Recognising negative thoughts allows you to change them.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Notice</span>
+                    <span class="visual-pill">Pause</span>
+                    <span class="visual-pill">Reframe</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 27 – Fixed Mindset -->
+          <article class="slide" data-slide="27">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Fixed Mindset</h2>
+              <p class="slide-subtitle">
+                A fixed mindset is the belief that abilities cannot change.
+              </p>
+              <div class="slide-body">
+                <p>Common example:</p>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Example thought</div>
+                  “I am not good at this.”
+                </div>
+                <p style="margin-top: 10px;">
+                  With a fixed mindset, people avoid challenges and give up quickly when work becomes difficult.
+                </p>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3951628/pexels-photo-3951628.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student looking frustrated with homework" />
+                <div class="visual-body">
+                  <div class="visual-title">Stuck thinking</div>
+                  <div class="visual-meta">Believing you cannot change blocks improvement.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Avoidance</span>
+                    <span class="visual-pill">Fear</span>
+                    <span class="visual-pill">Giving up</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 28 – Growth Mindset -->
+          <article class="slide" data-slide="28">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Growth Mindset</h2>
+              <p class="slide-subtitle">
+                A growth mindset is the belief that skills can improve with effort and the right strategy.
+              </p>
+              <div class="slide-body">
+                <p>Common example:</p>
+                <div class="slide-highlight" style="margin-top: 6px;">
+                  <div class="slide-highlight-title">Example thought</div>
+                  “I will learn this.”
+                </div>
+                <p style="margin-top: 10px;">
+                  With a growth mindset, people face challenges, practise more, and learn from mistakes.
+                </p>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144093/pexels-photo-4144093.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student studying with focus and determination" />
+                <div class="visual-body">
+                  <div class="visual-title">Believing in growth</div>
+                  <div class="visual-meta">Effort plus time creates new abilities.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Effort</span>
+                    <span class="visual-pill">Practice</span>
+                    <span class="visual-pill">Learning</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 29 – Fixed vs Growth Mindset -->
+          <article class="slide" data-slide="29">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Fixed vs Growth Mindset</h2>
+              <p class="slide-subtitle">
+                Compare how each mindset responds to challenges.
+              </p>
+              <div class="slide-body">
+                <div class="compare-grid">
+                  <div class="compare-card">
+                    <div class="compare-label">Fixed Mindset</div>
+                    <div class="compare-heading">Avoids challenges</div>
+                    <p>“If I fail, it means I am not good enough, so I will not try.”</p>
+                  </div>
+                  <div class="compare-card">
+                    <div class="compare-label">Growth Mindset</div>
+                    <div class="compare-heading">Accepts challenges</div>
+                    <p>“Challenges help me learn. I may struggle now, but I can improve.”</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/7005626/pexels-photo-7005626.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Two paths symbolizing different mindsets" />
+                <div class="visual-body">
+                  <div class="visual-title">Which path will you choose?</div>
+                  <div class="visual-meta">Every challenge is a chance to grow.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Choice</span>
+                    <span class="visual-pill">Challenge</span>
+                    <span class="visual-pill">Growth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 30 – Activity: Change the Thought -->
+          <article class="slide" data-slide="30">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Activity – Change the Thought</h2>
+              <p class="slide-subtitle">
+                Practise turning negative statements into positive, growth-focused ones.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Change negative thoughts to positive</div>
+                  <p>Example:</p>
+                  <ul class="bullet-list" style="margin-top: 6px;">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>❌ I cannot do this</strong></span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span><strong>✅ I will learn how to do this</strong></span>
+                    </li>
+                  </ul>
+                  <p style="margin-top: 8px; font-size: 0.9rem;">
+                    Ask students to suggest more negative statements and work together to rewrite them positively.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144170/pexels-photo-4144170.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Teacher guiding students in a positive exercise" />
+                <div class="visual-body">
+                  <div class="visual-title">Rewriting your inner script</div>
+                  <div class="visual-meta">Small changes in words can shift your mindset.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Awareness</span>
+                    <span class="visual-pill">Reframing</span>
+                    <span class="visual-pill">Optimism</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 31 – More Examples -->
+          <article class="slide" data-slide="31">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">More Positive Thinking Examples</h2>
+              <p class="slide-subtitle">
+                Show simple transformations students can remember and use.
+              </p>
+              <div class="slide-body">
+                <div class="compare-grid">
+                  <div class="compare-card">
+                    <div class="compare-label">Negative</div>
+                    <p><strong>“I always fail.”</strong></p>
+                    <div class="compare-label" style="margin-top: 10px;">Positive</div>
+                    <p><strong>“I learn from mistakes.”</strong></p>
+                  </div>
+                  <div class="compare-card">
+                    <div class="compare-label">Negative</div>
+                    <p><strong>“This is difficult.”</strong></p>
+                    <div class="compare-label" style="margin-top: 10px;">Positive</div>
+                    <p><strong>“I will try step by step.”</strong></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/7439163/pexels-photo-7439163.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student climbing stairs representing step-by-step progress" />
+                <div class="visual-body">
+                  <div class="visual-title">Step-by-step progress</div>
+                  <div class="visual-meta">Every small step counts towards success.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Patience</span>
+                    <span class="visual-pill">Persistence</span>
+                    <span class="visual-pill">Growth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 32 – Group Sharing -->
+          <article class="slide" data-slide="32">
+            <div>
+              <div class="slide-header-eyebrow">Positive Mindset</div>
+              <h2 class="slide-title">Group Sharing – Positive Statements</h2>
+              <p class="slide-subtitle">
+                Encourage students to practise positive language together.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Sharing circle</div>
+                  <ul class="bullet-list">
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span>Ask each participant to share <strong>one positive statement</strong> they will use.</span>
+                    </li>
+                    <li>
+                      <span class="bullet-dot"></span>
+                      <span>Invite them to support each other in <strong>using positive language</strong> during the day.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181400/pexels-photo-1181400.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Group of friends sharing and encouraging each other" />
+                <div class="visual-body">
+                  <div class="visual-title">Speaking positivity aloud</div>
+                  <div class="visual-meta">Words shape your environment and mindset.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Encouragement</span>
+                    <span class="visual-pill">Support</span>
+                    <span class="visual-pill">Community</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 33 – Reflection Time -->
+          <article class="slide" data-slide="33">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Reflection Time</h2>
+              <p class="slide-subtitle">
+                Pause and think about what you have learned so far.
+              </p>
+              <div class="slide-body">
+                <p>
+                  Ask participants to sit quietly for a moment, close their eyes if comfortable, and review the key ideas
+                  from today.
+                </p>
+                <ul class="reflection-list">
+                  <li>What did I hear today that was new or surprising?</li>
+                  <li>Which idea feels most important for my life right now?</li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4145306/pexels-photo-4145306.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Person quietly reflecting with notebook" />
+                <div class="visual-body">
+                  <div class="visual-title">Quiet reflection</div>
+                  <div class="visual-meta">Space to connect learning with life.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Pause</span>
+                    <span class="visual-pill">Notice</span>
+                    <span class="visual-pill">Integrate</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 34 – Reflection Question: What did I learn today? -->
+          <article class="slide" data-slide="34">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Reflection Question 1</h2>
+              <p class="slide-subtitle">
+                What did I learn today?
+              </p>
+              <div class="slide-body">
+                <p>Ask participants to write a short answer in their notebook:</p>
+                <ul class="reflection-list">
+                  <li>New ideas I discovered today.</li>
+                  <li>Concepts about self awareness or positive mindset that stood out to me.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3747464/pexels-photo-3747464.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student writing reflection notes" />
+                <div class="visual-body">
+                  <div class="visual-title">Capturing learning</div>
+                  <div class="visual-meta">Writing helps fix ideas in memory.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Recall</span>
+                    <span class="visual-pill">Understanding</span>
+                    <span class="visual-pill">Insight</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 35 – Reflection Question: Strength -->
+          <article class="slide" data-slide="35">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Reflection Question 2</h2>
+              <p class="slide-subtitle">
+                What is one strength I discovered?
+              </p>
+              <div class="slide-body">
+                <p>Guide participants to recognise something positive about themselves:</p>
+                <ul class="reflection-list">
+                  <li>A quality others appreciate in me.</li>
+                  <li>Something I did well in class, at home, or with friends.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144101/pexels-photo-4144101.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Smiling student feeling confident" />
+                <div class="visual-body">
+                  <div class="visual-title">Seeing your strengths</div>
+                  <div class="visual-meta">Positive self-knowledge builds confidence.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Self-esteem</span>
+                    <span class="visual-pill">Awareness</span>
+                    <span class="visual-pill">Gratitude</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 36 – Reflection Question: Weakness -->
+          <article class="slide" data-slide="36">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Reflection Question 3</h2>
+              <p class="slide-subtitle">
+                What is one weakness I want to improve?
+              </p>
+              <div class="slide-body">
+                <p>Encourage honest, non-judgmental reflection:</p>
+                <ul class="reflection-list">
+                  <li>A habit I want to change.</li>
+                  <li>A skill I want to develop (e.g., speaking up, planning better).</li>
+                </ul>
+                <p style="margin-top: 8px;">
+                  Remind them that identifying a weakness is already a <strong>step towards growth</strong>.
+                </p>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144098/pexels-photo-4144098.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student thinking seriously about personal change" />
+                <div class="visual-body">
+                  <div class="visual-title">Honest reflection</div>
+                  <div class="visual-meta">Seeing where to grow is powerful.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Honesty</span>
+                    <span class="visual-pill">Courage</span>
+                    <span class="visual-pill">Direction</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 37 – Personal Goal -->
+          <article class="slide" data-slide="37">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Personal Goal – My Next Step</h2>
+              <p class="slide-subtitle">
+                Turn reflection into a simple, practical action.
+              </p>
+              <div class="slide-body">
+                <div class="activity-box">
+                  <div class="activity-title">Write one personal improvement goal</div>
+                  <p>Ask participants to complete this sentence in their notebook:</p>
+                  <ul class="reflection-list" style="margin-top: 6px;">
+                    <li>“In the next 2–4 weeks, I will work on improving ________ by ________.”</li>
+                  </ul>
+                  <p style="margin-top: 8px; font-size: 0.9rem;">
+                    Encourage them to choose a small, realistic action they can start immediately.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/4144294/pexels-photo-4144294.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Student setting goals in a planner" />
+                <div class="visual-body">
+                  <div class="visual-title">From ideas to action</div>
+                  <div class="visual-meta">Goals turn learning into real change.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Goals</span>
+                    <span class="visual-pill">Habits</span>
+                    <span class="visual-pill">Progress</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 38 – Key Lessons -->
+          <article class="slide" data-slide="38">
+            <div>
+              <div class="slide-header-eyebrow">Reflection</div>
+              <h2 class="slide-title">Key Lessons from Today</h2>
+              <p class="slide-subtitle">
+                Summarise and reinforce the core messages of the workshop.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Soft skills are important</strong> for success in studies, work, and relationships.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Self awareness helps improvement</strong> by showing us our strengths and weaknesses.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Positive thinking leads to success</strong> by building confidence and resilience.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/3184416/pexels-photo-3184416.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Group celebrating success together" />
+                <div class="visual-body">
+                  <div class="visual-title">Carrying lessons forward</div>
+                  <div class="visual-meta">Today’s insights can shape tomorrow’s behaviour.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Awareness</span>
+                    <span class="visual-pill">Mindset</span>
+                    <span class="visual-pill">Behaviour</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 39 – Thank Participants -->
+          <article class="slide slide-layout-centered" data-slide="39">
+            <div>
+              <div class="slide-header-eyebrow">Closing</div>
+              <h2 class="slide-title">Thank You for Your Participation</h2>
+              <p class="slide-subtitle">
+                Appreciate the energy, openness, and honesty participants brought to the session.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list" style="max-width: 34rem; margin: 0 auto;">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Encourage them to <strong>practise one new idea</strong> from today’s workshop.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Invite them to <strong>notice their thoughts and behaviours</strong> over the coming days.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181405/pexels-photo-1181405.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Team giving a round of applause" />
+                <div class="visual-body">
+                  <div class="visual-title">Gratitude and encouragement</div>
+                  <div class="visual-meta">Every participant contributes to the learning space.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Thanks</span>
+                    <span class="visual-pill">Respect</span>
+                    <span class="visual-pill">Growth</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 40 – Questions -->
+          <article class="slide slide-layout-centered" data-slide="40">
+            <div>
+              <div class="slide-header-eyebrow">Closing</div>
+              <h2 class="slide-title">Questions &amp; Next Steps</h2>
+              <p class="slide-subtitle">
+                Invite questions, clarifications, or sharing before ending the session.
+              </p>
+              <div class="slide-body">
+                <ul class="bullet-list" style="max-width: 34rem; margin: 0 auto;">
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span><strong>Any questions?</strong> Clarify doubts or revisit any slide if needed.</span>
+                  </li>
+                  <li>
+                    <span class="bullet-dot"></span>
+                    <span>Encourage participants to <strong>observe their thoughts and actions</strong> after this
+                      workshop.</span>
+                  </li>
+                </ul>
+                <div class="quote-box" style="margin-top: 10px;">
+                  “Soft skills grow with practice. Start small, stay consistent, and be kind to yourself.”
+                </div>
+              </div>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-card">
+                <img class="visual-image"
+                     src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Teacher taking questions from students" />
+                <div class="visual-body">
+                  <div class="visual-title">Open for questions</div>
+                  <div class="visual-meta">Create space for curiosity and clarity.</div>
+                  <div class="visual-pill-row">
+                    <span class="visual-pill">Questions</span>
+                    <span class="visual-pill">Reflection</span>
+                    <span class="visual-pill">Next steps</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Footer / Controls -->
+        <footer class="slide-footer">
+          <div class="progress-wrap">
+            <div class="progress-label">
+              <span id="progressText">Slide 1 of 40</span>
+            </div>
+            <div class="progress-bar-shell" aria-hidden="true">
+              <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+          </div>
+          <div class="nav-controls">
+            <span class="nav-hint">Use ← and → keys to navigate</span>
+            <button class="nav-button secondary" id="prevBtn">
+              ◀ Previous
+            </button>
+            <button class="nav-button primary" id="nextBtn">
+              Next ▶
+            </button>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const totalSlides = slides.length;
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+      const metaSlideCount = document.getElementById("meta-slide-count");
+
+      let currentIndex = 0;
+
+      function updateSlides(newIndex) {
+        if (newIndex < 0 || newIndex >= totalSlides) return;
+
+        slides[currentIndex].classList.remove("active");
+        currentIndex = newIndex;
+        slides[currentIndex].classList.add("active");
+
+        const humanIndex = currentIndex + 1;
+        const label = `Slide ${humanIndex} of ${totalSlides}`;
+        progressText.textContent = label;
+        metaSlideCount.textContent = label;
+        const progressPercent = (humanIndex / totalSlides) * 100;
+        progressBar.style.width = progressPercent + "%";
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === totalSlides - 1;
+      }
+
+      prevBtn.addEventListener("click", function () {
+        updateSlides(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        updateSlides(currentIndex + 1);
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          updateSlides(currentIndex + 1);
+        } else if (event.key === "ArrowLeft") {
+          updateSlides(currentIndex - 1);
+        }
+      });
+
+      // Initialise state
+      updateSlides(0);
+    })();
+  </script>
+</body>
+</html>
+

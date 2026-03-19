@@ -1,0 +1,2820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Development - NVQ Level 5 ICT</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h2 {
+      color: #2563eb;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h3 {
+      color: #4f46e5;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-card h4 {
+      color: #6366f1;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      white-space: pre;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      border: 1px solid #334155;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .code-block code {
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: block;
+    }
+
+    .code-block::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .code-block::-webkit-scrollbar-track {
+      background: #0f172a;
+      border-radius: 4px;
+    }
+
+    .code-block::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+
+    .code-block::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    .code-block code {
+      color: #e2e8f0;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .code-block .keyword {
+      color: #60a5fa;
+      font-weight: 600;
+    }
+
+    .code-block .string {
+      color: #34d399;
+    }
+
+    .code-block .tag {
+      color: #f472b6;
+    }
+
+    .code-block .function {
+      color: #fbbf24;
+    }
+
+    .code-block .variable {
+      color: #a78bfa;
+    }
+
+    .code-block .number {
+      color: #fb7185;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 0;
+      font-family: inherit;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .code-block * {
+      font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1.5rem 0;
+    }
+
+    .table-responsive table {
+      min-width: 600px;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+      border-left: 4px solid #6366f1;
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.warning {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left-color: #f59e0b;
+    }
+
+    .info-box.success {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left-color: #10b981;
+    }
+
+    .info-box.danger {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left-color: #ef4444;
+    }
+
+    .diagram-container {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 2px solid #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .section-number {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      font-weight: 700;
+      margin-right: 1rem;
+      font-size: 1rem;
+    }
+
+    .icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .questions-section {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-left: 5px solid #0ea5e9;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .questions-section h3 {
+      color: #0369a1;
+      border-bottom: 2px solid #0ea5e9;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-item {
+      background: white;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-left: 3px solid #0ea5e9;
+    }
+
+    .question-item strong {
+      color: #0369a1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin: 1.5rem 0;
+    }
+
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    @media (max-width: 768px) {
+      .module-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .content-card {
+        padding: 1.5rem;
+      }
+
+      .content-card h2 {
+        font-size: 1.4rem;
+      }
+
+      .code-block {
+        font-size: 0.75rem;
+        padding: 1rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .content-card {
+        overflow-x: hidden;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-code me-2"></i>Web Development - Level 5
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#html">HTML</a></li>
+          <li class="nav-item"><a class="nav-link" href="#css">CSS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#bootstrap">Bootstrap</a></li>
+          <li class="nav-item"><a class="nav-link" href="#xml">XML</a></li>
+          <li class="nav-item"><a class="nav-link" href="#php">PHP</a></li>
+          <li class="nav-item"><a class="nav-link" href="#aspnet">ASP.NET</a></li>
+          <li class="nav-item"><a class="nav-link" href="#mvc">MVC</a></li>
+          <li class="nav-item"><a class="nav-link" href="#mobile">Mobile</a></li>
+          <li class="nav-item"><a class="nav-link" href="#mern">MERN</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="module-header">
+    <div class="container text-center">
+      <h1><i class="fas fa-globe me-2"></i>Web Development</h1>
+      <p class="lead">Comprehensive Guide to Modern Web Development Technologies</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    
+    <!-- Module 1: HTML -->
+    <div class="content-card" id="html">
+      <h2><span class="section-number">1</span>Web Contents Development 1 (HTML)</h2>
+      
+      <h3><i class="fas fa-code icon-box"></i>Understand and Explain the Outline of HTML</h3>
+      <p><strong>HTML (HyperText Markup Language)</strong> is the standard markup language used to create web pages. It provides the structure and content of a webpage, defining elements like headings, paragraphs, links, images, and more.</p>
+      
+      <p><strong>HTML Document Structure:</strong> Every HTML document follows a specific structure that includes:</p>
+      <ul>
+        <li><strong>DOCTYPE Declaration:</strong> Tells the browser which version of HTML is being used</li>
+        <li><strong>HTML Element:</strong> The root element that contains all other elements</li>
+        <li><strong>Head Section:</strong> Contains metadata, title, and links to external resources</li>
+        <li><strong>Body Section:</strong> Contains the visible content of the webpage</li>
+      </ul>
+
+      <div class="code-block">
+<span class="comment">&lt;!-- Basic HTML5 Document Structure --&gt;</span>
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">name</span>=<span class="string">"viewport"</span> <span class="keyword">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>My First Web Page<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Welcome to HTML<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>This is a paragraph of text.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+      </div>
+
+      <div class="info-box">
+        <strong>Key HTML Concepts:</strong>
+        <ul>
+          <li><strong>Elements:</strong> Building blocks of HTML (e.g., &lt;p&gt;, &lt;div&gt;, &lt;h1&gt;)</li>
+          <li><strong>Tags:</strong> Markers that define elements (opening &lt;tag&gt; and closing &lt;/tag&gt;)</li>
+          <li><strong>Attributes:</strong> Additional information about elements (e.g., id, class, src, href)</li>
+          <li><strong>Nesting:</strong> Placing elements inside other elements</li>
+          <li><strong>Semantic HTML:</strong> Using meaningful tags that describe content purpose</li>
+        </ul>
+      </div>
+
+      <h3><i class="fas fa-tags icon-box"></i>Identify HTML Basic Tags</h3>
+      <p>HTML provides numerous tags for structuring content. Understanding these basic tags is fundamental to web development.</p>
+
+      <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;h1&gt; to &lt;h6&gt;</code></td>
+            <td>Heading tags (h1 is largest, h6 is smallest)</td>
+            <td><code>&lt;h1&gt;Main Title&lt;/h1&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;p&gt;</code></td>
+            <td>Paragraph text</td>
+            <td><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;a&gt;</code></td>
+            <td>Anchor (hyperlink)</td>
+            <td><code>&lt;a href="page.html"&gt;Link&lt;/a&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;img&gt;</code></td>
+            <td>Image (self-closing)</td>
+            <td><code>&lt;img src="image.jpg" alt="Description"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;div&gt;</code></td>
+            <td>Division/container block element</td>
+            <td><code>&lt;div&gt;Content&lt;/div&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;span&gt;</code></td>
+            <td>Inline container element</td>
+            <td><code>&lt;span&gt;Inline content&lt;/span&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;ul&gt;</code></td>
+            <td>Unordered list</td>
+            <td><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;ol&gt;</code></td>
+            <td>Ordered list</td>
+            <td><code>&lt;ol&gt;&lt;li&gt;First&lt;/li&gt;&lt;/ol&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;table&gt;</code></td>
+            <td>Table structure</td>
+            <td><code>&lt;table&gt;&lt;tr&gt;&lt;td&gt;Cell&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;form&gt;</code></td>
+            <td>Form container</td>
+            <td><code>&lt;form action="submit.php" method="post"&gt;&lt;/form&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;input&gt;</code></td>
+            <td>Form input field</td>
+            <td><code>&lt;input type="text" name="username"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;button&gt;</code></td>
+            <td>Clickable button</td>
+            <td><code>&lt;button type="submit"&gt;Submit&lt;/button&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h4>Complete HTML Example with Basic Tags:</h4>
+      <div class="code-block">
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>HTML Basics Example<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comment">&lt;!-- Headings --&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Main Heading<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>Subheading<span class="tag">&lt;/h2&gt;</span>
+    
+    <span class="comment">&lt;!-- Paragraphs --&gt;</span>
+    <span class="tag">&lt;p&gt;</span>This is a paragraph with <span class="tag">&lt;strong&gt;</span>bold<span class="tag">&lt;/strong&gt;</span> and <span class="tag">&lt;em&gt;</span>italic<span class="tag">&lt;/em&gt;</span> text.<span class="tag">&lt;/p&gt;</span>
+    
+    <span class="comment">&lt;!-- Links --&gt;</span>
+    <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"https://example.com"</span> <span class="keyword">target</span>=<span class="string">"_blank"</span><span class="tag">&gt;</span>Visit Example<span class="tag">&lt;/a&gt;</span>
+    
+    <span class="comment">&lt;!-- Images --&gt;</span>
+    <span class="tag">&lt;img</span> <span class="keyword">src</span>=<span class="string">"image.jpg"</span> <span class="keyword">alt</span>=<span class="string">"Description"</span> <span class="keyword">width</span>=<span class="string">"300"</span><span class="tag">&gt;</span>
+    
+    <span class="comment">&lt;!-- Lists --&gt;</span>
+    <span class="tag">&lt;ul&gt;</span>
+        <span class="tag">&lt;li&gt;</span>First item<span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;li&gt;</span>Second item<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;/ul&gt;</span>
+    
+    <span class="comment">&lt;!-- Form --&gt;</span>
+    <span class="tag">&lt;form</span> <span class="keyword">action</span>=<span class="string">"/submit"</span> <span class="keyword">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="keyword">for</span>=<span class="string">"name"</span><span class="tag">&gt;</span>Name:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="keyword">type</span>=<span class="string">"text"</span> <span class="keyword">id</span>=<span class="string">"name"</span> <span class="keyword">name</span>=<span class="string">"name"</span> <span class="keyword">required</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/form&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+      </div>
+
+      <div class="info-box success">
+        <strong>HTML5 Semantic Elements:</strong>
+        <ul>
+          <li><code>&lt;header&gt;</code> - Header section</li>
+          <li><code>&lt;nav&gt;</code> - Navigation links</li>
+          <li><code>&lt;main&gt;</code> - Main content</li>
+          <li><code>&lt;article&gt;</code> - Independent content</li>
+          <li><code>&lt;section&gt;</code> - Thematic grouping</li>
+          <li><code>&lt;aside&gt;</code> - Sidebar content</li>
+          <li><code>&lt;footer&gt;</code> - Footer section</li>
+        </ul>
+      </div>
+
+      <!-- Questions for HTML -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - HTML</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the structure of an HTML document. What is the purpose of each section?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. What is the difference between block-level and inline elements? Provide examples.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Create a complete HTML page with a form that includes: text input, email input, radio buttons, checkboxes, and a submit button.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. Explain the importance of semantic HTML5 elements. How do they improve web accessibility?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q5. What are HTML attributes? List five common attributes and their purposes.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.5: CSS -->
+    <div class="content-card" id="css">
+      <h2><span class="section-number">1.5</span>Web Styling (CSS)</h2>
+      
+      <h3><i class="fas fa-paint-brush icon-box"></i>Understand CSS Syntax, Selectors, Box Model, Flexbox/Grid Layouts</h3>
+      <p><strong>CSS (Cascading Style Sheets)</strong> is used to style and layout web pages. It controls colors, fonts, spacing, positioning, and responsive design.</p>
+
+      <h4>CSS Syntax:</h4>
+      <div class="code-block">
+<span class="comment">/* CSS Syntax: selector { property: value; } */</span>
+<span class="keyword">selector</span> {
+    <span class="keyword">property</span>: <span class="string">value</span>;
+    <span class="keyword">property</span>: <span class="string">value</span>;
+}
+
+<span class="comment">/* Example */</span>
+<span class="keyword">h1</span> {
+    <span class="keyword">color</span>: <span class="string">blue</span>;
+    <span class="keyword">font-size</span>: <span class="string">2em</span>;
+    <span class="keyword">margin</span>: <span class="string">10px</span>;
+}
+      </div>
+
+      <h4>CSS Selectors:</h4>
+      <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Selector Type</th>
+            <th>Syntax</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Element</td>
+            <td><code>element</code></td>
+            <td><code>p { color: red; }</code></td>
+          </tr>
+          <tr>
+            <td>Class</td>
+            <td><code>.classname</code></td>
+            <td><code>.highlight { background: yellow; }</code></td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td><code>#idname</code></td>
+            <td><code>#header { height: 100px; }</code></td>
+          </tr>
+          <tr>
+            <td>Descendant</td>
+            <td><code>parent child</code></td>
+            <td><code>div p { margin: 10px; }</code></td>
+          </tr>
+          <tr>
+            <td>Child</td>
+            <td><code>parent > child</code></td>
+            <td><code>ul > li { list-style: none; }</code></td>
+          </tr>
+          <tr>
+            <td>Attribute</td>
+            <td><code>[attribute]</code></td>
+            <td><code>input[type="text"] { border: 1px solid; }</code></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h4>Box Model:</h4>
+      <p>The CSS box model describes how elements are rendered with content, padding, border, and margin.</p>
+      <div class="code-block">
+<span class="keyword">.box</span> {
+    <span class="comment">/* Content area */</span>
+    <span class="keyword">width</span>: <span class="string">200px</span>;
+    <span class="keyword">height</span>: <span class="string">100px</span>;
+    
+    <span class="comment">/* Padding - space inside border */</span>
+    <span class="keyword">padding</span>: <span class="string">20px</span>;
+    
+    <span class="comment">/* Border - around padding */</span>
+    <span class="keyword">border</span>: <span class="string">2px solid black</span>;
+    
+    <span class="comment">/* Margin - space outside border */</span>
+    <span class="keyword">margin</span>: <span class="string">10px</span>;
+    
+    <span class="comment">/* Box-sizing controls how width/height are calculated */</span>
+    <span class="keyword">box-sizing</span>: <span class="string">border-box</span>; <span class="comment">/* includes padding and border */</span>
+}
+      </div>
+
+      <h4>Flexbox Layout:</h4>
+      <div class="code-block">
+<span class="comment">/* Flexbox Container */</span>
+<span class="keyword">.container</span> {
+    <span class="keyword">display</span>: <span class="string">flex</span>;
+    <span class="keyword">flex-direction</span>: <span class="string">row</span>; <span class="comment">/* or column */</span>
+    <span class="keyword">justify-content</span>: <span class="string">center</span>; <span class="comment">/* main axis alignment */</span>
+    <span class="keyword">align-items</span>: <span class="string">center</span>; <span class="comment">/* cross axis alignment */</span>
+    <span class="keyword">flex-wrap</span>: <span class="string">wrap</span>;
+    <span class="keyword">gap</span>: <span class="string">20px</span>;
+}
+
+<span class="comment">/* Flexbox Items */</span>
+<span class="keyword">.item</span> {
+    <span class="keyword">flex</span>: <span class="string">1</span>; <span class="comment">/* grow, shrink, basis */</span>
+    <span class="keyword">flex-grow</span>: <span class="string">1</span>;
+    <span class="keyword">flex-shrink</span>: <span class="string">1</span>;
+    <span class="keyword">flex-basis</span>: <span class="string">200px</span>;
+}
+      </div>
+
+      <h4>CSS Grid Layout:</h4>
+      <div class="code-block">
+<span class="comment">/* Grid Container */</span>
+<span class="keyword">.grid-container</span> {
+    <span class="keyword">display</span>: <span class="string">grid</span>;
+    <span class="keyword">grid-template-columns</span>: <span class="string">repeat(3, 1fr)</span>; <span class="comment">/* 3 equal columns */</span>
+    <span class="keyword">grid-template-rows</span>: <span class="string">auto</span>;
+    <span class="keyword">gap</span>: <span class="string">20px</span>;
+    <span class="keyword">grid-template-areas</span>:
+        <span class="string">"header header header"</span>
+        <span class="string">"sidebar main aside"</span>
+        <span class="string">"footer footer footer"</span>;
+}
+
+<span class="comment">/* Grid Items */</span>
+<span class="keyword">.header</span> { <span class="keyword">grid-area</span>: <span class="string">header</span>; }
+<span class="keyword">.sidebar</span> { <span class="keyword">grid-area</span>: <span class="string">sidebar</span>; }
+<span class="keyword">.main</span> { <span class="keyword">grid-area</span>: <span class="string">main</span>; }
+      </div>
+
+      <h3><i class="fas fa-mobile-alt icon-box"></i>Apply Responsive Design Principles</h3>
+      <div class="code-block">
+<span class="comment">/* Media Queries for Responsive Design */</span>
+<span class="keyword">@media</span> <span class="keyword">screen</span> <span class="keyword">and</span> (<span class="keyword">max-width</span>: <span class="string">768px</span>) {
+    <span class="keyword">.container</span> {
+        <span class="keyword">flex-direction</span>: <span class="string">column</span>;
+        <span class="keyword">padding</span>: <span class="string">10px</span>;
+    }
+}
+
+<span class="comment">/* Mobile-first approach */</span>
+<span class="keyword">.responsive</span> {
+    <span class="keyword">width</span>: <span class="string">100%</span>;
+    <span class="keyword">max-width</span>: <span class="string">1200px</span>;
+    <span class="keyword">margin</span>: <span class="string">0 auto</span>;
+    <span class="keyword">padding</span>: <span class="string">1rem</span>;
+}
+
+<span class="comment">/* Fluid typography */</span>
+<span class="keyword">h1</span> {
+    <span class="keyword">font-size</span>: <span class="string">clamp(1.5rem, 5vw, 3rem)</span>;
+}
+      </div>
+
+      <!-- Questions for CSS -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - CSS</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the CSS box model. How do padding, border, and margin affect element sizing?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. What is the difference between Flexbox and Grid? When would you use each?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Create a responsive layout using CSS Grid that has 3 columns on desktop, 2 on tablet, and 1 on mobile.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. Explain CSS specificity. How does the browser determine which styles to apply?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q5. Write CSS code for a centered flexbox container with items that wrap and have equal spacing.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 1.6: Bootstrap -->
+    <div class="content-card" id="bootstrap">
+      <h2><span class="section-number">1.6</span>Responsive Frameworks (Bootstrap)</h2>
+      
+      <h3><i class="fas fa-th icon-box"></i>Install/Use Bootstrap CDN; Grid System, Components</h3>
+      <p><strong>Bootstrap</strong> is a popular CSS framework that provides pre-built components and a responsive grid system for rapid web development.</p>
+
+      <h4>Installing Bootstrap via CDN:</h4>
+      <div class="code-block">
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">name</span>=<span class="string">"viewport"</span> <span class="keyword">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Bootstrap Example<span class="tag">&lt;/title&gt;</span>
+    
+    <span class="comment">&lt;!-- Bootstrap CSS --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="keyword">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"</span> <span class="keyword">rel</span>=<span class="string">"stylesheet"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comment">&lt;!-- Your content here --&gt;</span>
+    
+    <span class="comment">&lt;!-- Bootstrap JS --&gt;</span>
+    <span class="tag">&lt;script</span> <span class="keyword">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+      </div>
+
+      <h4>Bootstrap Grid System:</h4>
+      <div class="code-block">
+<span class="comment">&lt;!-- Bootstrap uses 12-column grid system --&gt;</span>
+<span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"row"</span><span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- 4 columns on all screens --&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"col-md-4"</span><span class="tag">&gt;</span>Column 1<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"col-md-4"</span><span class="tag">&gt;</span>Column 2<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"col-md-4"</span><span class="tag">&gt;</span>Column 3<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    
+    <span class="comment">&lt;!-- Responsive columns --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"row"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"col-12 col-md-6 col-lg-4"</span><span class="tag">&gt;</span>
+            <span class="comment">&lt;!-- Full width on mobile, half on tablet, third on desktop --&gt;</span>
+            Responsive Column
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+      </div>
+
+      <h4>Bootstrap Components - Navbar:</h4>
+      <div class="code-block">
+<span class="tag">&lt;nav</span> <span class="keyword">class</span>=<span class="string">"navbar navbar-expand-lg navbar-dark bg-dark"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container-fluid"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;a</span> <span class="keyword">class</span>=<span class="string">"navbar-brand"</span> <span class="keyword">href</span>=<span class="string">"#"</span><span class="tag">&gt;</span>My Website<span class="tag">&lt;/a&gt;</span>
+        <span class="tag">&lt;button</span> <span class="keyword">class</span>=<span class="string">"navbar-toggler"</span> <span class="keyword">type</span>=<span class="string">"button"</span> <span class="keyword">data-bs-toggle</span>=<span class="string">"collapse"</span> <span class="keyword">data-bs-target</span>=<span class="string">"#navbarNav"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span</span> <span class="keyword">class</span>=<span class="string">"navbar-toggler-icon"</span><span class="tag">&gt;&lt;/span&gt;</span>
+        <span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"collapse navbar-collapse"</span> <span class="keyword">id</span>=<span class="string">"navbarNav"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;ul</span> <span class="keyword">class</span>=<span class="string">"navbar-nav ms-auto"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;li</span> <span class="keyword">class</span>=<span class="string">"nav-item"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;a</span> <span class="keyword">class</span>=<span class="string">"nav-link"</span> <span class="keyword">href</span>=<span class="string">"#"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;</span>
+                <span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li</span> <span class="keyword">class</span>=<span class="string">"nav-item"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;a</span> <span class="keyword">class</span>=<span class="string">"nav-link"</span> <span class="keyword">href</span>=<span class="string">"#"</span><span class="tag">&gt;</span>About<span class="tag">&lt;/a&gt;</span>
+                <span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/nav&gt;</span>
+      </div>
+
+      <h4>Bootstrap Components - Cards:</h4>
+      <div class="code-block">
+<span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"card"</span> <span class="keyword">style</span>=<span class="string">"width: 18rem;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;img</span> <span class="keyword">src</span>=<span class="string">"image.jpg"</span> <span class="keyword">class</span>=<span class="string">"card-img-top"</span> <span class="keyword">alt</span>=<span class="string">"..."</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"card-body"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h5</span> <span class="keyword">class</span>=<span class="string">"card-title"</span><span class="tag">&gt;</span>Card Title<span class="tag">&lt;/h5&gt;</span>
+        <span class="tag">&lt;p</span> <span class="keyword">class</span>=<span class="string">"card-text"</span><span class="tag">&gt;</span>Some card content text.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"#"</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary"</span><span class="tag">&gt;</span>Go somewhere<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+      </div>
+
+      <h4>Bootstrap Components - Modals:</h4>
+      <div class="code-block">
+<span class="comment">&lt;!-- Button trigger modal --&gt;</span>
+<span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"button"</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary"</span> <span class="keyword">data-bs-toggle</span>=<span class="string">"modal"</span> <span class="keyword">data-bs-target</span>=<span class="string">"#exampleModal"</span><span class="tag">&gt;</span>
+    Open Modal
+<span class="tag">&lt;/button&gt;</span>
+
+<span class="comment">&lt;!-- Modal --&gt;</span>
+<span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal fade"</span> <span class="keyword">id</span>=<span class="string">"exampleModal"</span> <span class="keyword">tabindex</span>=<span class="string">"-1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal-dialog"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal-content"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal-header"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h5</span> <span class="keyword">class</span>=<span class="string">"modal-title"</span><span class="tag">&gt;</span>Modal Title<span class="tag">&lt;/h5&gt;</span>
+                <span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"button"</span> <span class="keyword">class</span>=<span class="string">"btn-close"</span> <span class="keyword">data-bs-dismiss</span>=<span class="string">"modal"</span><span class="tag">&gt;&lt;/button&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal-body"</span><span class="tag">&gt;</span>
+                Modal content goes here.
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"modal-footer"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"button"</span> <span class="keyword">class</span>=<span class="string">"btn btn-secondary"</span> <span class="keyword">data-bs-dismiss</span>=<span class="string">"modal"</span><span class="tag">&gt;</span>Close<span class="tag">&lt;/button&gt;</span>
+                <span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"button"</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary"</span><span class="tag">&gt;</span>Save changes<span class="tag">&lt;/button&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+      </div>
+
+      <h3><i class="fas fa-palette icon-box"></i>Customize Themes; Integrate with ASP.NET Views</h3>
+      <p>Bootstrap can be customized using CSS variables or by compiling with Sass. For ASP.NET integration, Bootstrap classes work seamlessly with Razor views.</p>
+      
+      <div class="code-block">
+<span class="comment">&lt;!-- Custom Bootstrap Theme in ASP.NET View --&gt;</span>
+<span class="tag">&lt;style&gt;</span>
+    <span class="comment">/* Override Bootstrap variables */</span>
+    <span class="keyword">:root</span> {
+        <span class="keyword">--bs-primary</span>: <span class="string">#667eea</span>;
+        <span class="keyword">--bs-secondary</span>: <span class="string">#764ba2</span>;
+        <span class="keyword">--bs-success</span>: <span class="string">#10b981</span>;
+    }
+<span class="tag">&lt;/style&gt;</span>
+
+<span class="comment">// ASP.NET Razor View Example</span>
+<span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"row"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"col-md-6"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>@Model.Title<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;p</span> <span class="keyword">class</span>=<span class="string">"text-muted"</span><span class="tag">&gt;</span>@Model.Description<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+      </div>
+
+      <!-- Questions for Bootstrap -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Bootstrap</h3>
+        <div class="question-item">
+          <strong>Q1. Explain Bootstrap's 12-column grid system. How does it enable responsive design?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create a Bootstrap layout with a navbar, three-column content area, and footer that is responsive.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. How do you customize Bootstrap themes? Explain the process of overriding default styles.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. Demonstrate how to integrate Bootstrap components with ASP.NET Razor views.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2: XML -->
+    <div class="content-card" id="xml">
+      <h2><span class="section-number">2</span>Web Contents Development 2 (XML)</h2>
+      
+      <h3><i class="fas fa-file-code icon-box"></i>Understand and Explain the Outline of XML</h3>
+      <p><strong>XML (eXtensible Markup Language)</strong> is a markup language designed to store and transport data. Unlike HTML, XML focuses on data structure rather than presentation.</p>
+      
+      <div class="info-box">
+        <strong>Key XML Characteristics:</strong>
+        <ul>
+          <li><strong>Self-descriptive:</strong> Tags describe the data they contain</li>
+          <li><strong>Platform independent:</strong> Works across different systems</li>
+          <li><strong>Extensible:</strong> You can define your own tags</li>
+          <li><strong>Structured:</strong> Hierarchical data organization</li>
+          <li><strong>Case-sensitive:</strong> Tags must match exactly</li>
+        </ul>
+      </div>
+
+      <h4>Basic XML Structure:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="tag">&lt;root&gt;</span>
+    <span class="tag">&lt;element</span> <span class="keyword">attribute</span>=<span class="string">"value"</span><span class="tag">&gt;</span>
+        Content here
+    <span class="tag">&lt;/element&gt;</span>
+    <span class="tag">&lt;child&gt;</span>
+        <span class="tag">&lt;nested&gt;</span>Nested content<span class="tag">&lt;/nested&gt;</span>
+    <span class="tag">&lt;/child&gt;</span>
+<span class="tag">&lt;/root&gt;</span>
+      </div>
+
+      <h3><i class="fas fa-edit icon-box"></i>Perform XML Document Creation</h3>
+      <p>Creating well-formed XML documents requires following specific rules and structure.</p>
+
+      <h4>XML Document Example:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="tag">&lt;students&gt;</span>
+    <span class="tag">&lt;student</span> <span class="keyword">id</span>=<span class="string">"101"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;name&gt;</span>John Doe<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;age&gt;</span>20<span class="tag">&lt;/age&gt;</span>
+        <span class="tag">&lt;course&gt;</span>Computer Science<span class="tag">&lt;/course&gt;</span>
+        <span class="tag">&lt;grades&gt;</span>
+            <span class="tag">&lt;subject</span> <span class="keyword">name</span>=<span class="string">"Math"</span><span class="tag">&gt;</span>85<span class="tag">&lt;/subject&gt;</span>
+            <span class="tag">&lt;subject</span> <span class="keyword">name</span>=<span class="string">"English"</span><span class="tag">&gt;</span>90<span class="tag">&lt;/subject&gt;</span>
+        <span class="tag">&lt;/grades&gt;</span>
+    <span class="tag">&lt;/student&gt;</span>
+    <span class="tag">&lt;student</span> <span class="keyword">id</span>=<span class="string">"102"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;name&gt;</span>Jane Smith<span class="tag">&lt;/name&gt;</span>
+        <span class="tag">&lt;age&gt;</span>21<span class="tag">&lt;/age&gt;</span>
+        <span class="tag">&lt;course&gt;</span>Information Technology<span class="tag">&lt;/course&gt;</span>
+    <span class="tag">&lt;/student&gt;</span>
+<span class="tag">&lt;/students&gt;</span>
+      </div>
+
+      <div class="info-box warning">
+        <strong>XML Rules:</strong>
+        <ul>
+          <li>Must have a root element</li>
+          <li>All tags must be closed</li>
+          <li>Tags are case-sensitive</li>
+          <li>Attributes must be quoted</li>
+          <li>Proper nesting required</li>
+        </ul>
+      </div>
+
+      <h3><i class="fas fa-exchange-alt icon-box"></i>Perform XSLT Programming</h3>
+      <p><strong>XSLT (eXtensible Stylesheet Language Transformations)</strong> is used to transform XML documents into other formats like HTML, PDF, or other XML structures.</p>
+
+      <h4>XSLT Example - Transforming XML to HTML:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="tag">&lt;xsl:stylesheet</span> <span class="keyword">version</span>=<span class="string">"1.0"</span> 
+    <span class="keyword">xmlns:xsl</span>=<span class="string">"http://www.w3.org/1999/XSL/Transform"</span><span class="tag">&gt;</span>
+    
+    <span class="tag">&lt;xsl:template</span> <span class="keyword">match</span>=<span class="string">"/"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;html&gt;</span>
+            <span class="tag">&lt;head&gt;</span>
+                <span class="tag">&lt;title&gt;</span>Students List<span class="tag">&lt;/title&gt;</span>
+            <span class="tag">&lt;/head&gt;</span>
+            <span class="tag">&lt;body&gt;</span>
+                <span class="tag">&lt;h1&gt;</span>Student Information<span class="tag">&lt;/h1&gt;</span>
+                <span class="tag">&lt;table</span> <span class="keyword">border</span>=<span class="string">"1"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;tr&gt;</span>
+                        <span class="tag">&lt;th&gt;</span>ID<span class="tag">&lt;/th&gt;</span>
+                        <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+                        <span class="tag">&lt;th&gt;</span>Age<span class="tag">&lt;/th&gt;</span>
+                        <span class="tag">&lt;th&gt;</span>Course<span class="tag">&lt;/th&gt;</span>
+                    <span class="tag">&lt;/tr&gt;</span>
+                    <span class="tag">&lt;xsl:for-each</span> <span class="keyword">select</span>=<span class="string">"students/student"</span><span class="tag">&gt;</span>
+                        <span class="tag">&lt;tr&gt;</span>
+                            <span class="tag">&lt;td&gt;</span><span class="tag">&lt;xsl:value-of</span> <span class="keyword">select</span>=<span class="string">"@id"</span><span class="tag">/&gt;</span><span class="tag">&lt;/td&gt;</span>
+                            <span class="tag">&lt;td&gt;</span><span class="tag">&lt;xsl:value-of</span> <span class="keyword">select</span>=<span class="string">"name"</span><span class="tag">/&gt;</span><span class="tag">&lt;/td&gt;</span>
+                            <span class="tag">&lt;td&gt;</span><span class="tag">&lt;xsl:value-of</span> <span class="keyword">select</span>=<span class="string">"age"</span><span class="tag">/&gt;</span><span class="tag">&lt;/td&gt;</span>
+                            <span class="tag">&lt;td&gt;</span><span class="tag">&lt;xsl:value-of</span> <span class="keyword">select</span>=<span class="string">"course"</span><span class="tag">/&gt;</span><span class="tag">&lt;/td&gt;</span>
+                        <span class="tag">&lt;/tr&gt;</span>
+                    <span class="tag">&lt;/xsl:for-each&gt;</span>
+                <span class="tag">&lt;/table&gt;</span>
+            <span class="tag">&lt;/body&gt;</span>
+        <span class="tag">&lt;/html&gt;</span>
+    <span class="tag">&lt;/xsl:template&gt;</span>
+<span class="tag">&lt;/xsl:stylesheet&gt;</span>
+      </div>
+
+      <h4>XSLT Key Elements:</h4>
+      <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Purpose</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;xsl:template&gt;</code></td>
+            <td>Defines transformation rules</td>
+            <td><code>&lt;xsl:template match="/"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;xsl:value-of&gt;</code></td>
+            <td>Extracts value from XML</td>
+            <td><code>&lt;xsl:value-of select="name"/&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;xsl:for-each&gt;</code></td>
+            <td>Loops through elements</td>
+            <td><code>&lt;xsl:for-each select="student"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;xsl:if&gt;</code></td>
+            <td>Conditional processing</td>
+            <td><code>&lt;xsl:if test="age &gt; 20"&gt;</code></td>
+          </tr>
+          <tr>
+            <td><code>&lt;xsl:choose&gt;</code></td>
+            <td>Multiple conditions</td>
+            <td><code>&lt;xsl:choose&gt;&lt;xsl:when&gt;&lt;/xsl:choose&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <!-- Questions for XML -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - XML</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the difference between XML and HTML. When would you use XML?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create a well-formed XML document for a library system with books, authors, and categories.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Write an XSLT stylesheet to transform an XML document containing product information into an HTML table.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. Explain XSLT templates and how they work. Provide examples of different template matching patterns.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module: PHP Development -->
+    <div class="content-card" id="php">
+      <h2><span class="section-number">PHP</span>PHP Development (CRUD & MVC)</h2>
+      
+      <h3><i class="fas fa-code icon-box"></i>PHP CRUD Operations</h3>
+      <p><strong>PHP (Hypertext Preprocessor)</strong> is a server-side scripting language used for web development. CRUD (Create, Read, Update, Delete) operations are fundamental database operations.</p>
+
+      <h4>Database Connection (config.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="comment">// Database configuration</span>
+<span class="keyword">define</span>(<span class="string">'DB_HOST'</span>, <span class="string">'localhost'</span>);
+<span class="keyword">define</span>(<span class="string">'DB_USER'</span>, <span class="string">'root'</span>);
+<span class="keyword">define</span>(<span class="string">'DB_PASS'</span>, <span class="string">''</span>);
+<span class="keyword">define</span>(<span class="string">'DB_NAME'</span>, <span class="string">'my_database'</span>);
+
+<span class="comment">// Create connection</span>
+<span class="keyword">function</span> <span class="function">getConnection</span>() {
+    <span class="keyword">$conn</span> = <span class="keyword">new</span> <span class="function">mysqli</span>(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+    <span class="keyword">if</span> (<span class="keyword">$conn</span>-&gt;connect_error) {
+        <span class="function">die</span>(<span class="string">"Connection failed: " . $conn-&gt;connect_error</span>);
+    }
+    
+    <span class="keyword">return</span> <span class="keyword">$conn</span>;
+}
+
+<span class="comment">// Using PDO (Alternative method)</span>
+<span class="keyword">function</span> <span class="function">getPDOConnection</span>() {
+    <span class="keyword">try</span> {
+        <span class="keyword">$pdo</span> = <span class="keyword">new</span> <span class="function">PDO</span>(
+            <span class="string">"mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8"</span>,
+            DB_USER,
+            DB_PASS,
+            [
+                PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE =&gt; PDO::FETCH_ASSOC
+            ]
+        );
+        <span class="keyword">return</span> <span class="keyword">$pdo</span>;
+    } <span class="keyword">catch</span> (PDOException <span class="keyword">$e</span>) {
+        <span class="function">die</span>(<span class="string">"Connection failed: " . $e-&gt;getMessage()</span>);
+    }
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>CREATE Operation - Insert Data:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'config.php'</span>;
+
+<span class="comment">// Using MySQLi</span>
+<span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span>) {
+    <span class="keyword">$name</span> = <span class="function">mysqli_real_escape_string</span>(<span class="function">getConnection</span>(), <span class="keyword">$_POST</span>[<span class="string">'name'</span>]);
+    <span class="keyword">$email</span> = <span class="function">mysqli_real_escape_string</span>(<span class="function">getConnection</span>(), <span class="keyword">$_POST</span>[<span class="string">'email'</span>]);
+    <span class="keyword">$age</span> = <span class="function">intval</span>(<span class="keyword">$_POST</span>[<span class="string">'age'</span>]);
+    
+    <span class="keyword">$conn</span> = <span class="function">getConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"INSERT INTO users (name, email, age) VALUES (?, ?, ?)"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"ssi"</span>, <span class="keyword">$name</span>, <span class="keyword">$email</span>, <span class="keyword">$age</span>);
+    
+    <span class="keyword">if</span> (<span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>()) {
+        <span class="keyword">$message</span> = <span class="string">"User created successfully!"</span>;
+        <span class="keyword">$messageType</span> = <span class="string">"success"</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">$message</span> = <span class="string">"Error: " . $stmt-&gt;error</span>;
+        <span class="keyword">$messageType</span> = <span class="string">"error"</span>;
+    }
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">$conn</span>-&gt;<span class="function">close</span>();
+}
+
+<span class="comment">// Using PDO (More secure)</span>
+<span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span>) {
+    <span class="keyword">$pdo</span> = <span class="function">getPDOConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"INSERT INTO users (name, email, age) VALUES (:name, :email, :age)"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$pdo</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':name'</span>, <span class="keyword">$_POST</span>[<span class="string">'name'</span>], PDO::PARAM_STR);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':email'</span>, <span class="keyword">$_POST</span>[<span class="string">'email'</span>], PDO::PARAM_STR);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':age'</span>, <span class="keyword">$_POST</span>[<span class="string">'age'</span>], PDO::PARAM_INT);
+    
+    <span class="keyword">if</span> (<span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>()) {
+        <span class="keyword">$message</span> = <span class="string">"User created successfully!"</span>;
+    }
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>READ Operation - Fetch Data:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'config.php'</span>;
+
+<span class="comment">// Fetch all users</span>
+<span class="keyword">function</span> <span class="function">getAllUsers</span>() {
+    <span class="keyword">$conn</span> = <span class="function">getConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"SELECT * FROM users ORDER BY id DESC"</span>;
+    <span class="keyword">$result</span> = <span class="keyword">$conn</span>-&gt;<span class="function">query</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$users</span> = [];
+    
+    <span class="keyword">if</span> (<span class="keyword">$result</span>-&gt;num_rows &gt; 0) {
+        <span class="keyword">while</span> (<span class="keyword">$row</span> = <span class="keyword">$result</span>-&gt;<span class="function">fetch_assoc</span>()) {
+            <span class="keyword">$users</span>[] = <span class="keyword">$row</span>;
+        }
+    }
+    
+    <span class="keyword">$conn</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">return</span> <span class="keyword">$users</span>;
+}
+
+<span class="comment">// Fetch single user by ID</span>
+<span class="keyword">function</span> <span class="function">getUserById</span>(<span class="keyword">$id</span>) {
+    <span class="keyword">$conn</span> = <span class="function">getConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"SELECT * FROM users WHERE id = ?"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"i"</span>, <span class="keyword">$id</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+    <span class="keyword">$result</span> = <span class="keyword">$stmt</span>-&gt;<span class="function">get_result</span>();
+    <span class="keyword">$user</span> = <span class="keyword">$result</span>-&gt;<span class="function">fetch_assoc</span>();
+    <span class="keyword">$stmt</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">$conn</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">return</span> <span class="keyword">$user</span>;
+}
+
+<span class="comment">// Using PDO</span>
+<span class="keyword">function</span> <span class="function">getAllUsersPDO</span>() {
+    <span class="keyword">$pdo</span> = <span class="function">getPDOConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"SELECT * FROM users ORDER BY id DESC"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$pdo</span>-&gt;<span class="function">query</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">return</span> <span class="keyword">$stmt</span>-&gt;<span class="function">fetchAll</span>(PDO::FETCH_ASSOC);
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>UPDATE Operation - Modify Data:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'config.php'</span>;
+
+<span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span> &amp;&amp; <span class="function">isset</span>(<span class="keyword">$_POST</span>[<span class="string">'update'</span>])) {
+    <span class="keyword">$id</span> = <span class="function">intval</span>(<span class="keyword">$_POST</span>[<span class="string">'id'</span>]);
+    <span class="keyword">$name</span> = <span class="function">mysqli_real_escape_string</span>(<span class="function">getConnection</span>(), <span class="keyword">$_POST</span>[<span class="string">'name'</span>]);
+    <span class="keyword">$email</span> = <span class="function">mysqli_real_escape_string</span>(<span class="function">getConnection</span>(), <span class="keyword">$_POST</span>[<span class="string">'email'</span>]);
+    <span class="keyword">$age</span> = <span class="function">intval</span>(<span class="keyword">$_POST</span>[<span class="string">'age'</span>]);
+    
+    <span class="keyword">$conn</span> = <span class="function">getConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"ssii"</span>, <span class="keyword">$name</span>, <span class="keyword">$email</span>, <span class="keyword">$age</span>, <span class="keyword">$id</span>);
+    
+    <span class="keyword">if</span> (<span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>()) {
+        <span class="keyword">$message</span> = <span class="string">"User updated successfully!"</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">$message</span> = <span class="string">"Error updating user: " . $stmt-&gt;error</span>;
+    }
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">$conn</span>-&gt;<span class="function">close</span>();
+}
+
+<span class="comment">// Using PDO</span>
+<span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span> &amp;&amp; <span class="function">isset</span>(<span class="keyword">$_POST</span>[<span class="string">'update'</span>])) {
+    <span class="keyword">$pdo</span> = <span class="function">getPDOConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"UPDATE users SET name = :name, email = :email, age = :age WHERE id = :id"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$pdo</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':id'</span>, <span class="keyword">$_POST</span>[<span class="string">'id'</span>], PDO::PARAM_INT);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':name'</span>, <span class="keyword">$_POST</span>[<span class="string">'name'</span>], PDO::PARAM_STR);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':email'</span>, <span class="keyword">$_POST</span>[<span class="string">'email'</span>], PDO::PARAM_STR);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':age'</span>, <span class="keyword">$_POST</span>[<span class="string">'age'</span>], PDO::PARAM_INT);
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>DELETE Operation - Remove Data:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'config.php'</span>;
+
+<span class="keyword">if</span> (<span class="function">isset</span>(<span class="keyword">$_GET</span>[<span class="string">'delete'</span>])) {
+    <span class="keyword">$id</span> = <span class="function">intval</span>(<span class="keyword">$_GET</span>[<span class="string">'delete'</span>]);
+    
+    <span class="keyword">$conn</span> = <span class="function">getConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"DELETE FROM users WHERE id = ?"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"i"</span>, <span class="keyword">$id</span>);
+    
+    <span class="keyword">if</span> (<span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>()) {
+        <span class="keyword">$message</span> = <span class="string">"User deleted successfully!"</span>;
+        <span class="function">header</span>(<span class="string">"Location: index.php?msg=deleted"</span>);
+        <span class="function">exit</span>();
+    } <span class="keyword">else</span> {
+        <span class="keyword">$message</span> = <span class="string">"Error deleting user: " . $stmt-&gt;error</span>;
+    }
+    
+    <span class="keyword">$stmt</span>-&gt;<span class="function">close</span>();
+    <span class="keyword">$conn</span>-&gt;<span class="function">close</span>();
+}
+
+<span class="comment">// Using PDO</span>
+<span class="keyword">if</span> (<span class="function">isset</span>(<span class="keyword">$_GET</span>[<span class="string">'delete'</span>])) {
+    <span class="keyword">$pdo</span> = <span class="function">getPDOConnection</span>();
+    <span class="keyword">$sql</span> = <span class="string">"DELETE FROM users WHERE id = :id"</span>;
+    <span class="keyword">$stmt</span> = <span class="keyword">$pdo</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">bindParam</span>(<span class="string">':id'</span>, <span class="keyword">$_GET</span>[<span class="string">'delete'</span>], PDO::PARAM_INT);
+    <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+    <span class="function">header</span>(<span class="string">"Location: index.php?msg=deleted"</span>);
+    <span class="function">exit</span>();
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>Complete CRUD Example - index.php:</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'config.php'</span>;
+<span class="keyword">require_once</span> <span class="string">'functions.php'</span>; <span class="comment">// Contains CRUD functions</span>
+
+<span class="keyword">$users</span> = <span class="function">getAllUsers</span>();
+<span class="comment">?&gt;</span>
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>PHP CRUD Application<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;link</span> <span class="keyword">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"</span> <span class="keyword">rel</span>=<span class="string">"stylesheet"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container mt-5"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h1&gt;</span>User Management<span class="tag">&lt;/h1&gt;</span>
+        
+        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"create.php"</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary mb-3"</span><span class="tag">&gt;</span>Add New User<span class="tag">&lt;/a&gt;</span>
+        
+        <span class="tag">&lt;table</span> <span class="keyword">class</span>=<span class="string">"table table-striped"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;thead&gt;</span>
+                <span class="tag">&lt;tr&gt;</span>
+                    <span class="tag">&lt;th&gt;</span>ID<span class="tag">&lt;/th&gt;</span>
+                    <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+                    <span class="tag">&lt;th&gt;</span>Email<span class="tag">&lt;/th&gt;</span>
+                    <span class="tag">&lt;th&gt;</span>Age<span class="tag">&lt;/th&gt;</span>
+                    <span class="tag">&lt;th&gt;</span>Actions<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;/tr&gt;</span>
+            <span class="tag">&lt;/thead&gt;</span>
+            <span class="tag">&lt;tbody&gt;</span>
+                <span class="tag">&lt;?php</span> <span class="keyword">foreach</span> (<span class="keyword">$users</span> <span class="keyword">as</span> <span class="keyword">$user</span>): <span class="tag">?&gt;</span>
+                <span class="tag">&lt;tr&gt;</span>
+                    <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'id'</span>]); ?&gt;<span class="tag">&lt;/td&gt;</span>
+                    <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'name'</span>]); ?&gt;<span class="tag">&lt;/td&gt;</span>
+                    <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'email'</span>]); ?&gt;<span class="tag">&lt;/td&gt;</span>
+                    <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'age'</span>]); ?&gt;<span class="tag">&lt;/td&gt;</span>
+                    <span class="tag">&lt;td&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"edit.php?id=&lt;?php echo $user['id']; ?&gt;"</span> <span class="keyword">class</span>=<span class="string">"btn btn-sm btn-warning"</span><span class="tag">&gt;</span>Edit<span class="tag">&lt;/a&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"delete.php?id=&lt;?php echo $user['id']; ?&gt;"</span> 
+                            <span class="keyword">class</span>=<span class="string">"btn btn-sm btn-danger"</span> 
+                            <span class="keyword">onclick</span>=<span class="string">"return confirm('Are you sure?')"</span><span class="tag">&gt;</span>Delete<span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;/tr&gt;</span>
+                <span class="tag">&lt;?php</span> <span class="keyword">endforeach</span>; <span class="tag">?&gt;</span>
+            <span class="tag">&lt;/tbody&gt;</span>
+        <span class="tag">&lt;/table&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+      </div>
+
+      <h3><i class="fas fa-sitemap icon-box"></i>PHP MVC Pattern</h3>
+      <p>The <strong>MVC (Model-View-Controller)</strong> pattern separates application logic into three interconnected components for better organization and maintainability.</p>
+
+      <div class="info-box">
+        <strong>PHP MVC Components:</strong>
+        <ul>
+          <li><strong>Model:</strong> Handles data logic and database operations</li>
+          <li><strong>View:</strong> Displays data to users (HTML/PHP templates)</li>
+          <li><strong>Controller:</strong> Processes requests and coordinates Model and View</li>
+        </ul>
+      </div>
+
+      <h4>MVC Directory Structure:</h4>
+      <div class="code-block">
+<span class="comment">Project Structure:</span>
+my-mvc-app/
+├── index.php              <span class="comment">// Entry point</span>
+├── .htaccess             <span class="comment">// URL rewriting</span>
+├── config/
+│   └── database.php       <span class="comment">// Database configuration</span>
+├── models/
+│   └── UserModel.php     <span class="comment">// Data logic</span>
+├── views/
+│   ├── users/
+│   │   ├── index.php     <span class="comment">// List view</span>
+│   │   ├── create.php    <span class="comment">// Create form</span>
+│   │   └── edit.php      <span class="comment">// Edit form</span>
+│   └── layouts/
+│       └── main.php      <span class="comment">// Main layout</span>
+├── controllers/
+│   └── UserController.php <span class="comment">// Request handling</span>
+└── core/
+    ├── Router.php        <span class="comment">// Routing logic</span>
+    ├── Controller.php    <span class="comment">// Base controller</span>
+    └── Model.php         <span class="comment">// Base model</span>
+      </div>
+
+      <h4>Core Router (core/Router.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">class</span> Router {
+    <span class="keyword">private</span> <span class="keyword">$routes</span> = [];
+    
+    <span class="keyword">public function</span> <span class="function">addRoute</span>(<span class="keyword">$method</span>, <span class="keyword">$path</span>, <span class="keyword">$controller</span>, <span class="keyword">$action</span>) {
+        <span class="keyword">$this</span>-&gt;<span class="keyword">routes</span>[] = [
+            <span class="string">'method'</span> =&gt; <span class="keyword">$method</span>,
+            <span class="string">'path'</span> =&gt; <span class="keyword">$path</span>,
+            <span class="string">'controller'</span> =&gt; <span class="keyword">$controller</span>,
+            <span class="string">'action'</span> =&gt; <span class="keyword">$action</span>
+        ];
+    }
+    
+    <span class="keyword">public function</span> <span class="function">dispatch</span>() {
+        <span class="keyword">$method</span> = <span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>];
+        <span class="keyword">$path</span> = <span class="function">parse_url</span>(<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_URI'</span>], PHP_URL_PATH);
+        
+        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;<span class="keyword">routes</span> <span class="keyword">as</span> <span class="keyword">$route</span>) {
+            <span class="keyword">if</span> (<span class="keyword">$route</span>[<span class="string">'method'</span>] == <span class="keyword">$method</span> &amp;&amp; <span class="keyword">$route</span>[<span class="string">'path'</span>] == <span class="keyword">$path</span>) {
+                <span class="keyword">$controller</span> = <span class="keyword">new</span> <span class="keyword">$route</span>[<span class="string">'controller'</span>]();
+                <span class="keyword">$action</span> = <span class="keyword">$route</span>[<span class="string">'action'</span>];
+                <span class="keyword">$controller</span>-&gt;<span class="function">$action</span>();
+                <span class="keyword">return</span>;
+            }
+        }
+        
+        <span class="function">http_response_code</span>(404);
+        <span class="function">echo</span> <span class="string">"404 - Page Not Found"</span>;
+    }
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>Model (models/UserModel.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">__DIR__ . '/../config/database.php'</span>;
+
+<span class="keyword">class</span> UserModel {
+    <span class="keyword">private</span> <span class="keyword">$conn</span>;
+    
+    <span class="keyword">public function</span> <span class="function">__construct</span>() {
+        <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span> = <span class="function">getConnection</span>();
+    }
+    
+    <span class="comment">// Get all users</span>
+    <span class="keyword">public function</span> <span class="function">getAll</span>() {
+        <span class="keyword">$sql</span> = <span class="string">"SELECT * FROM users ORDER BY id DESC"</span>;
+        <span class="keyword">$result</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span>-&gt;<span class="function">query</span>(<span class="keyword">$sql</span>);
+        <span class="keyword">return</span> <span class="keyword">$result</span>-&gt;<span class="function">fetch_all</span>(MYSQLI_ASSOC);
+    }
+    
+    <span class="comment">// Get user by ID</span>
+    <span class="keyword">public function</span> <span class="function">getById</span>(<span class="keyword">$id</span>) {
+        <span class="keyword">$sql</span> = <span class="string">"SELECT * FROM users WHERE id = ?"</span>;
+        <span class="keyword">$stmt</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+        <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"i"</span>, <span class="keyword">$id</span>);
+        <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+        <span class="keyword">$result</span> = <span class="keyword">$stmt</span>-&gt;<span class="function">get_result</span>();
+        <span class="keyword">return</span> <span class="keyword">$result</span>-&gt;<span class="function">fetch_assoc</span>();
+    }
+    
+    <span class="comment">// Create user</span>
+    <span class="keyword">public function</span> <span class="function">create</span>(<span class="keyword">$data</span>) {
+        <span class="keyword">$sql</span> = <span class="string">"INSERT INTO users (name, email, age) VALUES (?, ?, ?)"</span>;
+        <span class="keyword">$stmt</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+        <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"ssi"</span>, <span class="keyword">$data</span>[<span class="string">'name'</span>], <span class="keyword">$data</span>[<span class="string">'email'</span>], <span class="keyword">$data</span>[<span class="string">'age'</span>]);
+        <span class="keyword">return</span> <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+    }
+    
+    <span class="comment">// Update user</span>
+    <span class="keyword">public function</span> <span class="function">update</span>(<span class="keyword">$id</span>, <span class="keyword">$data</span>) {
+        <span class="keyword">$sql</span> = <span class="string">"UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?"</span>;
+        <span class="keyword">$stmt</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+        <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"ssii"</span>, <span class="keyword">$data</span>[<span class="string">'name'</span>], <span class="keyword">$data</span>[<span class="string">'email'</span>], <span class="keyword">$data</span>[<span class="string">'age'</span>], <span class="keyword">$id</span>);
+        <span class="keyword">return</span> <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+    }
+    
+    <span class="comment">// Delete user</span>
+    <span class="keyword">public function</span> <span class="function">delete</span>(<span class="keyword">$id</span>) {
+        <span class="keyword">$sql</span> = <span class="string">"DELETE FROM users WHERE id = ?"</span>;
+        <span class="keyword">$stmt</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">conn</span>-&gt;<span class="function">prepare</span>(<span class="keyword">$sql</span>);
+        <span class="keyword">$stmt</span>-&gt;<span class="function">bind_param</span>(<span class="string">"i"</span>, <span class="keyword">$id</span>);
+        <span class="keyword">return</span> <span class="keyword">$stmt</span>-&gt;<span class="function">execute</span>();
+    }
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>Controller (controllers/UserController.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">__DIR__ . '/../models/UserModel.php'</span>;
+
+<span class="keyword">class</span> UserController {
+    <span class="keyword">private</span> <span class="keyword">$model</span>;
+    
+    <span class="keyword">public function</span> <span class="function">__construct</span>() {
+        <span class="keyword">$this</span>-&gt;<span class="keyword">model</span> = <span class="keyword">new</span> UserModel();
+    }
+    
+    <span class="comment">// Display all users</span>
+    <span class="keyword">public function</span> <span class="function">index</span>() {
+        <span class="keyword">$users</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">model</span>-&gt;<span class="function">getAll</span>();
+        <span class="keyword">require_once</span> <span class="string">__DIR__ . '/../views/users/index.php'</span>;
+    }
+    
+    <span class="comment">// Show create form</span>
+    <span class="keyword">public function</span> <span class="function">create</span>() {
+        <span class="keyword">require_once</span> <span class="string">__DIR__ . '/../views/users/create.php'</span>;
+    }
+    
+    <span class="comment">// Store new user</span>
+    <span class="keyword">public function</span> <span class="function">store</span>() {
+        <span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span>) {
+            <span class="keyword">$data</span> = [
+                <span class="string">'name'</span> =&gt; <span class="function">htmlspecialchars</span>(<span class="keyword">$_POST</span>[<span class="string">'name'</span>]),
+                <span class="string">'email'</span> =&gt; <span class="function">filter_var</span>(<span class="keyword">$_POST</span>[<span class="string">'email'</span>], FILTER_SANITIZE_EMAIL),
+                <span class="string">'age'</span> =&gt; <span class="function">intval</span>(<span class="keyword">$_POST</span>[<span class="string">'age'</span>])
+            ];
+            
+            <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;<span class="keyword">model</span>-&gt;<span class="function">create</span>(<span class="keyword">$data</span>)) {
+                <span class="function">header</span>(<span class="string">"Location: /users?msg=created"</span>);
+                <span class="function">exit</span>();
+            }
+        }
+    }
+    
+    <span class="comment">// Show edit form</span>
+    <span class="keyword">public function</span> <span class="function">edit</span>(<span class="keyword">$id</span>) {
+        <span class="keyword">$user</span> = <span class="keyword">$this</span>-&gt;<span class="keyword">model</span>-&gt;<span class="function">getById</span>(<span class="keyword">$id</span>);
+        <span class="keyword">if</span> (!<span class="keyword">$user</span>) {
+            <span class="function">http_response_code</span>(404);
+            <span class="function">echo</span> <span class="string">"User not found"</span>;
+            <span class="keyword">return</span>;
+        }
+        <span class="keyword">require_once</span> <span class="string">__DIR__ . '/../views/users/edit.php'</span>;
+    }
+    
+    <span class="comment">// Update user</span>
+    <span class="keyword">public function</span> <span class="function">update</span>(<span class="keyword">$id</span>) {
+        <span class="keyword">if</span> (<span class="keyword">$_SERVER</span>[<span class="string">'REQUEST_METHOD'</span>] == <span class="string">'POST'</span>) {
+            <span class="keyword">$data</span> = [
+                <span class="string">'name'</span> =&gt; <span class="function">htmlspecialchars</span>(<span class="keyword">$_POST</span>[<span class="string">'name'</span>]),
+                <span class="string">'email'</span> =&gt; <span class="function">filter_var</span>(<span class="keyword">$_POST</span>[<span class="string">'email'</span>], FILTER_SANITIZE_EMAIL),
+                <span class="string">'age'</span> =&gt; <span class="function">intval</span>(<span class="keyword">$_POST</span>[<span class="string">'age'</span>])
+            ];
+            
+            <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;<span class="keyword">model</span>-&gt;<span class="function">update</span>(<span class="keyword">$id</span>, <span class="keyword">$data</span>)) {
+                <span class="function">header</span>(<span class="string">"Location: /users?msg=updated"</span>);
+                <span class="function">exit</span>();
+            }
+        }
+    }
+    
+    <span class="comment">// Delete user</span>
+    <span class="keyword">public function</span> <span class="function">delete</span>(<span class="keyword">$id</span>) {
+        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;<span class="keyword">model</span>-&gt;<span class="function">delete</span>(<span class="keyword">$id</span>)) {
+            <span class="function">header</span>(<span class="string">"Location: /users?msg=deleted"</span>);
+            <span class="function">exit</span>();
+        }
+    }
+}
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>View Example (views/users/index.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span> <span class="keyword">require_once</span> <span class="string">__DIR__ . '/../layouts/header.php'</span>; <span class="tag">?&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container mt-4"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Users List<span class="tag">&lt;/h1&gt;</span>
+    
+    <span class="tag">&lt;?php</span> <span class="keyword">if</span> (<span class="function">isset</span>(<span class="keyword">$_GET</span>[<span class="string">'msg'</span>])): <span class="tag">?&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"alert alert-success"</span><span class="tag">&gt;</span>
+            &lt;?php <span class="keyword">echo</span> <span class="function">ucfirst</span>(<span class="keyword">$_GET</span>[<span class="string">'msg'</span>]) . <span class="string">" successfully!"</span>; <span class="tag">?&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;?php</span> <span class="keyword">endif</span>; <span class="tag">?&gt;</span>
+    
+    <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"/users/create"</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary mb-3"</span><span class="tag">&gt;</span>Add New User<span class="tag">&lt;/a&gt;</span>
+    
+    <span class="tag">&lt;table</span> <span class="keyword">class</span>=<span class="string">"table table-striped"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;thead&gt;</span>
+            <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;th&gt;</span>ID<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>Email<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>Age<span class="tag">&lt;/th&gt;</span>
+                <span class="tag">&lt;th&gt;</span>Actions<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;/tr&gt;</span>
+        <span class="tag">&lt;/thead&gt;</span>
+        <span class="tag">&lt;tbody&gt;</span>
+            <span class="tag">&lt;?php</span> <span class="keyword">foreach</span> (<span class="keyword">$users</span> <span class="keyword">as</span> <span class="keyword">$user</span>): <span class="tag">?&gt;</span>
+            <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'id'</span>]); <span class="tag">?&gt;</span><span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'name'</span>]); <span class="tag">?&gt;</span><span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'email'</span>]); <span class="tag">?&gt;</span><span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>&lt;?php <span class="keyword">echo</span> <span class="function">htmlspecialchars</span>(<span class="keyword">$user</span>[<span class="string">'age'</span>]); <span class="tag">?&gt;</span><span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>
+                    <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"/users/edit/&lt;?php echo $user['id']; ?&gt;"</span> <span class="keyword">class</span>=<span class="string">"btn btn-sm btn-warning"</span><span class="tag">&gt;</span>Edit<span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"/users/delete/&lt;?php echo $user['id']; ?&gt;"</span> 
+                        <span class="keyword">class</span>=<span class="string">"btn btn-sm btn-danger"</span> 
+                        <span class="keyword">onclick</span>=<span class="string">"return confirm('Are you sure?')"</span><span class="tag">&gt;</span>Delete<span class="tag">&lt;/a&gt;</span>
+                <span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;/tr&gt;</span>
+            <span class="tag">&lt;?php</span> <span class="keyword">endforeach</span>; <span class="tag">?&gt;</span>
+        <span class="tag">&lt;/tbody&gt;</span>
+    <span class="tag">&lt;/table&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;?php</span> <span class="keyword">require_once</span> <span class="string">__DIR__ . '/../layouts/footer.php'</span>; <span class="tag">?&gt;</span>
+      </div>
+
+      <h4>Entry Point (index.php):</h4>
+      <div class="code-block">
+<span class="comment">&lt;?php</span>
+<span class="keyword">require_once</span> <span class="string">'core/Router.php'</span>;
+<span class="keyword">require_once</span> <span class="string">'controllers/UserController.php'</span>;
+
+<span class="keyword">$router</span> = <span class="keyword">new</span> Router();
+
+<span class="comment">// Define routes</span>
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'GET'</span>, <span class="string">'/users'</span>, <span class="string">'UserController'</span>, <span class="string">'index'</span>);
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'GET'</span>, <span class="string">'/users/create'</span>, <span class="string">'UserController'</span>, <span class="string">'create'</span>);
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'POST'</span>, <span class="string">'/users/store'</span>, <span class="string">'UserController'</span>, <span class="string">'store'</span>);
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'GET'</span>, <span class="string">'/users/edit/{id}'</span>, <span class="string">'UserController'</span>, <span class="string">'edit'</span>);
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'POST'</span>, <span class="string">'/users/update/{id}'</span>, <span class="string">'UserController'</span>, <span class="string">'update'</span>);
+<span class="keyword">$router</span>-&gt;<span class="function">addRoute</span>(<span class="string">'GET'</span>, <span class="string">'/users/delete/{id}'</span>, <span class="string">'UserController'</span>, <span class="string">'delete'</span>);
+
+<span class="comment">// Dispatch the request</span>
+<span class="keyword">$router</span>-&gt;<span class="function">dispatch</span>();
+<span class="comment">?&gt;</span>
+      </div>
+
+      <h4>.htaccess for URL Rewriting:</h4>
+      <div class="code-block">
+<span class="comment"># Enable URL rewriting</span>
+RewriteEngine On
+
+<span class="comment"># Redirect all requests to index.php</span>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+<span class="comment"># Prevent directory listing</span>
+Options -Indexes
+
+<span class="comment"># Security headers</span>
+&lt;IfModule mod_headers.c&gt;
+    Header set X-Content-Type-Options <span class="string">"nosniff"</span>
+    Header set X-Frame-Options <span class="string">"DENY"</span>
+    Header set X-XSS-Protection <span class="string">"1; mode=block"</span>
+&lt;/IfModule&gt;
+      </div>
+
+      <div class="info-box success">
+        <strong>MVC Benefits:</strong>
+        <ul>
+          <li><strong>Separation of Concerns:</strong> Each component has a specific responsibility</li>
+          <li><strong>Maintainability:</strong> Easier to update and modify code</li>
+          <li><strong>Reusability:</strong> Models and views can be reused</li>
+          <li><strong>Testability:</strong> Components can be tested independently</li>
+          <li><strong>Scalability:</strong> Easy to add new features</li>
+        </ul>
+      </div>
+
+      <!-- Questions for PHP -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - PHP</h3>
+        <div class="question-item">
+          <strong>Q1. Create a complete PHP CRUD application with MySQLi. Include all four operations with proper error handling.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Explain the difference between MySQLi and PDO. When would you use each?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Implement a PHP MVC application from scratch. Include routing, models, views, and controllers.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. How do you prevent SQL injection in PHP? Provide examples using prepared statements.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q5. Explain the MVC pattern in PHP. How does it improve code organization?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q6. Create a router class in PHP that handles dynamic routes with parameters.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 3-6: ASP.NET -->
+    <div class="content-card" id="aspnet">
+      <h2><span class="section-number">3-6</span>ASP.NET Development</h2>
+      
+      <h3><i class="fas fa-server icon-box"></i>Module 3: ASP.NET 1 (Basic Syntax)</h3>
+      <p><strong>ASP.NET</strong> is a web framework developed by Microsoft for building dynamic web applications. It supports multiple programming languages including C# and VB.NET.</p>
+
+      <h4>Understand and Explain the Outline of ASP.NET</h4>
+      <div class="info-box">
+        <strong>ASP.NET Features:</strong>
+        <ul>
+          <li>Server-side web application framework</li>
+          <li>Built on .NET Framework/.NET Core</li>
+          <li>Supports Web Forms, MVC, and Web API</li>
+          <li>Integrated with Visual Studio IDE</li>
+          <li>Strong security features</li>
+          <li>State management capabilities</li>
+        </ul>
+      </div>
+
+      <h4>Create Web Form - Basic ASP.NET Web Form:</h4>
+      <div class="code-block">
+<span class="comment">// Default.aspx (Web Form)</span>
+<span class="tag">&lt;%@</span> <span class="keyword">Page</span> <span class="keyword">Language</span>=<span class="string">"C#"</span> <span class="keyword">AutoEventWireup</span>=<span class="string">"true"</span> 
+    <span class="keyword">CodeBehind</span>=<span class="string">"Default.aspx.cs"</span> <span class="keyword">Inherits</span>=<span class="string">"WebApplication1.Default"</span> <span class="tag">%&gt;</span>
+
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head</span> <span class="keyword">runat</span>=<span class="string">"server"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>ASP.NET Web Form<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;form</span> <span class="keyword">id</span>=<span class="string">"form1"</span> <span class="keyword">runat</span>=<span class="string">"server"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div&gt;</span>
+            <span class="tag">&lt;asp:Label</span> <span class="keyword">ID</span>=<span class="string">"lblMessage"</span> <span class="keyword">runat</span>=<span class="string">"server"</span> <span class="keyword">Text</span>=<span class="string">"Enter your name:"</span><span class="tag">&gt;&lt;/asp:Label&gt;</span>
+            <span class="tag">&lt;asp:TextBox</span> <span class="keyword">ID</span>=<span class="string">"txtName"</span> <span class="keyword">runat</span>=<span class="string">"server"</span><span class="tag">&gt;&lt;/asp:TextBox&gt;</span>
+            <span class="tag">&lt;asp:Button</span> <span class="keyword">ID</span>=<span class="string">"btnSubmit"</span> <span class="keyword">runat</span>=<span class="string">"server"</span> <span class="keyword">Text</span>=<span class="string">"Submit"</span> 
+                <span class="keyword">OnClick</span>=<span class="string">"btnSubmit_Click"</span> <span class="tag">/&gt;</span>
+            <span class="tag">&lt;asp:Label</span> <span class="keyword">ID</span>=<span class="string">"lblResult"</span> <span class="keyword">runat</span>=<span class="string">"server"</span><span class="tag">&gt;&lt;/asp:Label&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/form&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+<span class="comment">// Default.aspx.cs (Code-Behind)</span>
+<span class="keyword">using</span> System;
+<span class="keyword">using</span> System.Web.UI;
+
+<span class="keyword">public partial class</span> Default : Page
+{
+    <span class="keyword">protected void</span> Page_Load(<span class="keyword">object</span> sender, EventArgs e)
+    {
+        <span class="comment">// Page load logic</span>
+    }
+
+    <span class="keyword">protected void</span> btnSubmit_Click(<span class="keyword">object</span> sender, EventArgs e)
+    {
+        <span class="keyword">string</span> name = txtName.Text;
+        lblResult.Text = <span class="string">"Hello, " + name + "!"</span>;
+    }
+}
+      </div>
+
+      <h3><i class="fas fa-route icon-box"></i>Module 4: ASP.NET 2 (Page Transition and Status Monitor)</h3>
+      
+      <h4>Perform Page Transition:</h4>
+      <div class="code-block">
+<span class="comment">// Redirect to another page</span>
+<span class="keyword">protected void</span> btnRedirect_Click(<span class="keyword">object</span> sender, EventArgs e)
+{
+    <span class="comment">// Method 1: Response.Redirect</span>
+    Response.Redirect(<span class="string">"Page2.aspx"</span>);
+    
+    <span class="comment">// Method 2: Server.Transfer (maintains state)</span>
+    Server.Transfer(<span class="string">"Page2.aspx"</span>);
+    
+    <span class="comment">// Method 3: With query string</span>
+    Response.Redirect(<span class="string">"Page2.aspx?id=123&name=John"</span>);
+}
+
+<span class="comment">// Cross-page posting</span>
+<span class="tag">&lt;asp:Button</span> <span class="keyword">ID</span>=<span class="string">"btnPost"</span> <span class="keyword">runat</span>=<span class="string">"server"</span> 
+    <span class="keyword">PostBackUrl</span>=<span class="string">"~/Page2.aspx"</span> <span class="tag">/&gt;</span>
+      </div>
+
+      <h4>Perform Status Monitor (ViewState, Session, Application State):</h4>
+      <div class="code-block">
+<span class="comment">// ViewState - Page-level state</span>
+<span class="keyword">protected void</span> Page_Load(<span class="keyword">object</span> sender, EventArgs e)
+{
+    <span class="keyword">if</span> (!IsPostBack)
+    {
+        ViewState[<span class="string">"Counter"</span>] = 0;
+    }
+}
+
+<span class="keyword">protected void</span> btnIncrement_Click(<span class="keyword">object</span> sender, EventArgs e)
+{
+    <span class="keyword">int</span> count = (<span class="keyword">int</span>)ViewState[<span class="string">"Counter"</span>];
+    count++;
+    ViewState[<span class="string">"Counter"</span>] = count;
+    lblCount.Text = count.ToString();
+}
+
+<span class="comment">// Session State - User-specific, server-side</span>
+<span class="keyword">protected void</span> btnSetSession_Click(<span class="keyword">object</span> sender, EventArgs e)
+{
+    Session[<span class="string">"UserName"</span>] = txtName.Text;
+    Session[<span class="string">"LoginTime"</span>] = DateTime.Now;
+}
+
+<span class="keyword">protected void</span> Page_Load(<span class="keyword">object</span> sender, EventArgs e)
+{
+    <span class="keyword">if</span> (Session[<span class="string">"UserName"</span>] != <span class="keyword">null</span>)
+    {
+        lblWelcome.Text = <span class="string">"Welcome, " + Session["UserName"].ToString()</span>;
+    }
+}
+
+<span class="comment">// Application State - Global, shared across all users</span>
+<span class="keyword">protected void</span> Application_Start(<span class="keyword">object</span> sender, EventArgs e)
+{
+    Application[<span class="string">"TotalUsers"</span>] = 0;
+    Application[<span class="string">"SiteStartTime"</span>] = DateTime.Now;
+}
+
+<span class="keyword">protected void</span> Session_Start(<span class="keyword">object</span> sender, EventArgs e)
+{
+    Application.Lock();
+    <span class="keyword">int</span> count = (<span class="keyword">int</span>)Application[<span class="string">"TotalUsers"</span>];
+    Application[<span class="string">"TotalUsers"</span>] = count + 1;
+    Application.UnLock();
+}
+      </div>
+
+      <h3><i class="fas fa-database icon-box"></i>Module 5: ASP.NET 3 (Database Processing)</h3>
+      
+      <h4>Create Web-DB Link:</h4>
+      <div class="code-block">
+<span class="comment">// Web.config - Connection String</span>
+<span class="tag">&lt;connectionStrings&gt;</span>
+    <span class="tag">&lt;add</span> <span class="keyword">name</span>=<span class="string">"DefaultConnection"</span> 
+        <span class="keyword">connectionString</span>=<span class="string">"Data Source=localhost;Initial Catalog=MyDB;Integrated Security=True"</span>
+        <span class="keyword">providerName</span>=<span class="string">"System.Data.SqlClient"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/connectionStrings&gt;</span>
+
+<span class="comment">// Using ADO.NET - Code-Behind</span>
+<span class="keyword">using</span> System.Data;
+<span class="keyword">using</span> System.Data.SqlClient;
+<span class="keyword">using</span> System.Configuration;
+
+<span class="keyword">public partial class</span> DataPage : Page
+{
+    <span class="keyword">string</span> connectionString = ConfigurationManager.ConnectionStrings[<span class="string">"DefaultConnection"</span>].ConnectionString;
+    
+    <span class="keyword">protected void</span> Page_Load(<span class="keyword">object</span> sender, EventArgs e)
+    {
+        <span class="keyword">if</span> (!IsPostBack)
+        {
+            LoadData();
+        }
+    }
+    
+    <span class="keyword">private void</span> LoadData()
+    {
+        <span class="keyword">using</span> (SqlConnection conn = <span class="keyword">new</span> SqlConnection(connectionString))
+        {
+            <span class="keyword">string</span> query = <span class="string">"SELECT * FROM Users"</span>;
+            SqlCommand cmd = <span class="keyword">new</span> SqlCommand(query, conn);
+            SqlDataAdapter adapter = <span class="keyword">new</span> SqlDataAdapter(cmd);
+            DataTable dt = <span class="keyword">new</span> DataTable();
+            adapter.Fill(dt);
+            
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+    }
+    
+    <span class="keyword">protected void</span> btnInsert_Click(<span class="keyword">object</span> sender, EventArgs e)
+    {
+        <span class="keyword">using</span> (SqlConnection conn = <span class="keyword">new</span> SqlConnection(connectionString))
+        {
+            conn.Open();
+            <span class="keyword">string</span> query = <span class="string">"INSERT INTO Users (Name, Email) VALUES (@Name, @Email)"</span>;
+            SqlCommand cmd = <span class="keyword">new</span> SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue(<span class="string">"@Name"</span>, txtName.Text);
+            cmd.Parameters.AddWithValue(<span class="string">"@Email"</span>, txtEmail.Text);
+            cmd.ExecuteNonQuery();
+        }
+        LoadData();
+    }
+}
+
+<span class="comment">// Using GridView Control</span>
+<span class="tag">&lt;asp:GridView</span> <span class="keyword">ID</span>=<span class="string">"GridView1"</span> <span class="keyword">runat</span>=<span class="string">"server"</span> 
+    <span class="keyword">AutoGenerateColumns</span>=<span class="string">"true"</span> <span class="keyword">AllowPaging</span>=<span class="string">"true"</span>
+    <span class="keyword">PageSize</span>=<span class="string">"10"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/asp:GridView&gt;</span>
+      </div>
+
+      <h3><i class="fas fa-shield-alt icon-box"></i>Module 6: ASP.NET 4 (Security Control and Optimization)</h3>
+      
+      <h4>Perform Security Control:</h4>
+      <div class="code-block">
+<span class="comment">// Authentication and Authorization in Web.config</span>
+<span class="tag">&lt;system.web&gt;</span>
+    <span class="tag">&lt;authentication</span> <span class="keyword">mode</span>=<span class="string">"Forms"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;forms</span> <span class="keyword">loginUrl</span>=<span class="string">"~/Login.aspx"</span> 
+            <span class="keyword">timeout</span>=<span class="string">"30"</span> 
+            <span class="keyword">protection</span>=<span class="string">"All"</span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/authentication&gt;</span>
+    <span class="tag">&lt;authorization&gt;</span>
+        <span class="tag">&lt;deny</span> <span class="keyword">users</span>=<span class="string">"?"</span><span class="tag">/&gt;</span> <span class="comment">&lt;!-- Deny anonymous users --&gt;</span>
+        <span class="tag">&lt;allow</span> <span class="keyword">users</span>=<span class="string">"*"</span><span class="tag">/&gt;</span> <span class="comment">&lt;!-- Allow all authenticated users --&gt;</span>
+    <span class="tag">&lt;/authorization&gt;</span>
+<span class="tag">&lt;/system.web&gt;</span>
+
+<span class="comment">// Login Page Code</span>
+<span class="keyword">protected void</span> btnLogin_Click(<span class="keyword">object</span> sender, EventArgs e)
+{
+    <span class="keyword">string</span> username = txtUsername.Text;
+    <span class="keyword">string</span> password = txtPassword.Text;
+    
+    <span class="comment">// Validate credentials (check against database)</span>
+    <span class="keyword">if</span> (ValidateUser(username, password))
+    {
+        FormsAuthentication.SetAuthCookie(username, chkRemember.Checked);
+        Response.Redirect(<span class="string">"~/Default.aspx"</span>);
+    }
+    <span class="keyword">else</span>
+    {
+        lblError.Text = <span class="string">"Invalid username or password"</span>;
+    }
+}
+
+<span class="comment">// SQL Injection Prevention - Using Parameters</span>
+<span class="keyword">string</span> query = <span class="string">"SELECT * FROM Users WHERE Username = @Username AND Password = @Password"</span>;
+SqlCommand cmd = <span class="keyword">new</span> SqlCommand(query, conn);
+cmd.Parameters.AddWithValue(<span class="string">"@Username"</span>, username);
+cmd.Parameters.AddWithValue(<span class="string">"@Password"</span>, password);
+
+<span class="comment">// XSS Prevention - HTML Encoding</span>
+<span class="keyword">string</span> userInput = Server.HtmlEncode(txtInput.Text);
+lblOutput.Text = userInput;
+
+<span class="comment">// CSRF Protection - ViewState MAC</span>
+<span class="tag">&lt;pages</span> <span class="keyword">enableViewStateMac</span>=<span class="string">"true"</span> <span class="keyword">viewStateEncryptionMode</span>=<span class="string">"Always"</span><span class="tag">/&gt;</span>
+      </div>
+
+      <h4>Perform Performance Optimization:</h4>
+      <div class="code-block">
+<span class="comment">// Output Caching</span>
+<span class="tag">&lt;%@</span> <span class="keyword">OutputCache</span> <span class="keyword">Duration</span>=<span class="string">"60"</span> <span class="keyword">VaryByParam</span>=<span class="string">"id"</span> <span class="tag">%&gt;</span>
+
+<span class="comment">// Data Caching</span>
+<span class="keyword">protected void</span> LoadData()
+{
+    <span class="keyword">string</span> cacheKey = <span class="string">"UserData"</span>;
+    DataTable dt = Cache[cacheKey] <span class="keyword">as</span> DataTable;
+    
+    <span class="keyword">if</span> (dt == <span class="keyword">null</span>)
+    {
+        dt = GetDataFromDatabase();
+        Cache.Insert(cacheKey, dt, <span class="keyword">null</span>, 
+            DateTime.Now.AddMinutes(30), TimeSpan.Zero);
+    }
+    
+    GridView1.DataSource = dt;
+    GridView1.DataBind();
+}
+
+<span class="comment">// Connection Pooling (automatic in .NET)</span>
+<span class="comment">// Use using statements for proper disposal</span>
+<span class="keyword">using</span> (SqlConnection conn = <span class="keyword">new</span> SqlConnection(connectionString))
+{
+    <span class="comment">// Connection automatically returned to pool</span>
+}
+
+<span class="comment">// Disable ViewState when not needed</span>
+<span class="tag">&lt;%@</span> <span class="keyword">Page</span> <span class="keyword">EnableViewState</span>=<span class="string">"false"</span> <span class="tag">%&gt;</span>
+<span class="tag">&lt;asp:Label</span> <span class="keyword">ID</span>=<span class="string">"lblStatic"</span> <span class="keyword">runat</span>=<span class="string">"server"</span> <span class="keyword">EnableViewState</span>=<span class="string">"false"</span><span class="tag">/&gt;</span>
+
+<span class="comment">// Enable Compression in Web.config</span>
+<span class="tag">&lt;system.webServer&gt;</span>
+    <span class="tag">&lt;urlCompression</span> <span class="keyword">doStaticCompression</span>=<span class="string">"true"</span> 
+        <span class="keyword">doDynamicCompression</span>=<span class="string">"true"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;/system.webServer&gt;</span>
+      </div>
+
+      <!-- Questions for ASP.NET -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - ASP.NET</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the difference between ViewState, Session, and Application state. When would you use each?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create an ASP.NET web form with database connectivity that displays, inserts, and updates user records.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Explain ASP.NET security features. How do you prevent SQL injection and XSS attacks?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. Describe ASP.NET performance optimization techniques. Provide code examples.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module: ASP.NET MVC -->
+    <div class="content-card" id="mvc">
+      <h2><span class="section-number">5</span>ASP.NET 5 (MVC Pattern)</h2>
+      
+      <h3><i class="fas fa-sitemap icon-box"></i>Explain MVC (Model: data/logic; View: UI/Razor; Controller: requests)</h3>
+      <p><strong>MVC (Model-View-Controller)</strong> is an architectural pattern that separates an application into three main components:</p>
+      
+      <div class="info-box">
+        <strong>MVC Components:</strong>
+        <ul>
+          <li><strong>Model:</strong> Represents data and business logic</li>
+          <li><strong>View:</strong> Displays data to the user (Razor views)</li>
+          <li><strong>Controller:</strong> Handles user input and coordinates Model and View</li>
+        </ul>
+      </div>
+
+      <h4>Create MVC Project Structure:</h4>
+      <div class="code-block">
+<span class="comment">// Models/User.cs</span>
+<span class="keyword">public class</span> User
+{
+    <span class="keyword">public int</span> Id { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> Name { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public string</span> Email { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// Controllers/UserController.cs</span>
+<span class="keyword">using</span> System.Web.Mvc;
+
+<span class="keyword">public class</span> UserController : Controller
+{
+    <span class="comment">// GET: User</span>
+    <span class="keyword">public ActionResult</span> Index()
+    {
+        <span class="keyword">var</span> users = GetUsers(); <span class="comment">// Get from database</span>
+        <span class="keyword">return</span> View(users);
+    }
+    
+    <span class="comment">// GET: User/Create</span>
+    <span class="keyword">public ActionResult</span> Create()
+    {
+        <span class="keyword">return</span> View();
+    }
+    
+    <span class="comment">// POST: User/Create</span>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    <span class="keyword">public ActionResult</span> Create(User user)
+    {
+        <span class="keyword">if</span> (ModelState.IsValid)
+        {
+            <span class="comment">// Save to database</span>
+            <span class="keyword">return</span> RedirectToAction(<span class="string">"Index"</span>);
+        }
+        <span class="keyword">return</span> View(user);
+    }
+}
+
+<span class="comment">// Views/User/Index.cshtml (Razor View)</span>
+@model IEnumerable&lt;MyApp.Models.User&gt;
+
+@{
+    ViewBag.Title = <span class="string">"Users"</span>;
+}
+
+<span class="tag">&lt;h2&gt;</span>Users List<span class="tag">&lt;/h2&gt;</span>
+
+<span class="tag">&lt;table</span> <span class="keyword">class</span>=<span class="string">"table"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+        <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;th&gt;</span>Email<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+    @foreach (<span class="keyword">var</span> user <span class="keyword">in</span> Model)
+    {
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;td&gt;</span>@user.Name<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>@user.Email<span class="tag">&lt;/td&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    }
+<span class="tag">&lt;/table&gt;</span>
+      </div>
+
+      <h4>Routing, Controllers, Entity Framework:</h4>
+      <div class="code-block">
+<span class="comment">// App_Start/RouteConfig.cs - Routing Configuration</span>
+<span class="keyword">public class</span> RouteConfig
+{
+    <span class="keyword">public static void</span> RegisterRoutes(RouteCollection routes)
+    {
+        routes.IgnoreRoute(<span class="string">"{resource}.axd/{*pathInfo}"</span>);
+        
+        routes.MapRoute(
+            name: <span class="string">"Default"</span>,
+            url: <span class="string">"{controller}/{action}/{id}"</span>,
+            defaults: <span class="keyword">new</span> { controller = <span class="string">"Home"</span>, action = <span class="string">"Index"</span>, id = UrlParameter.Optional }
+        );
+    }
+}
+
+<span class="comment">// Using Entity Framework - Models/ApplicationDbContext.cs</span>
+<span class="keyword">using</span> System.Data.Entity;
+
+<span class="keyword">public class</span> ApplicationDbContext : DbContext
+{
+    <span class="keyword">public</span> ApplicationDbContext() : base(<span class="string">"DefaultConnection"</span>) { }
+    
+    <span class="keyword">public</span> DbSet&lt;User&gt; Users { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+    <span class="keyword">public</span> DbSet&lt;Product&gt; Products { <span class="keyword">get</span>; <span class="keyword">set</span>; }
+}
+
+<span class="comment">// Controller with Entity Framework</span>
+<span class="keyword">public class</span> ProductController : Controller
+{
+    <span class="keyword">private</span> ApplicationDbContext db = <span class="keyword">new</span> ApplicationDbContext();
+    
+    <span class="keyword">public ActionResult</span> Index()
+    {
+        <span class="keyword">var</span> products = db.Products.ToList();
+        <span class="keyword">return</span> View(products);
+    }
+    
+    <span class="keyword">protected override void</span> Dispose(<span class="keyword">bool</span> disposing)
+    {
+        <span class="keyword">if</span> (disposing)
+        {
+            db.Dispose();
+        }
+        base.Dispose(disposing);
+    }
+}
+      </div>
+
+      <!-- Questions for MVC -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - ASP.NET MVC</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the MVC pattern. How does it differ from Web Forms?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create a complete MVC application with CRUD operations using Entity Framework.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Explain ASP.NET MVC routing. How do you create custom routes?</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 11: Mobile App Development -->
+    <div class="content-card" id="mobile">
+      <h2><span class="section-number">11</span>Mobile App Development 1 (Hybrid/PWA)</h2>
+      
+      <h3><i class="fas fa-mobile-alt icon-box"></i>Hybrid Apps with HTML/CSS/JS (PWA manifest, responsive UI)</h3>
+      <p><strong>Progressive Web Apps (PWAs)</strong> are web applications that provide a native app-like experience using web technologies.</p>
+
+      <h4>PWA Manifest File (manifest.json):</h4>
+      <div class="code-block">
+{
+  <span class="string">"name"</span>: <span class="string">"My PWA App"</span>,
+  <span class="string">"short_name"</span>: <span class="string">"PWA"</span>,
+  <span class="string">"description"</span>: <span class="string">"A Progressive Web Application"</span>,
+  <span class="string">"start_url"</span>: <span class="string">"/"</span>,
+  <span class="string">"display"</span>: <span class="string">"standalone"</span>,
+  <span class="string">"background_color"</span>: <span class="string">"#ffffff"</span>,
+  <span class="string">"theme_color"</span>: <span class="string">"#667eea"</span>,
+  <span class="string">"icons"</span>: [
+    {
+      <span class="string">"src"</span>: <span class="string">"/icon-192.png"</span>,
+      <span class="string">"sizes"</span>: <span class="string">"192x192"</span>,
+      <span class="string">"type"</span>: <span class="string">"image/png"</span>
+    },
+    {
+      <span class="string">"src"</span>: <span class="string">"/icon-512.png"</span>,
+      <span class="string">"sizes"</span>: <span class="string">"512x512"</span>,
+      <span class="string">"type"</span>: <span class="string">"image/png"</span>
+    }
+  ]
+}
+      </div>
+
+      <h4>Service Worker for Offline Support:</h4>
+      <div class="code-block">
+<span class="comment">// service-worker.js</span>
+<span class="keyword">const</span> CACHE_NAME = <span class="string">'my-pwa-cache-v1'</span>;
+<span class="keyword">const</span> urlsToCache = [
+  <span class="string">'/'</span>,
+  <span class="string">'/styles.css'</span>,
+  <span class="string">'/script.js'</span>,
+  <span class="string">'/icon-192.png'</span>
+];
+
+<span class="comment">// Install event - cache resources</span>
+self.addEventListener(<span class="string">'install'</span>, <span class="keyword">function</span>(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(<span class="keyword">function</span>(cache) {
+        <span class="keyword">return</span> cache.addAll(urlsToCache);
+      })
+  );
+});
+
+<span class="comment">// Fetch event - serve from cache, fallback to network</span>
+self.addEventListener(<span class="string">'fetch'</span>, <span class="keyword">function</span>(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(<span class="keyword">function</span>(response) {
+        <span class="keyword">return</span> response || fetch(event.request);
+      })
+  );
+});
+      </div>
+
+      <h4>HTML with PWA Integration:</h4>
+      <div class="code-block">
+<span class="tag">&lt;!DOCTYPE</span> <span class="keyword">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">name</span>=<span class="string">"viewport"</span> <span class="keyword">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">name</span>=<span class="string">"theme-color"</span> <span class="keyword">content</span>=<span class="string">"#667eea"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="keyword">rel</span>=<span class="string">"manifest"</span> <span class="keyword">href</span>=<span class="string">"/manifest.json"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>PWA App<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Progressive Web App<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;script&gt;</span>
+        <span class="comment">// Register service worker</span>
+        <span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) {
+          navigator.serviceWorker.register(<span class="string">'/service-worker.js'</span>)
+            .then(<span class="keyword">function</span>(registration) {
+              console.log(<span class="string">'Service Worker registered'</span>);
+            });
+        }
+    <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+      </div>
+
+      <!-- Questions for Mobile -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Mobile Development</h3>
+        <div class="question-item">
+          <strong>Q1. What is a PWA? Explain the key features that make a web app progressive.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create a complete PWA with manifest, service worker, and offline functionality.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 13: MERN Stack -->
+    <div class="content-card" id="mern">
+      <h2><span class="section-number">13</span>Full-Stack MERN (MongoDB, Express, React, Node.js)</h2>
+      
+      <h3><i class="fas fa-layer-group icon-box"></i>Setup MERN Environment; CRUD with MongoDB/Express Backend</h3>
+      
+      <h4>Node.js/Express Backend Setup:</h4>
+      <div class="code-block">
+<span class="comment">// package.json</span>
+{
+  <span class="string">"name"</span>: <span class="string">"mern-app"</span>,
+  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+  <span class="string">"dependencies"</span>: {
+    <span class="string">"express"</span>: <span class="string">"^4.18.2"</span>,
+    <span class="string">"mongoose"</span>: <span class="string">"^7.0.0"</span>,
+    <span class="string">"cors"</span>: <span class="string">"^2.8.5"</span>,
+    <span class="string">"dotenv"</span>: <span class="string">"^16.0.0"</span>
+  }
+}
+
+<span class="comment">// server.js</span>
+<span class="keyword">const</span> express = require(<span class="string">'express'</span>);
+<span class="keyword">const</span> mongoose = require(<span class="string">'mongoose'</span>);
+<span class="keyword">const</span> cors = require(<span class="string">'cors'</span>);
+require(<span class="string">'dotenv'</span>).config();
+
+<span class="keyword">const</span> app = express();
+<span class="keyword">const</span> PORT = process.env.PORT || 5000;
+
+<span class="comment">// Middleware</span>
+app.use(cors());
+app.use(express.json());
+
+<span class="comment">// MongoDB Connection</span>
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: <span class="keyword">true</span>,
+  useUnifiedTopology: <span class="keyword">true</span>
+})
+.then(() => console.log(<span class="string">'MongoDB Connected'</span>))
+.catch(err => console.log(err));
+
+<span class="comment">// Routes</span>
+app.use(<span class="string">'/api/users'</span>, require(<span class="string">'./routes/users'</span>));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+      </div>
+
+      <h4>MongoDB Model and Routes:</h4>
+      <div class="code-block">
+<span class="comment">// models/User.js</span>
+<span class="keyword">const</span> mongoose = require(<span class="string">'mongoose'</span>);
+
+<span class="keyword">const</span> userSchema = <span class="keyword">new</span> mongoose.Schema({
+  name: { type: String, required: <span class="keyword">true</span> },
+  email: { type: String, required: <span class="keyword">true</span>, unique: <span class="keyword">true</span> },
+  age: { type: Number }
+}, { timestamps: <span class="keyword">true</span> });
+
+module.exports = mongoose.model(<span class="string">'User'</span>, userSchema);
+
+<span class="comment">// routes/users.js</span>
+<span class="keyword">const</span> express = require(<span class="string">'express'</span>);
+<span class="keyword">const</span> router = express.Router();
+<span class="keyword">const</span> User = require(<span class="string">'../models/User'</span>);
+
+<span class="comment">// GET all users</span>
+router.get(<span class="string">'/'</span>, async (req, res) => {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> users = await User.find();
+    res.json(users);
+  } <span class="keyword">catch</span> (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+<span class="comment">// POST create user</span>
+router.post(<span class="string">'/'</span>, async (req, res) => {
+  <span class="keyword">const</span> user = <span class="keyword">new</span> User({
+    name: req.body.name,
+    email: req.body.email,
+    age: req.body.age
+  });
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> newUser = await user.save();
+    res.status(201).json(newUser);
+  } <span class="keyword">catch</span> (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+<span class="comment">// PUT update user</span>
+router.put(<span class="string">'/:id'</span>, async (req, res) => {
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> user = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: <span class="keyword">true</span> }
+    );
+    res.json(user);
+  } <span class="keyword">catch</span> (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+<span class="comment">// DELETE user</span>
+router.delete(<span class="string">'/:id'</span>, async (req, res) => {
+  <span class="keyword">try</span> {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: <span class="string">'User deleted'</span> });
+  } <span class="keyword">catch</span> (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;
+      </div>
+
+      <h4>React Frontend Components:</h4>
+      <div class="code-block">
+<span class="comment">// src/App.js</span>
+<span class="keyword">import</span> React, { useState, useEffect } <span class="keyword">from</span> <span class="string">'react'</span>;
+<span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;
+
+<span class="keyword">function</span> App() {
+  <span class="keyword">const</span> [users, setUsers] = useState([]);
+  <span class="keyword">const</span> [formData, setFormData] = useState({ name: <span class="string">''</span>, email: <span class="string">''</span>, age: <span class="string">''</span> });
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  <span class="keyword">const</span> fetchUsers = async () => {
+    <span class="keyword">const</span> res = await axios.get(<span class="string">'http://localhost:5000/api/users'</span>);
+    setUsers(res.data);
+  };
+
+  <span class="keyword">const</span> handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios.post(<span class="string">'http://localhost:5000/api/users'</span>, formData);
+    fetchUsers();
+    setFormData({ name: <span class="string">''</span>, email: <span class="string">''</span>, age: <span class="string">''</span> });
+  };
+
+  <span class="keyword">return</span> (
+    <span class="tag">&lt;div&gt;</span>
+      <span class="tag">&lt;h1&gt;</span>MERN Stack App<span class="tag">&lt;/h1&gt;</span>
+      <span class="tag">&lt;form</span> onSubmit={handleSubmit}<span class="tag">&gt;</span>
+        <span class="tag">&lt;input</span> type=<span class="string">"text"</span> placeholder=<span class="string">"Name"</span> 
+          value={formData.name}
+          onChange={(e) => setFormData({...formData, name: e.target.value})} <span class="tag">/&gt;</span>
+        <span class="tag">&lt;input</span> type=<span class="string">"email"</span> placeholder=<span class="string">"Email"</span>
+          value={formData.email}
+          onChange={(e) => setFormData({...formData, email: e.target.value})} <span class="tag">/&gt;</span>
+        <span class="tag">&lt;button</span> type=<span class="string">"submit"</span><span class="tag">&gt;</span>Add User<span class="tag">&lt;/button&gt;</span>
+      <span class="tag">&lt;/form&gt;</span>
+      <span class="tag">&lt;ul&gt;</span>
+        {users.map(user => (
+          <span class="tag">&lt;li</span> key={user._id}<span class="tag">&gt;</span>
+            {user.name} - {user.email}
+          <span class="tag">&lt;/li&gt;</span>
+        ))}
+      <span class="tag">&lt;/ul&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  );
+}
+
+export default App;
+      </div>
+
+      <!-- Questions for MERN -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - MERN Stack</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the MERN stack architecture. How do MongoDB, Express, React, and Node.js work together?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Create a complete MERN application with full CRUD operations.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. How do you deploy a MERN application to Vercel or Netlify?</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 7: Multimedia -->
+    <div class="content-card">
+      <h2><span class="section-number">7</span>Multimedia Application</h2>
+      
+      <h3><i class="fas fa-video icon-box"></i>Add Multimedia</h3>
+      <p>Multimedia elements enhance web pages with audio, video, images, and interactive content.</p>
+
+      <h4>HTML5 Video:</h4>
+      <div class="code-block">
+<span class="tag">&lt;video</span> <span class="keyword">width</span>=<span class="string">"640"</span> <span class="keyword">height</span>=<span class="string">"360"</span> <span class="keyword">controls</span> <span class="keyword">autoplay</span> <span class="keyword">muted</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="keyword">src</span>=<span class="string">"video.mp4"</span> <span class="keyword">type</span>=<span class="string">"video/mp4"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="keyword">src</span>=<span class="string">"video.webm"</span> <span class="keyword">type</span>=<span class="string">"video/webm"</span><span class="tag">&gt;</span>
+    Your browser does not support the video tag.
+<span class="tag">&lt;/video&gt;</span>
+      </div>
+
+      <h4>HTML5 Audio:</h4>
+      <div class="code-block">
+<span class="tag">&lt;audio</span> <span class="keyword">controls</span> <span class="keyword">autoplay</span> <span class="keyword">loop</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="keyword">src</span>=<span class="string">"audio.mp3"</span> <span class="keyword">type</span>=<span class="string">"audio/mpeg"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> <span class="keyword">src</span>=<span class="string">"audio.ogg"</span> <span class="keyword">type</span>=<span class="string">"audio/ogg"</span><span class="tag">&gt;</span>
+    Your browser does not support the audio tag.
+<span class="tag">&lt;/audio&gt;</span>
+      </div>
+
+      <h4>Canvas for Graphics:</h4>
+      <div class="code-block">
+<span class="tag">&lt;canvas</span> <span class="keyword">id</span>=<span class="string">"myCanvas"</span> <span class="keyword">width</span>=<span class="string">"400"</span> <span class="keyword">height</span>=<span class="string">"200"</span><span class="tag">&gt;&lt;/canvas&gt;</span>
+<span class="tag">&lt;script&gt;</span>
+    <span class="keyword">const</span> canvas = document.getElementById(<span class="string">'myCanvas'</span>);
+    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);
+    
+    <span class="comment">// Draw rectangle</span>
+    ctx.fillStyle = <span class="string">'#667eea'</span>;
+    ctx.fillRect(10, 10, 100, 50);
+    
+    <span class="comment">// Draw circle</span>
+    ctx.beginPath();
+    ctx.arc(200, 100, 50, 0, 2 * Math.PI);
+    ctx.fillStyle = <span class="string">'#10b981'</span>;
+    ctx.fill();
+<span class="tag">&lt;/script&gt;</span>
+      </div>
+    </div>
+
+    <!-- Module 8-10: Web Servers -->
+    <div class="content-card">
+      <h2><span class="section-number">8-10</span>Web Server Management</h2>
+      
+      <h3><i class="fas fa-server icon-box"></i>Module 8: Role of a Web Server - Introduction to Internet and Web Publishing (DNS)</h3>
+      <p><strong>Web servers</strong> are software that deliver web content to clients over HTTP/HTTPS protocols.</p>
+
+      <div class="info-box">
+        <strong>Web Server Functions:</strong>
+        <ul>
+          <li>Receive HTTP requests from clients</li>
+          <li>Process requests and execute server-side code</li>
+          <li>Return HTTP responses with web content</li>
+          <li>Handle static and dynamic content</li>
+          <li>Manage sessions and security</li>
+        </ul>
+      </div>
+
+      <h4>DNS (Domain Name System):</h4>
+      <p>DNS translates human-readable domain names (e.g., www.example.com) into IP addresses (e.g., 192.168.1.1).</p>
+      <div class="code-block">
+<span class="comment">DNS Resolution Process:</span>
+1. User types "www.example.com" in browser
+2. Browser queries DNS server
+3. DNS server returns IP address (e.g., 192.168.1.1)
+4. Browser connects to web server at that IP
+5. Web server returns requested content
+
+<span class="comment">Common DNS Record Types:</span>
+- A Record: Maps domain to IPv4 address
+- AAAA Record: Maps domain to IPv6 address
+- CNAME Record: Maps domain alias to another domain
+- MX Record: Mail exchange server
+- TXT Record: Text information
+      </div>
+
+      <h3><i class="fas fa-cogs icon-box"></i>Module 9: Install, Configure and Maintain Web Server</h3>
+      
+      <h4>IIS (Internet Information Services) - Windows:</h4>
+      <div class="code-block">
+<span class="comment">// Installing IIS via PowerShell (Windows)</span>
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServer
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-CommonHttpFeatures
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-HttpErrors
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-ApplicationInit
+
+<span class="comment">// Web.config for ASP.NET in IIS</span>
+<span class="tag">&lt;configuration&gt;</span>
+    <span class="tag">&lt;system.webServer&gt;</span>
+        <span class="tag">&lt;defaultDocument&gt;</span>
+            <span class="tag">&lt;files&gt;</span>
+                <span class="tag">&lt;clear</span> <span class="tag">/&gt;</span>
+                <span class="tag">&lt;add</span> <span class="keyword">value</span>=<span class="string">"Default.aspx"</span> <span class="tag">/&gt;</span>
+            <span class="tag">&lt;/files&gt;</span>
+        <span class="tag">&lt;/defaultDocument&gt;</span>
+        <span class="tag">&lt;directoryBrowse</span> <span class="keyword">enabled</span>=<span class="string">"false"</span> <span class="tag">/&gt;</span>
+    <span class="tag">&lt;/system.webServer&gt;</span>
+<span class="tag">&lt;/configuration&gt;</span>
+      </div>
+
+      <h4>Apache Web Server - Linux:</h4>
+      <div class="code-block">
+<span class="comment"># Installing Apache on Ubuntu/Debian</span>
+sudo apt update
+sudo apt install apache2
+
+<span class="comment"># Starting Apache service</span>
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+<span class="comment"># Apache Configuration File: /etc/apache2/apache2.conf</span>
+<span class="comment"># Virtual Host Configuration: /etc/apache2/sites-available/000-default.conf</span>
+
+<span class="tag">&lt;VirtualHost</span> *:80<span class="tag">&gt;</span>
+    ServerAdmin webmaster@example.com
+    ServerName www.example.com
+    DocumentRoot /var/www/html
+    
+    <span class="tag">&lt;Directory</span> /var/www/html<span class="tag">&gt;</span>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    <span class="tag">&lt;/Directory&gt;</span>
+    
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+<span class="tag">&lt;/VirtualHost&gt;</span>
+      </div>
+
+      <h4>Implementing Secure Web Services using SSL:</h4>
+      <div class="code-block">
+<span class="comment">// SSL/TLS Configuration in Apache</span>
+<span class="tag">&lt;VirtualHost</span> *:443<span class="tag">&gt;</span>
+    ServerName www.example.com
+    DocumentRoot /var/www/html
+    
+    <span class="comment"># SSL Configuration</span>
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/example.crt
+    SSLCertificateKeyFile /etc/ssl/private/example.key
+    SSLCertificateChainFile /etc/ssl/certs/chain.crt
+    
+    <span class="comment"># Force HTTPS redirect</span>
+    <span class="tag">&lt;IfModule</span> mod_rewrite.c<span class="tag">&gt;</span>
+        RewriteEngine On
+        RewriteCond %{HTTPS} off
+        RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    <span class="tag">&lt;/IfModule&gt;</span>
+<span class="tag">&lt;/VirtualHost&gt;</span>
+
+<span class="comment">// SSL in IIS - Web.config</span>
+<span class="tag">&lt;system.webServer&gt;</span>
+    <span class="tag">&lt;rewrite&gt;</span>
+        <span class="tag">&lt;rules&gt;</span>
+            <span class="tag">&lt;rule</span> <span class="keyword">name</span>=<span class="string">"HTTP to HTTPS redirect"</span> <span class="keyword">stopProcessing</span>=<span class="string">"true"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;match</span> <span class="keyword">url</span>=<span class="string">"(.*)"</span> <span class="tag">/&gt;</span>
+                <span class="tag">&lt;conditions&gt;</span>
+                    <span class="tag">&lt;add</span> <span class="keyword">input</span>=<span class="string">"{HTTPS}"</span> <span class="keyword">pattern</span>=<span class="string">"off"</span> <span class="tag">/&gt;</span>
+                <span class="tag">&lt;/conditions&gt;</span>
+                <span class="tag">&lt;action</span> <span class="keyword">type</span>=<span class="string">"Redirect"</span> <span class="keyword">url</span>=<span class="string">"https://{HTTP_HOST}/{R:1}"</span> <span class="tag">/&gt;</span>
+            <span class="tag">&lt;/rule&gt;</span>
+        <span class="tag">&lt;/rules&gt;</span>
+    <span class="tag">&lt;/rewrite&gt;</span>
+<span class="tag">&lt;/system.webServer&gt;</span>
+      </div>
+
+      <h3><i class="fas fa-cloud-upload-alt icon-box"></i>Module 10: Publishing a Web Site</h3>
+      
+      <h4>Creating Hosting Domain Name:</h4>
+      <div class="code-block">
+<span class="comment">Steps to Register and Configure Domain:</span>
+1. Choose a domain registrar (GoDaddy, Namecheap, etc.)
+2. Search for available domain name
+3. Register the domain
+4. Configure DNS records:
+   - A Record: @ → Server IP address
+   - CNAME: www → @ (or direct IP)
+   - MX Records for email (if needed)
+
+<span class="comment">DNS Configuration Example:</span>
+Type    Name    Value           TTL
+A       @       192.168.1.100   3600
+CNAME   www     example.com     3600
+MX      @       mail.example.com 3600
+      </div>
+
+      <h4>Publishing Web Content:</h4>
+      <div class="code-block">
+<span class="comment">// FTP Deployment (FileZilla, WinSCP)</span>
+<span class="comment">FTP Server: ftp.example.com</span>
+<span class="comment">Username: your_username</span>
+<span class="comment">Password: your_password</span>
+<span class="comment">Upload files to: /public_html or /wwwroot</span>
+
+<span class="comment">// Using Git for Deployment</span>
+<span class="comment"># On server, clone repository</span>
+git clone https://github.com/username/repo.git /var/www/html
+
+<span class="comment"># Set up auto-deployment with webhook</span>
+<span class="comment"># Or use CI/CD pipeline (GitHub Actions, GitLab CI)</span>
+
+<span class="comment">// Deploying ASP.NET to IIS</span>
+<span class="comment">1. Build application in Release mode</span>
+<span class="comment">2. Publish to folder</span>
+<span class="comment">3. Copy files to IIS wwwroot directory</span>
+<span class="comment">4. Configure application pool in IIS Manager</span>
+<span class="comment">5. Set appropriate permissions</span>
+      </div>
+
+      <!-- Questions for Web Servers -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Web Servers</h3>
+        <div class="question-item">
+          <strong>Q1. Explain the role of a web server. How does it differ from an application server?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Compare IIS and Apache web servers. What are the advantages of each?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Explain DNS and how it works. What are the different types of DNS records?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q4. How do you configure SSL/TLS on a web server? Explain the process step by step.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q5. Describe the process of publishing a website. Include domain registration, DNS configuration, and file deployment.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 12: ASP.NET Advanced -->
+    <div class="content-card">
+      <h2><span class="section-number">12</span>ASP.NET Advanced (Web API + Blazor)</h2>
+      
+      <h3><i class="fas fa-plug icon-box"></i>REST APIs, Server-side Blazor for Interactive UIs</h3>
+      
+      <h4>ASP.NET Web API:</h4>
+      <div class="code-block">
+<span class="comment">// Controllers/UsersController.cs (Web API)</span>
+<span class="keyword">using</span> System.Web.Http;
+
+<span class="keyword">public class</span> UsersController : ApiController
+{
+    <span class="comment">// GET: api/Users</span>
+    <span class="keyword">public</span> IHttpActionResult GetUsers()
+    {
+        <span class="keyword">var</span> users = GetUsersFromDatabase();
+        <span class="keyword">return</span> Ok(users);
+    }
+    
+    <span class="comment">// GET: api/Users/5</span>
+    <span class="keyword">public</span> IHttpActionResult GetUser(<span class="keyword">int</span> id)
+    {
+        <span class="keyword">var</span> user = GetUserById(id);
+        <span class="keyword">if</span> (user == <span class="keyword">null</span>)
+            <span class="keyword">return</span> NotFound();
+        <span class="keyword">return</span> Ok(user);
+    }
+    
+    <span class="comment">// POST: api/Users</span>
+    <span class="keyword">public</span> IHttpActionResult PostUser(User user)
+    {
+        <span class="keyword">if</span> (!ModelState.IsValid)
+            <span class="keyword">return</span> BadRequest(ModelState);
+        
+        CreateUser(user);
+        <span class="keyword">return</span> CreatedAtRoute(<span class="string">"DefaultApi"</span>, <span class="keyword">new</span> { id = user.Id }, user);
+    }
+    
+    <span class="comment">// PUT: api/Users/5</span>
+    <span class="keyword">public</span> IHttpActionResult PutUser(<span class="keyword">int</span> id, User user)
+    {
+        <span class="keyword">if</span> (!ModelState.IsValid)
+            <span class="keyword">return</span> BadRequest();
+        
+        UpdateUser(id, user);
+        <span class="keyword">return</span> StatusCode(HttpStatusCode.NoContent);
+    }
+    
+    <span class="comment">// DELETE: api/Users/5</span>
+    <span class="keyword">public</span> IHttpActionResult DeleteUser(<span class="keyword">int</span> id)
+    {
+        DeleteUser(id);
+        <span class="keyword">return</span> Ok();
+    }
+}
+
+<span class="comment">// WebApiConfig.cs - Routing</span>
+<span class="keyword">public static void</span> Register(HttpConfiguration config)
+{
+    config.MapHttpAttributeRoutes();
+    
+    config.Routes.MapHttpRoute(
+        name: <span class="string">"DefaultApi"</span>,
+        routeTemplate: <span class="string">"api/{controller}/{id}"</span>,
+        defaults: <span class="keyword">new</span> { id = RouteParameter.Optional }
+    );
+}
+      </div>
+
+      <h4>Server-side Blazor:</h4>
+      <div class="code-block">
+<span class="comment">// Pages/Counter.razor</span>
+@page <span class="string">"/counter"</span>
+
+<span class="tag">&lt;h1&gt;</span>Counter<span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;p&gt;</span>Current count: @currentCount<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;button</span> <span class="keyword">class</span>=<span class="string">"btn btn-primary"</span> @onclick=<span class="string">"IncrementCount"</span><span class="tag">&gt;</span>Click me<span class="tag">&lt;/button&gt;</span>
+
+@code {
+    <span class="keyword">private int</span> currentCount = 0;
+
+    <span class="keyword">private void</span> IncrementCount()
+    {
+        currentCount++;
+    }
+}
+
+<span class="comment">// Pages/Users.razor - Data Binding</span>
+@page <span class="string">"/users"</span>
+@using MyApp.Models
+@inject HttpClient Http
+
+<span class="tag">&lt;h1&gt;</span>Users<span class="tag">&lt;/h1&gt;</span>
+
+<span class="tag">&lt;table</span> <span class="keyword">class</span>=<span class="string">"table"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;thead&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;th&gt;</span>Name<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>Email<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/thead&gt;</span>
+    <span class="tag">&lt;tbody&gt;</span>
+        @foreach (<span class="keyword">var</span> user <span class="keyword">in</span> users)
+        {
+            <span class="tag">&lt;tr&gt;</span>
+                <span class="tag">&lt;td&gt;</span>@user.Name<span class="tag">&lt;/td&gt;</span>
+                <span class="tag">&lt;td&gt;</span>@user.Email<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;/tr&gt;</span>
+        }
+    <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span>
+
+@code {
+    <span class="keyword">private</span> List&lt;User&gt; users = <span class="keyword">new</span> List&lt;User&gt;();
+
+    <span class="keyword">protected override async Task</span> OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync&lt;List&lt;User&gt;&gt;(<span class="string">"api/users"</span>);
+    }
+}
+      </div>
+
+      <!-- Questions for ASP.NET Advanced -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - ASP.NET Advanced</h3>
+        <div class="question-item">
+          <strong>Q1. What is REST? Create a RESTful Web API with CRUD operations.</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q2. Explain server-side Blazor. How does it differ from client-side Blazor?</strong>
+        </div>
+        <div class="question-item">
+          <strong>Q3. Create a Blazor component that fetches data from a Web API and displays it.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

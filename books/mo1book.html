@@ -1,0 +1,2639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Reading Book - User Requirements for Software Solution</title>
+    <!-- html2pdf.js library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* A4 Page Setup - Optimized for printing and screen viewing */
+        @page {
+            size: A4;
+            margin: 0.8cm;
+            /* Narrow margins */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Georgia', serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            max-width: 21cm;
+            min-height: 29.7cm;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Page Breaks */
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .no-break {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        /* Cover Page */
+        .cover-page {
+            page-break-after: always;
+            text-align: center;
+            padding: 1.5cm 0.8cm;
+            /* Narrow margins */
+            height: 29.7cm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 50%, #f0f9ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(30, 64, 175, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .cover-page>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 4cm;
+            height: 4cm;
+            margin-bottom: 1cm;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #333333 0%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24pt;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cover-title {
+            font-size: 32pt;
+            font-weight: bold;
+            margin-bottom: 0.8cm;
+            color: #000000;
+            line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .cover-subtitle {
+            font-size: 20pt;
+            margin-bottom: 0.5cm;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .cover-info {
+            font-size: 12pt;
+            margin-top: 2cm;
+            line-height: 2.2;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1cm 1.5cm;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e7ff;
+        }
+
+        /* Headings */
+        h1 {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-top: 1.5cm;
+            margin-bottom: 0.5cm;
+            color: #000000;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-top: 1cm;
+            margin-bottom: 0.4cm;
+            color: #000000;
+            page-break-after: avoid;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 0.2cm;
+        }
+
+        h3 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 0.8cm;
+            margin-bottom: 0.3cm;
+            color: #000000;
+            page-break-after: avoid;
+        }
+
+        h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 0.6cm;
+            margin-bottom: 0.3cm;
+            color: #000000;
+            page-break-after: avoid;
+        }
+
+        h5 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 0.5cm;
+            margin-bottom: 0.2cm;
+            color: #4b5563;
+        }
+
+        /* Paragraphs and Text */
+        p {
+            margin-bottom: 0.4cm;
+            text-align: justify;
+            text-indent: 0.5cm;
+        }
+
+        .no-indent {
+            text-indent: 0;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin-left: 1cm;
+            margin-bottom: 0.4cm;
+            padding-left: 0.5cm;
+        }
+
+        li {
+            margin-bottom: 0.2cm;
+            line-height: 1.5;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5cm 0;
+            font-size: 10pt;
+            page-break-inside: avoid;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        table th {
+            background: linear-gradient(135deg, #e5e5e5 0%, #d0d0d0 100%);
+            border: 1px solid #000000;
+            padding: 0.4cm;
+            text-align: left;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.35cm;
+            vertical-align: top;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        table tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Boxes and Callouts */
+        .info-box {
+            border: 2px solid #000000;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+            padding: 0.5cm;
+            margin: 0.5cm 0;
+            border-radius: 8px;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .example-box {
+            border-left: 5px solid #22c55e;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 0.5cm;
+            margin: 0.5cm 0;
+            border-radius: 0 8px 8px 0;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 6px rgba(34, 197, 94, 0.15);
+        }
+
+        .important-box {
+            border: 2px solid #dc2626;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 0.5cm;
+            margin: 0.5cm 0;
+            border-radius: 8px;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.15);
+        }
+
+        /* A4 Size Cards - Full Page Cards */
+        .a4-card {
+            width: 21cm;
+            min-height: 29.7cm;
+            max-height: 29.7cm;
+            background: #ffffff;
+            margin: 0 auto;
+            padding: 0.8cm;
+            /* Narrow margins */
+            box-sizing: border-box;
+            page-break-after: always;
+            break-after: page;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .a4-card-content {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 0.6cm;
+            margin: 0.5cm 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            page-break-inside: avoid;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 12pt;
+            color: #000000;
+            margin-bottom: 0.3cm;
+            padding-bottom: 0.2cm;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .card-content {
+            line-height: 1.6;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5cm;
+            margin: 0.5cm 0;
+            page-break-inside: avoid;
+        }
+
+        @media print {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .a4-card {
+                page-break-after: always;
+                break-after: page;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* Diagrams Placeholder */
+        .diagram {
+            border: 2px solid #000000;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+            padding: 1cm;
+            margin: 0.5cm 0;
+            text-align: center;
+            font-style: italic;
+            color: #000000;
+            page-break-inside: avoid;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image Containers */
+        .image-container {
+            width: 100%;
+            margin: 0.5cm 0;
+            text-align: center;
+            page-break-inside: avoid;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            min-height: 4cm;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+            border: 2px dashed #000000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-style: italic;
+            margin: 0.5cm 0;
+            page-break-inside: avoid;
+        }
+
+        .diagram-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 0.5cm 0;
+            page-break-inside: avoid;
+        }
+
+        .illustration-image {
+            width: 100%;
+            max-width: 16cm;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 0.5cm auto;
+            display: block;
+            page-break-inside: avoid;
+        }
+
+        /* Session Content */
+        .session {
+            margin-bottom: 1cm;
+            page-break-inside: avoid;
+        }
+
+        .session-header {
+            background-color: #e5e5e5;
+            padding: 0.3cm;
+            border-left: 4px solid #000000;
+            margin-bottom: 0.4cm;
+            font-weight: bold;
+        }
+
+        /* Phase Badges */
+        .phase {
+            display: inline-block;
+            padding: 0.1cm 0.3cm;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: bold;
+            margin-right: 0.2cm;
+        }
+
+        .phase-intro {
+            background-color: #e5e5e5;
+            color: #000000;
+        }
+
+        .phase-dev {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .phase-app {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .phase-cons {
+            background-color: #fce7f3;
+            color: #9f1239;
+        }
+
+        /* Performance Criteria */
+        .performance-criteria {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 0.4cm;
+            margin: 0.5cm 0;
+            page-break-inside: avoid;
+        }
+
+        /* TOC */
+        .toc {
+            page-break-after: always;
+        }
+
+        .toc-item {
+            margin: 0.2cm 0;
+            padding-left: 0.5cm;
+        }
+
+        .toc-level-1 {
+            font-weight: bold;
+            margin-top: 0.3cm;
+        }
+
+        .toc-level-2 {
+            padding-left: 1cm;
+        }
+
+        .toc-level-3 {
+            padding-left: 1.5cm;
+            font-size: 10pt;
+        }
+
+        /* Print Styles */
+        @media print {
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 21cm !important;
+                max-width: 21cm !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+                page-break-after: always;
+                break-before: page;
+                break-after: page;
+                margin: 0 !important;
+                padding: 0.8cm !important;
+                /* Narrow margins */
+                width: 21cm !important;
+                max-width: 21cm !important;
+                min-height: 29.7cm;
+                box-shadow: none !important;
+                background: white !important;
+                overflow: visible !important;
+                position: relative;
+            }
+
+            .cover-page {
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important;
+                padding: 1.5cm 0.8cm !important;
+                /* Narrow margins */
+                width: 21cm !important;
+                max-width: 21cm !important;
+                min-height: 29.7cm;
+                height: auto;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+
+            .toc {
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important;
+                padding: 0.8cm !important;
+                /* Narrow margins */
+                width: 21cm !important;
+                max-width: 21cm !important;
+                min-height: 29.7cm;
+                box-shadow: none !important;
+                overflow: visible !important;
+            }
+
+            h1 {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-top: 0.5cm !important;
+                margin-bottom: 0.5cm !important;
+                padding-top: 0 !important;
+            }
+
+            h2 {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-top: 0.8cm !important;
+                margin-bottom: 0.4cm !important;
+                padding-top: 0 !important;
+            }
+
+            h3 {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-top: 0.6cm !important;
+                margin-bottom: 0.3cm !important;
+                padding-top: 0 !important;
+            }
+
+            h4,
+            h5 {
+                page-break-after: avoid;
+                break-after: avoid;
+                margin-top: 0.4cm !important;
+                margin-bottom: 0.2cm !important;
+            }
+
+            p {
+                margin-top: 0.2cm !important;
+                margin-bottom: 0.3cm !important;
+                orphans: 3;
+                widows: 3;
+            }
+
+            ul,
+            ol {
+                margin-top: 0.2cm !important;
+                margin-bottom: 0.3cm !important;
+                padding-left: 1cm !important;
+                orphans: 3;
+                widows: 3;
+            }
+
+            li {
+                margin-bottom: 0.15cm !important;
+                page-break-inside: avoid;
+            }
+
+            table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0.4cm 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .no-break {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .card,
+            .info-box,
+            .example-box,
+            .important-box,
+            .performance-criteria {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0.4cm 0 !important;
+                padding: 0.4cm !important;
+                overflow: visible !important;
+            }
+
+            .image-container {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0.4cm 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .diagram-image,
+            .illustration-image {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                max-width: 100% !important;
+                height: auto !important;
+                margin: 0.4cm 0 !important;
+            }
+
+            .diagram {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0.4cm 0 !important;
+                padding: 0.6cm !important;
+            }
+
+            .download-btn-container {
+                display: none !important;
+            }
+
+            /* Prevent overlapping */
+            .session {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 0.3cm 0 !important;
+            }
+
+            /* Ensure proper spacing */
+            .toc-item {
+                margin: 0.15cm 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Fix for nested elements */
+            div {
+                overflow: visible !important;
+            }
+
+            /* Remove any transforms or positioning that might cause overlap */
+            * {
+                transform: none !important;
+            }
+
+            /* Fix positioning for cover page elements */
+            .cover-page>* {
+                position: relative !important;
+                z-index: auto !important;
+            }
+
+            .cover-page::before {
+                display: none !important;
+            }
+
+            /* Prevent float issues */
+            * {
+                float: none !important;
+                clear: both !important;
+            }
+
+            /* Ensure proper display */
+            .page-break,
+            .cover-page,
+            .toc {
+                display: block !important;
+                clear: both !important;
+            }
+
+            /* Fix for flexbox in print */
+            .cover-page {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+
+            /* Ensure proper spacing between elements */
+            .page-break>*:first-child {
+                margin-top: 0 !important;
+                padding-top: 0 !important;
+            }
+
+            .page-break>*:last-child {
+                margin-bottom: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* Fix for lists to prevent overflow */
+            ul,
+            ol {
+                list-style-position: inside !important;
+            }
+
+            /* Ensure boxes don't overlap */
+            .info-box,
+            .example-box,
+            .important-box {
+                clear: both !important;
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        /* Screen Styles */
+        @media screen {
+            body {
+                background: #f5f5f5;
+                padding: 1cm 0;
+            }
+
+            .page-break {
+                background: white;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+                margin: 0 auto 1.5cm auto;
+                padding: 0.8cm;
+                /* Narrow margins */
+                min-height: 29.7cm;
+                width: 21cm;
+                max-width: 21cm;
+                box-sizing: border-box;
+            }
+
+            .cover-page {
+                margin: 0 auto 1.5cm auto;
+                width: 21cm;
+                max-width: 21cm;
+                padding: 1.5cm 0.8cm;
+                /* Narrow margins */
+            }
+
+            .toc {
+                margin: 0 auto 1.5cm auto;
+                width: 21cm;
+                max-width: 21cm;
+                padding: 0.8cm;
+                /* Narrow margins */
+            }
+        }
+
+        /* Download Button */
+        .download-btn-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #333333 0%, #000000 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14pt;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .download-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @media print {
+            .download-btn-container {
+                display: none;
+            }
+        }
+
+        /* Header and Footer */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0.8cm;
+                /* Narrow margins */
+
+                @top-center {
+                    content: "User Requirements for Software Solution - K72T001M01";
+                    font-size: 9pt;
+                    color: #666;
+                    margin-top: 0.3cm;
+                }
+
+                @bottom-center {
+                    content: "Page " counter(page);
+                    font-size: 9pt;
+                    color: #666;
+                    margin-bottom: 0.3cm;
+                }
+            }
+
+            /* Ensure proper page margins are respected */
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Fix for any absolute positioned elements */
+            .cover-page::before {
+                display: none !important;
+            }
+
+            /* Ensure images don't overflow */
+            img {
+                max-width: 100% !important;
+                height: auto !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Fix table overflow */
+            table {
+                table-layout: auto !important;
+                word-wrap: break-word;
+            }
+
+            td,
+            th {
+                padding: 0.25cm !important;
+                word-wrap: break-word;
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Download PDF Button -->
+    <div class="download-btn-container">
+        <button class="download-btn" onclick="downloadPDF()" id="downloadBtn" title="Download as PDF">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg>
+            Download PDF
+        </button>
+        <button class="download-btn" onclick="window.print()"
+            style="margin-top: 10px; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);"
+            title="Use Print to PDF (Recommended)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"
+                    fill="white" />
+            </svg>
+            Print to PDF
+        </button>
+    </div>
+
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <div class="cover-logo">K72</div>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&fit=crop"
+            alt="Software Requirements"
+            style="width: 12cm; max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 1cm; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+            onerror="this.style.display='none';">
+        <div class="cover-title">User Requirements for Software Solution</div>
+        <div class="cover-subtitle">Student Reading Book</div>
+        <div class="cover-info">
+            <div><strong>Module Code:</strong> K72T001M01</div>
+            <div><strong>Level:</strong> 05</div>
+            <div><strong>Unit:</strong> K72T001U01</div>
+            <div style="margin-top: 1cm;"><strong>Total Hours:</strong> 100 (60 Theory + 30 Practical + 10 Self-study)
+            </div>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc page-break">
+        <h1>Table of Contents</h1>
+
+        <div class="toc-item toc-level-1">1. Introduction</div>
+        <div class="toc-item toc-level-2">1.1 Module Overview</div>
+        <div class="toc-item toc-level-2">1.2 Learning Outcomes</div>
+        <div class="toc-item toc-level-2">1.3 Module Structure</div>
+
+        <div class="toc-item toc-level-1">2. Introduction to Various Business Processes</div>
+        <div class="toc-item toc-level-2">2.1 Identify and Outline Range of Proposed Solution</div>
+        <div class="toc-item toc-level-2">2.2 Identify and Agree Upon Key Stakeholders</div>
+        <div class="toc-item toc-level-2">2.3 Plan Time Schedule and Arrange Meetings</div>
+        <div class="toc-item toc-level-2">2.4 Practical Sessions</div>
+
+        <div class="toc-item toc-level-1">3. Study of Business Processes</div>
+        <div class="toc-item toc-level-2">3.1 Identify Requirements through Data Gathering Techniques</div>
+        <div class="toc-item toc-level-2">3.2 Recognize Present Workflow by Observing Existing Processes</div>
+        <div class="toc-item toc-level-2">3.3 Identify Source Documents from Present System</div>
+        <div class="toc-item toc-level-2">3.4 Record Key Decisions from Client Meetings</div>
+        <div class="toc-item toc-level-2">3.5 Practical Sessions</div>
+
+        <div class="toc-item toc-level-1">4. Requirements Gathering</div>
+        <div class="toc-item toc-level-2">4.1 Document Requirement Specifications</div>
+        <div class="toc-item toc-level-2">4.2 Highlight Functional and Non-functional Requirements</div>
+        <div class="toc-item toc-level-2">4.3 Include Suggested Business Process Improvements</div>
+        <div class="toc-item toc-level-2">4.4 Practical Sessions</div>
+
+        <div class="toc-item toc-level-1">5. Requirement Analysis</div>
+        <div class="toc-item toc-level-2">5.1 Present and Explain Requirement Specifications to Client</div>
+        <div class="toc-item toc-level-2">5.2 Develop and Present Prototypes</div>
+        <div class="toc-item toc-level-2">5.3 Obtain Client Confirmation for Requirement Specification</div>
+        <div class="toc-item toc-level-2">5.4 Practical Sessions</div>
+
+        <div class="toc-item toc-level-1">6. Feasibility Study</div>
+        <div class="toc-item toc-level-2">6.1 Conduct Feasibility Study for Software Solutions</div>
+        <div class="toc-item toc-level-2">6.2 Practical Sessions</div>
+
+        <div class="toc-item toc-level-1">7. Practical Assignments</div>
+        <div class="toc-item toc-level-1">8. Assessment Plan</div>
+    </div>
+
+    <!-- Chapter 1: Introduction -->
+    <div class="page-break">
+        <h1>1. Introduction</h1>
+        <p class="no-indent">Welcome to the <strong>User Requirements for Software Solution</strong> module. This
+            comprehensive reading book is designed to guide you through the essential processes of understanding
+            business requirements, gathering user needs, analyzing requirements, and conducting feasibility studies for
+            software solutions.</p>
+
+        <p>This module provides a structured approach to requirement engineering, covering the complete lifecycle from
+            initial planning through to feasibility assessment. You will learn industry-standard techniques and
+            methodologies that are widely used in software development projects.</p>
+
+        <p>The content is organized into five main elements, each building upon the previous one to provide you with a
+            complete understanding of the requirement gathering and analysis process. Through practical examples, case
+            studies, and hands-on exercises, you will develop the skills necessary to work effectively as a requirements
+            analyst or business analyst in the software industry.</p>
+
+        <div class="info-box">
+            <strong>How to Use This Book:</strong>
+            <ul>
+                <li>Read each section sequentially to build your understanding</li>
+                <li>Complete the practical sessions to reinforce learning</li>
+                <li>Review the performance criteria to ensure you meet learning objectives</li>
+                <li>Use the examples and case studies as reference materials</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 1.1: Module Overview -->
+    <div class="page-break">
+        <h2>1.1 Module Overview</h2>
+        <p class="no-indent">This module, <strong>User Requirements for Software Solution</strong>, is designed to
+            provide students with comprehensive knowledge and skills in understanding business processes, gathering user
+            requirements, analyzing requirements, and conducting feasibility studies for software solutions.</p>
+
+        <p>The module is structured to guide students through the complete lifecycle of requirement gathering and
+            analysis, from initial planning through to feasibility assessment. Students will learn practical techniques
+            and methodologies used in the software development industry.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+                alt="Software Requirements Gathering" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h2>1.2 Learning Outcomes</h2>
+
+        <h3>General Objective</h3>
+        <p class="no-indent">At the end of this module, students will <strong>understand</strong> business processes,
+            <strong>acquire</strong> knowledge of requirement gathering, and <strong>know</strong> requirement analysis
+            and feasibility study report preparation.</p>
+
+        <h3>Specific Objectives</h3>
+        <p class="no-indent">At the end of this module, the student shall be able to:</p>
+        <ol>
+            <li>Analyze business processes and identify key stakeholders</li>
+            <li>Apply requirements gathering techniques and analyze strengths and weaknesses</li>
+            <li>Break down requirements and define project scope</li>
+            <li>Evaluate feasibility aspects of software solutions</li>
+            <li>Prepare and present reports</li>
+        </ol>
+    </div>
+
+    <!-- Chapter 1: Section 1.3 -->
+    <div class="page-break">
+        <h2>1.3 Module Structure</h2>
+        <p class="no-indent">The module is organized into five main elements:</p>
+        <ol>
+            <li><strong>Introduction to various business processes</strong> (15 hours) - Understanding business
+                processes and planning the scope of software solutions</li>
+            <li><strong>Study of business processes</strong> (15 hours) - Learning techniques to gather and analyze
+                business requirements</li>
+            <li><strong>Requirements Gathering</strong> (12 hours) - Documenting and categorizing requirements</li>
+            <li><strong>Requirement analysis</strong> (12 hours) - Presenting requirements and obtaining client
+                confirmation</li>
+            <li><strong>Feasibility study</strong> (6 hours) - Evaluating the feasibility of proposed software solutions
+            </li>
+        </ol>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                alt="Module Structure Flow Diagram" class="diagram-image"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-placeholder" style="display: none;">
+                <div style="text-align: center;">
+                    <strong style="display: block; margin-bottom: 0.3cm; font-size: 12pt;">Module Structure
+                        Flow</strong>
+                    <div style="font-size: 10pt; line-height: 1.8;">
+                        Element 1 → Element 2 → Element 3 → Element 4 → Element 5<br>
+                        Planning → Gathering → Documentation → Analysis → Feasibility
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chapter 2: Element 1 -->
+    <div class="page-break">
+        <h1>2. Element 1: Introduction to Various Business Processes</h1>
+        <p class="no-indent">This element focuses on understanding business processes and planning the initial scope of
+            software solutions. You will learn to identify solution ranges, work with stakeholders, and plan schedules
+            for requirement gathering activities.</p>
+
+        <h2>2.1 Identify and Outline Range of Proposed Solution</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify contractual document scope</li>
+            <li>Outline solution range within defined scope</li>
+            <li>Apply organizational standards to document solutions</li>
+        </ul>
+
+        <h3>Understanding Contractual Documents and Scope</h3>
+        <p>Before beginning any software development project, it is essential to understand the contractual agreement
+            between the client and the development organization. The contractual document defines the boundaries,
+            expectations, and deliverables of the project.</p>
+
+        <div class="info-box">
+            <strong>Key Components of Contractual Documents:</strong>
+            <ul>
+                <li><strong>Project Scope:</strong> Defines what will and will not be included in the project</li>
+                <li><strong>Deliverables:</strong> Specific outputs expected from the project</li>
+                <li><strong>Timeline:</strong> Project schedule and milestones</li>
+                <li><strong>Budget:</strong> Financial constraints and payment terms</li>
+                <li><strong>Standards:</strong> Quality and documentation standards to be followed</li>
+            </ul>
+        </div>
+
+        <h4>Identifying Scope Elements</h4>
+        <p>When reviewing a contractual document, you should identify:</p>
+        <ol>
+            <li><strong>In-scope items:</strong> Features, functions, and deliverables explicitly included</li>
+            <li><strong>Out-of-scope items:</strong> Items explicitly excluded from the project</li>
+            <li><strong>Assumptions:</strong> Conditions taken for granted</li>
+            <li><strong>Constraints:</strong> Limitations that affect the project</li>
+        </ol>
+    </div>
+
+    <!-- Section 2.1 Continued -->
+    <div class="page-break">
+        <h2>2.1 Identify and Outline Range of Proposed Solution (Continued)</h2>
+
+        <div class="example-box">
+            <strong>Example:</strong> A contract for a library management system might specify:<br>
+            <strong>In-scope:</strong> Book cataloging, member registration, loan management<br>
+            <strong>Out-of-scope:</strong> Online payment integration, mobile application<br>
+            <strong>Assumptions:</strong> Library has existing network infrastructure<br>
+            <strong>Constraints:</strong> Must comply with data protection regulations
+        </div>
+
+        <h3>Organizational Standards</h3>
+        <p>Organizations typically have standards and guidelines for documenting solutions. These may include:</p>
+        <ul>
+            <li>Documentation templates and formats</li>
+            <li>Naming conventions</li>
+            <li>Version control procedures</li>
+            <li>Review and approval processes</li>
+        </ul>
+
+        <h3>Creating Solution Range Outlines</h3>
+        <p>When outlining the solution range, you should:</p>
+        <ol>
+            <li>Review the contractual document thoroughly</li>
+            <li>Extract all scope-related information</li>
+            <li>Organize the information according to organizational standards</li>
+            <li>Create a clear, structured outline document</li>
+            <li>Have the outline reviewed and approved by relevant stakeholders</li>
+        </ol>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 1.1:</strong> Range of the proposed solution within the scope defined in the
+            contractual document identified and outlined as per the organizational standards.
+        </div>
+    </div>
+
+    <!-- Section 2.2 -->
+    <div class="page-break">
+        <h2>2.2 Identify and Agree Upon Key Stakeholders</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify stakeholders from different functional areas</li>
+            <li>Explain stakeholder roles and involvement</li>
+            <li>Agree upon stakeholders with clients</li>
+        </ul>
+
+        <h3>Understanding Stakeholders</h3>
+        <p>Stakeholders are individuals or groups who have an interest in or are affected by the software solution.
+            Identifying the right stakeholders is crucial for successful requirement gathering.</p>
+
+        <h4>Types of Stakeholders</h4>
+        <table>
+            <tr>
+                <th>Stakeholder Type</th>
+                <th>Description</th>
+                <th>Example Roles</th>
+            </tr>
+            <tr>
+                <td>Primary Stakeholders</td>
+                <td>Directly affected by the system</td>
+                <td>End users, System administrators</td>
+            </tr>
+            <tr>
+                <td>Secondary Stakeholders</td>
+                <td>Indirectly affected or have influence</td>
+                <td>Managers, IT support staff</td>
+            </tr>
+            <tr>
+                <td>Key Decision Makers</td>
+                <td>Have authority to approve or reject</td>
+                <td>Project sponsors, Department heads</td>
+            </tr>
+            <tr>
+                <td>Technical Stakeholders</td>
+                <td>Involved in technical aspects</td>
+                <td>Developers, System architects</td>
+            </tr>
+        </table>
+        <h4>Stakeholder Identification Process</h4>
+        <p>The process of identifying stakeholders involves:</p>
+        <ol>
+            <li><strong>Brainstorming:</strong> List all potential stakeholders</li>
+            <li><strong>Categorization:</strong> Group stakeholders by functional area</li>
+            <li><strong>Prioritization:</strong> Identify key stakeholders</li>
+            <li><strong>Verification:</strong> Confirm with client organization</li>
+            <li><strong>Documentation:</strong> Create stakeholder register</li>
+        </ol>
+    </div>
+    <div class="page-break">
+       
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop"
+                alt="Stakeholder Identification Process" class="diagram-image"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-placeholder" style="display: none;">
+                <div style="text-align: center;">
+                    <strong style="display: block; margin-bottom: 0.3cm; font-size: 12pt;">Stakeholder Identification
+                        Process</strong>
+                    <div style="font-size: 10pt; line-height: 1.8;">
+                        Brainstorm → Categorize → Prioritize → Verify → Document
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4>Functional Areas</h4>
+        <p>Stakeholders typically come from various functional areas:</p>
+        <ul>
+            <li><strong>Operations:</strong> Day-to-day users of the system</li>
+            <li><strong>Management:</strong> Decision makers and supervisors</li>
+            <li><strong>IT Department:</strong> Technical support and infrastructure</li>
+            <li><strong>Finance:</strong> Budget and cost management</li>
+            <li><strong>Legal/Compliance:</strong> Regulatory and legal requirements</li>
+            <li><strong>Customer Service:</strong> External customer interaction</li>
+        </ul>
+    </div>
+    <div class="page-break">
+        <h4>Stakeholder Agreement</h4>
+        <p>Once stakeholders are identified, it is important to:</p>
+        <ul>
+            <li>Present the stakeholder list to the client</li>
+            <li>Explain the role and importance of each stakeholder</li>
+            <li>Obtain formal agreement on the stakeholder list</li>
+            <li>Document the agreement in writing</li>
+            <li>Establish communication channels with each stakeholder</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example Stakeholder Register:</strong><br>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Functional Area</th>
+                    <th>Contact</th>
+                </tr>
+                <tr>
+                    <td>John Smith</td>
+                    <td>Operations Manager</td>
+                    <td>Operations</td>
+                    <td>john.smith@company.com</td>
+                </tr>
+                <tr>
+                    <td>Sarah Johnson</td>
+                    <td>IT Director</td>
+                    <td>IT Department</td>
+                    <td>sarah.j@company.com</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 1.2:</strong> Key stakeholders from respective functional areas identified
+            and agreed upon with the client.
+        </div>
+    </div>
+
+    <!-- Section 2.3 -->
+    <div class="page-break">
+        <h2>2.3 Plan Time Schedule and Arrange Meetings</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify time requirements for requirement gathering activities</li>
+            <li>Create time schedules for requirement gathering process</li>
+            <li>Arrange meetings with key stakeholders</li>
+        </ul>
+
+        <h3>Planning Requirement Gathering Activities</h3>
+        <p>Effective planning is essential for successful requirement gathering. You need to estimate the time required
+            for each activity and create a realistic schedule.</p>
+
+        <h4>Requirement Gathering Activities</h4>
+        <p>Common activities include:</p>
+        <ul>
+            <li><strong>Interviews:</strong> One-on-one sessions with stakeholders (1-2 hours each)</li>
+            <li><strong>Workshops:</strong> Group sessions for collaborative requirement gathering (2-4 hours)</li>
+            <li><strong>Document Review:</strong> Analyzing existing documentation (varies by volume)</li>
+            <li><strong>Observation:</strong> Watching current processes in action (varies)</li>
+            <li><strong>Questionnaires:</strong> Distributed surveys (1-2 weeks for responses)</li>
+        </ul>
+
+        <h4>Creating Time Schedules</h4>
+        <p>When creating schedules, consider:</p>
+        <ol>
+            <li><strong>Activity Duration:</strong> How long each activity will take</li>
+            <li><strong>Dependencies:</strong> Activities that must be completed before others</li>
+            <li><strong>Resource Availability:</strong> When stakeholders are available</li>
+            <li><strong>Buffer Time:</strong> Extra time for unexpected delays</li>
+            <li><strong>Review and Approval:</strong> Time for document review and sign-off</li>
+        </ol>
+
+        <div class="example-box">
+            <strong>Example Schedule:</strong><br>
+            <table>
+                <tr>
+                    <th>Week</th>
+                    <th>Activity</th>
+                    <th>Duration</th>
+                </tr>
+                <tr>
+                    <td>Week 1</td>
+                    <td>Stakeholder identification and agreement</td>
+                    <td>2 days</td>
+                </tr>
+                <tr>
+                    <td>Week 1-2</td>
+                    <td>Document review</td>
+                    <td>5 days</td>
+                </tr>
+                <tr>
+                    <td>Week 2-3</td>
+                    <td>Stakeholder interviews</td>
+                    <td>10 days</td>
+                </tr>
+                <tr>
+                    <td>Week 3</td>
+                    <td>Workshop sessions</td>
+                    <td>3 days</td>
+                </tr>
+                <tr>
+                    <td>Week 4</td>
+                    <td>Observation and process analysis</td>
+                    <td>5 days</td>
+                </tr>
+            </table>
+        </div>
+
+        <h4>Arranging Meetings</h4>
+        <p>When arranging meetings with stakeholders:</p>
+        <ul>
+            <li>Send meeting invitations well in advance (at least 1 week)</li>
+            <li>Provide clear agenda and objectives</li>
+            <li>Confirm availability and send reminders</li>
+            <li>Prepare necessary materials and questions</li>
+            <li>Schedule follow-up meetings if needed</li>
+            <li>Document meeting outcomes and action items</li>
+        </ul>
+
+        <div class="important-box">
+            <strong>Important:</strong> Always confirm meeting times with stakeholders and send calendar invitations. Be
+            respectful of stakeholders' time and prepare thoroughly for each meeting.
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 1.3:</strong> Time schedule for the requirement gathering process planned
+            and conveyed to the respective key stakeholders and meetings arranged accordingly.
+        </div>
+    </div>
+
+    <!-- Chapter 3: Element 2 -->
+    <div class="page-break">
+        <h1>3. Study of Business Processes</h1>
+        <p class="no-indent">This element focuses on understanding existing business processes and gathering
+            requirements through various techniques. You will learn to use data gathering methods, observe workflows,
+            identify source documents, and record key decisions.</p>
+
+        <h2>3.1 Identify Requirements through Data Gathering Techniques</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify various data gathering techniques</li>
+            <li>Select appropriate techniques for different situations</li>
+            <li>Gather requirements from users using selected techniques</li>
+        </ul>
+
+        <h3>Data Gathering Techniques</h3>
+        <p>There are several techniques available for gathering requirements from users. Each technique has its
+            strengths and weaknesses, and the choice depends on the situation, stakeholders, and type of information
+            needed.</p>
+
+        <h4>1. Document Review</h4>
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&h=350&fit=crop"
+                alt="Document Review and Analysis" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+        <p><strong>Description:</strong> Analyzing existing documentation such as business process documents, user
+            manuals, system documentation, and reports.</p>
+        <p><strong>When to use:</strong> When you need to understand existing systems, processes, or historical
+            information.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Provides historical context</li>
+            <li>Less time-consuming than interviews</li>
+            <li>Can reveal implicit requirements</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Documents may be outdated</li>
+            <li>May not reflect current practices</li>
+            <li>Requires careful analysis</li>
+        </ul>
+
+        <h4>2. Interviews</h4>
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=700&h=350&fit=crop"
+                alt="Stakeholder Interview" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+        <p><strong>Description:</strong> One-on-one or small group conversations with stakeholders to gather detailed
+            information.</p>
+        <p><strong>Types:</strong></p>
+        <ul>
+            <li><strong>Structured:</strong> Predefined questions</li>
+            <li><strong>Unstructured:</strong> Open-ended conversation</li>
+            <li><strong>Semi-structured:</strong> Combination of both</li>
+        </ul>
+        <p><strong>When to use:</strong> For detailed, in-depth information from key stakeholders.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Allows for detailed exploration</li>
+            <li>Can clarify ambiguities immediately</li>
+            <li>Builds rapport with stakeholders</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Time-consuming</li>
+            <li>May be influenced by interviewer bias</li>
+            <li>Requires good communication skills</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>Interview Best Practices:</strong>
+            <ul>
+                <li>Prepare questions in advance</li>
+                <li>Create a comfortable environment</li>
+                <li>Listen actively and take notes</li>
+                <li>Ask follow-up questions</li>
+                <li>Summarize key points at the end</li>
+            </ul>
+        </div>
+
+        <h4>3. Questionnaires</h4>
+        <p><strong>Description:</strong> Written surveys distributed to multiple stakeholders to gather standardized
+            information.</p>
+        <p><strong>When to use:</strong> When you need information from many stakeholders or when time is limited.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Can reach many people efficiently</li>
+            <li>Standardized responses</li>
+            <li>Less time-consuming than interviews</li>
+            <li>Can be anonymous</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Low response rates</li>
+            <li>Limited opportunity for clarification</li>
+            <li>May miss important details</li>
+        </ul>
+
+        <h4>4. Workshops</h4>
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=350&fit=crop"
+                alt="Workshop Collaboration" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+        <p><strong>Description:</strong> Facilitated group sessions where stakeholders collaborate to identify and
+            discuss requirements.</p>
+        <p><strong>When to use:</strong> When you need to build consensus or gather input from multiple stakeholders
+            simultaneously.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Encourages collaboration</li>
+            <li>Builds consensus</li>
+            <li>Can generate creative solutions</li>
+            <li>Efficient use of stakeholder time</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Requires skilled facilitation</li>
+            <li>May be dominated by vocal participants</li>
+            <li>Can be difficult to schedule</li>
+        </ul>
+
+        <h4>5. Observations</h4>
+        <p><strong>Description:</strong> Watching users perform their work in their natural environment.</p>
+        <p><strong>Types:</strong></p>
+        <ul>
+            <li><strong>Participant:</strong> Observer participates in the process</li>
+            <li><strong>Non-participant:</strong> Observer watches without participating</li>
+        </ul>
+        <p><strong>When to use:</strong> When you need to understand actual work practices that may differ from
+            documented procedures.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Reveals actual work practices</li>
+            <li>Can identify inefficiencies</li>
+            <li>Provides context for requirements</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Time-consuming</li>
+            <li>May alter behavior (Hawthorne effect)</li>
+            <li>Requires permission and access</li>
+        </ul>
+
+        <h4>6. Prototypes</h4>
+        <p><strong>Description:</strong> Creating early versions or mockups of the system to gather feedback.</p>
+        <p><strong>Types:</strong></p>
+        <ul>
+            <li><strong>Low-fidelity:</strong> Paper sketches, wireframes</li>
+            <li><strong>High-fidelity:</strong> Interactive mockups, working prototypes</li>
+        </ul>
+        <p><strong>When to use:</strong> When requirements are unclear or when you need early user feedback.</p>
+        <p><strong>Advantages:</strong></p>
+        <ul>
+            <li>Helps users visualize the solution</li>
+            <li>Encourages early feedback</li>
+            <li>Can reveal unstated requirements</li>
+        </ul>
+        <p><strong>Disadvantages:</strong></p>
+        <ul>
+            <li>Can be time-consuming to create</li>
+            <li>May set unrealistic expectations</li>
+            <li>Requires technical skills</li>
+        </ul>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
+                alt="Data Gathering Techniques" class="diagram-image"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-placeholder" style="display: none;">
+                <div style="text-align: center;">
+                    <strong style="display: block; margin-bottom: 0.3cm; font-size: 12pt;">Data Gathering Techniques
+                        Comparison</strong>
+                    <div style="font-size: 10pt; line-height: 1.8;">
+                        Document Review → Interviews → Questionnaires → Workshops → Observations → Prototypes<br>
+                        <span style="color: #64748b;">(Low interaction) → (High interaction) → (Medium
+                            interaction)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Selecting Appropriate Techniques</h3>
+        <p>The choice of technique depends on several factors:</p>
+        <table>
+            <tr>
+                <th>Factor</th>
+                <th>Consideration</th>
+            </tr>
+            <tr>
+                <td>Number of stakeholders</td>
+                <td>Questionnaires for many, interviews for few</td>
+            </tr>
+            <tr>
+                <td>Type of information</td>
+                <td>Interviews for detailed, questionnaires for standardized</td>
+            </tr>
+            <tr>
+                <td>Time available</td>
+                <td>Questionnaires faster, observations slower</td>
+            </tr>
+            <tr>
+                <td>Stakeholder availability</td>
+                <td>Workshops require coordination, document review is flexible</td>
+            </tr>
+            <tr>
+                <td>Clarity of requirements</td>
+                <td>Prototypes when unclear, interviews when clear</td>
+            </tr>
+        </table>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 2.1:</strong> Requirements identified through data gathering techniques
+            (document review, interview, questionnaires, workshops, observations, prototypes) with respective users.
+        </div>
+    </div>
+
+    <!-- Section 3.2 -->
+    <div class="page-break">
+        <h2>3.2 Recognize Present Workflow by Observing Existing Processes</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify observation techniques for process analysis</li>
+            <li>Explain how to recognize and document workflows</li>
+            <li>Apply observation skills to analyze existing processes</li>
+        </ul>
+
+        <h3>Understanding Workflows</h3>
+        <p>A workflow is a sequence of tasks or activities that transform inputs into outputs. Understanding existing
+            workflows is essential for identifying requirements and potential improvements.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop"
+                alt="Workflow Process Observation" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h4>Workflow Components</h4>
+        <ul>
+            <li><strong>Inputs:</strong> Resources, data, or materials that enter the process</li>
+            <li><strong>Activities:</strong> Tasks or steps performed</li>
+            <li><strong>Outputs:</strong> Results or deliverables produced</li>
+            <li><strong>Actors:</strong> People or systems performing activities</li>
+            <li><strong>Decisions:</strong> Points where choices are made</li>
+            <li><strong>Flow:</strong> Sequence and relationships between activities</li>
+        </ul>
+
+        <h4>Observation Techniques</h4>
+        <p>When observing processes, you can use:</p>
+        <ol>
+            <li><strong>Direct Observation:</strong> Watch the process as it happens</li>
+            <li><strong>Shadowing:</strong> Follow a user through their workday</li>
+            <li><strong>Process Mapping:</strong> Document the flow of activities</li>
+            <li><strong>Time Studies:</strong> Measure how long activities take</li>
+            <li><strong>Video Recording:</strong> Record for later analysis (with permission)</li>
+        </ol>
+
+        <h4>Documenting Workflows</h4>
+        <p>Workflows can be documented using:</p>
+        <ul>
+            <li><strong>Flowcharts:</strong> Visual representation of process flow</li>
+            <li><strong>Swimlane Diagrams:</strong> Show responsibilities by role</li>
+            <li><strong>Process Maps:</strong> High-level overview of processes</li>
+            <li><strong>Narrative Descriptions:</strong> Written descriptions of processes</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example Workflow - Order Processing:</strong><br>
+            1. Customer submits order → 2. Order received → 3. Check inventory →<br>
+            4. [If available] Process payment → 5. Prepare shipment → 6. Ship order →<br>
+            [If not available] Notify customer → Wait for stock
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 2.2:</strong> Present workflow recognized by observing the existing
+            processes.
+        </div>
+    </div>
+
+    <!-- Section 3.3 -->
+    <div class="page-break">
+        <h2>3.3 Identify Source Documents from Present System</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify types of source documents in existing systems</li>
+            <li>Explain how to extract information from source documents</li>
+            <li>Apply organizational standards to document identification</li>
+        </ul>
+
+        <h3>Source Documents</h3>
+        <p>Source documents are original records that provide evidence of business transactions or activities. They are
+            essential for understanding data requirements and business rules.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=700&h=350&fit=crop"
+                alt="Source Documents" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h4>Types of Source Documents</h4>
+        <table>
+            <tr>
+                <th>Document Type</th>
+                <th>Purpose</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td>Transaction Documents</td>
+                <td>Record business transactions</td>
+                <td>Invoices, receipts, purchase orders</td>
+            </tr>
+            <tr>
+                <td>Reference Documents</td>
+                <td>Provide reference information</td>
+                <td>Price lists, catalogs, manuals</td>
+            </tr>
+            <tr>
+                <td>Authorization Documents</td>
+                <td>Provide approval or authorization</td>
+                <td>Approval forms, authorization letters</td>
+            </tr>
+            <tr>
+                <td>Reporting Documents</td>
+                <td>Summarize information</td>
+                <td>Reports, statements, summaries</td>
+            </tr>
+        </table>
+
+        <h4>Identifying Source Documents</h4>
+        <p>To identify source documents:</p>
+        <ol>
+            <li>Review existing system documentation</li>
+            <li>Observe processes and note documents used</li>
+            <li>Interview users about documents they work with</li>
+            <li>Review file systems and document storage</li>
+            <li>Analyze data entry points in current systems</li>
+        </ol>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 2.3:</strong> Source documents from the present system identified as per the
+            organization standards.
+        </div>
+    </div>
+
+    <!-- Section 3.4 -->
+    <div class="page-break">
+        <h2>3.4 Record Key Decisions from Client Meetings</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify and recall SOP requirements for meeting documentation</li>
+            <li>Explain how to identify and record key decisions</li>
+            <li>Apply SOP to analyze meeting scenarios and create decision documentation</li>
+        </ul>
+
+        <h3>Standard Operating Procedures (SOP)</h3>
+        <p>Organizations typically have Standard Operating Procedures (SOP) for documenting meetings and decisions.
+            These procedures ensure consistency and completeness in documentation.</p>
+
+        <h4>Key Components of Meeting Documentation</h4>
+        <ul>
+            <li><strong>Meeting Information:</strong> Date, time, location, attendees</li>
+            <li><strong>Agenda Items:</strong> Topics discussed</li>
+            <li><strong>Decisions Made:</strong> Key decisions and outcomes</li>
+            <li><strong>Action Items:</strong> Tasks assigned with owners and deadlines</li>
+            <li><strong>Next Steps:</strong> Follow-up activities</li>
+        </ul>
+
+        <h4>Recording Key Decisions</h4>
+        <p>When recording decisions, include:</p>
+        <ol>
+            <li><strong>Decision Statement:</strong> Clear description of what was decided</li>
+            <li><strong>Rationale:</strong> Reasons for the decision</li>
+            <li><strong>Decision Maker:</strong> Who made the decision</li>
+            <li><strong>Date:</strong> When the decision was made</li>
+            <li><strong>Impact:</strong> How this decision affects the project</li>
+        </ol>
+
+        <div class="example-box">
+            <strong>Example Decision Record:</strong><br>
+            <strong>Decision:</strong> Use cloud-based hosting for the new system<br>
+            <strong>Rationale:</strong> Provides scalability and reduces infrastructure costs<br>
+            <strong>Decision Maker:</strong> IT Director and Project Sponsor<br>
+            <strong>Date:</strong> 2024-01-15<br>
+            <strong>Impact:</strong> Requires cloud security assessment and vendor selection
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 2.4:</strong> Key decisions of the client meetings recorded according to the
+            SOP (Standard Operating Procedures).
+        </div>
+    </div>
+
+    <!-- Chapter 4: Element 3 -->
+    <div class="page-break">
+        <h1>4. Requirements Gathering</h1>
+        <p class="no-indent">This element focuses on documenting and organizing requirements. You will learn to create
+            requirement specifications, distinguish between functional and non-functional requirements, and suggest
+            business process improvements.</p>
+
+        <h2>4.1 Document Requirement Specifications</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify organization standards and guidelines for documentation</li>
+            <li>Explain requirement specification documentation structure</li>
+            <li>Apply standards to create comprehensive requirement specifications</li>
+        </ul>
+
+        <h3>Requirement Specification Documents</h3>
+        <p>A Requirement Specification Document (RSD) is a formal document that describes the functional and
+            non-functional requirements of a software system. It serves as a contract between stakeholders and
+            developers.</p>
+
+        <h4>Document Structure</h4>
+        <p>Typical sections of an RSD include:</p>
+        <ol>
+            <li><strong>Introduction:</strong> Purpose, scope, definitions, references</li>
+            <li><strong>Overall Description:</strong> Product perspective, functions, user characteristics</li>
+            <li><strong>System Features:</strong> Detailed functional requirements</li>
+            <li><strong>External Interface Requirements:</strong> User, hardware, software, communication interfaces
+            </li>
+            <li><strong>Non-functional Requirements:</strong> Performance, security, usability, etc.</li>
+            <li><strong>Appendices:</strong> Glossary, diagrams, references</li>
+        </ol>
+
+        <h4>Writing Good Requirements</h4>
+        <p>Requirements should be:</p>
+        <ul>
+            <li><strong>Complete:</strong> All necessary information included</li>
+            <li><strong>Clear:</strong> Unambiguous and easy to understand</li>
+            <li><strong>Consistent:</strong> No contradictions</li>
+            <li><strong>Verifiable:</strong> Can be tested or validated</li>
+            <li><strong>Traceable:</strong> Linked to source and design</li>
+        </ul>
+
+        <div class="important-box">
+            <strong>Important:</strong> Always follow organizational standards when creating requirement documents.
+            These standards ensure consistency and facilitate review and approval processes.
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 3.1:</strong> Requirement specifications documented as per the organization
+            standards and guidelines.
+        </div>
+    </div>
+
+    <!-- Section 4.2 -->
+    <div class="page-break">
+        <h2>4.2 Highlight Functional and Non-functional Requirements</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Define functional and non-functional requirements</li>
+            <li>Explain how to highlight and categorize requirements</li>
+            <li>Apply standards to document functional and non-functional requirements</li>
+        </ul>
+
+        <h3>Functional Requirements</h3>
+        <p>Functional requirements describe <strong>what</strong> the system should do - the functions, features, and
+            behaviors it must provide.</p>
+
+        <h4>Characteristics of Functional Requirements</h4>
+        <ul>
+            <li>Describe system behavior and functions</li>
+            <li>Specify inputs and expected outputs</li>
+            <li>Define business rules and logic</li>
+            <li>Can be verified through testing</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example Functional Requirements:</strong>
+            <ul>
+                <li>The system shall allow users to create new accounts</li>
+                <li>The system shall validate user login credentials</li>
+                <li>The system shall generate monthly reports</li>
+                <li>The system shall process payment transactions</li>
+            </ul>
+        </div>
+
+        <h3>Non-functional Requirements</h3>
+        <p>Non-functional requirements describe <strong>how well</strong> the system should perform - quality attributes
+            and constraints.</p>
+
+        <h4>Types of Non-functional Requirements</h4>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>Speed and efficiency requirements</td>
+                <td>Response time, throughput, resource usage</td>
+            </tr>
+            <tr>
+                <td>Security</td>
+                <td>Protection of data and systems</td>
+                <td>Authentication, encryption, access control</td>
+            </tr>
+            <tr>
+                <td>Usability</td>
+                <td>Ease of use and user experience</td>
+                <td>User interface design, learnability</td>
+            </tr>
+            <tr>
+                <td>Reliability</td>
+                <td>System availability and fault tolerance</td>
+                <td>Uptime, error recovery, backup</td>
+            </tr>
+            <tr>
+                <td>Scalability</td>
+                <td>Ability to handle growth</td>
+                <td>User capacity, data volume</td>
+            </tr>
+            <tr>
+                <td>Maintainability</td>
+                <td>Ease of maintenance and updates</td>
+                <td>Code quality, documentation</td>
+            </tr>
+        </table>
+
+        <div class="example-box">
+            <strong>Example Non-functional Requirements:</strong>
+            <ul>
+                <li>The system shall respond to user requests within 2 seconds</li>
+                <li>The system shall support 1000 concurrent users</li>
+                <li>The system shall encrypt all sensitive data</li>
+                <li>The system shall be available 99.9% of the time</li>
+            </ul>
+        </div>
+
+        <h4>Categorizing Requirements</h4>
+        <p>When documenting requirements, clearly separate and label:</p>
+        <ul>
+            <li>Functional requirements (FR)</li>
+            <li>Non-functional requirements (NFR)</li>
+            <li>Business requirements (BR)</li>
+            <li>User requirements (UR)</li>
+            <li>System requirements (SR)</li>
+        </ul>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop"
+                alt="Requirements Hierarchy" class="diagram-image"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-placeholder" style="display: none;">
+                <div style="text-align: center;">
+                    <strong style="display: block; margin-bottom: 0.3cm; font-size: 12pt;">Requirements
+                        Hierarchy</strong>
+                    <div style="font-size: 10pt; line-height: 1.8; font-family: monospace;">
+                        Business Requirements<br>
+                        ↓<br>
+                        User Requirements<br>
+                        ↓<br>
+                        System Requirements<br>
+                        ├─ Functional Requirements<br>
+                        └─ Non-functional Requirements
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 3.2:</strong> Functional and non-functional requirements of the proposed
+            solutions highlighted, as per the organization standards and guidelines.
+        </div>
+    </div>
+
+    <!-- Section 4.3 -->
+    <div class="page-break">
+        <h2>4.3 Include Suggested Business Process Improvements</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify business process improvement opportunities</li>
+            <li>Explain how to suggest and document improvements</li>
+            <li>Apply knowledge to create improvement recommendations</li>
+        </ul>
+
+        <h3>Business Process Improvement</h3>
+        <p>While gathering requirements, you may identify opportunities to improve existing business processes. These
+            improvements should be documented and presented to stakeholders.</p>
+
+        <h4>Identifying Improvement Opportunities</h4>
+        <p>Look for:</p>
+        <ul>
+            <li><strong>Bottlenecks:</strong> Processes that slow down workflow</li>
+            <li><strong>Redundancies:</strong> Duplicate or unnecessary steps</li>
+            <li><strong>Manual Processes:</strong> Tasks that could be automated</li>
+            <li><strong>Error-prone Steps:</strong> Areas with frequent mistakes</li>
+            <li><strong>Inefficiencies:</strong> Processes that waste time or resources</li>
+        </ul>
+
+        <h4>Documenting Improvements</h4>
+        <p>When documenting improvements, include:</p>
+        <ol>
+            <li><strong>Current State:</strong> Description of current process</li>
+            <li><strong>Issues:</strong> Problems with current process</li>
+            <li><strong>Proposed Improvement:</strong> Suggested change</li>
+            <li><strong>Benefits:</strong> Expected advantages</li>
+            <li><strong>Implementation Considerations:</strong> What needs to be done</li>
+        </ol>
+
+        <div class="example-box">
+            <strong>Example Process Improvement:</strong><br>
+            <strong>Current State:</strong> Orders are manually entered into the system by staff<br>
+            <strong>Issue:</strong> High error rate, time-consuming<br>
+            <strong>Proposed Improvement:</strong> Implement online order form with validation<br>
+            <strong>Benefits:</strong> Reduced errors, faster processing, 24/7 availability<br>
+            <strong>Implementation:</strong> Develop web form, integrate with existing system
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 3.3:</strong> Suggested business process improvements included as per the
+            requirements.
+        </div>
+    </div>
+
+    <!-- Chapter 5: Element 4 -->
+    <div class="page-break">
+        <h1>5. Requirement Analysis</h1>
+        <p class="no-indent">This element focuses on presenting requirements to clients, developing prototypes, and
+            obtaining confirmation. You will learn effective presentation techniques and prototype development methods.
+        </p>
+
+        <h2>5.1 Present and Explain Requirement Specifications to Client</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify presentation techniques and organization standards</li>
+            <li>Explain how to present and explain requirements effectively</li>
+            <li>Apply presentation skills to communicate requirements to clients</li>
+        </ul>
+
+        <h3>Presenting Requirements</h3>
+        <p>Presenting requirements effectively is crucial for ensuring client understanding and obtaining approval. The
+            presentation should be clear, organized, and tailored to the audience.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=400&fit=crop"
+                alt="Client Presentation" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h4>Presentation Preparation</h4>
+        <p>Before presenting:</p>
+        <ol>
+            <li><strong>Know Your Audience:</strong> Understand stakeholders' backgrounds and interests</li>
+            <li><strong>Prepare Materials:</strong> Create slides, handouts, and visual aids</li>
+            <li><strong>Practice:</strong> Rehearse your presentation</li>
+            <li><strong>Anticipate Questions:</strong> Prepare answers for likely questions</li>
+            <li><strong>Check Technology:</strong> Ensure equipment works properly</li>
+        </ol>
+
+        <h4>Presentation Structure</h4>
+        <p>A typical presentation includes:</p>
+        <ol>
+            <li><strong>Introduction:</strong> Overview and objectives</li>
+            <li><strong>Background:</strong> Context and scope</li>
+            <li><strong>Requirements Overview:</strong> High-level summary</li>
+            <li><strong>Detailed Requirements:</strong> Key functional and non-functional requirements</li>
+            <li><strong>Next Steps:</strong> Timeline and action items</li>
+            <li><strong>Q&A:</strong> Address questions and concerns</li>
+        </ol>
+
+        <h4>Effective Communication Techniques</h4>
+        <ul>
+            <li><strong>Use Visual Aids:</strong> Diagrams, charts, and graphs</li>
+            <li><strong>Speak Clearly:</strong> Use simple language, avoid jargon</li>
+            <li><strong>Engage Audience:</strong> Ask questions, encourage participation</li>
+            <li><strong>Provide Examples:</strong> Use real-world scenarios</li>
+            <li><strong>Summarize Key Points:</strong> Reinforce important information</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>Presentation Tips:</strong>
+            <ul>
+                <li>Start with the big picture, then provide details</li>
+                <li>Use visual aids to illustrate complex concepts</li>
+                <li>Allow time for questions throughout</li>
+                <li>Be prepared to adjust based on audience feedback</li>
+                <li>Follow up with written documentation</li>
+            </ul>
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 4.1:</strong> Requirement specifications, presented and explained to the
+            client as per the organization standards.
+        </div>
+    </div>
+
+    <!-- Section 5.2 -->
+    <div class="page-break">
+        <h2>5.2 Develop and Present Prototypes</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify prototyping techniques and tools</li>
+            <li>Explain prototype development process</li>
+            <li>Apply prototyping skills to create and present solution prototypes</li>
+        </ul>
+
+        <h3>Prototyping</h3>
+        <p>Prototyping involves creating early versions or mockups of the system to demonstrate functionality and gather
+            feedback. Prototypes help stakeholders visualize the solution and identify issues early.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop"
+                alt="Prototyping and Design" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h4>Types of Prototypes</h4>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>When to Use</th>
+            </tr>
+            <tr>
+                <td>Low-fidelity</td>
+                <td>Simple sketches, wireframes, paper prototypes</td>
+                <td>Early stages, quick iterations</td>
+            </tr>
+            <tr>
+                <td>High-fidelity</td>
+                <td>Detailed, interactive mockups</td>
+                <td>When detailed feedback needed</td>
+            </tr>
+            <tr>
+                <td>Horizontal</td>
+                <td>Shows many features at surface level</td>
+                <td>To show breadth of functionality</td>
+            </tr>
+            <tr>
+                <td>Vertical</td>
+                <td>Shows few features in depth</td>
+                <td>To demonstrate specific functionality</td>
+            </tr>
+            <tr>
+                <td>Throwaway</td>
+                <td>Discarded after feedback</td>
+                <td>For exploration and learning</td>
+            </tr>
+            <tr>
+                <td>Evolutionary</td>
+                <td>Refined into final product</td>
+                <td>When prototype will become product</td>
+            </tr>
+        </table>
+
+        <h4>Prototyping Tools</h4>
+        <p>Common tools for creating prototypes include:</p>
+        <ul>
+            <li><strong>Paper/Sketching:</strong> Quick, low-cost, easy to modify</li>
+            <li><strong>Wireframing Tools:</strong> Balsamiq, Figma, Adobe XD</li>
+            <li><strong>UI Design Tools:</strong> Sketch, InVision, Axure</li>
+            <li><strong>Development Tools:</strong> HTML/CSS/JS for interactive prototypes</li>
+        </ul>
+
+        <h4>Prototype Development Process</h4>
+        <ol>
+            <li><strong>Identify Key Features:</strong> Determine what to prototype</li>
+            <li><strong>Choose Fidelity Level:</strong> Low or high fidelity</li>
+            <li><strong>Create Prototype:</strong> Build using selected tools</li>
+            <li><strong>Test with Users:</strong> Gather feedback</li>
+            <li><strong>Iterate:</strong> Refine based on feedback</li>
+            <li><strong>Present to Stakeholders:</strong> Demonstrate functionality</li>
+        </ol>
+
+        <div class="example-box">
+            <strong>Example Prototype Scenario:</strong><br>
+            For a library management system, create a low-fidelity prototype showing:<br>
+            - Login screen layout<br>
+            - Book search interface<br>
+            - Checkout process flow<br>
+            - User dashboard layout
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 4.2:</strong> Prototypes developed and presented to the client as per the
+            organization standards.
+        </div>
+    </div>
+
+    <!-- Section 5.3 -->
+    <div class="page-break">
+        <h2>5.3 Obtain Client Confirmation for Requirement Specification</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify confirmation processes and documentation requirements</li>
+            <li>Explain how to obtain formal client confirmation</li>
+            <li>Apply processes to secure requirement specification approval</li>
+        </ul>
+
+        <h3>Obtaining Client Confirmation</h3>
+        <p>Client confirmation is a formal approval process where stakeholders review and approve the requirement
+            specification document. This approval serves as a baseline for development.</p>
+
+        <h4>Confirmation Process</h4>
+        <ol>
+            <li><strong>Document Review:</strong> Provide complete requirement specification to client</li>
+            <li><strong>Presentation:</strong> Present and explain requirements</li>
+            <li><strong>Feedback Collection:</strong> Gather comments and concerns</li>
+            <li><strong>Revision:</strong> Update document based on feedback</li>
+            <li><strong>Final Review:</strong> Present revised document</li>
+            <li><strong>Formal Approval:</strong> Obtain signed confirmation</li>
+        </ol>
+
+        <h4>Confirmation Documentation</h4>
+        <p>Confirmation typically includes:</p>
+        <ul>
+            <li><strong>Approval Form:</strong> Formal document with signatures</li>
+            <li><strong>Version Control:</strong> Document version number and date</li>
+            <li><strong>Approver Information:</strong> Name, role, date of approval</li>
+            <li><strong>Conditions:</strong> Any conditions or reservations</li>
+            <li><strong>Change Control:</strong> Process for future changes</li>
+        </ul>
+
+        <div class="important-box">
+            <strong>Important:</strong> Never proceed with development without formal client confirmation. This protects
+            both parties and ensures alignment on requirements.
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 4.3:</strong> Client confirmation for requirement specification obtained as
+            per the organization standards.
+        </div>
+
+        <h2>5.4 Practical Sessions</h2>
+        <p class="no-indent">In this practical session, you will:</p>
+        <ol>
+            <li>Create a presentation for requirement specifications</li>
+            <li>Develop a low-fidelity prototype for a given scenario</li>
+            <li>Practice presenting requirements to peers</li>
+            <li>Create a client confirmation document template</li>
+            <li>Simulate a client meeting to obtain approval</li>
+        </ol>
+    </div>
+
+    <!-- Chapter 6: Element 5 -->
+    <div class="page-break">
+        <h1>6. Feasibility Study</h1>
+        <p class="no-indent">This element focuses on evaluating the feasibility of proposed software solutions. You will
+            learn to assess technical, economic, operational, and schedule feasibility.</p>
+
+        <h2>6.1 Conduct Feasibility Study for Software Solutions</h2>
+
+        <h3>Learning Objectives</h3>
+        <p class="no-indent">By the end of this session, you will be able to:</p>
+        <ul>
+            <li>Identify types of feasibility studies</li>
+            <li>Explain how to conduct feasibility assessments</li>
+            <li>Apply knowledge to evaluate software solution feasibility</li>
+        </ul>
+
+        <h3>Feasibility Study Overview</h3>
+        <p>A feasibility study evaluates whether a proposed software solution is viable and worth pursuing. It helps
+            stakeholders make informed decisions before committing significant resources.</p>
+
+        <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                alt="Feasibility Study Analysis" class="illustration-image" onerror="this.style.display='none';">
+        </div>
+
+        <h4>Types of Feasibility</h4>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Key Questions</th>
+            </tr>
+            <tr>
+                <td>Technical Feasibility</td>
+                <td>Can the solution be built with available technology?</td>
+                <td>Is technology available? Do we have required skills? Are there technical constraints?</td>
+            </tr>
+            <tr>
+                <td>Economic Feasibility</td>
+                <td>Is the solution financially viable?</td>
+                <td>What are the costs? What are the benefits? What is the ROI?</td>
+            </tr>
+            <tr>
+                <td>Operational Feasibility</td>
+                <td>Can the solution be operated effectively?</td>
+                <td>Will users accept it? Can it be integrated? Are resources available?</td>
+            </tr>
+            <tr>
+                <td>Schedule Feasibility</td>
+                <td>Can the solution be delivered on time?</td>
+                <td>Is timeline realistic? Are resources available? Are there dependencies?</td>
+            </tr>
+            <tr>
+                <td>Legal Feasibility</td>
+                <td>Does the solution comply with laws and regulations?</td>
+                <td>Are there legal restrictions? Does it comply with regulations? Are there licensing issues?</td>
+            </tr>
+        </table>
+
+        <h4>Conducting Technical Feasibility</h4>
+        <p>Technical feasibility assesses:</p>
+        <ul>
+            <li>Availability of required technology</li>
+            <li>Technical skills and expertise of team</li>
+            <li>Hardware and software requirements</li>
+            <li>Integration with existing systems</li>
+            <li>Scalability and performance requirements</li>
+        </ul>
+
+        <h4>Conducting Economic Feasibility</h4>
+        <p>Economic feasibility includes:</p>
+        <ul>
+            <li><strong>Cost Analysis:</strong> Development, implementation, maintenance costs</li>
+            <li><strong>Benefit Analysis:</strong> Direct and indirect benefits</li>
+            <li><strong>Cost-Benefit Analysis:</strong> Comparison of costs and benefits</li>
+            <li><strong>Return on Investment (ROI):</strong> Financial return calculation</li>
+            <li><strong>Payback Period:</strong> Time to recover investment</li>
+        </ul>
+
+        <div class="example-box">
+            <strong>Example Economic Feasibility:</strong><br>
+            <strong>Costs:</strong> Development: $100,000, Implementation: $20,000, Annual Maintenance: $10,000<br>
+            <strong>Benefits:</strong> Annual savings: $30,000, Increased revenue: $15,000/year<br>
+            <strong>ROI:</strong> (45,000 - 10,000) / 120,000 = 29% annually<br>
+            <strong>Payback Period:</strong> 120,000 / 35,000 = 3.4 years
+        </div>
+
+        <h4>Conducting Operational Feasibility</h4>
+        <p>Operational feasibility evaluates:</p>
+        <ul>
+            <li>User acceptance and willingness to change</li>
+            <li>Organizational readiness</li>
+            <li>Training requirements</li>
+            <li>Impact on existing processes</li>
+            <li>Resource availability for operations</li>
+        </ul>
+
+        <h4>Conducting Schedule Feasibility</h4>
+        <p>Schedule feasibility considers:</p>
+        <ul>
+            <li>Project timeline and deadlines</li>
+            <li>Resource availability</li>
+            <li>Dependencies between activities</li>
+            <li>Risk factors that could cause delays</li>
+            <li>Buffer time for unexpected issues</li>
+        </ul>
+
+        <h4>Feasibility Study Report Structure</h4>
+        <ol>
+            <li><strong>Executive Summary:</strong> Overview and recommendation</li>
+            <li><strong>Introduction:</strong> Background and objectives</li>
+            <li><strong>Current System:</strong> Description of existing situation</li>
+            <li><strong>Proposed Solution:</strong> Description of proposed system</li>
+            <li><strong>Feasibility Analysis:</strong> Technical, economic, operational, schedule</li>
+            <li><strong>Risks and Mitigation:</strong> Identified risks and solutions</li>
+            <li><strong>Recommendation:</strong> Go/no-go decision with rationale</li>
+            <li><strong>Appendices:</strong> Supporting documents and data</li>
+        </ol>
+
+        <div class="info-box">
+            <strong>Feasibility Study Best Practices:</strong>
+            <ul>
+                <li>Be objective and unbiased</li>
+                <li>Consider all types of feasibility</li>
+                <li>Use quantitative data when possible</li>
+                <li>Identify and address risks</li>
+                <li>Provide clear recommendations</li>
+                <li>Document assumptions</li>
+            </ul>
+        </div>
+
+        <div class="performance-criteria">
+            <strong>Performance Criteria PC 5.1:</strong> Feasibility study for software solutions conducted as per the
+            organization standards.
+        </div>
+
+        <h2>6.2 Practical Sessions</h2>
+        <p class="no-indent">In this practical session, you will:</p>
+        <ol>
+            <li>Conduct a technical feasibility assessment for a given scenario</li>
+            <li>Perform cost-benefit analysis</li>
+            <li>Evaluate operational feasibility</li>
+            <li>Create a feasibility study report</li>
+            <li>Present findings and recommendations</li>
+        </ol>
+    </div>
+
+    <!-- Chapter 7: Practical Assignments -->
+    <div class="page-break">
+        <h1>7. Practical Assignments</h1>
+        <p class="no-indent">This section provides practical assignments to reinforce learning and develop practical
+            skills in requirement gathering and analysis.</p>
+
+        <h2>Assignment 1: Stakeholder Identification and Planning</h2>
+        <p class="no-indent"><strong>Scenario:</strong> A local library wants to implement a new library management
+            system.</p>
+        <p><strong>Tasks:</strong></p>
+        <ol>
+            <li>Identify key stakeholders from different functional areas</li>
+            <li>Create a stakeholder register</li>
+            <li>Develop a time schedule for requirement gathering</li>
+            <li>Plan meetings with identified stakeholders</li>
+        </ol>
+        <p><strong>Deliverables:</strong> Stakeholder register, time schedule, meeting plan</p>
+
+        <h2>Assignment 2: Requirements Gathering</h2>
+        <p class="no-indent"><strong>Scenario:</strong> Continue with the library management system project.</p>
+        <p><strong>Tasks:</strong></p>
+        <ol>
+            <li>Conduct interviews with at least 3 stakeholders</li>
+            <li>Observe existing library processes</li>
+            <li>Identify source documents</li>
+            <li>Document workflows using flowcharts</li>
+            <li>Record key decisions from meetings</li>
+        </ol>
+        <p><strong>Deliverables:</strong> Interview notes, workflow diagrams, decision log</p>
+
+        <h2>Assignment 3: Requirement Documentation</h2>
+        <p class="no-indent"><strong>Scenario:</strong> Document requirements for the library management system.</p>
+        <p><strong>Tasks:</strong></p>
+        <ol>
+            <li>Create a requirement specification document</li>
+            <li>Categorize requirements as functional or non-functional</li>
+            <li>Suggest at least 3 business process improvements</li>
+            <li>Follow organizational standards for documentation</li>
+        </ol>
+        <p><strong>Deliverables:</strong> Requirement specification document with categorized requirements</p>
+
+        <h2>Assignment 4: Requirement Presentation and Prototyping</h2>
+        <p class="no-indent"><strong>Scenario:</strong> Present requirements and develop prototypes.</p>
+        <p><strong>Tasks:</strong></p>
+        <ol>
+            <li>Create a presentation for requirement specifications</li>
+            <li>Develop low-fidelity prototypes for key features</li>
+            <li>Present requirements to peers (acting as clients)</li>
+            <li>Obtain feedback and revise</li>
+            <li>Create a client confirmation document</li>
+        </ol>
+        <p><strong>Deliverables:</strong> Presentation slides, prototypes, confirmation document</p>
+
+        <h2>Assignment 5: Feasibility Study</h2>
+        <p class="no-indent"><strong>Scenario:</strong> Conduct a feasibility study for the library management system.
+        </p>
+        <p><strong>Tasks:</strong></p>
+        <ol>
+            <li>Assess technical feasibility</li>
+            <li>Conduct economic feasibility analysis</li>
+            <li>Evaluate operational feasibility</li>
+            <li>Assess schedule feasibility</li>
+            <li>Create a comprehensive feasibility study report</li>
+            <li>Provide recommendations</li>
+        </ol>
+        <p><strong>Deliverables:</strong> Complete feasibility study report</p>
+    </div>
+
+    <!-- Chapter 8: Assessment Plan -->
+    <div class="page-break">
+        <h1>8. Assessment Plan</h1>
+        <p class="no-indent">This module uses a combination of assessment methods to evaluate student learning and
+            competency.</p>
+
+        <h2>Assessment Methods</h2>
+        <table>
+            <tr>
+                <th>Assessment Type</th>
+                <th>Weight</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Practical Assignments</td>
+                <td>40%</td>
+                <td>Five practical assignments covering all elements</td>
+            </tr>
+            <tr>
+                <td>Mid-term Assessment</td>
+                <td>20%</td>
+                <td>Written test covering Elements 1-3</td>
+            </tr>
+            <tr>
+                <td>Final Project</td>
+                <td>30%</td>
+                <td>Complete requirement gathering and analysis project</td>
+            </tr>
+            <tr>
+                <td>Class Participation</td>
+                <td>10%</td>
+                <td>Active participation in discussions and activities</td>
+            </tr>
+        </table>
+
+        <h2>Performance Criteria Assessment</h2>
+        <p class="no-indent">Students will be assessed against the following performance criteria:</p>
+        <ul>
+            <li><strong>PC 1.1:</strong> Range of proposed solution identified and outlined</li>
+            <li><strong>PC 1.2:</strong> Key stakeholders identified and agreed upon</li>
+            <li><strong>PC 1.3:</strong> Time schedule planned and meetings arranged</li>
+            <li><strong>PC 2.1:</strong> Requirements identified through data gathering techniques</li>
+            <li><strong>PC 2.2:</strong> Present workflow recognized through observation</li>
+            <li><strong>PC 2.3:</strong> Source documents identified</li>
+            <li><strong>PC 2.4:</strong> Key decisions recorded according to SOP</li>
+            <li><strong>PC 3.1:</strong> Requirement specifications documented</li>
+            <li><strong>PC 3.2:</strong> Functional and non-functional requirements highlighted</li>
+            <li><strong>PC 3.3:</strong> Business process improvements included</li>
+            <li><strong>PC 4.1:</strong> Requirements presented and explained</li>
+            <li><strong>PC 4.2:</strong> Prototypes developed and presented</li>
+            <li><strong>PC 4.3:</strong> Client confirmation obtained</li>
+            <li><strong>PC 5.1:</strong> Feasibility study conducted</li>
+        </ul>
+
+        <h2>Grading Criteria</h2>
+        <table>
+            <tr>
+                <th>Grade</th>
+                <th>Percentage</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Distinction</td>
+                <td>80-100%</td>
+                <td>Excellent understanding, all criteria met with high quality</td>
+            </tr>
+            <tr>
+                <td>Merit</td>
+                <td>65-79%</td>
+                <td>Good understanding, most criteria met well</td>
+            </tr>
+            <tr>
+                <td>Pass</td>
+                <td>50-64%</td>
+                <td>Satisfactory understanding, all criteria met</td>
+            </tr>
+            <tr>
+                <td>Fail</td>
+                <td>Below 50%</td>
+                <td>Insufficient understanding, criteria not met</td>
+            </tr>
+        </table>
+
+        <h2>Submission Requirements</h2>
+        <ul>
+            <li>All assignments must be submitted by specified deadlines</li>
+            <li>Documents must follow organizational standards</li>
+            <li>All work must be original and properly referenced</li>
+            <li>Late submissions may incur penalties</li>
+        </ul>
+    </div>
+
+    <!-- References -->
+    <div class="page-break">
+        <h1>References</h1>
+        <p class="no-indent">The following resources are recommended for further study:</p>
+        <ol>
+            <li>Wiegers, K., & Beatty, J. (2013). <em>Software Requirements</em>. Microsoft Press.</li>
+            <li>Robertson, S., & Robertson, J. (2012). <em>Mastering the Requirements Process</em>. Addison-Wesley.</li>
+            <li>IEEE Std 830-1998. (1998). <em>IEEE Recommended Practice for Software Requirements Specifications</em>.
+            </li>
+            <li>Babbie, E. (2016). <em>The Practice of Social Research</em>. Cengage Learning.</li>
+            <li>Sharp, H., Preece, J., & Rogers, Y. (2019). <em>Interaction Design: Beyond Human-Computer
+                    Interaction</em>. Wiley.</li>
+        </ol>
+    </div>
+
+    <!-- JavaScript for PDF Download -->
+    <script>
+        function downloadPDF() {
+            const button = document.getElementById('downloadBtn');
+            const originalText = button.innerHTML;
+
+            // Disable button and show loading state
+            button.disabled = true;
+            button.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="animation: spin 1s linear infinite;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Generating PDF...';
+
+            // Hide download button during PDF generation
+            const downloadBtnContainer = document.querySelector('.download-btn-container');
+            if (downloadBtnContainer) {
+                downloadBtnContainer.style.display = 'none';
+            }
+
+            // Wait a moment for images to load
+            setTimeout(() => {
+                // Create a wrapper container for PDF content
+                const pdfWrapper = document.createElement('div');
+                pdfWrapper.id = 'pdf-wrapper';
+                pdfWrapper.style.cssText = 'width: 21cm; margin: 0 auto; background: white; position: absolute; left: -9999px; top: 0; padding: 0;';
+
+                // Get all main content sections in order
+                const allSections = document.querySelectorAll('.cover-page, .toc, .page-break');
+
+                // Clone all sections with proper formatting
+                if (allSections.length > 0) {
+                    allSections.forEach((section) => {
+                        const clone = section.cloneNode(true);
+                        // Ensure proper sizing and page breaks
+                        clone.style.cssText += 'width: 21cm; min-height: 29.7cm; page-break-after: always; break-after: page; margin: 0; padding: 0.8cm; box-sizing: border-box;'; /* Narrow margins */
+                        pdfWrapper.appendChild(clone);
+                    });
+                } else {
+                    // Fallback: get all body children except download button
+                    const bodyChildren = Array.from(document.body.children);
+                    bodyChildren.forEach((child) => {
+                        if (!child.classList.contains('download-btn-container')) {
+                            const clone = child.cloneNode(true);
+                            clone.style.cssText += 'width: 21cm; page-break-after: always; break-after: page;';
+                            pdfWrapper.appendChild(clone);
+                        }
+                    });
+                }
+
+                // Add to document
+                document.body.appendChild(pdfWrapper);
+
+                // Configure PDF options - optimized for A4 with full content
+                const options = {
+                    margin: [0, 0, 0, 0],
+                    filename: 'User_Requirements_for_Software_Solution_K72T001M01.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        letterRendering: true,
+                        allowTaint: true,
+                        backgroundColor: '#ffffff',
+                        windowWidth: 794,
+                        windowHeight: 1123,
+                        scrollX: 0,
+                        scrollY: 0
+                    },
+                    jsPDF: {
+                        unit: 'px',
+                        format: 'a4',
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: {
+                        mode: ['avoid-all', 'css', 'legacy'],
+                        before: '.page-break',
+                        after: '.page-break',
+                        avoid: ['.no-break']
+                    }
+                };
+
+                // Function to restore button and cleanup
+                const restoreButton = () => {
+                    if (downloadBtnContainer) {
+                        downloadBtnContainer.style.display = 'block';
+                    }
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    // Remove temporary wrapper
+                    const wrapper = document.getElementById('pdf-wrapper');
+                    if (wrapper && wrapper.parentNode) {
+                        wrapper.parentNode.removeChild(wrapper);
+                    }
+                };
+
+                // Generate and download PDF
+                html2pdf().set(options).from(pdfWrapper).save().then(() => {
+                    restoreButton();
+                    console.log('PDF generated successfully with all content');
+                }).catch((error) => {
+                    console.error('Error generating PDF:', error);
+                    restoreButton();
+
+                    // Show instructions with option to use print
+                    const usePrint = confirm('PDF generation encountered an issue.\n\nClick OK to use browser Print dialog (Ctrl+P), then select "Save as PDF" as the destination.\n\nOr click Cancel to try again.');
+
+                    if (usePrint) {
+                        // Trigger print dialog
+                        window.print();
+                    }
+                });
+            }, 500); // Wait 500ms for images to load
+        }
+
+        // Add spin animation for loading
+        const style = document.createElement('style');
+        style.textContent = `
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>

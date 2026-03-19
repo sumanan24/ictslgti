@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Design with Text, Graphics and Images – Teaching Notes | K72T001M08 Level 05</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --header-bg: linear-gradient(135deg, #7c3aed 0%, #a78bfa 50%, #c4b5fd 100%);
+      --accent: #7c3aed;
+      --accent-light: #ede9fe;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{
+      font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+      background:linear-gradient(180deg,#f5f3ff 0%,#faf5ff 50%,#f8fafc 100%);
+      color:var(--text);
+      line-height:1.75;
+      padding:0;
+      min-height:100vh;
+      max-width:100%;
+      text-align:left;
+      font-size:1rem;
+      letter-spacing:0.01em;
+    }
+
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed!important;left:0;top:0;width:260px;height:100vh;z-index:40;margin:0;border-radius:0;border-right:1px solid rgba(124,58,237,0.2);overflow-y:auto}
+      .page-wrapper{margin-left:260px;max-width:100%}
+    }
+    @media (max-width:991px){
+      .toc-sidebar{position:fixed!important;top:0;left:0;right:0;width:100%;z-index:50}
+      .toc-sidebar .toc-header{display:none!important}
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;padding:0!important;margin:0!important;transition:max-height 0.25s ease}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto;padding:0.5rem 0 1.25rem!important}
+      .toc-sidebar .toc-toggle{display:flex!important;align-items:center;justify-content:space-between;padding:0.75rem 1rem;min-height:3rem}
+      .page-wrapper{margin-left:0!important;padding-top:3.25rem}
+    }
+
+    .container-main{
+      max-width:48rem;
+      margin:0 auto;
+      padding:var(--space-md) var(--space-lg) var(--space-xl);
+      width:100%;
+    }
+    .toc-sidebar{background:#fff;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(124,58,237,0.1)}
+    .toc-sidebar .toc-header{padding:0.875rem 1rem;background:var(--header-bg);color:#fff;font-weight:700;font-size:0.95rem;text-align:center}
+    .toc-sidebar .toc-toggle{display:none;width:100%;padding:0.75rem 1rem;background:var(--header-bg);color:#fff;border:none;font-size:0.95rem;font-weight:600;cursor:pointer;text-align:left}
+    .toc-sidebar .toc-list{padding:0.5rem 0 1.25rem;background:#fff}
+    .toc-sidebar .toc-list a{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8125rem;color:var(--text);text-decoration:none;padding:0.5rem 0.75rem 0.5rem 1rem;line-height:1.45;border-bottom:1px solid #f1f5f9}
+    .toc-sidebar .toc-list a:hover{color:var(--accent);background:#f5f3ff}
+    .toc-sidebar .toc-list a .ch-num-side{flex-shrink:0;min-width:1.75rem;width:1.75rem;text-align:right;font-weight:700;font-size:0.8rem;color:var(--accent)}
+    .toc-sidebar .toc-list a .ch-title-side{flex:1;min-width:0}
+
+    .module-block{margin-bottom:var(--space-xl);margin-top:var(--space-xl)}
+    .module-block:first-of-type{margin-top:0}
+    .module-title{
+      background:var(--header-bg);
+      color:#fff;
+      padding:var(--space-md) var(--space-lg);
+      border-radius:12px;
+      margin-bottom:var(--space-lg);
+      margin-top:0;
+      font-size:1.25rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:0.75rem;
+      box-shadow:0 4px 14px rgba(124,58,237,0.25);
+      text-align:left;
+    }
+
+    .chapter-card{
+      background:#fff;
+      border-radius:14px;
+      padding:var(--space-xl);
+      margin-bottom:var(--space-lg);
+      box-shadow:0 4px 20px rgba(0,0,0,0.08);
+      border:1px solid rgba(124,58,237,0.08);
+      border-left:4px solid var(--accent);
+    }
+    .chapter-card > p:first-of-type{
+      background:linear-gradient(90deg,#f5f3ff 0%,#fff 100%);
+      padding:var(--space-sm) var(--space-md);
+      border-radius:8px;
+      border-left:3px solid var(--accent);
+      font-size:0.9375rem;
+      margin-bottom:var(--space-lg);
+      margin-top:0;
+    }
+    .chapter-card h2{
+      color:var(--accent);
+      font-size:clamp(1.15rem,3vw,1.4rem);
+      margin:0 0 var(--space-md) 0;
+      padding-bottom:var(--space-sm);
+      border-bottom:3px solid var(--accent-light);
+      display:flex;
+      align-items:center;
+      gap:0.5rem;
+      line-height:1.3;
+      text-align:left;
+    }
+    .chapter-card .ch-num{width:2rem;height:2rem;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0}
+    .chapter-card h3{
+      color:#5b21b6;
+      font-size:1.1rem;
+      margin:var(--space-lg) 0 var(--space-sm) 0;
+      line-height:1.35;
+      text-align:left;
+    }
+    .chapter-card h3:first-of-type{margin-top:0}
+    .chapter-card h4{
+      color:#4c1d95;
+      font-size:1rem;
+      margin:var(--space-md) 0 var(--space-xs) 0;
+      font-weight:600;
+      line-height:1.35;
+      text-align:left;
+    }
+    .chapter-card p{
+      margin:0 0 var(--space-md) 0;
+      text-align:left;
+      line-height:1.75;
+    }
+    .chapter-card p:last-child{margin-bottom:0}
+    .chapter-card ul,.chapter-card ol{
+      padding-left:1.5rem;
+      margin:var(--space-sm) 0 var(--space-lg) 0;
+      text-align:left;
+    }
+    .chapter-card li{
+      margin-bottom:var(--space-xs);
+      line-height:1.65;
+      padding-left:0.25rem;
+    }
+    .chapter-card li:last-child{margin-bottom:0}
+    .chapter-card ul ul,.chapter-card ol ol{margin:var(--space-xs) 0;padding-left:1.25rem}
+
+    .info-box{
+      background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%);
+      border-left:4px solid var(--accent);
+      padding:var(--space-md) var(--space-lg);
+      border-radius:0 10px 10px 0;
+      margin:var(--space-lg) 0;
+      text-align:left;
+      line-height:1.65;
+    }
+    .diagram-wrap{
+      background:linear-gradient(180deg,#faf5ff 0%,#f5f3ff 100%);
+      border-radius:12px;
+      padding:var(--space-lg);
+      margin:var(--space-lg) 0;
+      border:1px solid rgba(124,58,237,0.25);
+      text-align:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.04);
+    }
+    .diagram-wrap svg{max-width:100%;height:auto;margin:0 auto}
+    .diagram-wrap .fig-caption{font-size:0.875rem;color:var(--text-muted);margin-top:var(--space-sm);text-align:center}
+    .example-img-wrap{
+      margin:var(--space-lg) 0;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(124,58,237,0.2);
+      box-shadow:0 4px 14px rgba(0,0,0,0.06);
+    }
+    .example-img-wrap img{width:100%;height:auto;display:block;min-height:120px;background:#f5f3ff}
+    .example-img-wrap .fig-caption{padding:var(--space-sm) var(--space-md);background:#f8fafc;font-size:0.875rem;color:var(--text-muted);text-align:left;line-height:1.5}
+    .q-box{
+      background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);
+      border-left:4px solid #3b82f6;
+      padding:var(--space-md) var(--space-lg);
+      border-radius:0 10px 10px 0;
+      margin:var(--space-lg) 0;
+      text-align:left;
+    }
+    .activity-box{
+      background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);
+      border-left:4px solid #eab308;
+      padding:var(--space-md) var(--space-lg);
+      border-radius:0 10px 10px 0;
+      margin:var(--space-lg) 0;
+      text-align:left;
+    }
+    .simple-english{
+      background:linear-gradient(135deg,#f8fafc 0%,#f5f3ff 100%);
+      padding:var(--space-sm) var(--space-md);
+      border-radius:8px;
+      border-left:3px solid var(--accent);
+      margin:var(--space-md) 0;
+      font-size:0.9375rem;
+      line-height:1.65;
+      text-align:left;
+    }
+    .table-wrap{overflow-x:auto;margin:var(--space-lg) 0;border-radius:12px;border:1px solid rgba(124,58,237,0.2)}
+    .compare-table{width:100%;border-collapse:collapse;font-size:0.9rem;background:#fff}
+    .compare-table th,.compare-table td{padding:0.75rem 1rem;text-align:left;border-bottom:1px solid #e2e8f0;vertical-align:top}
+    .compare-table th{background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%);color:#5b21b6;font-weight:700}
+    .tool-icon{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;background:linear-gradient(180deg,#f1f5f9 0%,#e2e8f0 100%);border:1px solid #cbd5e1;border-radius:4px;margin-right:8px;font-size:12px;color:#475569;vertical-align:middle;flex-shrink:0}
+    .tool-strip{display:flex;flex-wrap:wrap;gap:8px;margin:var(--space-sm) 0 var(--space-md) 0;padding:var(--space-sm);background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;align-items:center}
+    .tool-strip .tool-icon{margin-right:0}
+    .tool-icon-img,.tool-strip img{border-radius:4px;border:1px solid rgba(0,0,0,0.08);object-fit:contain}
+    .chapter-card li .tool-icon{margin-bottom:0}
+    .book-hero{background:linear-gradient(145deg,#7c3aed 0%,#8b5cf6 40%,#a78bfa 100%);color:#fff;padding:var(--space-xl) var(--space-md);text-align:center;border-radius:0 0 24px 24px;box-shadow:0 8px 30px rgba(124,58,237,0.35)}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800;line-height:1.3}
+    .book-hero .lead{margin:0;font-size:0.95rem;opacity:0.95;line-height:1.5}
+    .page-footer{text-align:center;padding:var(--space-xl) var(--space-md);font-size:0.9rem;color:var(--text-muted);line-height:1.5}
+    .content-area hr{margin:var(--space-xl) 0;border:0;border-top:2px solid var(--accent-light)}
+    .q-box ol,.activity-box p,.q-box ul{margin:0.5rem 0 0 1.25rem;padding:0}
+    .q-box ol li,.activity-box p{margin-bottom:0.25rem}
+  </style>
+</head>
+<body>
+  <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapter navigation">
+    <div class="toc-header"><i class="fas fa-list me-2"></i>Contents</div>
+    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="tocList" id="tocToggle">
+      <span><i class="fas fa-list me-2"></i>Contents</span>
+      <i class="fas fa-chevron-down" id="tocChevron"></i>
+    </button>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="page-wrapper">
+    <div class="container-main">
+      <main class="content-area">
+
+        <section id="overview" class="module-block">
+          <div class="book-hero">
+            <h1>Creative Design with Text, Graphics and Images</h1>
+            <p class="lead">Module Code: <strong>K72T001M08</strong> / Level 05 &nbsp;|&nbsp; Unit: K72T001U05 &nbsp;|&nbsp; Compulsory</p>
+          </div>
+
+          <article id="ch0" class="chapter-card">
+            <h2><span class="ch-num">0</span> Module Overview</h2>
+            <p><strong>Module aim:</strong> To enable you to prepare a creative design using text, graphics and images. By the end you will design graphics, edit images, and finalize content for printing.</p>
+            <h3>Learning Outcomes</h3>
+            <ol>
+              <li>Design and develop graphics.</li>
+              <li>Edit images.</li>
+              <li>Finalize text, graphics and images for printing.</li>
+            </ol>
+            <h3>Pre-requisites</h3>
+            <p>Relevant NVQ Level 4 Qualification or GCE (A/L) or equivalent.</p>
+          </article>
+        </section>
+
+        <!-- SECTION 1: Text manipulation -->
+        <section id="mod1" class="module-block">
+          <h2 class="module-title"><i class="fas fa-font me-2"></i> 1. Introduction to Text Manipulation</h2>
+
+          <article id="ch1" class="chapter-card">
+            <h2><span class="ch-num">1</span> Font, Size, Formats and Special Effects</h2>
+            <p><strong>Learning focus:</strong> What text manipulation means and how we change how text looks (font, size, format, effects, alignment).</p>
+            <h3>What is Text Manipulation?</h3>
+            <div class="info-box"><strong>Text manipulation</strong> means changing how text looks and behaves: the type of letters (font), how big they are (size), bold or italic (format), shadows or colours (effects), and how lines line up (alignment).</div>
+            <p class="simple-english"><strong>In simple words:</strong> When you type a word, you can make it bigger, bolder, in a different style, or move it to the centre. All of that is text manipulation.</p>
+            <h3>Font (Typeface)</h3>
+            <p>A <strong>font</strong> is the style of the letters. For example: Arial looks clean and simple; Times New Roman looks formal; Comic Sans looks casual. Choosing the right font helps your design say the right thing.</p>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/600x220/ede9fe/7c3aed?text=Font+examples%3A+Arial%2C+Times%2C+Comic+Sans" alt="Examples of different fonts: Arial, Times New Roman, Comic Sans" width="600" height="auto">
+              <p class="fig-caption">Different fonts give different feelings. Use one or two fonts per design to keep it clear.</p>
+            </div>
+            <h3>Size</h3>
+            <p><strong>Size</strong> is how big the text is. We often measure it in <strong>points (pt)</strong> or <strong>pixels (px)</strong>. Bigger text gets more attention; smaller text is for details. Headings are usually larger than body text.</p>
+            <h3>Formats (Bold, Italic, Underline)</h3>
+            <ul>
+              <li><strong>Bold</strong> – text is thicker and stands out.</li>
+              <li><strong>Italic</strong> – text slants; often used for emphasis or titles.</li>
+              <li><strong>Underline</strong> – a line under the text (use carefully; too much looks messy).</li>
+            </ul>
+            <h3>Special Effects</h3>
+            <p>Special effects include: <strong>shadow</strong> (text appears to float), <strong>outline</strong> (border around letters), <strong>colour</strong>, and <strong>gradient</strong> (colour that changes from one to another). Use effects to make important text stand out, but do not overuse them.</p>
+            <h3>Alignment</h3>
+            <p><strong>Alignment</strong> is how lines of text line up:</p>
+            <ul>
+              <li><strong>Left</strong> – text starts from the left (normal for paragraphs).</li>
+              <li><strong>Centre</strong> – text is in the middle (good for titles).</li>
+              <li><strong>Right</strong> – text ends at the right.</li>
+              <li><strong>Justify</strong> – both left and right edges are straight (like in newspapers).</li>
+            </ul>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:400px;">
+                <text x="30" y="28" font-size="14" fill="#374151">Left align</text>
+                <line x1="30" y1="32" x2="370" y2="32" stroke="#e5e7eb" stroke-width="1"/>
+                <text x="200" y="58" text-anchor="middle" font-size="14" fill="#374151">Centre align</text>
+                <line x1="30" y1="62" x2="370" y2="62" stroke="#e5e7eb" stroke-width="1"/>
+                <text x="370" y="88" text-anchor="end" font-size="14" fill="#374151">Right align</text>
+                <line x1="30" y1="92" x2="370" y2="92" stroke="#e5e7eb" stroke-width="1"/>
+              </svg>
+              <p class="fig-caption">Left, centre and right alignment</p>
+            </div>
+            <h3>Text Manipulation Software</h3>
+            <p>Software used for text includes: <strong>Microsoft Word</strong>, <strong>Google Docs</strong>, <strong>LibreOffice Writer</strong>, and inside design tools like <strong>Adobe InDesign</strong> or <strong>Canva</strong>. In graphic design we often add and edit text inside the design software.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol style="margin:0.5rem 0 0 1.25rem;"><li>What is the difference between font and size?</li><li>When would you use centre alignment?</li><li>Name two special effects you can apply to text.</li></ol>
+            </div>
+            <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+              <p class="mb-0 mt-1">In Word or a design tool, type your name. Change the font, size, bold, italic, and alignment. See how each change affects how it looks.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 2: Graphic Designing -->
+        <section id="mod2" class="module-block">
+          <h2 class="module-title"><i class="fas fa-palette me-2"></i> 2. Introduction to Graphic Designing</h2>
+
+          <article id="ch2" class="chapter-card">
+            <h2><span class="ch-num">2</span> Importance of Graphic Designing</h2>
+            <p><strong>Learning focus:</strong> Why graphic design matters in business, branding and communication.</p>
+            <p><strong>Graphic design</strong> is the art of arranging images, text and shapes to communicate a message. Good design helps people understand your message quickly and remember your brand.</p>
+            <p class="simple-english"><strong>In simple words:</strong> When you see a poster, logo or website, someone planned the colours, pictures and text. That planning is graphic design. It makes things look professional and easy to read.</p>
+            <ul>
+              <li><strong>Branding</strong> – logos and colours help people recognise a company.</li>
+              <li><strong>Advertising</strong> – posters and banners attract attention.</li>
+              <li><strong>Information</strong> – charts and layouts make data easy to understand.</li>
+            </ul>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/600x220/ede9fe/7c3aed?text=Poster+%26+Logo+examples" alt="Poster and logo examples showing importance of graphic design" width="600" height="auto">
+              <p class="fig-caption">Good graphic design makes messages clear and attractive.</p>
+            </div>
+          </article>
+
+          <article id="ch3" class="chapter-card">
+            <h2><span class="ch-num">3</span> Sketching, Prototyping and Design Rules</h2>
+            <p><strong>Learning focus:</strong> Sketching and prototyping before using software; Golden ratio and Gestalt theory.</p>
+            <h3>Sketching and Prototyping</h3>
+            <p>Before using the computer, many designers <strong>sketch</strong> ideas on paper. A <strong>prototype</strong> is a simple version of the design to test layout and ideas. Sketching is fast and helps you try many ideas without wasting time on the computer.</p>
+            <h3>Golden Ratio</h3>
+            <p>The <strong>golden ratio</strong> (about 1.618 : 1) is a proportion that appears in nature and art. Using it in layout (e.g. dividing a page or image in this ratio) often makes the design feel balanced and pleasing.</p>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:200px;">
+                <rect x="10" y="10" width="118" height="100" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+                <rect x="128" y="10" width="62" height="100" fill="#c4b5fd" stroke="#7c3aed" stroke-width="2"/>
+                <text x="69" y="65" text-anchor="middle" fill="#5b21b6" font-size="11">1</text>
+                <text x="159" y="65" text-anchor="middle" fill="#5b21b6" font-size="11">0.618</text>
+                <text x="100" y="115" text-anchor="middle" fill="#64748b" font-size="9">Golden ratio split (1 : 0.618)</text>
+              </svg>
+              <p class="fig-caption">A rectangle divided by the golden ratio</p>
+            </div>
+            <h3>Gestalt Theory</h3>
+            <p><strong>Gestalt</strong> ideas say that we see whole shapes and patterns, not just dots and lines. Important principles:</p>
+            <ul>
+              <li><strong>Proximity</strong> – things close together are seen as a group.</li>
+              <li><strong>Similarity</strong> – similar colour or shape = same group.</li>
+              <li><strong>Closure</strong> – we complete incomplete shapes in our mind.</li>
+              <li><strong>Continuity</strong> – we follow lines and curves naturally.</li>
+            </ul>
+            <p>Using these helps organise your design so the viewer understands it quickly.</p>
+          </article>
+
+          <article id="ch4" class="chapter-card">
+            <h2><span class="ch-num">4</span> Hardware, Software, Tools Panel and Layers</h2>
+            <p><strong>Learning focus:</strong> What you need to run graphic design software; main parts of the software (tools panel, layers).</p>
+            <h3>Hardware and Software Requirements</h3>
+            <p>For graphic design you typically need: a computer (PC or Mac), enough <strong>RAM</strong> (e.g. 8 GB or more), a good <strong>monitor</strong> (clear and colour-accurate if possible), and a <strong>mouse</strong> or <strong>graphics tablet</strong>. Software examples: <strong>Adobe Illustrator</strong>, <strong>CorelDRAW</strong>, <strong>Inkscape</strong> (free), <strong>Canva</strong> (online).</p>
+            <h3>Tools Panel</h3>
+            <p>The <strong>tools panel</strong> is a set of icons on the side of the screen. Each icon is a tool: select, draw shapes, type text, zoom, fill colour, etc. Click a tool then use it on the canvas.</p>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/500x280/dbeafe/1e40af?text=Tools+Panel+%26+Layers" alt="Graphic design software tools panel with selection, shape, text and colour tools" width="500" height="auto">
+              <p class="fig-caption">Tools panel: selection, shapes, text, colours and more.</p>
+            </div>
+            <h3>Layers</h3>
+            <p><strong>Layers</strong> are like transparent sheets stacked on top of each other. You put different parts of your design on different layers (e.g. background on one, text on another, logo on another). You can hide, show, reorder or edit one layer without affecting the others.</p>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 280 140" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:280px;">
+                <rect x="40" y="20" width="200" height="30" fill="#fef3c7" stroke="#eab308" stroke-width="1"/>
+                <text x="140" y="40" text-anchor="middle" font-size="10" fill="#92400e">Layer 3 – Text</text>
+                <rect x="50" y="55" width="200" height="30" fill="#d1fae5" stroke="#10b981" stroke-width="1"/>
+                <text x="150" y="75" text-anchor="middle" font-size="10" fill="#065f46">Layer 2 – Logo</text>
+                <rect x="60" y="90" width="200" height="30" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+                <text x="160" y="110" text-anchor="middle" font-size="10" fill="#1e40af">Layer 1 – Background</text>
+                <text x="140" y="132" text-anchor="middle" fill="#64748b" font-size="9">Layers stack from bottom to top</text>
+              </svg>
+              <p class="fig-caption">Layers: background at bottom, text on top.</p>
+            </div>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol style="margin:0.5rem 0 0 1.25rem;"><li>What is the use of layers in design software?</li><li>Name one free graphic design software.</li></ol>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 3: Scanning -->
+        <section id="mod3" class="module-block">
+          <h2 class="module-title"><i class="fas fa-scanner me-2"></i> 3. Scanning</h2>
+
+          <article id="ch5" class="chapter-card">
+            <h2><span class="ch-num">5</span> Flatbed, Drum Scanners and OCR</h2>
+            <p><strong>Learning focus:</strong> How we turn paper documents and photos into digital images; flatbed vs drum scanners; OCR for text.</p>
+            <h3>What is Scanning?</h3>
+            <p><strong>Scanning</strong> means using a device (scanner) to capture a paper document or photo and save it as a digital image file on the computer.</p>
+            <h3>Flatbed Scanner</h3>
+            <p>A <strong>flatbed scanner</strong> has a flat glass plate. You place the document face down on the glass, close the lid, and the scanner moves a light and sensor under the glass to capture the image. It is common in offices and homes. Good for single sheets, photos and books (if you can open them flat).</p>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/500x220/fef3c7/eab308?text=Flatbed+Scanner" alt="Flatbed scanner with document on glass" width="500" height="auto">
+              <p class="fig-caption">Flatbed scanner: document on glass, lid closed.</p>
+            </div>
+            <h3>Drum Scanner</h3>
+            <p>A <strong>drum scanner</strong> is used mainly in professional printing. The document is wrapped around a rotating drum and a light beam scans it. Drum scanners give very high quality and are used for high-end print work. They are expensive and not common in small offices.</p>
+            <h3>OCR (Optical Character Recognition)</h3>
+            <p><strong>OCR</strong> is software that looks at a scanned image of text and converts it into editable text (e.g. in Word). So you can scan a printed page and then search or edit the words instead of just having a picture of the page.</p>
+            <div class="info-box">Use OCR when you need to edit or reuse the text from a printed document. Without OCR you only get an image; with OCR you get actual text you can change.</div>
+            <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+              <p class="mb-0 mt-1">If you have access to a flatbed scanner, scan one page. If your software has OCR, run it and open the result in a word processor to see the editable text.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 4: Page layout -->
+        <section id="mod4" class="module-block">
+          <h2 class="module-title"><i class="fas fa-columns me-2"></i> 4. Page Layout</h2>
+
+          <article id="ch6" class="chapter-card">
+            <h2><span class="ch-num">6</span> Page Layout for Different Print Media</h2>
+            <p><strong>Learning focus:</strong> What page layout is and how it changes for different print products (brochure, poster, flyer, etc.).</p>
+            <p><strong>Page layout</strong> is how you arrange text, images and graphics on a page: margins, columns, headings, and where pictures go. Different print media need different sizes and layouts.</p>
+            <ul>
+              <li><strong>Poster</strong> – usually large (e.g. A2, A1), one main message, big text and one strong image.</li>
+              <li><strong>Flyer</strong> – one or two pages, simple layout, clear call-to-action.</li>
+              <li><strong>Brochure</strong> – folded (e.g. 3-fold), sections for different topics, mix of text and images.</li>
+              <li><strong>Business card</strong> – small fixed size, name, contact, maybe logo.</li>
+              <li><strong>Magazine / booklet</strong> – multiple pages, columns, consistent margins and headings.</li>
+            </ul>
+            <p>Always set the correct <strong>page size</strong> and <strong>margins</strong> at the start so the design fits the final print size.</p>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/600x220/d1fae5/065f46?text=Poster%2C+Flyer%2C+Brochure+layouts" alt="Examples of poster, flyer and brochure layouts" width="600" height="auto">
+              <p class="fig-caption">Different print media need different page layouts.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 5: Image editing (Photoshop tools) -->
+        <section id="mod5" class="module-block">
+          <h2 class="module-title"><i class="fas fa-image me-2"></i> 5. Introduction to Image Editing</h2>
+
+          <article id="ch7" class="chapter-card">
+            <h2><span class="ch-num">7</span> Importance, Camera Shots and Image Editing Standards</h2>
+            <p><strong>Learning focus:</strong> Why we edit images; basic camera shots and framing; scaling and image quality.</p>
+            <h3>Why Image Editing?</h3>
+            <p>We edit images to: improve brightness and colour, remove mistakes, crop to focus on the subject, resize for print or web, and combine several images. Good editing makes photos clearer and more professional.</p>
+            <h3>Camera Shots and Framing</h3>
+            <p>Even if you did not take the photo, understanding shots helps you crop and compose:</p>
+            <ul>
+              <li><strong>Close-up</strong> – face or small detail; shows emotion or detail.</li>
+              <li><strong>Medium shot</strong> – from waist up; good for people talking.</li>
+              <li><strong>Wide shot</strong> – full scene; shows place or context.</li>
+              <li><strong>Framing</strong> – what you include or leave out; rule of thirds (placing important parts on one-third lines) often improves composition.</li>
+            </ul>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/550x220/fce7f3/9d174d?text=Close-up%2C+Medium%2C+Wide+shot" alt="Close-up, medium and wide shot examples" width="550" height="auto">
+              <p class="fig-caption">Close-up, medium and wide shot.</p>
+            </div>
+            <h3>Scaling and Image Quality</h3>
+            <p><strong>Scaling</strong> means making an image larger or smaller. If you make a small image much bigger, it can look blurry (pixelated) because the software is guessing extra pixels. For print we usually need enough <strong>resolution</strong> (e.g. 300 DPI for good quality). <strong>Image quality</strong> is affected by resolution, sharpness and compression. Avoid enlarging low-resolution images too much.</p>
+            <div class="info-box">Rule of thumb: for print at 300 DPI, an A4 page needs about 2480 × 3508 pixels. For screen, 72–150 DPI is often enough.</div>
+          </article>
+
+          <article id="ch8" class="chapter-card">
+            <h2><span class="ch-num">8</span> Adobe Photoshop 2026 &amp; Illustrator 2026: All Tools and Panels</h2>
+            <p><strong>Learning focus:</strong> Complete guide to the tools and panels in Adobe Photoshop 2026 (image editing) and Adobe Illustrator 2026 (vector graphics). Each tool and each main tab/panel is explained so you can work confidently at beginner level.</p>
+
+            <h3 id="ps-workspace">Adobe Photoshop 2026 – Workspace Overview</h3>
+            <p>When you open Photoshop, the <strong>workspace</strong> has these parts:</p>
+            <ul>
+              <li><strong>Menu bar</strong> (top) – File, Edit, Image, Layer, Type, Select, Filter, 3D, View, Window, Help. Each menu holds commands for that topic.</li>
+              <li><strong>Options bar</strong> (below menu bar) – Shows settings for the tool you have selected (e.g. brush size, opacity, tolerance). It changes when you switch tools.</li>
+              <li><strong>Tools panel</strong> (left) – A vertical strip of tool icons. Click a tool to use it; many icons have a small arrow: click and hold to see hidden tools in that group.</li>
+              <li><strong>Document window</strong> (centre) – Your image (canvas). You edit here.</li>
+              <li><strong>Panels</strong> (right, or docked) – Tabs like Layers, Color, Properties, Channels, Paths. Each panel has a specific job; you can show/hide them from the Window menu.</li>
+            </ul>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/600x340/1e3a5f/ffffff?text=Photoshop+Workspace" alt="Photoshop 2026 workspace" width="600" height="auto">
+              <p class="fig-caption">Photoshop 2026 workspace: menu bar, Options bar, Tools panel (left), document (centre), panels (right).</p>
+            </div>
+
+            <h3 id="ps-tools">Photoshop 2026 – Tools Panel (All Tools Explained)</h3>
+            <p>The Tools panel is grouped by function. Below is what each tool does. Tools with a small triangle have more tools under them (click and hold to see them).</p>
+
+            <h4>1. Move and Selection Tools</h4>
+            <ul>
+              <li><strong>Move (V)</strong> – Moves the selected layer or selection. Use it to drag content around the canvas.</li>
+              <li><strong>Rectangular Marquee (M)</strong> – Draws a rectangular selection. Hold Shift for a square.</li>
+              <li><strong>Elliptical Marquee (M)</strong> – Draws an oval/circle selection. Good for round objects.</li>
+              <li><strong>Lasso (L)</strong> – Draw a freehand selection by hand. Use for irregular shapes.</li>
+              <li><strong>Polygonal Lasso (L)</strong> – Clicks to add straight segments; good for angles and straight edges.</li>
+              <li><strong>Magnetic Lasso (L)</strong> – Snaps to edges as you move; useful when the object has clear borders.</li>
+              <li><strong>Object Selection</strong> – Draw a rough box; Photoshop tries to select the main object inside.</li>
+              <li><strong>Quick Selection (W)</strong> – Brush over an area; it selects similar colours and edges. Good for fast selections.</li>
+              <li><strong>Magic Wand (W)</strong> – Click a colour; it selects all similar-coloured pixels. Use Tolerance in the Options bar to control how “similar” is.</li>
+              <li><strong>Selection Brush</strong> – Paint to add or subtract from a selection like painting a mask.</li>
+            </ul>
+            <div class="info-box"><strong>Selection</strong> means “the area that will be affected.” Whatever you do (paint, delete, filter) only affects the selected area. No selection often means “the whole layer.”</div>
+
+            <h4>2. Crop and Slice Tools</h4>
+            <div class="tool-strip" aria-hidden="true">
+              <span class="tool-icon" title="Crop"><i class="fas fa-crop"></i></span>
+              <span class="tool-icon" title="Slice"><i class="fas fa-cut"></i></span>
+            </div>
+            <ul>
+              <li><span class="tool-icon"><i class="fas fa-crop"></i></span><strong>Crop (C)</strong> – Trims the image to a rectangle. You drag the corners; press Enter to apply. Used to change composition or remove edges.</li>
+              <li><span class="tool-icon"><i class="fas fa-crop-alt"></i></span><strong>Perspective Crop</strong> – Crop and correct perspective (e.g. a photo of a building taken at an angle).</li>
+              <li><span class="tool-icon"><i class="fas fa-cut"></i></span><strong>Slice (C)</strong> – Cuts the image into sections, often for web (each slice can be saved as a separate image).</li>
+            </ul>
+
+            <h4>3. Measurement Tools</h4>
+            <ul>
+              <li><strong>Eyedropper (I)</strong> – Click anywhere on the image to set the foreground colour to that pixel’s colour. Essential for matching colours.</li>
+              <li><strong>Color Sampler (I)</strong> – Places markers that show colour values (e.g. RGB) at specific points. Used for checking colour consistency.</li>
+              <li><strong>Ruler (I)</strong> – Draw a line to measure distance and angle. Info appears in the Options bar.</li>
+              <li><strong>Note (I)</strong> – Add a text note stuck to the image (for collaboration or reminders).</li>
+              <li><strong>Count (I)</strong> – Click to place numbered markers. Used for counting objects in an image.</li>
+            </ul>
+
+            <h4>4. Retouching and Painting Tools</h4>
+            <ul>
+              <li><strong>Spot Healing Brush (J)</strong> – Click or brush over a small flaw (spot, blemish); Photoshop blends it with surrounding pixels. No need to set a source.</li>
+              <li><strong>Healing Brush (J)</strong> – You Alt+click to set a “source” area, then paint over the flaw. Good for copying texture from one place to fix another.</li>
+              <li><strong>Patch (J)</strong> – Draw a selection around the area to fix, then drag it to a good area; Photoshop blends it.</li>
+              <li><strong>Red Eye (J)</strong> – Click on red eyes in a photo to remove the red colour.</li>
+              <li><strong>Brush (B)</strong> – Paints with the foreground colour. Size, hardness, opacity and flow are in the Options bar. The main painting tool.</li>
+              <li><strong>Pencil (B)</strong> – Like Brush but with hard edges (no softness).</li>
+              <li><strong>Color Replacement (B)</strong> – Paints to change one colour to another while keeping shading.</li>
+              <li><strong>Mixer Brush (B)</strong> – Simulates mixing paint; can blend colours on the canvas.</li>
+              <li><strong>Clone Stamp (S)</strong> – Alt+click to set a source, then paint to copy pixels from that source. Used to duplicate or cover areas.</li>
+              <li><strong>Pattern Stamp (S)</strong> – Paints using a pattern instead of copying from the image.</li>
+              <li><strong>Eraser (E)</strong> – Removes pixels (or reveals the layer below). Soft or hard edge like a brush.</li>
+              <li><strong>Background Eraser (E)</strong> – Erases similar colours; often used to remove a background.</li>
+              <li><strong>Magic Eraser (E)</strong> – Click to erase all similar-coloured pixels (like Magic Wand + delete).</li>
+              <li><strong>Gradient (G)</strong> – Fills with a gradient (one colour fading to another). Drag to set direction and length.</li>
+              <li><strong>Paint Bucket (G)</strong> – Fills a contiguous area of similar colour with the foreground colour or a pattern.</li>
+            </ul>
+
+            <h4>5. Drawing and Type Tools</h4>
+            <ul>
+              <li><strong>Pen (P)</strong> – Draws paths using anchor points and curves. Paths can be turned into selections or strokes. Professional way to get smooth shapes.</li>
+              <li><strong>Freeform Pen (P)</strong> – Draws a path by hand; Photoshop adds anchor points automatically.</li>
+              <li><strong>Horizontal Type (T)</strong> – Click to type text horizontally. You get a text layer; font, size and colour are in the Options bar.</li>
+              <li><strong>Vertical Type (T)</strong> – Types text in a vertical line.</li>
+              <li><strong>Rectangle (U)</strong> – Draws a rectangle shape (vector shape layer). Same key cycles: Rounded Rectangle, Ellipse, Polygon, Line, Custom Shape.</li>
+              <li><strong>Path Selection (A)</strong> – Selects and moves a whole path.</li>
+              <li><strong>Direct Selection (A)</strong> – Selects and moves individual anchor points on a path to reshape it.</li>
+            </ul>
+
+            <h4>6. Navigation Tools</h4>
+            <ul>
+              <li><strong>Hand (H)</strong> – Drag to pan around the canvas without zooming. Double-click the Hand icon to fit the image to the screen.</li>
+              <li><strong>Rotate View (R)</strong> – Rotates the view of the canvas (for drawing at an angle); does not rotate the actual image.</li>
+              <li><strong>Zoom (Z)</strong> – Click to zoom in; Alt+click to zoom out. Or drag to zoom into a specific area.</li>
+            </ul>
+            <p class="simple-english"><strong>Tip:</strong> Many tools have a keyboard shortcut (letter in brackets). Press the letter to switch to that tool. This speeds up your work.</p>
+
+            <div class="example-img-wrap">
+              <p class="fig-caption">Photoshop Tools panel: single or double column; click the double arrows at the top to switch tools.</p>
+            </div>
+
+            <h3 id="ps-panels">Photoshop 2026 – Main Panels (Tabs) Explained</h3>
+            <p>Panels appear on the right (or wherever you dock them). Each tab gives you different controls.</p>
+
+            <h4>Layers Panel</h4>
+            <p>The <strong>Layers</strong> panel lists every layer in your document from top to bottom (top of the list = front of the image). You can:</p>
+            <ul>
+              <li>Click a layer to select it (your edits apply to that layer).</li>
+              <li>Drag layers to reorder them (change what is in front).</li>
+              <li>Show/hide a layer with the eye icon.</li>
+              <li>Lock a layer (transparency, pixels, or position) so you don’t change it by mistake.</li>
+              <li>Create a new layer, duplicate, delete, or group layers into folders.</li>
+              <li>Change opacity and blend mode for special effects.</li>
+              <li>Add layer masks (black hides, white shows) to hide parts without erasing.</li>
+            </ul>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/200x240/3d5a80/ffffff?text=Layers" alt="Layers panel" width="200" height="auto">
+              <p class="fig-caption">Layers panel: list of layers, visibility (eye), lock, opacity, blend mode.</p>
+            </div>
+
+            <h4>Color / Swatches Panel</h4>
+            <p><strong>Color</strong> – Lets you pick the foreground and background colour using a colour slider or by typing values (e.g. RGB, HEX). <strong>Swatches</strong> – Preset colours you can click to apply. You can save your own colours as swatches for reuse.</p>
+
+            <h4>Properties Panel</h4>
+            <p>Shows <strong>properties of the selected layer or adjustment</strong>. For a normal layer you might see document info; for an adjustment layer (e.g. Levels, Curves) you get the adjustment controls here. Very useful for non-destructive editing.</p>
+
+            <h4>Adjustments Panel</h4>
+            <p>Quick buttons to add <strong>adjustment layers</strong>: Brightness/Contrast, Levels, Curves, Exposure, Vibrance, Hue/Saturation, Color Balance, Black & White, and more. Adjustment layers change how the image looks without changing the original pixels; you can edit or remove them anytime.</p>
+
+            <h4>Channels Panel</h4>
+            <p>Shows <strong>colour channels</strong> (e.g. Red, Green, Blue in RGB mode) and any saved Alpha channels (selections saved as masks). Advanced users use channels for precise selections and colour work.</p>
+
+            <h4>Paths Panel</h4>
+            <p>Stores <strong>vector paths</strong> you draw with the Pen tool. You can turn a path into a selection, fill it, or stroke it. Paths don’t use pixels until you use them.</p>
+
+            <h4>History Panel</h4>
+            <p>Lists your recent steps. Click a step to undo back to that point. You can also take a snapshot to jump back to a saved state later.</p>
+
+            <h4>Styles Panel</h4>
+            <p>Preset <strong>layer styles</strong> (drop shadow, glow, bevel, etc.). Click one to apply it to the selected layer. You can also create and save your own styles.</p>
+
+            <div class="info-box">You can open any panel from <strong>Window</strong> in the menu bar. If a panel is missing, go to Window and tick its name.</div>
+
+            <hr style="margin:2rem 0;border:0;border-top:2px solid var(--accent-light);">
+            <h3 id="ai-workspace">Adobe Illustrator 2026 – Workspace Overview</h3>
+            <p>Illustrator is for <strong>vector</strong> graphics (logos, icons, illustrations). Its workspace is similar to Photoshop:</p>
+            <ul>
+              <li><strong>Menu bar</strong> (top) – File, Edit, Object, Type, Select, Effect, View, Window, Help.</li>
+              <li><strong>Control panel</strong> (below menu bar) – Shows options for the selected tool or object (fill, stroke, opacity, etc.).</li>
+              <li><strong>Tools panel</strong> (left) – Vector drawing and selection tools. Click and hold icons to see hidden tools.</li>
+              <li><strong>Artboard</strong> (centre) – The printable/exportable area. You can have multiple artboards in one document (e.g. different sizes for different outputs).</li>
+              <li><strong>Panels</strong> (right) – Layers, Properties, Color, Swatches, Pathfinder, etc.</li>
+            </ul>
+            <div class="example-img-wrap">
+              <img src="https://placehold.co/600x340/300050/ffffff?text=Illustrator+Workspace" alt="Illustrator 2026 workspace" width="600" height="auto">
+              <p class="fig-caption">Illustrator 2026 workspace: Control bar, Tools panel (left), artboard (centre), panels (right).</p>
+            </div>
+
+            <h3 id="ai-tools">Illustrator 2026 – Tools Panel (All Tools Explained)</h3>
+            <p>Illustrator tools are grouped into six categories. Below is what each tool does.</p>
+
+            <h4>1. Select Tools</h4>
+            <ul>
+              <li><strong>Selection (V)</strong> – Select and move whole objects or groups. Drag to resize with the bounding box.</li>
+              <li><strong>Direct Selection (A)</strong> – Select and move <strong>anchor points and path segments</strong>. Use this to reshape paths (curves and corners).</li>
+              <li><strong>Group Selection</strong> – Click once to select one object in a group; click again to add the whole group. Good when objects are grouped.</li>
+              <li><strong>Magic Wand (Y)</strong> – Select objects that share an attribute (e.g. same fill colour, same stroke). Click one object; others with the same attribute get selected.</li>
+              <li><strong>Lasso (Q)</strong> – Draw a freehand shape around the elements you want to select. Good for selecting several objects at once.</li>
+              <li><strong>Artboard (Shift+O)</strong> – Select, create, resize and arrange artboards. Use this to define the areas you will export or print.</li>
+            </ul>
+
+            <h4>2. Draw Tools</h4>
+            <ul>
+              <li><strong>Pen (P)</strong> – Draw precise paths with anchor points and direction handles. Click for corners; click and drag for curves. The main tool for vector shapes.</li>
+              <li><strong>Pencil (N)</strong> – Draw freehand paths. Illustrator smooths the path. Good for sketch-like lines.</li>
+              <li><strong>Curvature (Shift+~)</strong> – Draw and edit smooth curves by clicking; easier than the Pen for simple curved shapes.</li>
+              <li><strong>Add Anchor Point (+)</strong> – Click on a path to add a new anchor point (for more control).</li>
+              <li><strong>Delete Anchor Point (-)</strong> – Click an anchor point to remove it from the path.</li>
+              <li><strong>Anchor Point (Shift+C)</strong> – Convert corner points to smooth points and move direction handles. Use to adjust curves.</li>
+              <li><strong>Rectangle (M)</strong> – Draw rectangles. Same slot: Rounded Rectangle, Ellipse, Polygon, Star, Flare. Or use the shape tools from the toolbar.</li>
+              <li><strong>Line Segment (\)</strong> – Draw straight lines. Hold Shift for 45° angles.</li>
+            </ul>
+
+            <h4>3. Navigate Tools</h4>
+            <ul>
+              <li><strong>Hand (H)</strong> – Drag to move the view around the canvas (pan). Double-click Hand to fit all artboards in view.</li>
+              <li><strong>Rotate View (Shift+H)</strong> – Rotate the view of the canvas for easier drawing; does not rotate the artwork.</li>
+              <li><strong>Zoom (Z)</strong> – Click to zoom in, Alt+click to zoom out. Or drag to zoom into an area.</li>
+            </ul>
+
+            <h4>4. Paint Tools</h4>
+            <ul>
+              <li><strong>Gradient (G)</strong> – Apply or edit a gradient fill. Drag on the object to set direction and length.</li>
+              <li><strong>Mesh (U)</strong> – Create gradient meshes for smooth colour shading on shapes (advanced).</li>
+              <li><strong>Shape Builder (Shift+M)</strong> – Merge or cut overlapping shapes by clicking regions. Great for building complex shapes from simple ones.</li>
+              <li><strong>Live Paint Bucket (K)</strong> – Turn paths into a Live Paint group, then click areas to fill them with colour. Good for colouring illustrations.</li>
+              <li><strong>Live Paint Selection (Shift+L)</strong> – Select edges or faces inside a Live Paint group to change their fill or stroke.</li>
+            </ul>
+
+            <h4>5. Text Tools</h4>
+            <ul>
+              <li><strong>Type (T)</strong> – Click to add point text, or drag to create a text area (paragraph text).</li>
+              <li><strong>Area Type</strong> – Click the edge of a shape to flow text inside the shape.</li>
+              <li><strong>Type on a Path</strong> – Click a path to type along that path (curved or circular text).</li>
+              <li><strong>Vertical Type</strong> – Type text in a vertical line.</li>
+              <li><strong>Touch Type (Shift+T)</strong> – Select and move, scale or rotate individual characters in text for custom typography.</li>
+            </ul>
+
+            <h4>6. Modify Tools</h4>
+            <ul>
+              <li><strong>Rotate (R)</strong> – Rotate an object around a reference point (default: centre). Double-click the tool to set the angle numerically.</li>
+              <li><strong>Reflect (O)</strong> – Flip an object horizontally or vertically over a reference point.</li>
+              <li><strong>Scale (S)</strong> – Resize an object. Double-click to scale by percentage or to scale strokes and effects.</li>
+              <li><strong>Shear</strong> – Slant (skew) an object. Useful for perspective or italic effects.</li>
+              <li><strong>Width (Shift+W)</strong> – Change the thickness of a stroke along the path (variable width strokes).</li>
+              <li><strong>Reshape</strong> – Drag an anchor point to stretch part of a path while keeping the rest fixed.</li>
+            </ul>
+
+            <div class="example-img-wrap">
+              <p class="fig-caption">Illustrator Tools panel: six categories – Select, Draw, Navigate, Paint, Text, Modify.</p>
+            </div>
+
+            <h3 id="ai-panels">Illustrator 2026 – Main Panels (Tabs) Explained</h3>
+
+            <h4>Layers Panel</h4>
+            <p>Like Photoshop, but for <strong>vector objects</strong>. Each layer can contain many paths and groups. You can expand a layer to see sub-layers, reorder, lock, hide, and create new layers. Use layers to organise complex artwork (e.g. background, characters, text).</p>
+
+            <h4>Properties Panel</h4>
+            <p>Shows <strong>options for the selected object</strong>: fill colour, stroke colour and weight, opacity, and quick actions (e.g. align, arrange). Very useful for fast edits without opening many panels.</p>
+
+            <h4>Color Panel</h4>
+            <p>Mix and choose colours using sliders (RGB, CMYK, etc.). The colour you set applies to the selected object’s fill or stroke (depending on which is active in the Tools panel).</p>
+
+            <h4>Swatches Panel</h4>
+            <p>Preset and saved colours, gradients and patterns. Click to apply to the selected object. You can create and save swatches from the Color panel for brand colours or palettes.</p>
+
+            <h4>Pathfinder Panel</h4>
+            <p>Combines shapes in different ways: <strong>Unite</strong> (merge), <strong>Minus Front</strong> (cut out), <strong>Intersect</strong> (keep overlap only), <strong>Exclude</strong> (remove overlap), and more. Essential for building logos and complex vector art from simple shapes.</p>
+
+            <h4>Appearance Panel</h4>
+            <p>Shows all <strong>fills, strokes and effects</strong> on the selected object. You can reorder them, turn them on/off, and edit each one. Good for understanding and changing complex styling.</p>
+
+            <h4>Align Panel</h4>
+            <p>Align or distribute selected objects (e.g. align left, centre, distribute spacing). Use this for clean layouts and even spacing.</p>
+
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Quick revision</strong>
+              <ul class="mb-0 mt-1" style="list-style:none;padding-left:0;"><li>• Photoshop: for <strong>raster</strong> (photos, pixel art). Main tools: selection, brush, clone stamp, pen, text.</li><li>• Illustrator: for <strong>vector</strong> (logos, icons). Main tools: Pen, shapes, Selection/Direct Selection, Type, Pathfinder.</li><li>• Both: Layers panel to organise; Color/Swatches for colour; Properties for the selected item.</li></ul>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 6: Types of graphics (Raster and Vector - after Photoshop tools) -->
+        <section id="mod6" class="module-block">
+          <h2 class="module-title"><i class="fas fa-shapes me-2"></i> 6. Types of Graphics</h2>
+
+          <article id="ch9" class="chapter-card">
+            <h2><span class="ch-num">9</span> Raster and Vector Graphics</h2>
+            <p><strong>Learning focus:</strong> Difference between raster (pixel) and vector (math-based) graphics; when to use each.</p>
+            <h3>Raster Graphics</h3>
+            <p><strong>Raster</strong> images are made of tiny coloured squares called <strong>pixels</strong>. Each pixel has one colour. Photos from cameras and phones are raster. File types: JPEG, PNG, BMP, TIFF. If you zoom in a lot, you see the squares and the image looks blocky.</p>
+            <h3>Vector Graphics</h3>
+            <p><strong>Vector</strong> graphics are made of shapes described by maths (lines, curves, fills). They can be scaled to any size without losing sharpness. Logos and illustrations are often vector. File types: SVG, AI, EPS. Editing is done by moving points and curves.</p>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:320px;">
+                <g transform="translate(20,10)">
+                  <text x="40" y="0" text-anchor="middle" font-size="11" font-weight="bold" fill="#5b21b6">Raster (pixels)</text>
+                  <rect x="0" y="10" width="30" height="30" fill="#7c3aed"/><rect x="30" y="10" width="30" height="30" fill="#a78bfa"/>
+                  <rect x="0" y="40" width="30" height="30" fill="#c4b5fd"/><rect x="30" y="40" width="30" height="30" fill="#7c3aed"/>
+                </g>
+                <g transform="translate(170,10)">
+                  <text x="75" y="0" text-anchor="middle" font-size="11" font-weight="bold" fill="#5b21b6">Vector (paths)</text>
+                  <path d="M30 40 L75 10 L120 40 L75 70 Z" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                  <circle cx="75" cy="40" r="25" fill="none" stroke="#a78bfa" stroke-width="2"/>
+                </g>
+                <text x="160" y="95" text-anchor="middle" fill="#64748b" font-size="9">Raster = grid of pixels; Vector = shapes that scale</text>
+              </svg>
+              <p class="fig-caption">Raster vs vector: pixels vs scalable shapes.</p>
+            </div>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Raster</th><th>Vector</th></tr></thead>
+                <tbody>
+                  <tr><td>Pixels; fixed resolution</td><td>Maths; scales without loss</td></tr>
+                  <tr><td>Photos, complex images</td><td>Logos, icons, typography</td></tr>
+                  <tr><td>JPEG, PNG, TIFF</td><td>SVG, AI, EPS</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol style="margin:0.5rem 0 0 1.25rem;"><li>Why is a logo often made as vector?</li><li>What happens when you zoom into a raster image too much?</li></ol>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 7: Color theory -->
+        <section id="mod7" class="module-block">
+          <h2 class="module-title"><i class="fas fa-fill-drip me-2"></i> 7. Color Theory</h2>
+
+          <article id="ch10" class="chapter-card">
+            <h2><span class="ch-num">10</span> Color Theory: Wheel, Warm &amp; Cool, Tint &amp; Shade, Primary &amp; Secondary, RGB &amp; CMYK</h2>
+            <p><strong>Learning focus:</strong> How colour works in design: the colour wheel, warm and cool colours, tint and shade, primary and secondary colours, and the difference between RGB (screen) and CMYK (print).</p>
+
+            <h3>The Colour Wheel</h3>
+            <p>The <strong>colour wheel</strong> is a circular diagram that shows how colours relate to each other. It helps you choose colours that look good together. The wheel is built from <strong>primary</strong> and <strong>secondary</strong> colours arranged in a circle.</p>
+            <ul>
+              <li><strong>Complementary colours</strong> – Opposite each other on the wheel (e.g. red and green, blue and orange). They create strong contrast and make each other stand out. Use for emphasis but avoid large areas of both.</li>
+              <li><strong>Analogous colours</strong> – Next to each other on the wheel (e.g. blue, blue‑green, green). They feel harmonious and calm. Good for backgrounds and smooth visuals.</li>
+              <li><strong>Triadic colours</strong> – Three colours evenly spaced (e.g. red, yellow, blue). They give a balanced but lively look.</li>
+            </ul>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:200px;">
+                <defs>
+                  <linearGradient id="cw" gradientUnits="userSpaceOnUse" x1="100" y1="0" x2="100" y2="200">
+                    <stop offset="0" stop-color="#ef4444"/><stop offset="0.17" stop-color="#f97316"/><stop offset="0.33" stop-color="#eab308"/>
+                    <stop offset="0.5" stop-color="#22c55e"/><stop offset="0.67" stop-color="#06b6d4"/><stop offset="0.83" stop-color="#3b82f6"/>
+                    <stop offset="1" stop-color="#8b5cf6"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="url(#cw)" stroke-width="12"/>
+                <text x="100" y="55" text-anchor="middle" font-size="10" fill="#374151">Red</text>
+                <text x="155" y="105" text-anchor="middle" font-size="10" fill="#374151">Green</text>
+                <text x="100" y="160" text-anchor="middle" font-size="10" fill="#374151">Blue</text>
+                <text x="45" y="105" text-anchor="middle" font-size="10" fill="#374151">Cyan</text>
+                <text x="100" y="195" text-anchor="middle" fill="#64748b" font-size="8">Colour wheel: complementary = opposite; analogous = next to each other</text>
+              </svg>
+              <p class="fig-caption">Colour wheel: complementary colours are opposite; analogous are next to each other.</p>
+            </div>
+
+            <h3>Primary and Secondary Colours</h3>
+            <p><strong>Primary colours</strong> are colours that cannot be made by mixing other colours. All other colours can be made from them.</p>
+            <ul>
+              <li><strong>In light (additive)</strong> – Red, Green, Blue (RGB). Mixing light: red + green = yellow; red + blue = magenta; green + blue = cyan; all three = white. Used for screens (monitors, phones, projectors).</li>
+              <li><strong>In paint/print (subtractive)</strong> – Red, Yellow, Blue (traditional). Or in professional print: <strong>Cyan, Magenta, Yellow</strong> (CMY). Mixing pigments: cyan + magenta = blue; cyan + yellow = green; magenta + yellow = red. Used for printing and paint.</li>
+            </ul>
+            <p><strong>Secondary colours</strong> are made by mixing two primary colours:</p>
+            <ul>
+              <li>Red + Yellow = <strong>Orange</strong>; Yellow + Blue = <strong>Green</strong>; Blue + Red = <strong>Violet/Purple</strong> (traditional model).</li>
+              <li>In RGB: Green + Blue = Cyan; Red + Blue = Magenta; Red + Green = Yellow.</li>
+            </ul>
+            <div class="info-box">Primary = cannot be mixed from others. Secondary = mix of two primaries. The colour wheel is usually drawn with primaries and secondaries in order: Red → Orange → Yellow → Green → Blue → Violet → back to Red.</div>
+
+            <h3>Warm and Cool Colours</h3>
+            <p>Colours are often grouped into <strong>warm</strong> and <strong>cool</strong>.</p>
+            <ul>
+              <li><strong>Warm colours</strong> – Red, orange, yellow. They remind us of sun, fire, heat. They feel energetic, urgent, or friendly. Use for call-to-action buttons, sale banners, food, excitement.</li>
+              <li><strong>Cool colours</strong> – Green, blue, violet (purple). They remind us of sky, water, grass, shadow. They feel calm, professional, or cold. Use for trust, tech, health, relaxation.</li>
+            </ul>
+            <p class="simple-english"><strong>In simple words:</strong> Warm = fire and sun (red, orange, yellow). Cool = water and sky (green, blue, purple). Choose warm when you want energy; choose cool when you want calm or trust.</p>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:260px;">
+                <rect x="10" y="10" width="70" height="40" fill="#ef4444"/><rect x="85" y="10" width="70" height="40" fill="#f97316"/><rect x="160" y="10" width="70" height="40" fill="#eab308"/>
+                <text x="45" y="55" text-anchor="middle" font-size="9" fill="#374151">Warm</text>
+                <rect x="10" y="10" width="70" height="40" fill="none" stroke="#333" stroke-width="1"/>
+                <rect x="180" y="10" width="70" height="40" fill="#22c55e"/><rect x="180" y="10" width="35" height="40" fill="#06b6d4"/><rect x="215" y="10" width="35" height="40" fill="#3b82f6"/>
+                <text x="215" y="55" text-anchor="middle" font-size="9" fill="#374151">Cool</text>
+              </svg>
+              <p class="fig-caption">Warm: red, orange, yellow. Cool: green, cyan, blue.</p>
+            </div>
+
+            <h3>Tint, Shade and Tone</h3>
+            <p>You can change a colour by adding white, black, or grey:</p>
+            <ul>
+              <li><strong>Tint</strong> – Colour + <strong>white</strong>. The colour becomes lighter and softer (e.g. red → pink). Tints feel light and gentle.</li>
+              <li><strong>Shade</strong> – Colour + <strong>black</strong>. The colour becomes darker (e.g. red → dark red / maroon). Shades feel deeper and heavier.</li>
+              <li><strong>Tone</strong> – Colour + <strong>grey</strong> (or both black and white). The colour becomes less vivid, more muted. Tones feel subtle and professional.</li>
+            </ul>
+            <p class="simple-english"><strong>In simple words:</strong> Tint = add white (lighter). Shade = add black (darker). Tone = add grey (muted). Design software often lets you pick a colour then move a slider for lighter/darker (tint/shade).</p>
+            <div class="diagram-wrap">
+              <svg viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg" width="100%" style="max-width:240px;">
+                <rect x="10" y="10" width="50" height="45" fill="#fecaca"/>
+                <rect x="70" y="10" width="50" height="45" fill="#ef4444"/>
+                <rect x="130" y="10" width="50" height="45" fill="#7f1d1d"/>
+                <text x="35" y="62" text-anchor="middle" font-size="8" fill="#374151">Tint (+white)</text>
+                <text x="95" y="62" text-anchor="middle" font-size="8" fill="#374151">Pure</text>
+                <text x="155" y="62" text-anchor="middle" font-size="8" fill="#fff">Shade (+black)</text>
+              </svg>
+              <p class="fig-caption">Same colour (red): tint (light), pure, shade (dark).</p>
+            </div>
+
+            <h3>RGB (Red, Green, Blue)</h3>
+            <p><strong>RGB</strong> is the colour model used for <strong>screens</strong>: monitors, TVs, phones, tablets, projectors. Light is added: Red + Green + Blue light in different amounts make all the colours you see. Each channel is usually a number from 0 to 255 (e.g. R=255, G=0, B=0 = red; R=0, G=0, B=0 = black; R=255, G=255, B=255 = white).</p>
+            <div class="info-box">Use <strong>RGB</strong> when your design will be seen on screen (websites, apps, presentations, social media). In design software, choose “RGB” or “Screen” colour mode for digital work.</div>
+
+            <h3>CMYK (Cyan, Magenta, Yellow, Key/Black)</h3>
+            <p><strong>CMYK</strong> is the colour model used for <strong>printing</strong>. Ink is subtracted: cyan, magenta, yellow and black inks are printed on white paper. Each is usually a percentage (0% to 100%). K = “key” (black) – it gives sharp text and dark areas; CMY alone would make a muddy dark.</p>
+            <ul>
+              <li><strong>C</strong> – Cyan (blue‑green).</li>
+              <li><strong>M</strong> – Magenta (pink‑red).</li>
+              <li><strong>Y</strong> – Yellow.</li>
+              <li><strong>K</strong> – Black (key).</li>
+            </ul>
+            <p>Colours on screen (RGB) can look different when printed (CMYK) because screens emit light and print reflects light. Bright neon-like colours on screen may not print as bright.</p>
+            <div class="info-box">Use <strong>CMYK</strong> when your design will be printed (brochures, posters, business cards, magazines). In design software, choose “CMYK” or “Print” colour mode and 300 DPI for good print quality.</div>
+
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>RGB</th><th>CMYK</th></tr></thead>
+                <tbody>
+                  <tr><td>For screens (web, app, TV)</td><td>For print (paper, fabric)</td></tr>
+                  <tr><td>Additive (light added)</td><td>Subtractive (ink on paper)</td></tr>
+                  <tr><td>Red, Green, Blue</td><td>Cyan, Magenta, Yellow, Black</td></tr>
+                  <tr><td>Values 0–255 per channel</td><td>Percentages 0–100% per channel</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p>Use a limited palette (e.g. 2–4 colours) for a clear, professional look. Consider meaning: blue often suggests trust; red can mean urgency or passion; green can mean nature or go. When preparing for print, convert your file to CMYK and check with the printer.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol style="margin:0.5rem 0 0 1.25rem;">
+                <li>What is the difference between a tint and a shade?</li>
+                <li>When should you use RGB and when CMYK?</li>
+                <li>Name the primary colours in light (RGB) and in print (CMYK).</li>
+              </ol>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 8: Use of graphic design software -->
+        <section id="mod8" class="module-block">
+          <h2 class="module-title"><i class="fas fa-tools me-2"></i> 8. Use of Graphic Design Software</h2>
+
+          <article id="ch11" class="chapter-card">
+            <h2><span class="ch-num">11</span> Tools, Packaging, Import/Export and Slicing</h2>
+            <p><strong>Learning focus:</strong> Using graphic design tools; packaging; importing and exporting graphics/images; slicing.</p>
+            <h3>Graphic Design Tools</h3>
+            <p>Use the tools panel to: draw shapes (rectangles, circles, paths), add and format text, apply fills and strokes, align and group objects, and work with layers. Practice each tool on a simple document.</p>
+            <h3>Packaging</h3>
+            <p><strong>Packaging</strong> (in some software) means saving the project and copying all linked images and fonts into one folder so you can move or send the project without broken links.</p>
+            <h3>Import and Export</h3>
+            <p><strong>Import</strong> – bring images or graphics from files (e.g. JPEG, PNG, SVG) into your design. <strong>Export</strong> – save your design in a format for print (e.g. PDF, high-res PNG) or for web (e.g. PNG, JPEG, SVG). Choose the format that matches how the design will be used.</p>
+            <h3>Slicing</h3>
+            <p><strong>Slicing</strong> means cutting a design into smaller pieces (slices), often for web use. Each slice can be exported as a separate image. Useful for buttons, banners or when you need only part of the design as an image.</p>
+            <div class="activity-box"><strong><i class="fas fa-pencil-alt me-1"></i> Activity</strong>
+              <p class="mb-0 mt-1">In your design software, import an image, add a shape and text, then export the page as PDF and as PNG.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 9: Ethical uses -->
+        <section id="mod9" class="module-block">
+          <h2 class="module-title"><i class="fas fa-balance-scale me-2"></i> 9. Ethical Uses of Graphics and Images</h2>
+
+          <article id="ch12" class="chapter-card">
+            <h2><span class="ch-num">12</span> Copyright and Plagiarism</h2>
+            <p><strong>Learning focus:</strong> Using others’ work legally and fairly; copyright and plagiarism.</p>
+            <h3>Copyright</h3>
+            <p><strong>Copyright</strong> is the law that gives the creator the right to control how their work (images, text, music, etc.) is used. You cannot use someone else’s image, logo or design for your project without permission or a licence, unless it is clearly marked as free to use (e.g. some Creative Commons or public domain).</p>
+            <div class="info-box">Always check the licence of images and fonts. Use stock photo sites that offer free or licensed images, or create your own graphics.</div>
+            <h3>Plagiarism</h3>
+            <p><strong>Plagiarism</strong> means presenting someone else’s work as your own. In design, copying another person’s layout, logo or image without credit or permission is plagiarism and can be illegal. Be original, or get permission and give credit where required.</p>
+            <p class="simple-english"><strong>In simple words:</strong> If you did not make it and you don’t have permission, don’t use it as if it were yours. When in doubt, create your own or use clearly licensed content.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol style="margin:0.5rem 0 0 1.25rem;"><li>What is the difference between copyright and plagiarism?</li><li>Where can you find images that are safe to use in projects?</li></ol>
+            </div>
+          </article>
+        </section>
+
+        <!-- SECTION 10: Practical and printing -->
+        <section id="mod10" class="module-block">
+          <h2 class="module-title"><i class="fas fa-print me-2"></i> 10. Practical Work and Preparing for Printing</h2>
+
+          <article id="ch13" class="chapter-card">
+            <h2><span class="ch-num">13</span> Image Editing Practical and Preparing for Print</h2>
+            <p><strong>Learning focus:</strong> Using image editing software; preparing text, images and graphics for different print types.</p>
+            <h3>Image Editing Practical</h3>
+            <p>Practice: opening an image, cropping and resizing, adjusting brightness/contrast and colour, using layers, making selections, and exporting in the right format and resolution for print or web.</p>
+            <h3>Preparing for Printing</h3>
+            <p>Different print methods need different file setup:</p>
+            <ul>
+              <li><strong>Offset printing</strong> – high volume (e.g. books, brochures). Use CMYK colour mode, 300 DPI, and supply PDF with bleed and crop marks if the printer asks.</li>
+              <li><strong>Digital printing</strong> – smaller runs, fast. Often PDF or high-res JPEG/PNG; 300 DPI for quality.</li>
+              <li><strong>Screen printing</strong> – used for T-shirts, posters. Often one or few colours; design may need to be simplified into separate colour layers.</li>
+            </ul>
+            <p>Always confirm with the printer: file format, colour mode (RGB vs CMYK), resolution and page size.</p>
+          </article>
+
+          <article id="ch14" class="chapter-card">
+            <h2><span class="ch-num">14</span> Practical Assignments</h2>
+            <p><strong>Learning focus:</strong> Summary of practical tasks from the module.</p>
+            <div class="activity-box">
+              <strong>Practical 01</strong> – Prepare a graphic design for a given scenario (e.g. creating a poster with a logo). Use text, graphics and images; apply design rules (layout, colour, hierarchy).
+            </div>
+            <div class="activity-box">
+              <strong>Practical 02</strong> – Prepare a banner for a given scenario with images, graphics and text. Plan layout and alignment; export in a suitable format for print or web.
+            </div>
+            <div class="activity-box">
+              <strong>Visit and proposal</strong> – Visit a company, collect their requirement for printing (e.g. brochure, poster, business cards), and prepare a proposal or quotation for the job. Include scope, deliverables and basic cost/time if required.
+            </div>
+          </article>
+        </section>
+
+        <p class="page-footer"><i class="fas fa-book me-1"></i> K72T001M08 – Creative Design with Text, Graphics and Images | Level 05</p>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    var chapters = [
+      {id:"ch0", title:"Module Overview"},
+      {id:"ch1", title:"Ch 1 – Font, Size, Formats, Effects"},
+      {id:"ch2", title:"Ch 2 – Importance of Graphic Design"},
+      {id:"ch3", title:"Ch 3 – Sketching, Prototyping, Design Rules"},
+      {id:"ch4", title:"Ch 4 – Tools Panel and Layers"},
+      {id:"ch5", title:"Ch 5 – Scanning and OCR"},
+      {id:"ch6", title:"Ch 6 – Page Layout for Print"},
+      {id:"ch7", title:"Ch 7 – Image Editing Basics"},
+      {id:"ch8", title:"Ch 8 – Photoshop & Illustrator 2026 Tools & Panels"},
+      {id:"ch9", title:"Ch 9 – Raster and Vector"},
+      {id:"ch10", title:"Ch 10 – Color Theory"},
+      {id:"ch11", title:"Ch 11 – Graphic Design Software Use"},
+      {id:"ch12", title:"Ch 12 – Copyright and Plagiarism"},
+      {id:"ch13", title:"Ch 13 – Preparing for Print"},
+      {id:"ch14", title:"Ch 14 – Practical Assignments"}
+    ];
+    var list = document.getElementById("tocList");
+    if (list) {
+      chapters.forEach(function(c) {
+        var a = document.createElement("a");
+        a.href = "#" + c.id;
+        a.setAttribute("title", c.title);
+        var num = c.id.replace("ch", "");
+        var label = c.title.replace(/^Ch \d+\s*[–\-]\s*/i, "").trim() || c.title;
+        a.innerHTML = "<span class=\"ch-num-side\">" + num + "</span><span class=\"ch-title-side\">" + label + "</span>";
+        list.appendChild(a);
+      });
+    }
+    var tocToggle = document.getElementById("tocToggle");
+    var tocSidebar = document.getElementById("tocSidebar");
+    if (tocToggle && tocSidebar) {
+      tocToggle.addEventListener("click", function() {
+        tocSidebar.classList.toggle("toc-open");
+        tocToggle.setAttribute("aria-expanded", tocSidebar.classList.contains("toc-open"));
+        var chev = document.getElementById("tocChevron");
+        if (chev) chev.style.transform = tocSidebar.classList.contains("toc-open") ? "rotate(180deg)" : "rotate(0deg)";
+      });
+    }
+    if (document.getElementById("tocList") && tocSidebar) {
+      document.getElementById("tocList").addEventListener("click", function(e) {
+        var link = e.target.closest("a");
+        if (link && link.getAttribute("href") && link.getAttribute("href").indexOf("#") === 0) {
+          tocSidebar.classList.remove("toc-open");
+          if (tocToggle) tocToggle.setAttribute("aria-expanded", "false");
+          var chev = document.getElementById("tocChevron");
+          if (chev) chev.style.transform = "rotate(0deg)";
+        }
+      });
+    }
+  </script>
+</body>
+</html>

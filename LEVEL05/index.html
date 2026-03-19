@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVQ Level 5 Diploma in ICT - Course Index</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-blue: #2563eb;
+      --primary-dark: #1e40af;
+      --accent-purple: #7c3aed;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-brand i {
+      font-size: 2rem;
+    }
+
+    .navbar-nav .nav-link {
+      color: rgba(255,255,255,0.9) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      margin: 0 0.25rem;
+    }
+
+    .navbar-nav .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white !important;
+      transform: translateY(-2px);
+    }
+
+    .navbar-toggler {
+      border: none;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: var(--bg-gradient);
+      color: white;
+      padding: 60px 0;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      margin-top: 1rem;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Course Info Cards */
+    .info-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid var(--primary-blue);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .info-card h3 {
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .info-card .icon {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+
+    /* Module Cards */
+    .module-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary-blue);
+      height: 100%;
+    }
+
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      border-top-color: var(--accent-purple);
+    }
+
+    .module-card .module-code {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-card .module-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .module-card .module-type {
+      display: inline-block;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: var(--primary-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .module-card .module-hours {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .module-card .hour-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .module-card .hour-item i {
+      color: var(--primary-blue);
+    }
+
+    .module-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .module-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+      color: white;
+    }
+
+    /* Semester Section */
+    .semester-section {
+      margin-bottom: 3rem;
+    }
+
+    .semester-header {
+      background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .semester-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* Assessment Plan Section */
+    .assessment-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+
+    .assessment-section h3 {
+      color: var(--primary-blue);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .assessment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .assessment-table th,
+    .assessment-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .assessment-table th {
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .assessment-table tr:hover {
+      background: #f8fafc;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-section .subtitle {
+        font-size: 1rem;
+      }
+
+      .module-card {
+        margin-bottom: 1rem;
+      }
+
+      .semester-header h2 {
+        font-size: 1.5rem;
+      }
+
+      body {
+        padding-top: 70px;
+      }
+    }
+
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary-blue);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#home">
+        <i class="fas fa-graduation-cap"></i>
+        <span>NVQ Level 5 ICT</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#semester1">Semester 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#semester2">Semester 2</a>
+          </li>
+         
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <h1>NVQ LEVEL 5 DIPLOMA COURSE</h1>
+      <p class="subtitle">IN INFORMATION AND COMMUNICATION TECHNOLOGY</p>
+      <div class="badge">
+        <i class="fas fa-code"></i> CBT Curriculum Code No: K72T001 - Version 2
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    
+    <!-- Course Overview -->
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3>Course Overview</h3>
+          <p>Comprehensive diploma program covering modern ICT concepts, software development, web technologies, and workplace skills.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Total Hours</h3>
+          <p><strong>1,500 Notional Hours</strong> across two semesters, including lectures, practical sessions, and self-study.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-card">
+          <div class="icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>Certification</h3>
+          <p>NVQ Level 5 Diploma in Information and Communication Technology upon successful completion.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semester 1 -->
+    <section id="semester1" class="semester-section">
+      <div class="semester-header">
+        <h2><i class="fas fa-calendar-alt"></i> Semester 1</h2>
+        <p class="mb-0">Total: 750 Notional Hours | 416 Lectures/Tutorials | 249 Practical/Industry Visits | 85 Self-study</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M01</div>
+            <div class="module-title">User Requirements for Software Solution</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="Version02/K72t001m01/notes.html" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+            
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M02</div>
+            <div class="module-title">System Analysis and Design</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M03</div>
+            <div class="module-title">Mathematics For Computing</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 25 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 20 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 0 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 5 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+<br><br>
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M04</div>
+            <div class="module-title">Digital Electronics and Computer Architecture</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 75 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 42 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 18 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 15 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M05</div>
+            <div class="module-title">Object Oriented Programming Concepts</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 54 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 36 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="Version02/K72t001m05/notes.html" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M06</div>
+            <div class="module-title">Data Structures and Algorithms</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M07</div>
+            <div class="module-title">Web Site Design and Hosting</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M08</div>
+            <div class="module-title">Creative Design for Print Media</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 30 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 60 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">EMPM02</div>
+            <div class="module-title">Workplace Communications Management</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 50 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 30 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 15 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 5 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Semester 2 -->
+    <section id="semester2" class="semester-section">
+      <div class="semester-header">
+        <h2><i class="fas fa-calendar-alt"></i> Semester 2</h2>
+        <p class="mb-0">Total: 750 Notional Hours | 416 Lectures/Tutorials | 246 Practical/Industry Visits | 88 Self-study</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M09</div>
+            <div class="module-title">Software Testing & Quality Assurance</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 75 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 42 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 18 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 15 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M10</div>
+            <div class="module-title">Web Application Development</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M11</div>
+            <div class="module-title">Database Management Systems</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M12</div>
+            <div class="module-title">Multimedia Production</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 30 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 60 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M13</div>
+            <div class="module-title">Computer Networks</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 100 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 60 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 30 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M14</div>
+            <div class="module-title">Cyber Security and Cloud Computing</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 50 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 24 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 18 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 8 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">K72T001M15</div>
+            <div class="module-title">Developing Mobile App</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 75 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 50 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 20 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 5 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">EMPM01</div>
+            <div class="module-title">Workplace Information Management</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 75 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 45 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 20 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="module-card">
+            <div class="module-code">EMPM03</div>
+            <div class="module-title">Planning and Scheduling Work at Workplace</div>
+            <span class="module-type">Compulsory</span>
+            <div class="module-hours">
+              <div class="hour-item"><i class="fas fa-clock"></i> 75 hrs</div>
+              <div class="hour-item"><i class="fas fa-chalkboard-teacher"></i> 45 L/T</div>
+              <div class="hour-item"><i class="fas fa-laptop-code"></i> 20 P/I</div>
+              <div class="hour-item"><i class="fas fa-book"></i> 10 SS</div>
+            </div>
+            <a href="" class="module-link">Teaching Material <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lesson Plan Section -->
+    <section id="lesson-plan" class="mb-5">
+      <div class="info-card">
+        <h3><i class="fas fa-chalkboard-teacher"></i> Full Lesson Plan</h3>
+        <p>The course is structured across two semesters with comprehensive lesson plans for each module. Each module includes:</p>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>General Objectives:</strong> Overall learning goals for each module</li>
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>Specific Objectives:</strong> Detailed learning outcomes</li>
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>Teaching Methods:</strong> Lectures, tutorials, practical sessions, and industry visits</li>
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>Session Plans:</strong> Detailed breakdown of each teaching session</li>
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>Time Allocation:</strong> Structured distribution of notional hours</li>
+          <li style="margin-bottom: 0.75rem;"><i class="fas fa-check-circle text-success"></i> <strong>Learning Resources:</strong> Textbooks, online materials, and practical tools</li>
+        </ul>
+        <p class="mt-3"><strong>Note:</strong> Detailed lesson plans for each module are available by clicking on the respective module links above.</p>
+      </div>
+    </section>
+
+    <!-- Assessment Plan Section -->
+    <section id="assessment" class="mb-5">
+      <div class="assessment-section">
+        <h3><i class="fas fa-clipboard-check"></i> Assessment Plan</h3>
+        <p>The assessment strategy for NVQ Level 5 Diploma in ICT follows a comprehensive approach to evaluate both theoretical knowledge and practical skills.</p>
+        
+        <table class="assessment-table">
+          <thead>
+            <tr>
+              <th>Assessment Type</th>
+              <th>Description</th>
+              <th>Weightage</th>
+              <th>Timing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Continuous Assessment</strong></td>
+              <td>Regular assignments, quizzes, and practical exercises</td>
+              <td>30%</td>
+              <td>Throughout the semester</td>
+            </tr>
+            <tr>
+              <td><strong>Practical Assessments</strong></td>
+              <td>Hands-on projects, coding assignments, and lab work</td>
+              <td>40%</td>
+              <td>End of each module</td>
+            </tr>
+            <tr>
+              <td><strong>Written Examinations</strong></td>
+              <td>Theoretical knowledge tests covering module content</td>
+              <td>20%</td>
+              <td>Mid-semester and Final</td>
+            </tr>
+            <tr>
+              <td><strong>Project Work</strong></td>
+              <td>Comprehensive projects integrating multiple modules</td>
+              <td>10%</td>
+              <td>End of each semester</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="mt-4">
+          <h4 style="color: var(--primary-blue); margin-bottom: 1rem;">Assessment Criteria:</h4>
+          <ul style="list-style: none; padding-left: 0;">
+            <li style="margin-bottom: 0.75rem;"><i class="fas fa-star text-warning"></i> <strong>Knowledge Understanding:</strong> Ability to explain concepts and theories</li>
+            <li style="margin-bottom: 0.75rem;"><i class="fas fa-star text-warning"></i> <strong>Practical Application:</strong> Skills in implementing solutions</li>
+            <li style="margin-bottom: 0.75rem;"><i class="fas fa-star text-warning"></i> <strong>Problem Solving:</strong> Analytical and critical thinking abilities</li>
+            <li style="margin-bottom: 0.75rem;"><i class="fas fa-star text-warning"></i> <strong>Communication:</strong> Presentation and documentation skills</li>
+            <li style="margin-bottom: 0.75rem;"><i class="fas fa-star text-warning"></i> <strong>Professional Practice:</strong> Workplace readiness and ethics</li>
+          </ul>
+        </div>
+
+        <div class="mt-4 p-3" style="background: #f8fafc; border-radius: 8px; border-left: 4px solid var(--primary-blue);">
+          <p class="mb-0"><strong>Passing Criteria:</strong> Students must achieve a minimum of 50% overall marks and pass all compulsory modules to be awarded the NVQ Level 5 Diploma in ICT.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="mb-2"><strong>NVQ Level 5 Diploma in Information and Communication Technology</strong></p>
+      <p class="mb-0">CBT Curriculum Code: K72T001 | Version 2</p>
+      <p class="mt-2 mb-0"><small>&copy; 2024 All Rights Reserved</small></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+      } else {
+        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+      }
+    });
+  </script>
+</body>
+</html>

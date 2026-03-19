@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Testing - NVQ Level 5 ICT</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f5 100%);
+      padding-top: 70px;
+      line-height: 1.7;
+      color: #2d3748;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 0.75rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: translateX(-3px);
+    }
+
+    /* Module Header */
+    .module-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .module-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header .lead {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .content-card h2 {
+      color: #2563eb;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid #e0e7ff;
+    }
+
+    .content-card h3 {
+      color: #4f46e5;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-card h4 {
+      color: #6366f1;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-card ul, .content-card ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-card li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Diagram Container */
+    .diagram-container {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 2px solid #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    /* SVG Diagrams */
+    svg {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Info Boxes */
+    .info-box {
+      background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+      border-left: 4px solid #6366f1;
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .info-box.warning {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left-color: #f59e0b;
+    }
+
+    .info-box.success {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left-color: #10b981;
+    }
+
+    .info-box.danger {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left-color: #ef4444;
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    /* Icon Styling */
+    .icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .module-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .content-card {
+        padding: 1.5rem;
+      }
+
+      .content-card h2 {
+        font-size: 1.4rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .diagram-container {
+        padding: 1rem;
+      }
+    }
+
+    /* Section Numbering */
+    .section-number {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 35px;
+      font-weight: 700;
+      margin-right: 1rem;
+      font-size: 1rem;
+    }
+
+    /* Code/Example Blocks */
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+
+    /* Process Flow */
+    .process-step {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .process-step::before {
+      content: '→';
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #667eea;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .process-step:first-child::before {
+      display: none;
+    }
+
+    /* Questions Section */
+    .questions-section {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-left: 5px solid #0ea5e9;
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .questions-section h3 {
+      color: #0369a1;
+      border-bottom: 2px solid #0ea5e9;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-item {
+      background: white;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-left: 3px solid #0ea5e9;
+    }
+
+    .question-item strong {
+      color: #0369a1;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-item ol, .question-item ul {
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* STLC Phase Box */
+    .stlc-phase {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 5px solid #f59e0b;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stlc-phase h4 {
+      color: #92400e;
+      margin-bottom: 1rem;
+    }
+
+    .stlc-phase ul {
+      margin-left: 1.5rem;
+    }
+
+    .stlc-phase li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-bug me-2"></i>Software Testing - Level 5
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#section1">Test Needs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#section2">Test Process</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#section3">Test Life Cycle</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#section4">Test Techniques</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#section5">Test Administration</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#section6">Test Tools</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Module Header -->
+  <div class="module-header">
+    <div class="container text-center">
+      <h1><i class="fas fa-vial me-2"></i>Software Testing</h1>
+      <p class="lead">Comprehensive Guide to Software Testing Principles and Practices</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    
+    <!-- Section 1: Identify Test Needs -->
+    <div class="content-card" id="section1">
+      <h2><span class="section-number">1</span>Identify Test Needs</h2>
+      
+      <h3><i class="fas fa-search icon-box"></i>Identify Situation of Software System</h3>
+      <p>Understanding the software system's context is crucial for effective testing. This involves analyzing various aspects of the system environment and requirements. The situation analysis helps testers understand what they are testing, why they are testing it, and under what conditions the testing will occur.</p>
+      
+      <p><strong>Detailed Analysis Process:</strong> When identifying the situation of a software system, testers must conduct a comprehensive analysis that covers multiple dimensions. This process begins with gathering information from various sources including project documentation, stakeholder interviews, system architecture diagrams, and existing test documentation if available.</p>
+      
+      <p>The analysis should examine the system's purpose, its intended users, the business domain it operates in, and the technical environment. Understanding the system's criticality is essential - a banking system requires different testing approaches than a simple blog application. The regulatory and compliance requirements must also be identified, as these often dictate specific testing standards and procedures.</p>
+      
+      <div class="info-box">
+        <strong>Key Areas to Identify:</strong>
+        <ul>
+          <li><strong>System Architecture:</strong> Understanding the overall structure, components, and their interactions</li>
+          <li><strong>Technology Stack:</strong> Programming languages, frameworks, databases, and third-party integrations</li>
+          <li><strong>Business Context:</strong> Purpose of the system, target users, and business objectives</li>
+          <li><strong>Operating Environment:</strong> Hardware, software, network configurations, and deployment scenarios</li>
+          <li><strong>Regulatory Requirements:</strong> Compliance standards, security requirements, and industry regulations</li>
+          <li><strong>Performance Expectations:</strong> Expected load, response times, and scalability requirements</li>
+        </ul>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Software System Context Analysis</div>
+        <svg width="100%" height="300" viewBox="0 0 800 300">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <!-- Central System -->
+          <rect x="300" y="100" width="200" height="100" rx="10" fill="url(#grad1)" stroke="#4c1d95" stroke-width="2"/>
+          <text x="400" y="155" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Software System</text>
+          
+          <!-- Surrounding Contexts -->
+          <rect x="50" y="50" width="150" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="125" y="80" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Business Context</text>
+          
+          <rect x="600" y="50" width="150" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="675" y="80" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Technology Stack</text>
+          
+          <rect x="50" y="190" width="150" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="125" y="220" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Environment</text>
+          
+          <rect x="600" y="190" width="150" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="675" y="220" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Requirements</text>
+          
+          <!-- Connection Lines -->
+          <line x1="200" y1="80" x2="300" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="600" y1="80" x2="500" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="200" y1="220" x2="300" y2="170" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="600" y1="220" x2="500" y2="170" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowhead)"/>
+          
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-exclamation-triangle icon-box"></i>Identify Cause of Software Bug</h3>
+      <p>Understanding the root causes of software bugs helps in preventing them and designing better test cases. Bugs can originate from various sources throughout the software development lifecycle.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Bug Category</th>
+              <th>Common Causes</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Requirements Issues</strong></td>
+              <td>Ambiguous, incomplete, or changing requirements</td>
+              <td>Missing validation rules, unclear business logic</td>
+            </tr>
+            <tr>
+              <td><strong>Design Flaws</strong></td>
+              <td>Poor architecture, incorrect algorithms</td>
+              <td>Inefficient data structures, wrong design patterns</td>
+            </tr>
+            <tr>
+              <td><strong>Coding Errors</strong></td>
+              <td>Syntax errors, logic mistakes, typos</td>
+              <td>Off-by-one errors, null pointer exceptions</td>
+            </tr>
+            <tr>
+              <td><strong>Integration Issues</strong></td>
+              <td>Component incompatibility, API mismatches</td>
+              <td>Data format mismatches, version conflicts</td>
+            </tr>
+            <tr>
+              <td><strong>Environment Problems</strong></td>
+              <td>Configuration errors, resource limitations</td>
+              <td>Missing dependencies, insufficient memory</td>
+            </tr>
+            <tr>
+              <td><strong>Human Factors</strong></td>
+              <td>Miscommunication, time pressure, fatigue</td>
+              <td>Copy-paste errors, missed edge cases</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Bug Root Cause Analysis</div>
+        <svg width="100%" height="400" viewBox="0 0 700 400">
+          <defs>
+            <linearGradient id="bugGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Central Bug -->
+          <circle cx="350" cy="200" r="60" fill="url(#bugGrad)" stroke="#991b1b" stroke-width="3"/>
+          <text x="350" y="210" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Software Bug</text>
+          
+          <!-- Causes -->
+          <rect x="50" y="50" width="120" height="50" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+          <text x="110" y="75" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Requirements</text>
+          <text x="110" y="90" text-anchor="middle" fill="#991b1b" font-size="10">Issues</text>
+          
+          <rect x="530" y="50" width="120" height="50" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+          <text x="590" y="75" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Design</text>
+          <text x="590" y="90" text-anchor="middle" fill="#991b1b" font-size="10">Flaws</text>
+          
+          <rect x="50" y="300" width="120" height="50" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+          <text x="110" y="325" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Coding</text>
+          <text x="110" y="340" text-anchor="middle" fill="#991b1b" font-size="10">Errors</text>
+          
+          <rect x="530" y="300" width="120" height="50" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+          <text x="590" y="325" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Integration</text>
+          <text x="590" y="340" text-anchor="middle" fill="#991b1b" font-size="10">Issues</text>
+          
+          <!-- Connection Lines -->
+          <line x1="170" y1="75" x2="300" y2="160" stroke="#ef4444" stroke-width="2"/>
+          <line x1="530" y1="75" x2="400" y2="160" stroke="#ef4444" stroke-width="2"/>
+          <line x1="170" y1="325" x2="300" y2="240" stroke="#ef4444" stroke-width="2"/>
+          <line x1="530" y1="325" x2="400" y2="240" stroke="#ef4444" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-users icon-box"></i>Identify Roles for Development</h3>
+      <p>Different roles in software development have distinct responsibilities and perspectives on testing. Understanding these roles helps coordinate testing efforts effectively.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-user-tie text-primary"></i> Project Manager</h4>
+            <p>Oversees project timeline, resources, and ensures testing aligns with project goals. Responsible for risk management and stakeholder communication.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-code text-primary"></i> Developer</h4>
+            <p>Writes code, performs unit testing, fixes bugs, and ensures code quality. Responsible for code reviews and technical documentation.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-vial text-primary"></i> Test Engineer</h4>
+            <p>Designs test cases, executes tests, reports defects, and validates fixes. Ensures comprehensive test coverage and quality assurance.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-user-cog text-primary"></i> Business Analyst</h4>
+            <p>Defines requirements, validates business logic, and ensures system meets business needs. Acts as bridge between business and technical teams.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-shield-alt text-primary"></i> QA Lead</h4>
+            <p>Manages testing strategy, test planning, and quality metrics. Coordinates testing activities and ensures adherence to quality standards.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="process-step">
+            <h4><i class="fas fa-server text-primary"></i> DevOps Engineer</h4>
+            <p>Manages test environments, CI/CD pipelines, and automation infrastructure. Ensures testing can be performed in production-like environments.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3><i class="fas fa-tools icon-box"></i>Implement Maintenance</h3>
+      <p>Maintenance testing ensures that changes, updates, and fixes don't introduce new issues while preserving existing functionality.</p>
+      
+      <div class="info-box success">
+        <strong>Maintenance Testing Types:</strong>
+        <ul>
+          <li><strong>Corrective Maintenance:</strong> Testing fixes for reported bugs</li>
+          <li><strong>Adaptive Maintenance:</strong> Testing changes for new environments or platforms</li>
+          <li><strong>Perfective Maintenance:</strong> Testing performance improvements and enhancements</li>
+          <li><strong>Preventive Maintenance:</strong> Testing refactoring and code improvements</li>
+        </ul>
+      </div>
+
+      <h3><i class="fas fa-rocket icon-box"></i>Implement Application</h3>
+      <p>Application implementation testing validates that the software works correctly in its intended environment and meets all specified requirements.</p>
+      
+      <div class="diagram-container">
+        <div class="diagram-title">Application Implementation Testing Flow</div>
+        <svg width="100%" height="250" viewBox="0 0 800 250">
+          <defs>
+            <linearGradient id="implGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          
+          <!-- Steps -->
+          <rect x="50" y="100" width="130" height="50" rx="8" fill="url(#implGrad)" stroke="#047857" stroke-width="2"/>
+          <text x="115" y="130" text-anchor="middle" fill="white" font-size="12" font-weight="600">Environment</text>
+          <text x="115" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="600">Setup</text>
+          
+          <rect x="220" y="100" width="130" height="50" rx="8" fill="url(#implGrad)" stroke="#047857" stroke-width="2"/>
+          <text x="285" y="130" text-anchor="middle" fill="white" font-size="12" font-weight="600">Installation</text>
+          <text x="285" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="600">Testing</text>
+          
+          <rect x="390" y="100" width="130" height="50" rx="8" fill="url(#implGrad)" stroke="#047857" stroke-width="2"/>
+          <text x="455" y="130" text-anchor="middle" fill="white" font-size="12" font-weight="600">Configuration</text>
+          <text x="455" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="600">Validation</text>
+          
+          <rect x="560" y="100" width="130" height="50" rx="8" fill="url(#implGrad)" stroke="#047857" stroke-width="2"/>
+          <text x="625" y="130" text-anchor="middle" fill="white" font-size="12" font-weight="600">Smoke</text>
+          <text x="625" y="145" text-anchor="middle" fill="white" font-size="12" font-weight="600">Testing</text>
+          
+          <!-- Arrows -->
+          <line x1="180" y1="125" x2="220" y2="125" stroke="#047857" stroke-width="3" marker-end="url(#arrowGreen)"/>
+          <line x1="350" y1="125" x2="390" y2="125" stroke="#047857" stroke-width="3" marker-end="url(#arrowGreen)"/>
+          <line x1="520" y1="125" x2="560" y2="125" stroke="#047857" stroke-width="3" marker-end="url(#arrowGreen)"/>
+          
+          <defs>
+            <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#047857"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- STLC Phases for Section 1 -->
+      <div class="stlc-phase">
+        <h4><i class="fas fa-sitemap me-2"></i>STLC Phases Related to Test Needs Identification</h4>
+        <p><strong>Phase 1: Requirement Analysis</strong> - In this STLC phase, testers analyze requirements to understand the software system situation. Activities include:</p>
+        <ul>
+          <li>Reviewing business requirements documents</li>
+          <li>Identifying functional and non-functional requirements</li>
+          <li>Understanding system boundaries and scope</li>
+          <li>Analyzing user stories and use cases</li>
+          <li>Documenting system context and environment</li>
+        </ul>
+        <p><strong>Phase 2: Test Planning</strong> - Based on the situation analysis, test planning involves:</p>
+        <ul>
+          <li>Identifying test objectives aligned with system situation</li>
+          <li>Defining test scope based on system criticality</li>
+          <li>Allocating resources based on system complexity</li>
+          <li>Planning test environment setup based on system requirements</li>
+          <li>Identifying risks specific to the system situation</li>
+        </ul>
+        <p><strong>Phase 3: Test Case Development</strong> - When developing test cases, the system situation influences:</p>
+        <ul>
+          <li>Test case design based on identified roles</li>
+          <li>Test data requirements based on system context</li>
+          <li>Test scenarios covering identified bug causes</li>
+          <li>Maintenance test cases for system updates</li>
+          <li>Application implementation test scenarios</li>
+        </ul>
+      </div>
+
+      <!-- Questions for Section 1 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 1: Identify Test Needs</h3>
+        
+        <div class="question-item">
+          <strong>Q1. Explain the importance of identifying the situation of a software system before testing begins.</strong>
+          <p>Answer should cover: Understanding system context, environment, requirements, criticality, and how this knowledge influences testing strategy.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. List and explain five common causes of software bugs. Provide examples for each.</strong>
+          <p>Answer should include: Requirements issues, design flaws, coding errors, integration issues, environment problems, with specific examples.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. Describe the roles and responsibilities of the following in software testing:</strong>
+          <ol type="a">
+            <li>Test Engineer</li>
+            <li>Developer</li>
+            <li>QA Lead</li>
+            <li>Business Analyst</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. What is the difference between corrective maintenance and adaptive maintenance in software testing?</strong>
+          <p>Provide examples of each type.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. Explain the application implementation testing flow. What are the key steps involved?</strong>
+          <p>Describe each step: Environment Setup, Installation Testing, Configuration Validation, and Smoke Testing.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. How does understanding the software system situation help in:</strong>
+          <ol type="a">
+            <li>Test planning?</li>
+            <li>Test case design?</li>
+            <li>Risk assessment?</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. In the STLC Requirement Analysis phase, what specific activities relate to identifying test needs?</strong>
+          <p>Explain how requirement analysis contributes to understanding the software system situation.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. Create a diagram showing the relationship between different development roles and their testing responsibilities.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Identify Basic Test Process -->
+    <div class="content-card" id="section2">
+      <h2><span class="section-number">2</span>Identify Basic Test Process</h2>
+      
+      <h3><i class="fas fa-clipboard-list icon-box"></i>Identify Test Design Activities and Control</h3>
+      <p>Test design activities involve creating test cases, test data, and test procedures. Control mechanisms ensure these activities are properly managed and executed. Test design is a critical phase where testers transform test conditions into executable test cases.</p>
+      
+      <p><strong>Detailed Test Design Process:</strong> Test design begins with analyzing requirements and specifications to identify test conditions. Each test condition represents a testable aspect of the system. Testers then design test cases that cover these conditions, ensuring adequate coverage of requirements. The design process involves selecting appropriate test techniques, creating test data, and defining expected results.</p>
+      
+      <p>Control mechanisms in test design include establishing standards and templates for test case documentation, implementing review processes to ensure quality, maintaining traceability between requirements and test cases, and managing changes to test designs. Version control systems help track changes to test artifacts, while traceability matrices ensure all requirements are covered by test cases.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box">
+            <strong>Test Design Activities:</strong>
+            <ul>
+              <li>Analyze requirements and specifications</li>
+              <li>Identify test conditions</li>
+              <li>Design test cases</li>
+              <li>Prepare test data</li>
+              <li>Create test procedures</li>
+              <li>Review and approve test designs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box warning">
+            <strong>Control Mechanisms:</strong>
+            <ul>
+              <li>Test design standards and templates</li>
+              <li>Review and approval processes</li>
+              <li>Version control for test artifacts</li>
+              <li>Traceability matrices</li>
+              <li>Change management procedures</li>
+              <li>Quality gates and checkpoints</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3><i class="fas fa-search icon-box"></i>Perform Analysis and Design</h3>
+      <p>Test analysis and design transform test conditions into detailed test cases and test procedures that can be executed.</p>
+      
+      <div class="diagram-container">
+        <div class="diagram-title">Test Analysis and Design Process</div>
+        <svg width="100%" height="350" viewBox="0 0 700 350">
+          <!-- Input -->
+          <rect x="50" y="50" width="150" height="60" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="125" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Requirements</text>
+          <text x="125" y="95" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">&amp; Specifications</text>
+          
+          <!-- Analysis -->
+          <rect x="250" y="50" width="150" height="60" rx="8" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="325" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Test Analysis</text>
+          <text x="325" y="95" text-anchor="middle" fill="#4f46e5" font-size="11">Identify Test Conditions</text>
+          
+          <!-- Design -->
+          <rect x="450" y="50" width="150" height="60" rx="8" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="525" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Test Design</text>
+          <text x="525" y="95" text-anchor="middle" fill="#4f46e5" font-size="11">Create Test Cases</text>
+          
+          <!-- Output -->
+          <rect x="250" y="150" width="200" height="60" rx="8" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="180" text-anchor="middle" fill="white" font-size="13" font-weight="600">Test Cases &amp; Procedures</text>
+          
+          <!-- Activities -->
+          <rect x="50" y="250" width="120" height="70" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="110" y="275" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Risk Analysis</text>
+          <text x="110" y="290" text-anchor="middle" fill="#475569" font-size="10">Prioritization</text>
+          <text x="110" y="305" text-anchor="middle" fill="#475569" font-size="10">Coverage Analysis</text>
+          
+          <rect x="200" y="250" width="120" height="70" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="260" y="275" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Test Data</text>
+          <text x="260" y="290" text-anchor="middle" fill="#475569" font-size="10">Preparation</text>
+          <text x="260" y="305" text-anchor="middle" fill="#475569" font-size="10">Environment Setup</text>
+          
+          <rect x="350" y="250" width="120" height="70" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="410" y="275" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Test</text>
+          <text x="410" y="290" text-anchor="middle" fill="#475569" font-size="10">Technique</text>
+          <text x="410" y="305" text-anchor="middle" fill="#475569" font-size="10">Selection</text>
+          
+          <rect x="500" y="250" width="120" height="70" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="560" y="275" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Review &amp;</text>
+          <text x="560" y="290" text-anchor="middle" fill="#475569" font-size="10">Approval</text>
+          <text x="560" y="305" text-anchor="middle" fill="#475569" font-size="10">Process</text>
+          
+          <!-- Arrows -->
+          <line x1="200" y1="80" x2="250" y2="80" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+          <line x1="400" y1="80" x2="450" y2="80" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+          <line x1="525" y1="110" x2="350" y2="150" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+          
+          <defs>
+            <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-code-branch icon-box"></i>Implement Development and Execution</h3>
+      <p>Test development involves creating test scripts and automation, while execution involves running tests and collecting results. This phase transforms test cases into executable test scripts and then runs them against the software under test.</p>
+      
+      <p><strong>Test Development Process:</strong> Test development begins with analyzing test cases to determine which can be automated and which require manual execution. For automated tests, testers select appropriate automation tools and frameworks, then develop test scripts following coding standards and best practices. Test scripts should be maintainable, reusable, and well-documented. Test data is prepared, either manually or through automated data generation tools.</p>
+      
+      <p><strong>Test Execution Process:</strong> Before execution, test environments must be prepared to mirror production conditions as closely as possible. This includes setting up hardware, software, databases, and network configurations. Test execution follows the test plan, with tests run in a specific order (often prioritizing critical functionality). Results are collected systematically, including pass/fail status, execution time, logs, screenshots, and any anomalies observed. Failed tests are analyzed to determine if they represent actual defects or test issues.</p>
+      
+      <div class="process-step">
+        <h4>Step 1: Test Script Development</h4>
+        <p>Create automated test scripts using appropriate testing frameworks and tools. Scripts should be maintainable, reusable, and well-documented.</p>
+      </div>
+      
+      <div class="process-step">
+        <h4>Step 2: Test Environment Preparation</h4>
+        <p>Set up test environments that mirror production conditions. Ensure all dependencies, databases, and external services are configured correctly.</p>
+      </div>
+      
+      <div class="process-step">
+        <h4>Step 3: Test Execution</h4>
+        <p>Execute test cases according to the test plan. This includes manual testing, automated test runs, and exploratory testing sessions.</p>
+      </div>
+      
+      <div class="process-step">
+        <h4>Step 4: Result Collection</h4>
+        <p>Collect test results, logs, screenshots, and other evidence. Document pass/fail status, execution time, and any anomalies observed.</p>
+      </div>
+
+      <h3><i class="fas fa-check-circle icon-box"></i>Implement Verification</h3>
+      <p>Verification ensures that test activities are performed correctly and that the software meets specified requirements.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Verification Type</th>
+              <th>Purpose</th>
+              <th>Activities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Test Case Verification</strong></td>
+              <td>Ensure test cases are correct and complete</td>
+              <td>Review test cases, check coverage, validate test data</td>
+            </tr>
+            <tr>
+              <td><strong>Test Execution Verification</strong></td>
+              <td>Confirm tests were executed properly</td>
+              <td>Verify test logs, check environment setup, validate results</td>
+            </tr>
+            <tr>
+              <td><strong>Result Verification</strong></td>
+              <td>Validate test results accuracy</td>
+              <td>Compare expected vs actual, verify defect reports, check metrics</td>
+            </tr>
+            <tr>
+              <td><strong>Process Verification</strong></td>
+              <td>Ensure testing process is followed</td>
+              <td>Audit test documentation, review adherence to standards, check traceability</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3><i class="fas fa-flag-checkered icon-box"></i>Identify Termination Criteria</h3>
+      <p>Termination criteria define when testing should stop. These criteria help ensure adequate testing without unnecessary delays.</p>
+      
+      <div class="info-box">
+        <strong>Common Termination Criteria:</strong>
+        <ul>
+          <li><strong>Test Coverage:</strong> Achieved required coverage percentage (e.g., 80% code coverage)</li>
+          <li><strong>Defect Rate:</strong> Defect discovery rate falls below threshold</li>
+          <li><strong>Time/Budget:</strong> Allocated time or budget exhausted</li>
+          <li><strong>Quality Metrics:</strong> Quality metrics meet acceptance criteria</li>
+          <li><strong>Risk Assessment:</strong> Residual risks are acceptable</li>
+          <li><strong>Stakeholder Approval:</strong> Stakeholders approve release readiness</li>
+        </ul>
+      </div>
+
+      <h3><i class="fas fa-stop-circle icon-box"></i>Perform Termination Task</h3>
+      <p>Termination tasks ensure proper closure of testing activities with complete documentation and knowledge transfer.</p>
+      
+      <div class="diagram-container">
+        <div class="diagram-title">Test Termination Activities</div>
+        <svg width="100%" height="300" viewBox="0 0 700 300">
+          <circle cx="350" cy="150" r="80" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+          <text x="350" y="145" text-anchor="middle" fill="#92400e" font-size="14" font-weight="bold">Test</text>
+          <text x="350" y="165" text-anchor="middle" fill="#92400e" font-size="14" font-weight="bold">Termination</text>
+          
+          <rect x="50" y="50" width="100" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="100" y="75" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Final Test</text>
+          <text x="100" y="90" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Report</text>
+          
+          <rect x="550" y="50" width="100" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="600" y="75" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Metrics</text>
+          <text x="600" y="90" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Summary</text>
+          
+          <rect x="50" y="200" width="100" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="100" y="225" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Lessons</text>
+          <text x="100" y="240" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Learned</text>
+          
+          <rect x="550" y="200" width="100" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="600" y="225" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Archive</text>
+          <text x="600" y="240" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Artifacts</text>
+          
+          <line x1="150" y1="75" x2="280" y2="130" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="550" y1="75" x2="420" y2="130" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="150" y1="225" x2="280" y2="170" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="550" y1="225" x2="420" y2="170" stroke="#3b82f6" stroke-width="2"/>
+        </svg>
+      </div>
+      
+      <div class="info-box success">
+        <strong>Key Termination Tasks:</strong>
+        <ul>
+          <li>Compile final test summary report</li>
+          <li>Document lessons learned and best practices</li>
+          <li>Archive test artifacts and documentation</li>
+          <li>Conduct test closure meeting with stakeholders</li>
+          <li>Update test metrics and dashboards</li>
+          <li>Hand over knowledge to maintenance team</li>
+        </ul>
+      </div>
+
+      <!-- STLC Phases for Section 2 -->
+      <div class="stlc-phase">
+        <h4><i class="fas fa-sitemap me-2"></i>STLC Phases Related to Basic Test Process</h4>
+        <p><strong>Phase 1: Test Planning</strong> - This STLC phase corresponds to identifying test design activities and control:</p>
+        <ul>
+          <li>Define test objectives and scope</li>
+          <li>Identify test design activities required</li>
+          <li>Establish control mechanisms and standards</li>
+          <li>Allocate resources for test design</li>
+          <li>Create test design templates and guidelines</li>
+        </ul>
+        <p><strong>Phase 2: Test Case Development</strong> - This phase involves analysis and design:</p>
+        <ul>
+          <li>Analyze requirements and specifications</li>
+          <li>Identify test conditions from requirements</li>
+          <li>Design test cases using appropriate techniques</li>
+          <li>Prepare test data and test environment requirements</li>
+          <li>Review and approve test cases</li>
+        </ul>
+        <p><strong>Phase 3: Test Environment Setup</strong> - Preparation for test execution:</p>
+        <ul>
+          <li>Set up hardware and software environments</li>
+          <li>Configure test data and databases</li>
+          <li>Install and configure test tools</li>
+          <li>Verify environment readiness</li>
+        </ul>
+        <p><strong>Phase 4: Test Execution</strong> - Implementation of development and execution:</p>
+        <ul>
+          <li>Execute test cases according to test plan</li>
+          <li>Record test results and observations</li>
+          <li>Log defects found during execution</li>
+          <li>Track test execution progress</li>
+          <li>Perform verification of test results</li>
+        </ul>
+        <p><strong>Phase 5: Test Cycle Closure</strong> - Termination criteria and tasks:</p>
+        <ul>
+          <li>Evaluate against termination criteria</li>
+          <li>Determine if testing objectives are met</li>
+          <li>Perform termination tasks</li>
+          <li>Document lessons learned</li>
+          <li>Archive test artifacts</li>
+        </ul>
+      </div>
+
+      <!-- Questions for Section 2 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 2: Identify Basic Test Process</h3>
+        
+        <div class="question-item">
+          <strong>Q1. Explain the test design activities involved in creating test cases. What is the relationship between test conditions and test cases?</strong>
+          <p>Describe the process from analyzing requirements to creating executable test cases.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. What are control mechanisms in test design? List and explain five control mechanisms used in test design.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. Describe the test analysis and design process with a detailed flow diagram. Include all major steps.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. Explain the difference between test development and test execution. What activities are involved in each?</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. What is test verification? Explain the four types of verification mentioned in this section.</strong>
+          <ol type="a">
+            <li>Test Case Verification</li>
+            <li>Test Execution Verification</li>
+            <li>Result Verification</li>
+            <li>Process Verification</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. Define termination criteria in testing. List six common termination criteria and explain when each would be appropriate.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. What are the key termination tasks that should be performed at the end of a test cycle?</strong>
+          <p>Explain the importance of each task.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. Map the basic test process activities to STLC phases. Show how each activity relates to specific STLC phases.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q9. Create a detailed test execution workflow diagram showing all steps from test case preparation to result collection.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q10. Explain how test design activities and control mechanisms work together to ensure quality in the testing process.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Identify Software Test Life Cycle -->
+    <div class="content-card" id="section3">
+      <h2><span class="section-number">3</span>Identify Software Test Life Cycle</h2>
+      
+      <h3><i class="fas fa-project-diagram icon-box"></i>Identify Test Model</h3>
+      <p>Test models provide frameworks for organizing and executing testing activities throughout the software development lifecycle. A test model defines how testing activities are structured, sequenced, and integrated with development activities. Different models suit different project types, methodologies, and organizational contexts.</p>
+      
+      <p><strong>Understanding Test Models:</strong> Test models help teams understand when to perform which testing activities, how testing relates to development, and what deliverables are expected at each stage. The choice of test model significantly impacts test planning, resource allocation, and the overall testing strategy. Models can be sequential (like Waterfall and V-Model) or iterative (like Agile and Spiral), each with distinct characteristics and advantages.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4>V-Model</h4>
+            <p>Sequential model where testing phases correspond to development phases. Each development phase has a corresponding testing phase.</p>
+            <ul>
+              <li>Unit Testing ↔ Unit Design</li>
+              <li>Integration Testing ↔ System Design</li>
+              <li>System Testing ↔ Requirements Analysis</li>
+              <li>Acceptance Testing ↔ User Requirements</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box warning">
+            <h4>Agile/Iterative Model</h4>
+            <p>Testing is integrated into each iteration/sprint. Continuous testing with frequent feedback loops.</p>
+            <ul>
+              <li>Test-Driven Development (TDD)</li>
+              <li>Behavior-Driven Development (BDD)</li>
+              <li>Continuous Integration/Testing</li>
+              <li>Sprint-based testing cycles</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4>Spiral Model</h4>
+            <p>Risk-driven model with iterative cycles. Each cycle includes risk analysis, testing, and evaluation.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4>Waterfall Model</h4>
+            <p>Traditional sequential model where testing occurs after development phases are complete.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">V-Model Testing Framework</div>
+        <svg width="100%" height="500" viewBox="0 0 600 500">
+          <!-- Left Side - Development -->
+          <text x="150" y="30" text-anchor="middle" fill="#2563eb" font-size="16" font-weight="bold">DEVELOPMENT PHASES</text>
+          
+          <rect x="50" y="60" width="200" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="150" y="85" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Requirements</text>
+          <text x="150" y="100" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Analysis</text>
+          
+          <rect x="50" y="130" width="200" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="150" y="155" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">System Design</text>
+          
+          <rect x="50" y="200" width="200" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="150" y="225" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Architecture Design</text>
+          
+          <rect x="50" y="270" width="200" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="150" y="295" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Module Design</text>
+          
+          <rect x="50" y="340" width="200" height="50" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="150" y="365" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Implementation</text>
+          
+          <!-- Right Side - Testing -->
+          <text x="450" y="30" text-anchor="middle" fill="#10b981" font-size="16" font-weight="bold">TESTING PHASES</text>
+          
+          <rect x="350" y="60" width="200" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="85" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Acceptance</text>
+          <text x="450" y="100" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Testing</text>
+          
+          <rect x="350" y="130" width="200" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="155" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">System Testing</text>
+          
+          <rect x="350" y="200" width="200" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="225" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Integration</text>
+          <text x="450" y="240" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Testing</text>
+          
+          <rect x="350" y="270" width="200" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="295" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Component</text>
+          <text x="450" y="310" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Testing</text>
+          
+          <rect x="350" y="340" width="200" height="50" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="365" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Unit Testing</text>
+          
+          <!-- V Shape Connection -->
+          <line x1="250" y1="85" x2="350" y2="85" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+          <line x1="250" y1="155" x2="350" y2="155" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+          <line x1="250" y1="225" x2="350" y2="225" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+          <line x1="250" y1="295" x2="350" y2="295" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+          <line x1="250" y1="365" x2="350" y2="365" stroke="#6366f1" stroke-width="2" stroke-dasharray="5,5"/>
+        </svg>
+      </div>
+
+      <!-- Detailed STLC Phases -->
+      <h3><i class="fas fa-list-ol icon-box"></i>Detailed STLC Phases</h3>
+      <p>The Software Test Life Cycle (STLC) consists of systematic phases that ensure comprehensive testing. Each phase has specific activities, deliverables, and entry/exit criteria. Understanding these phases is crucial for effective test planning and execution.</p>
+      
+      <div class="stlc-phase">
+        <h4><i class="fas fa-1 me-2"></i>Phase 1: Requirement Analysis</h4>
+        <p><strong>Objective:</strong> Understand and analyze testing requirements to determine testability and identify test conditions.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Review functional and non-functional requirements</li>
+          <li>Identify testable requirements</li>
+          <li>Analyze requirements for clarity and completeness</li>
+          <li>Identify test conditions from requirements</li>
+          <li>Document requirement ambiguities and clarifications</li>
+          <li>Prepare Requirement Traceability Matrix (RTM)</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Requirement Traceability Matrix, Testability Report, Requirement Analysis Document</p>
+        <p><strong>Entry Criteria:</strong> Requirements document available, Business requirements clear</p>
+        <p><strong>Exit Criteria:</strong> All requirements analyzed, Test conditions identified, RTM prepared</p>
+      </div>
+
+      <div class="stlc-phase">
+        <h4><i class="fas fa-2 me-2"></i>Phase 2: Test Planning</h4>
+        <p><strong>Objective:</strong> Create a comprehensive test plan that defines the testing strategy, scope, resources, and schedule.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Define test objectives and scope</li>
+          <li>Identify test items and features to be tested</li>
+          <li>Determine test approach and strategy</li>
+          <li>Estimate effort, resources, and schedule</li>
+          <li>Identify test environment requirements</li>
+          <li>Define entry and exit criteria</li>
+          <li>Identify risks and mitigation strategies</li>
+          <li>Assign roles and responsibilities</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Test Plan Document, Test Strategy Document, Effort Estimation Document</p>
+        <p><strong>Entry Criteria:</strong> Requirement analysis complete, Test conditions identified</p>
+        <p><strong>Exit Criteria:</strong> Test plan reviewed and approved, Resources allocated, Schedule finalized</p>
+      </div>
+
+      <div class="stlc-phase">
+        <h4><i class="fas fa-3 me-2"></i>Phase 3: Test Case Development</h4>
+        <p><strong>Objective:</strong> Create detailed test cases, test scripts, and test data based on test conditions.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Design test cases for identified test conditions</li>
+          <li>Select appropriate test design techniques</li>
+          <li>Create test case documents with test steps</li>
+          <li>Prepare test data (positive and negative)</li>
+          <li>Develop test scripts for automation (if applicable)</li>
+          <li>Review and approve test cases</li>
+          <li>Update Requirement Traceability Matrix</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Test Cases Document, Test Scripts, Test Data, Updated RTM</p>
+        <p><strong>Entry Criteria:</strong> Test plan approved, Test conditions identified</p>
+        <p><strong>Exit Criteria:</strong> Test cases reviewed and approved, Test data prepared, RTM updated</p>
+      </div>
+
+      <div class="stlc-phase">
+        <h4><i class="fas fa-4 me-2"></i>Phase 4: Test Environment Setup</h4>
+        <p><strong>Objective:</strong> Prepare and configure the test environment to support test execution.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Identify test environment requirements</li>
+          <li>Set up hardware and software infrastructure</li>
+          <li>Install and configure test tools</li>
+          <li>Prepare test databases and test data</li>
+          <li>Configure network and security settings</li>
+          <li>Verify environment readiness</li>
+          <li>Document environment configuration</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Test Environment, Environment Configuration Document, Environment Readiness Report</p>
+        <p><strong>Entry Criteria:</strong> Test plan approved, Environment requirements identified</p>
+        <p><strong>Exit Criteria:</strong> Environment ready, Smoke tests passed, Configuration documented</p>
+      </div>
+
+      <div class="stlc-phase">
+        <h4><i class="fas fa-5 me-2"></i>Phase 5: Test Execution</h4>
+        <p><strong>Objective:</strong> Execute test cases, log results, and report defects.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Execute test cases according to test plan</li>
+          <li>Record test results (pass/fail)</li>
+          <li>Log defects with detailed information</li>
+          <li>Retest fixed defects</li>
+          <li>Track test execution progress</li>
+          <li>Update test metrics</li>
+          <li>Perform regression testing</li>
+          <li>Document test execution results</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Test Execution Report, Defect Reports, Test Metrics, Test Logs</p>
+        <p><strong>Entry Criteria:</strong> Test cases ready, Test environment ready, Build available</p>
+        <p><strong>Exit Criteria:</strong> All test cases executed, All critical defects fixed, Exit criteria met</p>
+      </div>
+
+      <div class="stlc-phase">
+        <h4><i class="fas fa-6 me-2"></i>Phase 6: Test Cycle Closure</h4>
+        <p><strong>Objective:</strong> Evaluate testing completion, document results, and archive test artifacts.</p>
+        <p><strong>Activities:</strong></p>
+        <ul>
+          <li>Evaluate test completion against exit criteria</li>
+          <li>Prepare test summary report</li>
+          <li>Calculate test metrics and coverage</li>
+          <li>Document lessons learned</li>
+          <li>Archive test artifacts</li>
+          <li>Conduct test closure meeting</li>
+          <li>Hand over to maintenance team</li>
+          <li>Update test repository</li>
+        </ul>
+        <p><strong>Deliverables:</strong> Test Summary Report, Test Metrics Report, Lessons Learned Document, Archived Test Artifacts</p>
+        <p><strong>Entry Criteria:</strong> Test execution complete, Exit criteria evaluated</p>
+        <p><strong>Exit Criteria:</strong> Test summary report prepared, Artifacts archived, Knowledge transferred</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Complete STLC Phases Flow</div>
+        <svg width="100%" height="600" viewBox="0 0 700 600">
+          <!-- Phase 1 -->
+          <rect x="250" y="30" width="200" height="70" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="55" text-anchor="middle" fill="#4f46e5" font-size="14" font-weight="bold">Phase 1</text>
+          <text x="350" y="75" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Requirement</text>
+          <text x="350" y="90" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Analysis</text>
+          
+          <!-- Phase 2 -->
+          <rect x="250" y="130" width="200" height="70" rx="8" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="155" text-anchor="middle" fill="#4f46e5" font-size="14" font-weight="bold">Phase 2</text>
+          <text x="350" y="175" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Test Planning</text>
+          
+          <!-- Phase 3 -->
+          <rect x="250" y="230" width="200" height="70" rx="8" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="255" text-anchor="middle" fill="#4f46e5" font-size="14" font-weight="bold">Phase 3</text>
+          <text x="350" y="275" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Test Case</text>
+          <text x="350" y="290" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Development</text>
+          
+          <!-- Phase 4 -->
+          <rect x="250" y="330" width="200" height="70" rx="8" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="355" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Phase 4</text>
+          <text x="350" y="375" text-anchor="middle" fill="white" font-size="12" font-weight="600">Test Environment</text>
+          <text x="350" y="390" text-anchor="middle" fill="white" font-size="12" font-weight="600">Setup</text>
+          
+          <!-- Phase 5 -->
+          <rect x="250" y="430" width="200" height="70" rx="8" fill="#6366f1" stroke="#4f46e5" stroke-width="2"/>
+          <text x="350" y="455" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Phase 5</text>
+          <text x="350" y="475" text-anchor="middle" fill="white" font-size="12" font-weight="600">Test Execution</text>
+          
+          <!-- Phase 6 -->
+          <rect x="250" y="530" width="200" height="70" rx="8" fill="#4f46e5" stroke="#3730a3" stroke-width="2"/>
+          <text x="350" y="555" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Phase 6</text>
+          <text x="350" y="575" text-anchor="middle" fill="white" font-size="12" font-weight="600">Test Cycle</text>
+          <text x="350" y="590" text-anchor="middle" fill="white" font-size="12" font-weight="600">Closure</text>
+          
+          <!-- Arrows -->
+          <line x1="350" y1="100" x2="350" y2="130" stroke="#6366f1" stroke-width="3" marker-end="url(#arrowSTLC)"/>
+          <line x1="350" y1="200" x2="350" y2="230" stroke="#6366f1" stroke-width="3" marker-end="url(#arrowSTLC)"/>
+          <line x1="350" y1="300" x2="350" y2="330" stroke="#6366f1" stroke-width="3" marker-end="url(#arrowSTLC)"/>
+          <line x1="350" y1="400" x2="350" y2="430" stroke="#6366f1" stroke-width="3" marker-end="url(#arrowSTLC)"/>
+          <line x1="350" y1="500" x2="350" y2="530" stroke="#6366f1" stroke-width="3" marker-end="url(#arrowSTLC)"/>
+          
+          <defs>
+            <marker id="arrowSTLC" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-layer-group icon-box"></i>Identify Test Variety</h3>
+      <p>Different types of testing address different aspects of software quality. Understanding test variety ensures comprehensive coverage.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Test Type</th>
+              <th>Purpose</th>
+              <th>Focus Area</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Functional Testing</strong></td>
+              <td>Verify system functions correctly</td>
+              <td>Requirements, features, business logic</td>
+            </tr>
+            <tr>
+              <td><strong>Non-Functional Testing</strong></td>
+              <td>Verify system quality attributes</td>
+              <td>Performance, security, usability, reliability</td>
+            </tr>
+            <tr>
+              <td><strong>Structural Testing</strong></td>
+              <td>Test internal structure</td>
+              <td>Code coverage, paths, branches</td>
+            </tr>
+            <tr>
+              <td><strong>Regression Testing</strong></td>
+              <td>Ensure changes don't break existing functionality</td>
+              <td>Previously working features</td>
+            </tr>
+            <tr>
+              <td><strong>Smoke Testing</strong></td>
+              <td>Quick validation of basic functionality</td>
+              <td>Critical paths, build stability</td>
+            </tr>
+            <tr>
+              <td><strong>Sanity Testing</strong></td>
+              <td>Verify specific functionality after changes</td>
+              <td>Modified areas, related features</td>
+            </tr>
+            <tr>
+              <td><strong>Exploratory Testing</strong></td>
+              <td>Discover defects through exploration</td>
+              <td>Unscripted testing, edge cases</td>
+            </tr>
+            <tr>
+              <td><strong>Ad-hoc Testing</strong></td>
+              <td>Informal testing without documentation</td>
+              <td>Random scenarios, creative testing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3><i class="fas fa-cubes icon-box"></i>Identify Test Level: Unit Test, Combined Test</h3>
+      <p>Testing is performed at different levels, each focusing on different scopes and objectives.</p>
+      
+      <div class="diagram-container">
+        <div class="diagram-title">Test Levels Pyramid</div>
+        <svg width="100%" height="400" viewBox="0 0 500 400">
+          <!-- Unit Testing -->
+          <rect x="150" y="50" width="200" height="80" rx="8" fill="#10b981" stroke="#047857" stroke-width="3"/>
+          <text x="250" y="85" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Unit Testing</text>
+          <text x="250" y="105" text-anchor="middle" fill="white" font-size="12">Individual components/modules</text>
+          <text x="250" y="120" text-anchor="middle" fill="white" font-size="12">Fast, isolated, many tests</text>
+          
+          <!-- Integration Testing -->
+          <rect x="100" y="150" width="300" height="80" rx="8" fill="#3b82f6" stroke="#1e40af" stroke-width="3"/>
+          <text x="250" y="185" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Integration Testing</text>
+          <text x="250" y="205" text-anchor="middle" fill="white" font-size="12">Component interactions, interfaces</text>
+          <text x="250" y="220" text-anchor="middle" fill="white" font-size="12">API testing, data flow</text>
+          
+          <!-- System Testing -->
+          <rect x="50" y="250" width="400" height="80" rx="8" fill="#f59e0b" stroke="#d97706" stroke-width="3"/>
+          <text x="250" y="285" text-anchor="middle" fill="white" font-size="16" font-weight="bold">System Testing</text>
+          <text x="250" y="305" text-anchor="middle" fill="white" font-size="12">Complete system, end-to-end</text>
+          <text x="250" y="320" text-anchor="middle" fill="white" font-size="12">Functional &amp; non-functional</text>
+        </svg>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4><i class="fas fa-puzzle-piece"></i> Unit Testing</h4>
+            <p><strong>Definition:</strong> Testing individual components or modules in isolation.</p>
+            <ul>
+              <li>Performed by developers</li>
+              <li>Tests smallest testable parts</li>
+              <li>Uses mocks and stubs</li>
+              <li>Fast execution</li>
+              <li>High coverage possible</li>
+            </ul>
+            <p><strong>Example:</strong> Testing a single function that calculates tax.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4><i class="fas fa-link"></i> Integration Testing (Combined Test)</h4>
+            <p><strong>Definition:</strong> Testing combined components/modules to verify interactions.</p>
+            <ul>
+              <li>Tests interfaces between components</li>
+              <li>Verifies data flow</li>
+              <li>Checks API integrations</li>
+              <li>Validates system behavior</li>
+              <li>Can be incremental or big-bang</li>
+            </ul>
+            <p><strong>Types:</strong> Top-down, Bottom-up, Sandwich, Big-bang</p>
+          </div>
+        </div>
+      </div>
+
+      <h3><i class="fas fa-eye icon-box"></i>Review and Test Process</h3>
+      <p>Reviews are static testing techniques that examine work products without executing code. They are essential for early defect detection.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Review Type</th>
+              <th>Participants</th>
+              <th>Formality</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Informal Review</strong></td>
+              <td>Author, colleague</td>
+              <td>Low</td>
+              <td>Quick feedback, learning</td>
+            </tr>
+            <tr>
+              <td><strong>Walkthrough</strong></td>
+              <td>Author, peers, stakeholders</td>
+              <td>Low-Medium</td>
+              <td>Education, understanding</td>
+            </tr>
+            <tr>
+              <td><strong>Technical Review</strong></td>
+              <td>Technical experts</td>
+              <td>Medium</td>
+              <td>Technical correctness</td>
+            </tr>
+            <tr>
+              <td><strong>Inspection</strong></td>
+              <td>Trained reviewers, moderator</td>
+              <td>High</td>
+              <td>Defect detection, compliance</td>
+            </tr>
+            <tr>
+              <td><strong>Test Review</strong></td>
+              <td>Test team, stakeholders</td>
+              <td>Medium</td>
+              <td>Test case quality, coverage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Review Process Flow</div>
+        <svg width="100%" height="200" viewBox="0 0 700 200">
+          <rect x="50" y="70" width="100" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="100" y="95" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Planning</text>
+          <text x="100" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">Select reviewers</text>
+          
+          <rect x="180" y="70" width="100" height="60" rx="5" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="230" y="95" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Preparation</text>
+          <text x="230" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">Review materials</text>
+          
+          <rect x="310" y="70" width="100" height="60" rx="5" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="360" y="95" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Review</text>
+          <text x="360" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">Meeting/discussion</text>
+          
+          <rect x="440" y="70" width="100" height="60" rx="5" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+          <text x="490" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="600">Rework</text>
+          <text x="490" y="115" text-anchor="middle" fill="white" font-size="11">Fix issues</text>
+          
+          <rect x="570" y="70" width="100" height="60" rx="5" fill="#6366f1" stroke="#4f46e5" stroke-width="2"/>
+          <text x="620" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="600">Follow-up</text>
+          <text x="620" y="115" text-anchor="middle" fill="white" font-size="11">Verify fixes</text>
+          
+          <line x1="150" y1="100" x2="180" y2="100" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowReview)"/>
+          <line x1="280" y1="100" x2="310" y2="100" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowReview)"/>
+          <line x1="410" y1="100" x2="440" y2="100" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowReview)"/>
+          <line x1="540" y1="100" x2="570" y2="100" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowReview)"/>
+          
+          <defs>
+            <marker id="arrowReview" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Questions for Section 3 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 3: Identify Software Test Life Cycle</h3>
+        
+        <div class="question-item">
+          <strong>Q1. Explain the V-Model in detail. How does it relate testing phases to development phases?</strong>
+          <p>Create a diagram showing the correspondence between development and testing phases.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. Compare and contrast the following test models:</strong>
+          <ol type="a">
+            <li>V-Model vs Agile/Iterative Model</li>
+            <li>Waterfall Model vs Spiral Model</li>
+          </ol>
+          <p>When would you choose each model?</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. List and explain all six phases of STLC. For each phase, provide:</strong>
+          <ul>
+            <li>Objective</li>
+            <li>Key activities</li>
+            <li>Deliverables</li>
+            <li>Entry criteria</li>
+            <li>Exit criteria</li>
+          </ul>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. What is the difference between Unit Testing, Integration Testing, and System Testing?</strong>
+          <p>Provide examples of what would be tested at each level.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. Explain the test levels pyramid. Why is it structured as a pyramid?</strong>
+          <p>What does the pyramid structure indicate about the number of tests at each level?</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. Describe the review process in testing. What are the different types of reviews and when is each used?</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. In the STLC Test Planning phase, what factors should be considered when:</strong>
+          <ol type="a">
+            <li>Defining test scope?</li>
+            <li>Estimating effort and resources?</li>
+            <li>Identifying risks?</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. Explain the relationship between test variety and test levels. How do they complement each other?</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q9. What is Combined Test (Integration Testing)? Explain the different approaches to integration testing.</strong>
+          <p>Compare Top-down, Bottom-up, Sandwich, and Big-bang approaches.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q10. Create a detailed flowchart showing the complete STLC process, including decision points and feedback loops.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Test Design Technique -->
+    <div class="content-card" id="section4">
+      <h2><span class="section-number">4</span>Test Design Technique</h2>
+      
+      <h3><i class="fas fa-list-check icon-box"></i>Implement Determination of Test Condition</h3>
+      <p>Test conditions are testable aspects of a component or system identified from requirements, specifications, or other sources. They form the basis for test case design. A test condition is an item or event that could be verified by one or more test cases, such as a function, transaction, feature, quality attribute, or structural element.</p>
+      
+      <p><strong>Detailed Process:</strong> Determining test conditions requires careful analysis of requirements to identify all testable aspects. Testers must understand both functional requirements (what the system should do) and non-functional requirements (how well the system should perform). Each requirement should be broken down into specific, testable conditions. For example, a requirement stating "User must be able to login" can be broken down into multiple test conditions: valid login, invalid username, invalid password, empty fields, account locked, etc.</p>
+      
+      <p>The process involves reviewing requirements documents, user stories, use cases, and design documents. Testers identify test conditions by asking questions like "What needs to be tested?", "What are the different scenarios?", and "What are the edge cases?". Test conditions should be documented clearly and linked back to their source requirements for traceability.</p>
+      
+      <div class="info-box">
+        <strong>Steps to Determine Test Conditions:</strong>
+        <ol>
+          <li><strong>Analyze Requirements:</strong> Review functional and non-functional requirements</li>
+          <li><strong>Identify Testable Items:</strong> Break down requirements into testable elements</li>
+          <li><strong>Consider Test Types:</strong> Functional, performance, security, usability, etc.</li>
+          <li><strong>Prioritize:</strong> Rank test conditions based on risk and importance</li>
+          <li><strong>Document:</strong> Record test conditions in test design specifications</li>
+        </ol>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Test Condition Identification Process</div>
+        <svg width="100%" height="350" viewBox="0 0 700 350">
+          <rect x="50" y="50" width="150" height="80" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="125" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Requirements</text>
+          <text x="125" y="100" text-anchor="middle" fill="#4f46e5" font-size="11">Specifications</text>
+          <text x="125" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">User Stories</text>
+          
+          <rect x="250" y="50" width="150" height="80" rx="8" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="325" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Analysis</text>
+          <text x="325" y="100" text-anchor="middle" fill="#4f46e5" font-size="11">Break down into</text>
+          <text x="325" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">testable items</text>
+          
+          <rect x="450" y="50" width="150" height="80" rx="8" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="525" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Test</text>
+          <text x="525" y="100" text-anchor="middle" fill="#4f46e5" font-size="11">Conditions</text>
+          <text x="525" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">Identified</text>
+          
+          <rect x="150" y="180" width="120" height="60" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="210" y="205" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Functional</text>
+          <text x="210" y="225" text-anchor="middle" fill="#475569" font-size="10">Conditions</text>
+          
+          <rect x="290" y="180" width="120" height="60" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="350" y="205" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Performance</text>
+          <text x="350" y="225" text-anchor="middle" fill="#475569" font-size="10">Conditions</text>
+          
+          <rect x="430" y="180" width="120" height="60" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="490" y="205" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Security</text>
+          <text x="490" y="225" text-anchor="middle" fill="#475569" font-size="10">Conditions</text>
+          
+          <rect x="250" y="280" width="200" height="50" rx="8" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="310" text-anchor="middle" fill="white" font-size="13" font-weight="600">Test Cases</text>
+          <text x="350" y="325" text-anchor="middle" fill="white" font-size="11">Derived from Conditions</text>
+          
+          <line x1="200" y1="90" x2="250" y2="90" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowCond)"/>
+          <line x1="400" y1="90" x2="450" y2="90" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowCond)"/>
+          <line x1="525" y1="130" x2="350" y2="180" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowCond)"/>
+          <line x1="350" y1="240" x2="350" y2="280" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowCond)"/>
+          
+          <defs>
+            <marker id="arrowCond" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="code-block">
+<strong>Example Test Condition:</strong>
+Requirement: "User login must validate credentials"
+Test Conditions:
+- Valid username and password combination
+- Invalid username
+- Invalid password
+- Empty username field
+- Empty password field
+- SQL injection attempt
+- Session timeout handling
+      </div>
+
+      <h3><i class="fas fa-box icon-box"></i>Perform Black Box Test</h3>
+      <p>Black box testing focuses on testing software functionality without knowledge of internal code structure. Tests are based on requirements and specifications. The tester treats the software as a "black box" - they can see inputs and outputs but not the internal workings. This approach tests the system from a user's perspective, focusing on what the system does rather than how it does it.</p>
+      
+      <p><strong>Detailed Approach:</strong> Black box testing is also known as specification-based, behavioral, or functional testing. The tester designs test cases based solely on the software's specifications and requirements, without any knowledge of the internal code structure, algorithms, or implementation details. This method is particularly effective for finding functional errors, interface errors, missing functions, and performance issues.</p>
+      
+      <p>The main advantage is that it tests the system from the end-user's perspective, ensuring that the software meets user requirements. It doesn't require programming knowledge, making it accessible to non-technical testers. However, it may miss logical errors in code and might not achieve complete code coverage. Black box testing is typically performed at higher test levels (system and acceptance testing) but can also be used at lower levels.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4>Characteristics</h4>
+            <ul>
+              <li>No knowledge of internal structure</li>
+              <li>Tests based on requirements</li>
+              <li>User perspective testing</li>
+              <li>Focus on inputs and outputs</li>
+              <li>Can be performed by non-developers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4>Advantages</h4>
+            <ul>
+              <li>Tests from user's viewpoint</li>
+              <li>No programming knowledge needed</li>
+              <li>Unbiased testing</li>
+              <li>Tests actual requirements</li>
+              <li>Early test case design possible</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h4>Black Box Testing Techniques:</h4>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Description</th>
+              <th>Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Equivalence Partitioning</strong></td>
+              <td>Divide input data into equivalent groups that should produce similar outputs</td>
+              <td>Age validation (0-17, 18-65, 66+)</td>
+            </tr>
+            <tr>
+              <td><strong>Boundary Value Analysis</strong></td>
+              <td>Test values at boundaries of input ranges</td>
+              <td>Testing min, max, min-1, max+1 values</td>
+            </tr>
+            <tr>
+              <td><strong>Decision Table Testing</strong></td>
+              <td>Test combinations of conditions and actions</td>
+              <td>Complex business rules with multiple conditions</td>
+            </tr>
+            <tr>
+              <td><strong>State Transition Testing</strong></td>
+              <td>Test state changes and transitions</td>
+              <td>Login states, order status changes</td>
+            </tr>
+            <tr>
+              <td><strong>Use Case Testing</strong></td>
+              <td>Test scenarios based on use cases</td>
+              <td>End-to-end user workflows</td>
+            </tr>
+            <tr>
+              <td><strong>Error Guessing</strong></td>
+              <td>Use experience to guess potential errors</td>
+              <td>Common mistakes, edge cases</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Black Box Testing Approach</div>
+        <svg width="100%" height="300" viewBox="0 0 600 300">
+          <rect x="50" y="50" width="200" height="200" rx="10" fill="#1e293b" stroke="#475569" stroke-width="3" stroke-dasharray="5,5"/>
+          <text x="150" y="150" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="bold">BLACK BOX</text>
+          <text x="150" y="170" text-anchor="middle" fill="#94a3b8" font-size="12">(Internal Structure</text>
+          <text x="150" y="185" text-anchor="middle" fill="#94a3b8" font-size="12">Unknown)</text>
+          
+          <rect x="350" y="50" width="200" height="80" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="450" y="80" text-anchor="middle" fill="#4f46e5" font-size="13" font-weight="600">Input</text>
+          <text x="450" y="100" text-anchor="middle" fill="#4f46e5" font-size="11">Test Data</text>
+          <text x="450" y="115" text-anchor="middle" fill="#4f46e5" font-size="11">Requirements</text>
+          
+          <rect x="350" y="170" width="200" height="80" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="450" y="200" text-anchor="middle" fill="#065f46" font-size="13" font-weight="600">Output</text>
+          <text x="450" y="220" text-anchor="middle" fill="#065f46" font-size="11">Results</text>
+          <text x="450" y="235" text-anchor="middle" fill="#065f46" font-size="11">Behavior</text>
+          
+          <line x1="250" y1="100" x2="350" y2="90" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowBB)"/>
+          <line x1="250" y1="200" x2="350" y2="210" stroke="#10b981" stroke-width="2" marker-end="url(#arrowBB)"/>
+          
+          <defs>
+            <marker id="arrowBB" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="code-block">
+<strong>Example: Boundary Value Analysis</strong>
+Input Field: Age (valid range: 18-65)
+
+Test Cases:
+- Min-1: 17 (should fail)
+- Min: 18 (should pass)
+- Min+1: 19 (should pass)
+- Nominal: 40 (should pass)
+- Max-1: 64 (should pass)
+- Max: 65 (should pass)
+- Max+1: 66 (should fail)
+      </div>
+
+      <h3><i class="fas fa-code icon-box"></i>Perform White Box Test</h3>
+      <p>White box testing (also called structural or glass box testing) examines the internal structure, logic, and code of the software. It requires knowledge of programming. Unlike black box testing, white box testing requires the tester to have full visibility into the code structure, allowing them to design test cases based on internal logic, code paths, and implementation details.</p>
+      
+      <p><strong>Detailed Approach:</strong> White box testing is also known as code-based, structural, or glass box testing. The tester has full knowledge of the internal code structure, algorithms, data structures, and implementation details. This allows testing of internal logic, code paths, branches, conditions, and loops. The primary goal is to ensure that all code paths are executed and tested, achieving high code coverage.</p>
+      
+      <p>This testing method is typically performed by developers or testers with programming knowledge. It's most effective at the unit and integration test levels. White box testing can find logical errors, code paths that are never executed, and ensure that all branches and conditions are tested. However, it may miss functional requirements and user experience issues. The effectiveness is measured through code coverage metrics like statement coverage, branch coverage, and path coverage.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box warning">
+            <h4>Characteristics</h4>
+            <ul>
+              <li>Requires code knowledge</li>
+              <li>Tests internal structure</li>
+              <li>Focus on code paths</li>
+              <li>Developer perspective</li>
+              <li>Measures code coverage</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4>Coverage Types</h4>
+            <ul>
+              <li><strong>Statement Coverage:</strong> All statements executed</li>
+              <li><strong>Branch Coverage:</strong> All branches tested</li>
+              <li><strong>Path Coverage:</strong> All paths executed</li>
+              <li><strong>Condition Coverage:</strong> All conditions tested</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h4>White Box Testing Techniques:</h4>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Description</th>
+              <th>Coverage Metric</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Statement Coverage</strong></td>
+              <td>Execute every statement at least once</td>
+              <td>Lines of code executed</td>
+            </tr>
+            <tr>
+              <td><strong>Branch Coverage</strong></td>
+              <td>Test all true/false outcomes of decisions</td>
+              <td>Decision outcomes tested</td>
+            </tr>
+            <tr>
+              <td><strong>Path Coverage</strong></td>
+              <td>Test all possible execution paths</td>
+              <td>Unique paths executed</td>
+            </tr>
+            <tr>
+              <td><strong>Condition Coverage</strong></td>
+              <td>Test all boolean expressions</td>
+              <td>Condition outcomes tested</td>
+            </tr>
+            <tr>
+              <td><strong>Loop Testing</strong></td>
+              <td>Test loop boundaries and iterations</td>
+              <td>Loop execution scenarios</td>
+            </tr>
+            <tr>
+              <td><strong>Data Flow Testing</strong></td>
+              <td>Test variable definitions and uses</td>
+              <td>Definition-use pairs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">White Box Testing - Code Coverage</div>
+        <svg width="100%" height="400" viewBox="0 0 700 400">
+          <rect x="50" y="50" width="600" height="300" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          
+          <!-- Code Structure -->
+          <rect x="100" y="100" width="500" height="200" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="350" y="130" text-anchor="middle" fill="#4f46e5" font-size="14" font-weight="bold">Code Structure (Visible)</text>
+          
+          <!-- Statements -->
+          <line x1="150" y1="160" x2="200" y2="160" stroke="#10b981" stroke-width="3"/>
+          <text x="175" y="155" text-anchor="middle" fill="#059669" font-size="10">S1</text>
+          
+          <line x1="150" y1="180" x2="200" y2="180" stroke="#10b981" stroke-width="3"/>
+          <text x="175" y="175" text-anchor="middle" fill="#059669" font-size="10">S2</text>
+          
+          <!-- Decision -->
+          <polygon points="250,150 300,170 250,190" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+          <text x="275" y="175" text-anchor="middle" fill="#92400e" font-size="10" font-weight="bold">IF</text>
+          
+          <!-- Branches -->
+          <line x1="300" y1="160" x2="400" y2="160" stroke="#3b82f6" stroke-width="2"/>
+          <text x="350" y="155" text-anchor="middle" fill="#1e40af" font-size="10">True Branch</text>
+          
+          <line x1="300" y1="190" x2="400" y2="190" stroke="#ef4444" stroke-width="2"/>
+          <text x="350" y="185" text-anchor="middle" fill="#dc2626" font-size="10">False Branch</text>
+          
+          <!-- Loop -->
+          <ellipse cx="500" cy="200" rx="50" ry="30" fill="#8b5cf6" stroke="#7c3aed" stroke-width="2"/>
+          <text x="500" y="205" text-anchor="middle" fill="white" font-size="10" font-weight="bold">LOOP</text>
+          
+          <!-- Coverage Metrics -->
+          <rect x="100" y="370" width="120" height="30" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1"/>
+          <text x="160" y="390" text-anchor="middle" fill="#065f46" font-size="11">Statement: 85%</text>
+          
+          <rect x="240" y="370" width="120" height="30" rx="3" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+          <text x="300" y="390" text-anchor="middle" fill="#1e40af" font-size="11">Branch: 75%</text>
+          
+          <rect x="380" y="370" width="120" height="30" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+          <text x="440" y="390" text-anchor="middle" fill="#92400e" font-size="11">Path: 60%</text>
+          
+          <rect x="520" y="370" width="120" height="30" rx="3" fill="#fce7f3" stroke="#ec4899" stroke-width="1"/>
+          <text x="580" y="390" text-anchor="middle" fill="#9f1239" font-size="11">Condition: 70%</text>
+        </svg>
+      </div>
+
+      <div class="code-block">
+<strong>Example: Statement Coverage</strong>
+Code:
+if (age >= 18 && age <= 65) {
+    status = "Valid";
+} else {
+    status = "Invalid";
+}
+
+To achieve 100% statement coverage:
+- Test case 1: age = 25 (covers if branch)
+- Test case 2: age = 10 (covers else branch)
+      </div>
+
+      <!-- STLC Phases for Section 4 -->
+      <div class="stlc-phase">
+        <h4><i class="fas fa-sitemap me-2"></i>STLC Phases Related to Test Design Techniques</h4>
+        <p><strong>Phase 1: Requirement Analysis</strong> - Test condition determination begins here:</p>
+        <ul>
+          <li>Analyze requirements to identify testable aspects</li>
+          <li>Document test conditions from requirements</li>
+          <li>Identify functional and non-functional test conditions</li>
+          <li>Prioritize test conditions based on risk</li>
+        </ul>
+        <p><strong>Phase 3: Test Case Development</strong> - Test design techniques are applied:</p>
+        <ul>
+          <li>Select appropriate test design techniques (Black Box/White Box)</li>
+          <li>Apply equivalence partitioning and boundary value analysis</li>
+          <li>Use decision tables for complex business rules</li>
+          <li>Design test cases using state transition testing</li>
+          <li>Apply white box techniques for code coverage</li>
+          <li>Create test cases based on test conditions</li>
+          <li>Ensure coverage of all identified test conditions</li>
+        </ul>
+        <p><strong>Phase 5: Test Execution</strong> - Techniques guide execution:</p>
+        <ul>
+          <li>Execute test cases designed using selected techniques</li>
+          <li>Verify coverage achieved through techniques</li>
+          <li>Measure code coverage (for white box testing)</li>
+          <li>Validate that test conditions are adequately covered</li>
+        </ul>
+      </div>
+
+      <!-- Questions for Section 4 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 4: Test Design Technique</h3>
+        
+        <div class="question-item">
+          <strong>Q1. What are test conditions? Explain the process of determining test conditions from requirements.</strong>
+          <p>Provide a detailed example showing how a requirement is broken down into test conditions.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. Compare and contrast Black Box Testing and White Box Testing. Include:</strong>
+          <ul>
+            <li>Definition and approach</li>
+            <li>Advantages and disadvantages</li>
+            <li>When to use each</li>
+            <li>Who performs each type</li>
+            <li>Test levels where each is applied</li>
+          </ul>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. Explain the following Black Box Testing techniques with examples:</strong>
+          <ol type="a">
+            <li>Equivalence Partitioning</li>
+            <li>Boundary Value Analysis</li>
+            <li>Decision Table Testing</li>
+            <li>State Transition Testing</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. Create test cases using Boundary Value Analysis for a system that accepts age between 18 and 65 years.</strong>
+          <p>List all test cases with expected results.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. Explain the following White Box Testing coverage types:</strong>
+          <ol type="a">
+            <li>Statement Coverage</li>
+            <li>Branch Coverage</li>
+            <li>Path Coverage</li>
+            <li>Condition Coverage</li>
+          </ol>
+          <p>Provide code examples showing how to achieve each type of coverage.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. Given the following code, calculate statement coverage and branch coverage:</strong>
+          <div class="code-block">
+if (x > 0 && y > 0) {
+    result = x + y;
+} else if (x < 0) {
+    result = x - y;
+} else {
+    result = 0;
+}
+          </div>
+          <p>What test cases are needed for 100% statement coverage? What about 100% branch coverage?</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. Explain how test conditions relate to test cases. Show the relationship with a diagram.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. When would you choose Black Box Testing over White Box Testing, and vice versa?</strong>
+          <p>Provide specific scenarios for each choice.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q9. Create a decision table for the following scenario:</strong>
+          <p>"A discount is given if the customer is a member AND the purchase amount is over $100. If the customer is a VIP member, they get an additional 5% discount."</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q10. How do test design techniques fit into the STLC? Explain which STLC phases involve test design techniques.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Test Design and Administration -->
+    <div class="content-card" id="section5">
+      <h2><span class="section-number">5</span>Test Design and Administration</h2>
+      
+      <h3><i class="fas fa-sitemap icon-box"></i>Identify Test Framework</h3>
+      <p>A test framework provides structure, guidelines, and tools for organizing and executing tests. It establishes standards and best practices for testing activities. A well-designed test framework ensures consistency, reusability, and maintainability of test scripts across the project.</p>
+      
+      <p><strong>Detailed Framework Concept:</strong> A test framework is a set of guidelines, coding standards, concepts, processes, and practices that provide a foundation for building and executing automated tests. It provides a structure for organizing test code, managing test data, handling test execution, and generating reports. Frameworks help reduce script development and maintenance effort while improving test reliability and efficiency.</p>
+      
+      <p>Frameworks typically include libraries of reusable functions, configuration management, test data management, reporting mechanisms, and integration with other tools. The choice of framework depends on the application type, technology stack, team expertise, and project requirements. A good framework should be easy to learn, maintain, and extend.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box">
+            <h4>Framework Components</h4>
+            <ul>
+              <li><strong>Test Organization:</strong> Structure for test cases and suites</li>
+              <li><strong>Test Execution:</strong> Mechanisms to run tests</li>
+              <li><strong>Reporting:</strong> Test results and metrics</li>
+              <li><strong>Test Data Management:</strong> Handling test data</li>
+              <li><strong>Configuration:</strong> Environment and test settings</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4>Framework Benefits</h4>
+            <ul>
+              <li>Consistency across projects</li>
+              <li>Reusability of test components</li>
+              <li>Maintainability</li>
+              <li>Standardization</li>
+              <li>Improved efficiency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Framework Type</th>
+              <th>Description</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Linear Framework</strong></td>
+              <td>Sequential test scripts without functions</td>
+              <td>Simple record-playback</td>
+            </tr>
+            <tr>
+              <td><strong>Modular Framework</strong></td>
+              <td>Tests divided into independent modules</td>
+              <td>Reusable test components</td>
+            </tr>
+            <tr>
+              <td><strong>Data-Driven Framework</strong></td>
+              <td>Test data separated from test logic</td>
+              <td>Excel/CSV data files</td>
+            </tr>
+            <tr>
+              <td><strong>Keyword-Driven Framework</strong></td>
+              <td>Tests defined using keywords</td>
+              <td>Robot Framework, Cucumber</td>
+            </tr>
+            <tr>
+              <td><strong>Hybrid Framework</strong></td>
+              <td>Combination of multiple frameworks</td>
+              <td>Modular + Data-driven</td>
+            </tr>
+            <tr>
+              <td><strong>BDD Framework</strong></td>
+              <td>Behavior-driven development approach</td>
+              <td>Cucumber, SpecFlow, JBehave</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Test Framework Architecture</div>
+        <svg width="100%" height="350" viewBox="0 0 700 350">
+          <rect x="250" y="50" width="200" height="60" rx="8" fill="#667eea" stroke="#4f46e5" stroke-width="2"/>
+          <text x="350" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Test Framework</text>
+          <text x="350" y="100" text-anchor="middle" fill="white" font-size="12">Core Engine</text>
+          
+          <rect x="50" y="150" width="150" height="60" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="125" y="180" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Test</text>
+          <text x="125" y="195" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Execution</text>
+          
+          <rect x="250" y="150" width="150" height="60" rx="5" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="325" y="180" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Test Data</text>
+          <text x="325" y="195" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Management</text>
+          
+          <rect x="450" y="150" width="150" height="60" rx="5" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="525" y="180" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Reporting</text>
+          <text x="525" y="195" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">&amp; Logging</text>
+          
+          <rect x="150" y="250" width="120" height="60" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="210" y="280" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Test</text>
+          <text x="210" y="295" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Scripts</text>
+          
+          <rect x="290" y="250" width="120" height="60" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="350" y="280" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Test</text>
+          <text x="350" y="295" text-anchor="middle" fill="#475569" font-size="11" font-weight="600">Libraries</text>
+          
+          <line x1="350" y1="110" x2="125" y2="150" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowFrame)"/>
+          <line x1="350" y1="110" x2="325" y2="150" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowFrame)"/>
+          <line x1="350" y1="110" x2="525" y2="150" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowFrame)"/>
+          <line x1="200" y1="210" x2="210" y2="250" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowFrame)"/>
+          <line x1="400" y1="210" x2="350" y2="250" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowFrame)"/>
+          
+          <defs>
+            <marker id="arrowFrame" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-calendar-alt icon-box"></i>Perform Planning and Estimate</h3>
+      <p>Test planning involves defining the scope, approach, resources, and schedule for testing activities. Estimation helps determine effort, time, and resources needed.</p>
+      
+      <div class="info-box">
+        <strong>Test Planning Activities:</strong>
+        <ul>
+          <li><strong>Scope Definition:</strong> Identify what to test and what not to test</li>
+          <li><strong>Test Strategy:</strong> Define overall testing approach</li>
+          <li><strong>Resource Planning:</strong> Identify team, tools, and infrastructure</li>
+          <li><strong>Schedule Planning:</strong> Timeline for test activities</li>
+          <li><strong>Risk Assessment:</strong> Identify testing risks and mitigation</li>
+          <li><strong>Entry/Exit Criteria:</strong> Define when to start and stop testing</li>
+        </ul>
+      </div>
+
+      <h4>Estimation Techniques:</h4>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Description</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Expert Judgment</strong></td>
+              <td>Based on experience and expertise</td>
+              <td>Similar past projects available</td>
+            </tr>
+            <tr>
+              <td><strong>Work Breakdown Structure</strong></td>
+              <td>Break work into smaller tasks and estimate each</td>
+              <td>Well-defined project scope</td>
+            </tr>
+            <tr>
+              <td><strong>Three-Point Estimation</strong></td>
+              <td>Optimistic, pessimistic, and most likely estimates</td>
+              <td>Uncertainty in requirements</td>
+            </tr>
+            <tr>
+              <td><strong>Function Point Analysis</strong></td>
+              <td>Estimate based on functionality complexity</td>
+              <td>Functional requirements clear</td>
+            </tr>
+            <tr>
+              <td><strong>Test Case Point Method</strong></td>
+              <td>Estimate based on number and complexity of test cases</td>
+              <td>Test cases identified</td>
+            </tr>
+            <tr>
+              <td><strong>Historical Data</strong></td>
+              <td>Use metrics from similar past projects</td>
+              <td>Historical data available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Test Planning Process</div>
+        <svg width="100%" height="300" viewBox="0 0 800 300">
+          <rect x="50" y="100" width="130" height="60" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="115" y="130" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Analyze</text>
+          <text x="115" y="145" text-anchor="middle" fill="#4f46e5" font-size="11">Requirements</text>
+          
+          <rect x="220" y="100" width="130" height="60" rx="8" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="285" y="130" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Define</text>
+          <text x="285" y="145" text-anchor="middle" fill="#4f46e5" font-size="11">Test Strategy</text>
+          
+          <rect x="390" y="100" width="130" height="60" rx="8" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="455" y="130" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Estimate</text>
+          <text x="455" y="145" text-anchor="middle" fill="#4f46e5" font-size="11">Effort &amp; Time</text>
+          
+          <rect x="560" y="100" width="130" height="60" rx="8" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+          <text x="625" y="130" text-anchor="middle" fill="white" font-size="12" font-weight="600">Create</text>
+          <text x="625" y="145" text-anchor="middle" fill="white" font-size="11">Test Plan</text>
+          
+          <line x1="180" y1="130" x2="220" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowPlan)"/>
+          <line x1="350" y1="130" x2="390" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowPlan)"/>
+          <line x1="520" y1="130" x2="560" y2="130" stroke="#6366f1" stroke-width="2" marker-end="url(#arrowPlan)"/>
+          
+          <rect x="200" y="200" width="400" height="50" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+          <text x="400" y="225" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">Output: Test Plan Document</text>
+          <text x="400" y="240" text-anchor="middle" fill="#475569" font-size="11">(Scope, Strategy, Resources, Schedule, Risks)</text>
+          
+          <defs>
+            <marker id="arrowPlan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <polygon points="0 0, 10 3, 0 6" fill="#6366f1"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-chart-line icon-box"></i>Perform Progress Management</h3>
+      <p>Progress management involves tracking, monitoring, and controlling testing activities to ensure they stay on schedule and meet objectives.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box warning">
+            <h4>Key Metrics</h4>
+            <ul>
+              <li><strong>Test Execution Progress:</strong> Tests executed vs planned</li>
+              <li><strong>Defect Metrics:</strong> Found, fixed, reopened defects</li>
+              <li><strong>Coverage Metrics:</strong> Requirements, code coverage</li>
+              <li><strong>Schedule Adherence:</strong> Actual vs planned timeline</li>
+              <li><strong>Resource Utilization:</strong> Team productivity</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4>Progress Tracking Activities</h4>
+            <ul>
+              <li>Daily/weekly status reports</li>
+              <li>Test execution dashboards</li>
+              <li>Defect tracking and analysis</li>
+              <li>Risk monitoring</li>
+              <li>Stakeholder communication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Progress Management Dashboard</div>
+        <svg width="100%" height="350" viewBox="0 0 700 350">
+          <rect x="50" y="50" width="600" height="250" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="350" y="80" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="bold">Test Progress Dashboard</text>
+          
+          <!-- Progress Bars -->
+          <text x="100" y="120" fill="#475569" font-size="12" font-weight="600">Test Execution:</text>
+          <rect x="250" y="105" width="300" height="20" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="250" y="105" width="240" height="20" rx="10" fill="#10b981"/>
+          <text x="400" y="120" text-anchor="middle" fill="white" font-size="11" font-weight="600">80%</text>
+          
+          <text x="100" y="160" fill="#475569" font-size="12" font-weight="600">Requirements Coverage:</text>
+          <rect x="250" y="145" width="300" height="20" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="250" y="145" width="270" height="20" rx="10" fill="#3b82f6"/>
+          <text x="415" y="160" text-anchor="middle" fill="white" font-size="11" font-weight="600">90%</text>
+          
+          <text x="100" y="200" fill="#475569" font-size="12" font-weight="600">Defects Fixed:</text>
+          <rect x="250" y="185" width="300" height="20" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="250" y="185" width="225" height="20" rx="10" fill="#f59e0b"/>
+          <text x="387" y="200" text-anchor="middle" fill="white" font-size="11" font-weight="600">75%</text>
+          
+          <text x="100" y="240" fill="#475569" font-size="12" font-weight="600">Schedule Adherence:</text>
+          <rect x="250" y="225" width="300" height="20" rx="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+          <rect x="250" y="225" width="210" height="20" rx="10" fill="#8b5cf6"/>
+          <text x="365" y="240" text-anchor="middle" fill="white" font-size="11" font-weight="600">70%</text>
+          
+          <!-- Metrics Boxes -->
+          <rect x="100" y="280" width="100" height="40" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="1"/>
+          <text x="150" y="300" text-anchor="middle" fill="#065f46" font-size="11" font-weight="600">Tests: 800/1000</text>
+          
+          <rect x="220" y="280" width="100" height="40" rx="5" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+          <text x="270" y="300" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">Defects: 45</text>
+          
+          <rect x="340" y="280" width="100" height="40" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+          <text x="390" y="300" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">Open: 12</text>
+          
+          <rect x="460" y="280" width="100" height="40" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+          <text x="510" y="300" text-anchor="middle" fill="#92400e" font-size="11" font-weight="600">Fixed: 33</text>
+        </svg>
+      </div>
+
+      <div class="info-box">
+        <strong>Progress Management Best Practices:</strong>
+        <ul>
+          <li>Establish clear milestones and checkpoints</li>
+          <li>Use automated dashboards for real-time visibility</li>
+          <li>Conduct regular status meetings</li>
+          <li>Track leading and lagging indicators</li>
+          <li>Identify and address blockers early</li>
+          <li>Adjust plans based on actual progress</li>
+        </ul>
+      </div>
+
+      <!-- STLC Phases for Section 5 -->
+      <div class="stlc-phase">
+        <h4><i class="fas fa-sitemap me-2"></i>STLC Phases Related to Test Design and Administration</h4>
+        <p><strong>Phase 2: Test Planning</strong> - This phase directly relates to planning and estimation:</p>
+        <ul>
+          <li>Define test framework and approach</li>
+          <li>Perform effort estimation using various techniques</li>
+          <li>Create detailed test plan document</li>
+          <li>Estimate resources, time, and budget</li>
+          <li>Plan test environment setup</li>
+          <li>Define test schedule and milestones</li>
+          <li>Identify risks and mitigation strategies</li>
+        </ul>
+        <p><strong>Phase 5: Test Execution</strong> - Progress management during execution:</p>
+        <ul>
+          <li>Track test execution progress</li>
+          <li>Monitor test metrics and KPIs</li>
+          <li>Update progress dashboards</li>
+          <li>Report progress to stakeholders</li>
+          <li>Identify and address blockers</li>
+          <li>Adjust plans based on actual progress</li>
+        </ul>
+        <p><strong>Throughout STLC:</strong> Test framework provides structure:</p>
+        <ul>
+          <li>Framework guides test organization in all phases</li>
+          <li>Standards ensure consistency across phases</li>
+          <li>Tools support activities in each phase</li>
+          <li>Reporting mechanisms track progress</li>
+        </ul>
+      </div>
+
+      <!-- Questions for Section 5 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 5: Test Design and Administration</h3>
+        
+        <div class="question-item">
+          <strong>Q1. What is a test framework? Explain the components of a test framework and their purposes.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. Compare the following test framework types:</strong>
+          <ol type="a">
+            <li>Linear Framework vs Modular Framework</li>
+            <li>Data-Driven Framework vs Keyword-Driven Framework</li>
+            <li>Hybrid Framework vs BDD Framework</li>
+          </ol>
+          <p>When would you choose each type?</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. Explain the test planning process in detail. What are the key activities and deliverables?</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. Describe the following estimation techniques:</strong>
+          <ol type="a">
+            <li>Expert Judgment</li>
+            <li>Work Breakdown Structure</li>
+            <li>Three-Point Estimation</li>
+            <li>Function Point Analysis</li>
+          </ol>
+          <p>Provide an example of how each would be used.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. What are the key metrics used in test progress management? Explain how each metric helps track progress.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. Create a test plan document outline. Include all major sections and explain what should be included in each.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. Explain the importance of test framework in maintaining consistency across testing activities.</strong>
+          <p>How does a framework help in long-term maintenance of test scripts?</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. You need to estimate testing effort for a project with 50 functional requirements. Explain which estimation technique you would use and why.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q9. Design a progress dashboard showing key test metrics. Explain what metrics you would include and why.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q10. How do test planning and progress management relate to different STLC phases?</strong>
+          <p>Explain the relationship with specific examples.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Test Supportive Tools -->
+    <div class="content-card" id="section6">
+      <h2><span class="section-number">6</span>Test Supportive Tools</h2>
+      
+      <h3><i class="fas fa-toolbox icon-box"></i>Identify Tool Variety and Application</h3>
+      <p>Testing tools support various testing activities, from test management to automation. Understanding tool categories helps select appropriate tools for specific needs. Testing tools have become essential in modern software development, enabling teams to test more efficiently, accurately, and comprehensively.</p>
+      
+      <p><strong>Detailed Tool Categories:</strong> Testing tools can be broadly categorized based on their primary function. Test management tools help organize and track testing activities throughout the STLC. Automation tools enable repetitive test execution, saving time and reducing human error. Performance tools simulate load and measure system behavior under stress. Security tools identify vulnerabilities and compliance issues. Each tool category addresses specific testing needs and integrates with other tools to create a comprehensive testing ecosystem.</p>
+      
+      <p>Tool selection should be based on project requirements, team expertise, budget constraints, and integration needs. Tools should support the testing methodology being used (Agile, Waterfall, etc.) and integrate well with existing development and deployment tools. The tool ecosystem should support the entire STLC, from requirement analysis through test closure.</p>
+      
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Tool Category</th>
+              <th>Purpose</th>
+              <th>Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Test Management Tools</strong></td>
+              <td>Plan, track, and manage test cases and execution</td>
+              <td>Jira, TestRail, Zephyr, qTest</td>
+            </tr>
+            <tr>
+              <td><strong>Test Automation Tools</strong></td>
+              <td>Automate test execution</td>
+              <td>Selenium, Cypress, Playwright, Appium</td>
+            </tr>
+            <tr>
+              <td><strong>Performance Testing Tools</strong></td>
+              <td>Test system performance and load</td>
+              <td>JMeter, LoadRunner, Gatling, K6</td>
+            </tr>
+            <tr>
+              <td><strong>Security Testing Tools</strong></td>
+              <td>Identify security vulnerabilities</td>
+              <td>OWASP ZAP, Burp Suite, Nessus</td>
+            </tr>
+            <tr>
+              <td><strong>API Testing Tools</strong></td>
+              <td>Test APIs and web services</td>
+              <td>Postman, SoapUI, REST Assured, Insomnia</td>
+            </tr>
+            <tr>
+              <td><strong>Code Coverage Tools</strong></td>
+              <td>Measure code coverage</td>
+              <td>JaCoCo, Cobertura, Istanbul, SonarQube</td>
+            </tr>
+            <tr>
+              <td><strong>Defect Tracking Tools</strong></td>
+              <td>Track and manage defects</td>
+              <td>Jira, Bugzilla, Mantis, Azure DevOps</td>
+            </tr>
+            <tr>
+              <td><strong>CI/CD Tools</strong></td>
+              <td>Continuous integration and deployment</td>
+              <td>Jenkins, GitLab CI, GitHub Actions, Azure DevOps</td>
+            </tr>
+            <tr>
+              <td><strong>Mobile Testing Tools</strong></td>
+              <td>Test mobile applications</td>
+              <td>Appium, Espresso, XCUITest, BrowserStack</td>
+            </tr>
+            <tr>
+              <td><strong>Test Data Management Tools</strong></td>
+              <td>Generate and manage test data</td>
+              <td>Mockaroo, Faker, Test Data Builder</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Testing Tools Ecosystem</div>
+        <svg width="100%" height="450" viewBox="0 0 700 450">
+          <circle cx="350" cy="225" r="80" fill="#667eea" stroke="#4f46e5" stroke-width="3"/>
+          <text x="350" y="220" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Testing</text>
+          <text x="350" y="240" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Tools</text>
+          
+          <!-- Tool Categories -->
+          <rect x="50" y="50" width="140" height="50" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="120" y="75" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Test Management</text>
+          <text x="120" y="90" text-anchor="middle" fill="#4f46e5" font-size="10">Jira, TestRail</text>
+          
+          <rect x="510" y="50" width="140" height="50" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="580" y="75" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Automation</text>
+          <text x="580" y="90" text-anchor="middle" fill="#4f46e5" font-size="10">Selenium, Cypress</text>
+          
+          <rect x="50" y="350" width="140" height="50" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="120" y="375" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Performance</text>
+          <text x="120" y="390" text-anchor="middle" fill="#4f46e5" font-size="10">JMeter, LoadRunner</text>
+          
+          <rect x="510" y="350" width="140" height="50" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="580" y="375" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Security</text>
+          <text x="580" y="390" text-anchor="middle" fill="#4f46e5" font-size="10">OWASP ZAP</text>
+          
+          <rect x="200" y="120" width="140" height="50" rx="5" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="270" y="145" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">API Testing</text>
+          <text x="270" y="160" text-anchor="middle" fill="#4f46e5" font-size="10">Postman, SoapUI</text>
+          
+          <rect x="200" y="280" width="140" height="50" rx="5" fill="#c7d2fe" stroke="#6366f1" stroke-width="2"/>
+          <text x="270" y="305" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">CI/CD</text>
+          <text x="270" y="320" text-anchor="middle" fill="#4f46e5" font-size="10">Jenkins, GitLab</text>
+          
+          <rect x="350" y="50" width="140" height="50" rx="5" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="420" y="75" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Defect Tracking</text>
+          <text x="420" y="90" text-anchor="middle" fill="#4f46e5" font-size="10">Bugzilla, Mantis</text>
+          
+          <rect x="350" y="350" width="140" height="50" rx="5" fill="#a5b4fc" stroke="#6366f1" stroke-width="2"/>
+          <text x="420" y="375" text-anchor="middle" fill="#4f46e5" font-size="11" font-weight="600">Coverage</text>
+          <text x="420" y="390" text-anchor="middle" fill="#4f46e5" font-size="10">JaCoCo, SonarQube</text>
+          
+          <!-- Connection Lines -->
+          <line x1="190" y1="75" x2="300" y2="200" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="510" y1="75" x2="400" y2="200" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="190" y1="375" x2="300" y2="250" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="510" y1="375" x2="400" y2="250" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="270" y1="170" x2="320" y2="210" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="270" y1="280" x2="320" y2="240" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="420" y1="100" x2="380" y2="200" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="420" y1="350" x2="380" y2="250" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+
+      <h3><i class="fas fa-balance-scale icon-box"></i>Identify Advantage and Risk</h3>
+      <p>While testing tools provide significant benefits, they also come with risks. Understanding both helps make informed tool selection and usage decisions.</p>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="info-box success">
+            <h4><i class="fas fa-check-circle"></i> Advantages of Testing Tools</h4>
+            <ul>
+              <li><strong>Efficiency:</strong> Faster test execution and reporting</li>
+              <li><strong>Accuracy:</strong> Reduces human errors in repetitive tasks</li>
+              <li><strong>Reusability:</strong> Test scripts can be reused across projects</li>
+              <li><strong>Consistency:</strong> Standardized test execution</li>
+              <li><strong>Coverage:</strong> Ability to run more tests in less time</li>
+              <li><strong>Traceability:</strong> Better tracking of requirements to tests</li>
+              <li><strong>Reporting:</strong> Automated generation of test reports</li>
+              <li><strong>Integration:</strong> Can integrate with development tools</li>
+              <li><strong>Scalability:</strong> Can handle large test suites</li>
+              <li><strong>Cost Reduction:</strong> Long-term cost savings through automation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="info-box danger">
+            <h4><i class="fas fa-exclamation-triangle"></i> Risks and Challenges</h4>
+            <ul>
+              <li><strong>Initial Investment:</strong> High upfront cost for tools and training</li>
+              <li><strong>Maintenance Overhead:</strong> Tools require regular updates and maintenance</li>
+              <li><strong>False Sense of Security:</strong> Tools don't guarantee quality</li>
+              <li><strong>Tool Dependency:</strong> Over-reliance on tools</li>
+              <li><strong>Learning Curve:</strong> Team needs training and time to adapt</li>
+              <li><strong>Compatibility Issues:</strong> Tools may not work with all technologies</li>
+              <li><strong>False Positives/Negatives:</strong> Tools can produce incorrect results</li>
+              <li><strong>Vendor Lock-in:</strong> Dependency on specific tool vendors</li>
+              <li><strong>Complexity:</strong> Some tools can be complex to configure</li>
+              <li><strong>Maintenance of Test Scripts:</strong> Scripts need updates when application changes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">Tool Selection Decision Matrix</div>
+        <svg width="100%" height="350" viewBox="0 0 700 350">
+          <rect x="50" y="50" width="600" height="250" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="350" y="80" text-anchor="middle" fill="#1e293b" font-size="16" font-weight="bold">Tool Selection Criteria</text>
+          
+          <!-- Criteria Boxes -->
+          <rect x="100" y="100" width="120" height="80" rx="5" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+          <text x="160" y="125" text-anchor="middle" fill="#065f46" font-size="12" font-weight="600">Cost</text>
+          <text x="160" y="145" text-anchor="middle" fill="#065f46" font-size="10">License fees</text>
+          <text x="160" y="160" text-anchor="middle" fill="#065f46" font-size="10">Training cost</text>
+          <text x="160" y="175" text-anchor="middle" fill="#065f46" font-size="10">Maintenance</text>
+          
+          <rect x="250" y="100" width="120" height="80" rx="5" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+          <text x="310" y="125" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="600">Features</text>
+          <text x="310" y="145" text-anchor="middle" fill="#1e40af" font-size="10">Required</text>
+          <text x="310" y="160" text-anchor="middle" fill="#1e40af" font-size="10">functionality</text>
+          <text x="310" y="175" text-anchor="middle" fill="#1e40af" font-size="10">available</text>
+          
+          <rect x="400" y="100" width="120" height="80" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+          <text x="460" y="125" text-anchor="middle" fill="#92400e" font-size="12" font-weight="600">Ease of Use</text>
+          <text x="460" y="145" text-anchor="middle" fill="#92400e" font-size="10">Learning curve</text>
+          <text x="460" y="160" text-anchor="middle" fill="#92400e" font-size="10">User-friendly</text>
+          <text x="460" y="175" text-anchor="middle" fill="#92400e" font-size="10">interface</text>
+          
+          <rect x="100" y="200" width="120" height="80" rx="5" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+          <text x="160" y="225" text-anchor="middle" fill="#9f1239" font-size="12" font-weight="600">Support</text>
+          <text x="160" y="245" text-anchor="middle" fill="#9f1239" font-size="10">Documentation</text>
+          <text x="160" y="260" text-anchor="middle" fill="#9f1239" font-size="10">Community</text>
+          <text x="160" y="275" text-anchor="middle" fill="#9f1239" font-size="10">Vendor support</text>
+          
+          <rect x="250" y="200" width="120" height="80" rx="5" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+          <text x="310" y="225" text-anchor="middle" fill="#4f46e5" font-size="12" font-weight="600">Integration</text>
+          <text x="310" y="245" text-anchor="middle" fill="#4f46e5" font-size="10">Works with</text>
+          <text x="310" y="260" text-anchor="middle" fill="#4f46e5" font-size="10">existing tools</text>
+          <text x="310" y="275" text-anchor="middle" fill="#4f46e5" font-size="10">and systems</text>
+          
+          <rect x="400" y="200" width="120" height="80" rx="5" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2"/>
+          <text x="460" y="225" text-anchor="middle" fill="#5b21b6" font-size="12" font-weight="600">Scalability</text>
+          <text x="460" y="245" text-anchor="middle" fill="#5b21b6" font-size="10">Handles growth</text>
+          <text x="460" y="260" text-anchor="middle" fill="#5b21b6" font-size="10">Future needs</text>
+          <text x="460" y="275" text-anchor="middle" fill="#5b21b6" font-size="10">Performance</text>
+        </svg>
+      </div>
+
+      <div class="info-box">
+        <strong>Best Practices for Tool Selection and Usage:</strong>
+        <ul>
+          <li>Evaluate tools based on specific project needs</li>
+          <li>Consider total cost of ownership, not just initial cost</li>
+          <li>Start with pilot projects before full adoption</li>
+          <li>Ensure team training and support</li>
+          <li>Maintain balance between automation and manual testing</li>
+          <li>Regularly review and update tool strategy</li>
+          <li>Consider open-source alternatives</li>
+          <li>Plan for tool maintenance and updates</li>
+        </ul>
+      </div>
+
+      <!-- STLC Phases for Section 6 -->
+      <div class="stlc-phase">
+        <h4><i class="fas fa-sitemap me-2"></i>STLC Phases and Tool Support</h4>
+        <p><strong>Phase 1: Requirement Analysis</strong> - Tools used:</p>
+        <ul>
+          <li>Requirement management tools (Jira, Confluence)</li>
+          <li>Documentation tools</li>
+          <li>RTM tools for traceability</li>
+        </ul>
+        <p><strong>Phase 2: Test Planning</strong> - Tools used:</p>
+        <ul>
+          <li>Test management tools (TestRail, Zephyr)</li>
+          <li>Project management tools</li>
+          <li>Estimation tools</li>
+        </ul>
+        <p><strong>Phase 3: Test Case Development</strong> - Tools used:</p>
+        <ul>
+          <li>Test case management tools</li>
+          <li>Test data generation tools</li>
+          <li>Test design tools</li>
+        </ul>
+        <p><strong>Phase 4: Test Environment Setup</strong> - Tools used:</p>
+        <ul>
+          <li>Virtualization tools (Docker, VMs)</li>
+          <li>Configuration management tools</li>
+          <li>Environment provisioning tools</li>
+        </ul>
+        <p><strong>Phase 5: Test Execution</strong> - Tools used:</p>
+        <ul>
+          <li>Test automation tools (Selenium, Cypress)</li>
+          <li>API testing tools (Postman, SoapUI)</li>
+          <li>Performance testing tools (JMeter, LoadRunner)</li>
+          <li>Defect tracking tools (Jira, Bugzilla)</li>
+          <li>CI/CD tools (Jenkins, GitLab CI)</li>
+        </ul>
+        <p><strong>Phase 6: Test Cycle Closure</strong> - Tools used:</p>
+        <ul>
+          <li>Reporting tools</li>
+          <li>Metrics and analytics tools</li>
+          <li>Documentation tools</li>
+          <li>Archive and repository tools</li>
+        </ul>
+      </div>
+
+      <!-- Questions for Section 6 -->
+      <div class="questions-section">
+        <h3><i class="fas fa-question-circle me-2"></i>Review Questions - Section 6: Test Supportive Tools</h3>
+        
+        <div class="question-item">
+          <strong>Q1. Categorize testing tools and explain the purpose of each category. Provide examples of tools in each category.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q2. List and explain ten advantages of using testing tools. Provide specific examples for each advantage.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q3. What are the main risks and challenges associated with testing tools? How can these risks be mitigated?</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q4. Explain the tool selection criteria. Create a decision matrix for selecting a test automation tool.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q5. Compare the following tools for their specific purposes:</strong>
+          <ol type="a">
+            <li>Selenium vs Cypress (for web automation)</li>
+            <li>JMeter vs LoadRunner (for performance testing)</li>
+            <li>Jira vs TestRail (for test management)</li>
+          </ol>
+        </div>
+
+        <div class="question-item">
+          <strong>Q6. How do testing tools support different STLC phases? Provide specific examples of tools used in each phase.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q7. Explain the concept of tool integration. Why is it important? Provide examples of tool integrations.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q8. What factors should be considered when deciding between open-source and commercial testing tools?</strong>
+          <p>List advantages and disadvantages of each.</p>
+        </div>
+
+        <div class="question-item">
+          <strong>Q9. Design a testing tool ecosystem for an Agile project. Include tools for all STLC phases and explain how they integrate.</strong>
+        </div>
+
+        <div class="question-item">
+          <strong>Q10. Explain how testing tools help in:</strong>
+          <ol type="a">
+            <li>Improving test coverage</li>
+            <li>Reducing testing time</li>
+            <li>Enhancing test quality</li>
+            <li>Facilitating continuous testing</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="content-card" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 3rem;">
+      <h2 style="color: white; border: none; padding-bottom: 0;">Summary</h2>
+      <p style="font-size: 1.1rem; margin: 1rem 0;">This comprehensive guide covers all aspects of software testing from identifying test needs to utilizing supportive tools. Understanding these concepts is essential for effective software quality assurance.</p>
+      <p style="margin-top: 2rem; opacity: 0.9;">
+        <i class="fas fa-graduation-cap me-2"></i>NVQ Level 5 - Information and Communication Technology<br>
+        <i class="fas fa-book me-2"></i>Software Testing Module
+      </p>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Smooth Scroll -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

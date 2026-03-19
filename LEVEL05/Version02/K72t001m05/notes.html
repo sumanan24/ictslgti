@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basics of Programming &amp; Object-Oriented Programming | Level 5 ICT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    :root{
+      --header-bg: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #14b8a6 100%);
+      --accent: #0d9488;
+      --accent-light: #ccfbf1;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --mod1: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+      --mod2: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+      --mod3: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+      --mod4: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+      --mod5: linear-gradient(135deg, #15803d 0%, #22c55e 100%);
+    }
+    html{scroll-behavior:smooth;overflow-x:hidden;overflow-y:scroll}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(180deg,#f0fdfa 0%,#f8fafc 100%);color:var(--text);line-height:1.65;padding:0;min-height:100vh;overflow-x:hidden;max-width:100%}
+
+    @media (min-width:992px){
+      .toc-sidebar{position:fixed!important;left:0;top:0;width:260px;height:100vh;z-index:40;margin:0;border-radius:0;border-right:1px solid rgba(13,148,136,0.2);overflow-y:auto;overflow-x:hidden}
+      .page-wrapper{margin-left:260px;max-width:100%}
+    }
+    @media (min-width:992px){
+      .toc-sidebar .toc-toggle{display:none!important}
+      .toc-sidebar .toc-header{display:block!important}
+    }
+    @media (max-width:991px){
+      .toc-sidebar{position:fixed!important;top:0;left:0;right:0;width:100%;max-height:none;border-right:none;z-index:50}
+      .toc-sidebar .toc-list{max-height:0;overflow:hidden;padding:0!important;margin:0!important;transition:max-height 0.25s ease}
+      .toc-sidebar.toc-open .toc-list{max-height:70vh;overflow-y:auto;padding:0.5rem 0 1.25rem!important}
+      .toc-sidebar .toc-toggle{display:flex!important;align-items:center;justify-content:space-between;padding:0.75rem 1rem;min-height:3rem}
+      .page-wrapper{margin-left:0!important;padding-top:3.25rem}
+    }
+
+    .container-main{max-width:900px;margin:0 auto;padding:0 clamp(1rem,4vw,1.5rem)}
+    .toc-sidebar{background:#fff;padding:0;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(13,148,136,0.1)}
+    .toc-sidebar .toc-header{padding:0.875rem 1rem;background:var(--header-bg);color:#fff;font-weight:700;font-size:0.95rem;text-align:center}
+    .toc-sidebar .toc-toggle{display:none;align-items:center;justify-content:space-between;width:100%;padding:0.75rem 1rem;background:var(--header-bg);color:#fff;border:none;font-size:0.95rem;font-weight:600;cursor:pointer;text-align:left}
+    .toc-sidebar .toc-list{padding:0.5rem 0 1.25rem;background:#fff}
+    .toc-sidebar .toc-list a{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8125rem;color:var(--text);text-decoration:none;padding:0.5rem 0.75rem 0.5rem 1rem;line-height:1.4;border-bottom:1px solid #f1f5f9}
+    .toc-sidebar .toc-list a:hover{color:var(--accent);background:#f0fdfa}
+    .toc-sidebar .toc-list a .ch-num-side{flex-shrink:0;min-width:1.75rem;font-weight:700;color:var(--accent)}
+    .toc-sidebar .toc-list a .ch-title-side{flex:1;min-width:0}
+
+    .content-area{min-width:0}
+    .module-block{margin-bottom:2.5rem}
+    .module-title{background:var(--header-bg);color:#fff;padding:1rem 1.25rem;border-radius:12px;margin-bottom:1.5rem;font-size:1.25rem;font-weight:700;display:flex;align-items:center;gap:0.75rem;box-shadow:0 4px 14px rgba(0,0,0,0.12)}
+    .chapter-card{background:#fff;border-radius:14px;padding:clamp(1.25rem,4vw,2rem);margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.08);border:1px solid rgba(13,148,136,0.08);border-left:4px solid var(--accent)}
+    .chapter-card > p:first-of-type{background:linear-gradient(90deg,#f0fdfa 0%,#fff 100%);padding:0.5rem 0.75rem;border-radius:8px;border-left:3px solid var(--accent);font-size:0.9rem;margin-bottom:1rem}
+    .chapter-card h2{color:var(--accent);font-size:clamp(1.15rem,3vw,1.4rem);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:3px solid var(--accent-light);display:flex;align-items:center;gap:0.5rem}
+    .chapter-card .ch-num{width:2rem;height:2rem;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem}
+    .chapter-card h3{color:#0f766e;font-size:1.1rem;margin-top:1.25rem;margin-bottom:0.5rem}
+    .chapter-card ul,.chapter-card ol{padding-left:1.5rem;margin:0.5rem 0 1rem}
+    .chapter-card li{margin-bottom:0.35rem}
+    .info-box{background:linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 100%);border-left:4px solid var(--accent);padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .simple-english{background:linear-gradient(135deg,#f8fafc 0%,#f0fdfa 100%);padding:0.6rem 0.9rem;border-radius:8px;border-left:3px solid var(--accent);margin:0.6rem 0;font-size:0.92rem;line-height:1.5}
+    .simple-english strong{color:#0f766e}
+    .q-box{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-left:4px solid #3b82f6;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .q-box strong{color:#1d4ed8}
+    .activity-box{background:linear-gradient(135deg,#fefce8 0%,#fef9c3 100%);border-left:4px solid #eab308;padding:1rem 1.25rem;border-radius:0 10px 10px 0;margin:1rem 0}
+    .activity-box strong{color:#92400e}
+    .page-footer{text-align:center;padding:2rem 1rem;font-size:0.9rem;color:var(--text-muted)}
+    .book-hero{background:linear-gradient(145deg,#0f766e 0%,#0d9488 35%,#14b8a6 70%,#2dd4bf 100%);color:#fff;padding:2rem 1rem 2.5rem;text-align:center;border-radius:0 0 24px 24px;box-shadow:0 8px 30px rgba(15,118,110,0.35)}
+    .book-hero h1{margin:0 0 0.35rem;font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800}
+    .book-hero .lead{margin:0;font-size:0.95rem;opacity:0.95}
+    .table-wrap{overflow-x:auto;margin:1rem 0;border-radius:12px;border:1px solid rgba(13,148,136,0.2)}
+    .compare-table{width:100%;border-collapse:collapse;font-size:0.9rem;background:#fff}
+    .compare-table th,.compare-table td{padding:0.65rem 0.85rem;text-align:left;border-bottom:1px solid #e2e8f0}
+    .compare-table th{background:linear-gradient(135deg,#f0fdfa 0%,#ccfbf1 100%);color:#0f766e;font-weight:700}
+    .compare-table tr:hover td{background:#f8fafc}
+
+    /* Code blocks - Java & Python */
+    .code-block{background:#1e293b;color:#e2e8f0;padding:1rem 1.25rem;border-radius:10px;overflow-x:auto;margin:0.75rem 0;font-family:'Consolas','Monaco',monospace;font-size:0.875rem;line-height:1.5}
+    .code-block .lang-label{display:inline-block;background:rgba(255,255,255,0.15);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.75rem;margin-bottom:0.5rem;color:#94a3b8}
+    .code-block code{color:#e2e8f0;background:transparent;padding:0}
+    .code-block .keyword{color:#c084fc}
+    .code-block .comment{color:#64748b}
+    .two-lang{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+    @media (max-width:767px){.two-lang{grid-template-columns:1fr}}
+    .diagram-wrap{background:linear-gradient(180deg,#f8fafc 0%,#f1f5f9 100%);border-radius:12px;padding:1.25rem;margin:1.25rem 0;border:1px solid rgba(13,148,136,0.25);text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .diagram-wrap svg{max-width:100%;height:auto}
+    .diagram-wrap .fig-caption{font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;font-weight:600}
+    .flowchart-symbols{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin:1rem 0;align-items:start}
+    .flowchart-symbols .symbol-item{text-align:center}
+    .flowchart-symbols .symbol-item svg{display:block;margin:0 auto 0.35rem;border:1px solid #e2e8f0;border-radius:8px;background:#fff}
+  </style>
+</head>
+<body>
+  <aside class="toc-sidebar" id="tocSidebar" aria-label="Chapter navigation">
+    <div class="toc-header"><i class="fas fa-list me-2"></i>Chapters</div>
+    <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="tocList" id="tocToggle">
+      <span><i class="fas fa-list me-2"></i>Chapters</span>
+      <i class="fas fa-chevron-down" id="tocChevron"></i>
+    </button>
+    <div class="toc-list" id="tocList"></div>
+  </aside>
+
+  <div class="page-wrapper">
+    <div class="container-main">
+      <main class="content-area">
+
+        <section id="overview" class="module-block">
+          <div class="book-hero">
+            <h1><i class="fas fa-code me-2"></i>Basics of Programming &amp; OOP</h1>
+            <p class="lead">Computer Programming and Object-Oriented Programming Java &amp; Python | K72T001M05 | Level 05</p>
+          </div>
+          <h2 class="module-title"><i class="fas fa-book-open me-2"></i>Module Overview</h2>
+          <article id="ch0" class="chapter-card">
+            <h2><span class="ch-num">0</span> Course Outline &amp; Objectives</h2>
+            <p><strong>Module focus:</strong> Understand basics of programming (algorithms, flowcharts, pseudocode) and master Object-Oriented Programming concepts using Java and Python.</p>
+            <h3>What You Will Learn</h3>
+            <ul>
+              <li><strong>Intro:</strong> Programming concepts, generations of languages, translators</li>
+              <li><strong>Ch 1:</strong> Algorithms, flowcharts, pseudocode</li>
+              <li><strong>Ch 2:</strong> Procedural vs Object-Oriented Programming</li>
+              <li><strong>Ch 3:</strong> Classes, objects, variables, methods, constructors, overloading</li>
+              <li><strong>Ch 4:</strong> Memory management, garbage collection</li>
+              <li><strong>Ch 5:</strong> Access and non-access modifiers</li>
+              <li><strong>Ch 6:</strong> Encapsulation, getters and setters</li>
+              <li><strong>Ch 7:</strong> Inheritance, overriding, single/multiple inheritance</li>
+              <li><strong>Ch 8:</strong> Polymorphism</li>
+              <li><strong>Ch 9:</strong> Abstraction, abstract classes, interfaces</li>
+              <li><strong>Ch 10:</strong> Class relationships: association, aggregation, composition</li>
+            </ul>
+            <p class="simple-english"><strong>Teaching languages:</strong> All concepts are explained with <strong>Java</strong> and <strong>Python</strong> examples so you can see how each idea works in both languages.</p>
+          </article>
+
+        <!-- INTRODUCTION: Programming Concepts, Generations & Translators -->
+        <section id="mod-intro" class="module-block">
+          <h2 class="module-title"><i class="fas fa-microchip me-2"></i>Introduction: Programming Concepts, Generations &amp; Translators</h2>
+
+          <article id="chintro" class="chapter-card">
+            <h2><span class="ch-num">Intro</span> Programming Concept, Generations of Languages, and Translators</h2>
+            <p><strong></strong> What programming is, how programming languages evolved (generations), and how source code is turned into something the computer can run (translators).</p>
+
+            <h3>What is Programming?</h3>
+            <div class="info-box"><strong>Programming</strong> is the process of writing instructions (code) that a computer can understand and execute. A <strong>program</strong> is a set of instructions that tells the computer what to do step by step. Programming involves problem-solving, designing algorithms, and writing code in a programming language.</div>
+            <p class="simple-english">You write instructions in a language like Java or Python. The computer cannot run your words directly—something must <strong>translate</strong> your code into the machine’s own language (binary). That “something” is a <strong>translator</strong> (compiler or interpreter).</p>
+
+            <h3>Generations of Programming Languages</h3>
+            <p>Programming languages are often grouped into <strong>generations</strong> based on how close they are to the hardware and how easy they are for humans to read and write.</p>
+            <ul>
+              <li><strong>First Generation (1GL) Machine Language:</strong> Binary code (0s and 1s) that the CPU executes directly. Very fast but very hard for humans to write or read. Example: <code>10110010 00000001</code>.</li>
+              <li><strong>Second Generation (2GL) Assembly Language:</strong> Uses short mnemonics (e.g. ADD, MOV, JMP) that map almost one-to-one to machine instructions. An <strong>assembler</strong> translates assembly into machine code. Still tied to a specific processor.</li>
+              <li><strong>Third Generation (3GL) High-Level Languages:</strong> Readable, portable languages. One statement can represent many machine instructions. Examples: C, Java, Python, C++. These need a <strong>compiler</strong> or <strong>interpreter</strong> to run.</li>
+              <li><strong>Fourth Generation (4GL) Very High-Level:</strong> Languages and tools focused on specific tasks (databases, reports, forms). Examples: SQL, report generators. Less code for the same result.</li>
+              <li><strong>Fifth Generation (5GL) Constraint / Natural Language:</strong> Problem-oriented; programmer may describe the problem rather than the exact steps. Used in AI and some expert systems.</li>
+            </ul>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Generation</th><th>Type</th><th>Example</th><th>Translator</th></tr></thead>
+                <tbody>
+                  <tr><td>1GL</td><td>Machine language</td><td>Binary (0, 1)</td><td>None (direct execution)</td></tr>
+                  <tr><td>2GL</td><td>Assembly</td><td>ADD, MOV, JMP</td><td>Assembler</td></tr>
+                  <tr><td>3GL</td><td>High-level</td><td>C, Java, Python</td><td>Compiler / Interpreter</td></tr>
+                  <tr><td>4GL</td><td>Very high-level</td><td>SQL</td><td>Compiler / Interpreter</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Translators: Compilers, Interpreters, and Assemblers</h3>
+            <p>A <strong>translator</strong> converts program code written in one form into another form that can be executed (or into something closer to execution).</p>
+            <ul>
+              <li><strong>Assembler:</strong> Translates <strong>assembly language</strong> into <strong>machine code</strong>. One assembly instruction usually becomes one machine instruction. Used for 2GL.</li>
+              <li><strong>Compiler:</strong> Translates the <strong>entire</strong> source code (e.g. C, Java) into object code or machine code (or an intermediate form like bytecode) <strong>before</strong> execution. The program is then run separately. Fast execution; need to recompile when source changes. Examples: GCC (C), javac (Java → bytecode).</li>
+              <li><strong>Interpreter:</strong> Translates and <strong>executes</strong> source code <strong>line by line</strong> (or chunk by chunk). No separate executable file; the interpreter runs your code directly. Easier to test and change, but often slower than compiled code. Examples: Python interpreter, JavaScript in the browser.</li>
+            </ul>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Translator</th><th>Input</th><th>Output</th><th>When translation happens</th></tr></thead>
+                <tbody>
+                  <tr><td>Assembler</td><td>Assembly code</td><td>Machine code</td><td>Before execution (one pass)</td></tr>
+                  <tr><td>Compiler</td><td>High-level source (e.g. C, Java)</td><td>Object/bytecode/machine code</td><td>Before execution (whole program)</td></tr>
+                  <tr><td>Interpreter</td><td>High-level source (e.g. Python)</td><td>Execution</td><td>During execution (line by line)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="simple-english">An <strong>assembler</strong> turns assembly into machine code. A <strong>compiler</strong> turns your whole program into something the machine (or VM) can run, then you run it. An <strong>interpreter</strong> reads your code and does what it says as it goes—no separate “compiled file” to run. Java uses both: <code>javac</code> compiles to bytecode; the JVM interprets (or JIT-compiles) the bytecode. Python is usually interpreted.</p>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol><li>What is the difference between a compiler and an interpreter?</li><li>Which generation of language uses only 0s and 1s?</li><li>Name the translator used for assembly language.</li></ol>
+            </div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 1: Basics of Computer Programming -->
+        <section id="mod1" class="module-block">
+          <h2 class="module-title"><i class="fas fa-project-diagram me-2"></i>Chapter 1: Basics of Computer Programming</h2>
+
+          <article id="ch1" class="chapter-card">
+            <h2><span class="ch-num">1</span> Algorithms</h2>
+            <p><strong></strong> What an algorithm is, properties of a good algorithm, and how to write simple algorithms.</p>
+            <h3>What is an Algorithm?</h3>
+            <div class="info-box">An <strong>algorithm</strong> is a step-by-step procedure to solve a problem or perform a task. It is written in plain language (or pseudocode) and is independent of any programming language.</div>
+            <p class="simple-english">An algorithm is like a recipe. You have clear steps: first do this, then do that. If you follow the steps correctly, you get the correct result. It must be <strong>finite</strong> (ends after some steps), <strong>unambiguous</strong> (each step has one meaning), and <strong>effective</strong> (each step can be done).</p>
+            <h3>Properties of a Good Algorithm</h3>
+            <ul>
+              <li><strong>Input:</strong> Zero or more well-defined inputs.</li>
+              <li><strong>Output:</strong> At least one well-defined output.</li>
+              <li><strong>Finiteness:</strong> Must terminate after a finite number of steps.</li>
+              <li><strong>Definiteness:</strong> Each step is clear and unambiguous.</li>
+              <li><strong>Effectiveness:</strong> Each step is doable in a finite time.</li>
+            </ul>
+            <h3>Example: Algorithm to Find the Larger of Two Numbers</h3>
+            <pre class="code-block">1. START
+2. Read number A
+3. Read number B
+4. IF A > B THEN
+      Display A
+   ELSE
+      Display B
+   END IF
+5. STOP</pre>
+            <div class="q-box"><strong><i class="fas fa-question-circle me-1"></i> Questions</strong>
+              <ol><li>What does "unambiguous" mean for an algorithm?</li><li>Write a 5-step algorithm to add two numbers and display the result.</li></ol>
+            </div>
+          </article>
+
+          <article id="ch2" class="chapter-card">
+            <h2><span class="ch-num">2</span> Flowcharts</h2>
+            <p><strong></strong> Flowchart symbols and how to represent algorithms visually.</p>
+            <h3>What is a Flowchart?</h3>
+            <p>A <strong>flowchart</strong> is a diagram that shows the flow of control and steps in an algorithm using standard shapes. It makes logic easy to see and discuss.</p>
+            <h3>Common Flowchart Symbols</h3>
+            <div class="flowchart-symbols">
+              <div class="symbol-item">
+                <svg viewBox="0 0 100 56" width="100" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <ellipse cx="50" cy="28" rx="45" ry="22" fill="#0d9488" stroke="#0f766e" stroke-width="2"/>
+                  <text x="50" y="32" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">Start</text>
+                </svg>
+                <p class="fig-caption">Oval: Start / Stop (terminator)</p>
+              </div>
+              <div class="symbol-item">
+                <svg viewBox="0 0 100 56" width="100" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="8" width="80" height="40" rx="4" fill="#0ea5e9" stroke="#0284c7" stroke-width="2"/>
+                  <text x="50" y="33" text-anchor="middle" fill="#fff" font-size="10">Process</text>
+                </svg>
+                <p class="fig-caption">Rectangle: Process</p>
+              </div>
+              <div class="symbol-item">
+                <svg viewBox="0 0 100 56" width="100" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Parallelogram: top and bottom horizontal and equal length; left/right sides slanted and parallel -->
+                  <path d="M18 12 L82 12 L92 44 L28 44 Z" fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+                  <text x="60" y="30" text-anchor="middle" fill="#fff" font-size="9" font-weight="bold">Input / Output</text>
+                </svg>
+                <p class="fig-caption">Parallelogram: Input / Output</p>
+              </div>
+              <div class="symbol-item">
+                <svg viewBox="0 0 100 56" width="100" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="50,6 94,28 50,50 6,28" fill="#8b5cf6" stroke="#6d28d9" stroke-width="2"/>
+                  <text x="50" y="28" text-anchor="middle" fill="#fff" font-size="8">Yes</text>
+                  <text x="50" y="38" text-anchor="middle" fill="#fff" font-size="8">No</text>
+                </svg>
+                <p class="fig-caption">Diamond: Decision</p>
+              </div>
+              <div class="symbol-item">
+                <svg viewBox="0 0 100 56" width="100" height="56" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="15" y1="28" x2="65" y2="28" stroke="#0d9488" stroke-width="3"/>
+                  <polygon points="80,28 68,22 68,34" fill="#0d9488"/>
+                  <text x="50" y="48" text-anchor="middle" fill="#64748b" font-size="9">Flow</text>
+                </svg>
+                <p class="fig-caption">Arrows: Flow of control</p>
+              </div>
+            </div>
+            <ul>
+              <li><strong>Oval:</strong> Start / Stop (terminator)</li>
+              <li><strong>Rectangle:</strong> Process (e.g. calculation, assignment)</li>
+              <li><strong>Parallelogram:</strong> Input / Output</li>
+              <li><strong>Diamond:</strong> Decision (Yes/No branch)</li>
+              <li><strong>Arrows:</strong> Flow of control</li>
+            </ul>
+            <p class="simple-english">Start and end are ovals. A normal step (like "add 1 to count") is a rectangle. When you need to choose (e.g. "Is count &gt; 10?") you use a diamond with two arrows: one for Yes and one for No.</p>
+            <h3>Example: Flowchart for "Display larger of A and B"</h3>
+            <p>Start → Input A, B → Decision: Is A &gt; B? → Yes: Output A → No: Output B → End.</p>
+            <div class="q-box"><strong>Questions</strong><ol><li>Which shape is used for a decision?</li><li>Draw a flowchart for: Read a number; if it is even, print "Even", else print "Odd".</li></ol></div>
+          </article>
+
+          <article id="ch3" class="chapter-card">
+            <h2><span class="ch-num">3</span> Pseudocode</h2>
+            <p><strong></strong> Writing algorithms in pseudocode—readable, language-independent steps.</p>
+            <h3>What is Pseudocode?</h3>
+            <div class="info-box"><strong>Pseudocode</strong> is a way of writing an algorithm using a mix of natural language and programming-like keywords (IF, ELSE, WHILE, FOR). It is not real code but is easy to translate into Java, Python, or any language.</div>
+            <h3>Common Pseudocode Keywords</h3>
+            <ul>
+              <li><strong>INPUT / READ</strong> get data</li>
+              <li><strong>OUTPUT / PRINT / DISPLAY</strong> show result</li>
+              <li><strong>IF ... THEN ... ELSE ... END IF</strong> selection</li>
+              <li><strong>WHILE ... DO ... END WHILE</strong> loop (pre-test)</li>
+              <li><strong>FOR ... TO ... END FOR</strong> count-controlled loop</li>
+            </ul>
+            <h3>Example: Pseudocode for Sum of First N Numbers</h3>
+            <pre class="code-block">INPUT N
+SET sum = 0
+SET i = 1
+WHILE i <= N DO
+   sum = sum + i
+   i = i + 1
+END WHILE
+OUTPUT sum</pre>
+            <div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Write pseudocode to find the maximum of three numbers. Then draw a flowchart for the same.</p></div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 2: Introduction to OOP -->
+        <section id="mod2" class="module-block">
+          <h2 class="module-title"><i class="fas fa-balance-scale me-2"></i>Chapter 2: Introduction to Object-Oriented Programming</h2>
+
+          <article id="ch4" class="chapter-card">
+            <h2><span class="ch-num">4</span> Procedural vs Object-Oriented Programming</h2>
+            <p><strong></strong> How procedural programming differs from OOP and why OOP is used for large systems.</p>
+            <h3>Procedural Programming</h3>
+            <p>Programs are organized around <strong>functions/procedures</strong> that operate on <strong>data</strong>. Data and functions are separate. Data is often global or passed as parameters. Examples: C, Pascal, early style in many languages.</p>
+            <h3>Object-Oriented Programming (OOP)</h3>
+            <p>Programs are organized around <strong>objects</strong>. Each object has <strong>data (attributes)</strong> and <strong>behaviour (methods)</strong> bundled together. Emphasis on <strong>classes</strong>, <strong>encapsulation</strong>, <strong>inheritance</strong>, and <strong>polymorphism</strong>. Examples: Java, Python, C++, C#.</p>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Aspect</th><th>Procedural</th><th>Object-Oriented</th></tr></thead>
+                <tbody>
+                  <tr><td>Unit of design</td><td>Function / procedure</td><td>Class / Object</td></tr>
+                  <tr><td>Data &amp; behaviour</td><td>Separate</td><td>Encapsulated in object</td></tr>
+                  <tr><td>Reuse</td><td>Functions, libraries</td><td>Inheritance, composition</td></tr>
+                  <tr><td>Data access</td><td>Often global or parameters</td><td>Through object's methods (controlled)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="simple-english">In procedural style you write functions and pass data to them. In OOP you create "things" (objects) that have both data and actions; the object knows how to use its own data.</p>
+            <div class="q-box"><strong>Questions</strong><ol><li>What is the main unit of design in OOP?</li><li>Give one advantage of OOP over procedural for large software.</li></ol></div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 3: Classes and Objects -->
+        <section id="mod3" class="module-block">
+          <h2 class="module-title"><i class="fas fa-cubes me-2"></i>Chapter 3: Classes and Objects</h2>
+
+          <article id="ch5" class="chapter-card">
+            <h2><span class="ch-num">5</span> Classes and Objects Real-world Examples</h2>
+            <p><strong></strong> Class = blueprint; Object = instance. Real-world analogy.</p>
+            <h3>Class</h3>
+            <div class="info-box">A <strong>class</strong> is a blueprint or template that defines the <strong>attributes</strong> (data) and <strong>methods</strong> (behaviour) that objects of that type will have. It does not hold actual data until you create an object.</div>
+            <h3>Object</h3>
+            <p>An <strong>object</strong> is a concrete instance of a class. It has its own copy of the attributes and can call the methods. Example: Class = <code>Car</code>; objects = myRedCar, yourBlueCar.</p>
+            <p class="simple-english"><strong>Real-world:</strong> Class = "Student" (has name, id, grade). Objects = "Nimal" (Nimal, 001, 10), "Kamala" (Kamala, 002, 10). Each student is one object with their own name, id, and grade.</p>
+            <h3>Variables and Data Types</h3>
+            <p>Attributes are stored in <strong>variables</strong>. Each variable has a <strong>data type</strong> that defines what values can be stored and what operations are allowed.</p>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Purpose</th><th>Java</th><th>Python</th></tr></thead>
+                <tbody>
+                  <tr><td>Integer</td><td><code>int</code></td><td><code>int</code></td></tr>
+                  <tr><td>Decimal</td><td><code>double</code>, <code>float</code></td><td><code>float</code></td></tr>
+                  <tr><td>Text</td><td><code>String</code></td><td><code>str</code></td></tr>
+                  <tr><td>True/False</td><td><code>boolean</code></td><td><code>bool</code></td></tr>
+                  <tr><td>Character</td><td><code>char</code></td><td><code>str</code> (length 1)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Attributes and Methods</h3>
+            <ul>
+              <li><strong>Attributes</strong> (fields/properties): data that each object holds (e.g. <code>name</code>, <code>age</code>).</li>
+              <li><strong>Methods</strong>: functions that belong to the class; they operate on the object's data (e.g. <code>getName()</code>, <code>setAge()</code>).</li>
+            </ul>
+            <h3>Complete Example: Student Class</h3>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>public class Student {
+  private String name;
+  private int id;
+  public Student(String n, int i) {
+    name = n; id = i;
+  }
+  public String getName() {
+    return name;
+  }
+  public void setName(String n) {
+    name = n;
+  }
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>class Student:
+  def __init__(self, n, i):
+    self.name = n
+    self.id = i
+  def get_name(self):
+    return self.name
+  def set_name(self, n):
+    self.name = n</code></pre></div>
+              </div>
+            </div>
+          </article>
+
+          <article id="ch6" class="chapter-card">
+            <h2><span class="ch-num">6</span> Instantiating Objects, Accessing Attributes and Methods</h2>
+            <p><strong></strong> How to create objects and call their methods in Java and Python.</p>
+            <h3>Instantiating Objects</h3>
+            <p><strong>Instantiation</strong> = creating an object from a class. In Java: <code>ClassName obj = new ClassName();</code> In Python: <code>obj = ClassName()</code>.</p>
+            <h3>Accessing Attributes and Methods</h3>
+            <p>Use the object reference and the dot operator: <code>obj.attribute</code>, <code>obj.method()</code>. In Java, if attributes are private, you use getters/setters instead of direct access.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>// Create object
+Student s = new Student();
+// Access (if public) or use getters/setters
+s.setName("Nimal");
+String n = s.getName();</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code># Create object
+s = Student()
+# Access attributes / methods
+s.name = "Nimal"
+n = s.get_name()</code></pre></div>
+              </div>
+            </div>
+          </article>
+
+          <article id="ch7" class="chapter-card">
+            <h2><span class="ch-num">7</span> Constructors and Destructors</h2>
+            <p><strong></strong> Constructor = initialize object; Destructor = cleanup (Python: <code>__del__</code>; Java: no direct destructor, GC handles it).</p>
+            <h3>Constructors</h3>
+            <p>A <strong>constructor</strong> is a special method that runs when an object is created. It is used to set initial values for attributes. In Java: same name as class, no return type. In Python: <code>__init__(self, ...)</code>.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>public class Student {
+  String name;
+  int id;
+  public Student(String n, int i) {
+    name = n;
+    id = i;
+  }
+}
+// Use: Student s = new Student("Nimal", 1);</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>class Student:
+  def __init__(self, n, i):
+    self.name = n
+    self.id = i
+# Use: s = Student("Nimal", 1)</code></pre></div>
+              </div>
+            </div>
+            <h3>Destructors</h3>
+            <p><strong>Java:</strong> No destructors. The JVM uses <strong>garbage collection</strong> to free memory when objects are no longer used. <strong>Python:</strong> <code>__del__(self)</code> is called when the object is about to be destroyed (rarely need to define it).</p>
+          </article>
+
+          <article id="ch8" class="chapter-card">
+            <h2><span class="ch-num">8</span> Method Overloading</h2>
+            <p><strong></strong> Same method name, different parameter lists. Java: supported. Python: no true overloading; use default args or different names.</p>
+            <h3>Concept</h3>
+            <p><strong>Method overloading</strong> = defining multiple methods with the same name but different number or types of parameters. The compiler/interpreter chooses which one to call based on the arguments.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>public void print(int x) {
+  System.out.println(x);
+}
+public void print(String s) {
+  System.out.println(s);
+}
+public void print(int a, int b) {
+  System.out.println(a + b);
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>def print_val(self, x, y=None):
+  if y is None:
+    print(x)
+  else:
+    print(x + y)
+# Or use *args / default parameters</code></pre></div>
+              </div>
+            </div>
+            <p class="simple-english">In Java you can have <code>add(int, int)</code> and <code>add(double, double)</code>; the right one is picked by the argument types. In Python you often use one method with optional parameters.</p>
+          </article>
+        </section>
+
+        <!-- CHAPTER 4: Memory Management -->
+        <section id="mod4" class="module-block">
+          <h2 class="module-title"><i class="fas fa-memory me-2"></i>Chapter 4: Memory Management in OOP</h2>
+
+          <article id="ch9" class="chapter-card">
+            <h2><span class="ch-num">9</span> Dynamic Memory Allocation</h2>
+            <p><strong></strong> Objects are created on the heap; references point to them.</p>
+            <h3>Concept</h3>
+            <p>When you create an object with <code>new</code> (Java) or by calling the class (Python), memory is <strong>dynamically allocated</strong> on the heap. A variable holds a <strong>reference</strong> (address) to that memory, not the object itself.</p>
+            <p class="simple-english">Creating an object reserves a block of memory for its data. Your variable is like a pointer to that block. You don't manually free it in Java or Python—the runtime does it.</p>
+            <h3>Garbage Collection and Object Lifecycle</h3>
+            <p><strong>Garbage collection (GC)</strong> = automatic process that finds objects that are no longer reachable and frees their memory. <strong>Object lifecycle:</strong> Create (constructor) → Use → Unreferenced → Eligible for GC → Collected.</p>
+            <p>In Java: JVM runs GC. In Python: reference counting + cyclic GC. You generally do not need to write destructors for normal cleanup; use try-finally or try-with-resources (Java) / context managers (Python) for releasing resources like files.</p>
+            <div class="q-box"><strong>Questions</strong><ol><li>What is dynamic memory allocation?</li><li>What is the role of garbage collection?</li></ol></div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 5: Modifiers -->
+        <section id="mod5" class="module-block">
+          <h2 class="module-title"><i class="fas fa-lock me-2"></i>Chapter 5: Modifiers in OOP</h2>
+
+          <article id="ch10" class="chapter-card">
+            <h2><span class="ch-num">10</span> Access Modifiers and Non-access Modifiers</h2>
+            <p><strong></strong> Control visibility (access) and behaviour (static, final, etc.).</p>
+            <h3>Access Modifiers</h3>
+            <p>They control <strong>who can see</strong> a class, method, or field.</p>
+            <ul>
+              <li><strong>public</strong> accessible from anywhere.</li>
+              <li><strong>private</strong> only inside the same class.</li>
+              <li><strong>protected</strong> same class + subclasses (and same package in Java).</li>
+              <li><strong>default (package-private, Java)</strong> same package only.</li>
+            </ul>
+            <p><strong>Python:</strong> No strict access modifiers. Convention: <code>_name</code> = "protected", <code>__name</code> = name mangling (strong hint of "private").</p>
+            <h3>Non-access Modifiers</h3>
+            <p>They change behaviour, not visibility.</p>
+            <ul>
+              <li><strong>static (Java)</strong> belongs to the class, not to each object. One copy shared by all. Python: use class variables and <code>@staticmethod</code> / <code>@classmethod</code>.</li>
+              <li><strong>final (Java)</strong> constant (variable) or cannot override (method) or cannot extend (class). Python: no final; use naming convention or documentation.</li>
+            </ul>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>public class Example {
+  private int x;
+  public static int count = 0;
+  public final int MAX = 100;
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>class Example:
+  def __init__(self):
+    self._x = 0      # convention: "protected"
+    self.__secret = 0 # name mangling
+  count = 0          # class variable
+  MAX = 100          # class constant</code></pre></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 6: Encapsulation -->
+        <section id="mod6" class="module-block">
+          <h2 class="module-title"><i class="fas fa-box me-2"></i>Chapter 6: Encapsulation</h2>
+
+          <article id="ch11" class="chapter-card">
+            <h2><span class="ch-num">11</span> Encapsulation Concept, Getters and Setters</h2>
+            <p><strong></strong> Hide data, expose through methods; getters and setters.</p>
+            <h3>Encapsulation</h3>
+            <div class="info-box"><strong>Encapsulation</strong> means bundling data (attributes) and the methods that operate on that data inside a class, and hiding internal details by making fields <strong>private</strong> (or protected). Access is through public methods (getters/setters) so you can validate and control changes.</div>
+            <p class="simple-english">Don't let outside code touch your object's data directly. Provide <code>getName()</code> to read and <code>setAge(int age)</code> to write (and inside setAge you can check e.g. age &gt; 0).</p>
+            <h3>Getters and Setters</h3>
+            <p><strong>Getter</strong> = method that returns the value of a private field. <strong>Setter</strong> = method that sets the value, often with validation. Naming: <code>getX()</code> / <code>setX()</code> (Java), or <code>get_x()</code> / <code>set_x()</code> or properties (Python).</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>private String name;
+public String getName() {
+  return name;
+}
+public void setName(String name) {
+  if (name != null) this.name = name;
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>def __init__(self):
+  self.__name = ""
+def get_name(self): return self.__name
+def set_name(self, name):
+  if name: self.__name = name
+# Or: @property and @name.setter</code></pre></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 7: Inheritance -->
+        <section id="mod7" class="module-block">
+          <h2 class="module-title"><i class="fas fa-sitemap me-2"></i>Chapter 7: Inheritance</h2>
+
+          <article id="ch12" class="chapter-card">
+            <h2><span class="ch-num">12</span> Inheritance Concept, Hierarchies, Single and Multiple, Overriding</h2>
+            <p><strong></strong> Subclass gets superclass members; single vs multiple inheritance; overriding methods.</p>
+            <h3>Inheritance Concept</h3>
+            <p><strong>Inheritance</strong> = a new class (subclass/child) is based on an existing class (superclass/parent) and inherits its attributes and methods. This supports code reuse and "is-a" relationships (e.g. Dog is an Animal).</p>
+            <h3>Hierarchies and Class Relationships</h3>
+            <p>Class hierarchy = tree of classes: Animal → Mammal → Dog. Child can add new methods/fields and override parent methods.</p>
+            <h3>Single vs Multiple Inheritance</h3>
+            <ul>
+              <li><strong>Single:</strong> A class has one parent. Java: only single (class can extend one class). Python: single for the normal case.</li>
+              <li><strong>Multiple:</strong> A class has more than one parent. Java: not for classes; use interfaces for multiple "types". Python: allowed (e.g. <code>class C(A, B):</code>).</li>
+            </ul>
+            <h3>Method Overriding</h3>
+            <p>When a subclass defines a method with the same signature as the parent, the subclass version is used when called on the subclass object. In Java: <code>@Override</code>. In Python: just define the method again in the child.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>class Animal {
+  void speak() { System.out.println("..."); }
+}
+class Dog extends Animal {
+  @Override
+  void speak() { System.out.println("Woof"); }
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>class Animal:
+  def speak(self): print("...")
+class Dog(Animal):
+  def speak(self): print("Woof")</code></pre></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 8: Polymorphism -->
+        <section id="mod8" class="module-block">
+          <h2 class="module-title"><i class="fas fa-shapes me-2"></i>Chapter 8: Polymorphism</h2>
+
+          <article id="ch13" class="chapter-card">
+            <h2><span class="ch-num">13</span> Polymorphism Concept</h2>
+            <p><strong></strong> One interface or reference, many forms; runtime behaviour depends on actual object type.</p>
+            <h3>What is Polymorphism?</h3>
+            <div class="info-box"><strong>Polymorphism</strong> ("many forms") means the same operation or method name can behave differently depending on the actual object. Typically achieved by method overriding: a superclass reference can point to a subclass object, and the overridden method of the subclass is called.</div>
+            <p class="simple-english">You have a variable of type Animal. It can hold a Dog or a Cat. When you call <code>speak()</code>, if it's a Dog you get "Woof", if it's a Cat you get "Meow". Same call, different behaviour.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>Animal a = new Dog();
+a.speak();  // Woof (Dog's method)
+a = new Cat();
+a.speak();  // Meow</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>a = Dog()
+a.speak()   # Woof
+a = Cat()
+a.speak()   # Meow</code></pre></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- CHAPTER 9: Abstraction -->
+        <section id="mod9" class="module-block">
+          <h2 class="module-title"><i class="fas fa-eye-slash me-2"></i>Chapter 9: Abstraction</h2>
+
+          <article id="ch14" class="chapter-card">
+            <h2><span class="ch-num">14</span> Abstraction, Abstract Classes, Interfaces, Real-world Examples</h2>
+            <p><strong></strong> Hide implementation details; abstract classes and interfaces.</p>
+            <h3>Abstraction Concept</h3>
+            <p><strong>Abstraction</strong> means showing only what is necessary and hiding how it is done. The user sees "what" (e.g. start engine) not "how" (fuel injection, spark). In OOP: abstract classes and interfaces define contracts; concrete classes implement them.</p>
+            <h3>Abstract Classes</h3>
+            <p>An <strong>abstract class</strong> cannot be instantiated. It may have abstract methods (no body) that subclasses must implement, and can also have concrete methods. Java: <code>abstract class X { abstract void m(); }</code>. Python: inherit from <code>ABC</code> and use <code>@abstractmethod</code>.</p>
+            <h3>Interfaces</h3>
+            <p>An <strong>interface</strong> defines a contract (method signatures) with no implementation. Java: <code>interface I { void m(); }</code> class implements interface. Python: no built-in interface; use abstract base classes (ABC) with only abstract methods, or protocols.</p>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java</span><pre><code>interface Drawable {
+  void draw();
+}
+abstract class Shape implements Drawable {
+  abstract double area();
+}</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python</span><pre><code>from abc import ABC, abstractmethod
+class Drawable(ABC):
+  @abstractmethod
+  def draw(self): pass
+class Shape(Drawable, ABC):
+  @abstractmethod
+  def area(self): pass</code></pre></div>
+              </div>
+            </div>
+            <p class="simple-english"><strong>Real-world:</strong> Encapsulation = hide data (e.g. balance in BankAccount, access via deposit/withdraw). Abstraction = hide complexity (e.g. "drive" hides engine, transmission; "save" in an app hides file format and disk writes).</p>
+          </article>
+        </section>
+
+        <!-- CHAPTER 10: Relationships Between Classes -->
+        <section id="mod10" class="module-block">
+          <h2 class="module-title"><i class="fas fa-link me-2"></i>Chapter 10: Relationships Between Classes</h2>
+
+          <article id="ch15" class="chapter-card">
+            <h2><span class="ch-num">15</span> Association, Aggregation, Composition</h2>
+            <p><strong></strong> How classes relate: association (uses), aggregation (has-a, independent), composition (has-a, owns and lifecycle-dependent).</p>
+            <h3>Association</h3>
+            <p><strong>Association</strong> = a general "uses" or "works with" relationship between two classes. One class has a reference to another (e.g. Student uses Library, Doctor treats Patient). They can exist independently.</p>
+            <h3>Aggregation</h3>
+            <p><strong>Aggregation</strong> = "has-a" relationship where the whole contains parts, but the parts can exist without the whole (e.g. Department has Teachers; if the department is removed, teachers still exist). Weak ownership.</p>
+            <h3>Composition</h3>
+            <p><strong>Composition</strong> = stronger "has-a": the whole owns the parts and is responsible for their lifecycle. When the whole is destroyed, the parts are destroyed (e.g. Car has Engine; when Car is destroyed, Engine goes with it). Strong ownership.</p>
+            <div class="table-wrap">
+              <table class="compare-table">
+                <thead><tr><th>Relationship</th><th>Meaning</th><th>Lifecycle</th></tr></thead>
+                <tbody>
+                  <tr><td>Association</td><td>Uses / links to</td><td>Independent</td></tr>
+                  <tr><td>Aggregation</td><td>Has-a (whole–part)</td><td>Parts can outlive whole</td></tr>
+                  <tr><td>Composition</td><td>Has-a (owns)</td><td>Parts die with whole</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="two-lang">
+              <div>
+                <div class="code-block"><span class="lang-label">Java – Composition</span><pre><code>class Car {
+  private Engine engine;
+  Car() { engine = new Engine(); }
+}
+// Engine created with Car, dies with Car</code></pre></div>
+              </div>
+              <div>
+                <div class="code-block"><span class="lang-label">Python – Aggregation</span><pre><code>class Department:
+  def __init__(self, teachers):
+    self.teachers = teachers  # refs to existing
+# Teachers exist outside Department</code></pre></div>
+              </div>
+            </div>
+            <div class="q-box"><strong>Questions</strong><ol><li>Difference between aggregation and composition?</li><li>Give one real-world example of composition.</li></ol></div>
+            <div class="activity-box"><strong>Activity</strong><p class="mb-0 mt-1">Design: University has Departments; Department has Teachers. Is that association, aggregation, or composition? Implement a minimal version in Java or Python.</p></div>
+          </article>
+        </section>
+
+        <footer class="page-footer">
+          <p>Basics of Programming &amp; Object-Oriented Programming | K72T001M05 | Level 05 ICT Notes</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    var chapters = [
+      {mod:0, id:"ch0", title:"Ch 0 – Course Outline & Objectives"},
+      {mod:0, id:"chintro", title:"Intro – Programming Concepts, Generations & Translators"},
+      {mod:1, id:"ch1", title:"Ch 1 – Algorithms"},
+      {mod:1, id:"ch2", title:"Ch 2 – Flowcharts"},
+      {mod:1, id:"ch3", title:"Ch 3 – Pseudocode"},
+      {mod:2, id:"ch4", title:"Ch 4 – Procedural vs OOP"},
+      {mod:3, id:"ch5", title:"Ch 5 – Classes & Objects"},
+      {mod:3, id:"ch6", title:"Ch 6 – Instantiating & Accessing"},
+      {mod:3, id:"ch7", title:"Ch 7 – Constructors & Destructors"},
+      {mod:3, id:"ch8", title:"Ch 8 – Method Overloading"},
+      {mod:4, id:"ch9", title:"Ch 9 – Memory Management"},
+      {mod:5, id:"ch10", title:"Ch 10 – Modifiers"},
+      {mod:6, id:"ch11", title:"Ch 11 – Encapsulation"},
+      {mod:7, id:"ch12", title:"Ch 12 – Inheritance"},
+      {mod:8, id:"ch13", title:"Ch 13 – Polymorphism"},
+      {mod:9, id:"ch14", title:"Ch 14 – Abstraction"},
+      {mod:10, id:"ch15", title:"Ch 15 – Class Relationships"}
+    ];
+    var list = document.getElementById("tocList");
+    if (list) {
+      chapters.forEach(function(c) {
+        var a = document.createElement("a");
+        a.href = "#" + c.id;
+        a.setAttribute("title", c.title);
+        var num = c.id.replace("ch", "");
+        var label = c.title.replace(/^Ch \d+\s*[–\-]\s*/i, "").trim() || c.title;
+        a.innerHTML = "<span class=\"ch-num-side\">" + num + "</span><span class=\"ch-title-side\">" + label + "</span>";
+        list.appendChild(a);
+      });
+    }
+    var tocToggle = document.getElementById("tocToggle");
+    var tocSidebar = document.getElementById("tocSidebar");
+    if (tocToggle && tocSidebar) {
+      tocToggle.addEventListener("click", function() {
+        tocSidebar.classList.toggle("toc-open");
+        var open = tocSidebar.classList.contains("toc-open");
+        tocToggle.setAttribute("aria-expanded", open);
+        var chev = document.getElementById("tocChevron");
+        if (chev) chev.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
+      });
+    }
+    var tocList = document.getElementById("tocList");
+    if (tocList && tocSidebar) {
+      tocList.addEventListener("click", function(e) {
+        var link = e.target.closest("a");
+        if (link && link.getAttribute("href") && link.getAttribute("href").indexOf("#") === 0) {
+          tocSidebar.classList.remove("toc-open");
+          if (tocToggle) tocToggle.setAttribute("aria-expanded", "false");
+          var chev = document.getElementById("tocChevron");
+          if (chev) chev.style.transform = "rotate(0deg)";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
